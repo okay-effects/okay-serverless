@@ -14,10 +14,12 @@ import scala.scalajs.js
 final class ObjectStorage(ctx: js.Dynamic):
   private val storage = ctx.storage
   private val sql = storage.sql
-  sql.exec("CREATE TABLE IF NOT EXISTS okay_values (key TEXT PRIMARY KEY, value TEXT NOT NULL, version INTEGER NOT NULL)")
+  sql.exec("CREATE TABLE IF NOT EXISTS okay_values " +
+    "(key TEXT PRIMARY KEY, value TEXT NOT NULL, version INTEGER NOT NULL)")
 
   private def rows(query: String, args: js.Any*): js.Array[js.Dynamic] =
-    sql.exec.applyDynamic("call")((sql: js.Any) +: (query: js.Any) +: args*).toArray().asInstanceOf[js.Array[js.Dynamic]]
+    sql.exec.applyDynamic("call")((sql: js.Any) +: (query: js.Any) +: args*).toArray()
+      .asInstanceOf[js.Array[js.Dynamic]]
 
   def read(keys: List[String]): Map[String, Versioned] =
     keys.flatMap { k =>

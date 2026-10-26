@@ -25,7 +25,8 @@ final class Memory:
     values(key) = Versioned(value, values.get(key).fold(1L)(_.version + 1))
   }
 
-  def read(keys: List[String]): Map[String, Versioned] = synchronized(keys.flatMap(k => values.get(k).map(k -> _)).toMap)
+  def read(keys: List[String]): Map[String, Versioned] =
+    synchronized(keys.flatMap(k => values.get(k).map(k -> _)).toMap)
 
   def keys(prefix: String): List[String] = synchronized(values.keys.filter(_.startsWith(prefix)).toList.sorted)
 

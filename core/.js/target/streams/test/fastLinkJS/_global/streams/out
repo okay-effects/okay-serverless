@@ -1,27 +1,27 @@
 [info] Fast optimizing /Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/okay-serverless-test-fastopt
-[debug] Linker: Compute reachability: 196511 us
-[debug] Linker: Assemble LinkedClasses: 17776 us
-[debug] Linker: 222743 us
-[debug] Desugarer: Desugar: 11323 us
-[debug] Desugarer: 11481 us
+[debug] Linker: Compute reachability: 191564 us
+[debug] Linker: Assemble LinkedClasses: 17655 us
+[debug] Linker: 217244 us
+[debug] Desugarer: Desugar: 11196 us
+[debug] Desugarer: 11313 us
 [debug] Optimizer: Batch mode: true
-[debug] Optimizer: Incremental part: 40020 us
-[debug] Optimizer: Elidable constructors: 2228 us
+[debug] Optimizer: Incremental part: 38074 us
+[debug] Optimizer: Elidable constructors: 1972 us
 [debug] Optimizer: Optimizing 9998 methods.
-[debug] Optimizer: Optimizer part: 333654 us
-[debug] Optimizer: 380876 us
-[debug] Refiner: Compute reachability: 69636 us
-[debug] Refiner: Assemble LinkedClasses: 8597 us
-[debug] Refiner: 79273 us
-[debug] Module Splitter: Calculate Dependency Info: 953 us
-[debug] Module Splitter: Analyze Modules: 299 us
-[debug] Module Splitter: Assemble Modules: 2580 us
-[debug] Module Splitter: 4292 us
-[debug] Emitter: Generate Classes: 407813 us
-[debug] Emitter: Write trees: 16503 us
+[debug] Optimizer: Optimizer part: 320130 us
+[debug] Optimizer: 364753 us
+[debug] Refiner: Compute reachability: 62337 us
+[debug] Refiner: Assemble LinkedClasses: 7369 us
+[debug] Refiner: 70417 us
+[debug] Module Splitter: Calculate Dependency Info: 757 us
+[debug] Module Splitter: Analyze Modules: 343 us
+[debug] Module Splitter: Assemble Modules: 2095 us
+[debug] Module Splitter: 3615 us
+[debug] Emitter: Generate Classes: 412660 us
+[debug] Emitter: Write trees: 14004 us
 [debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1162
 [debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 5319
 [debug] Emitter: Pre prints: 7792
-[debug] Emitter: 442402 us
-[debug] BasicBackend: Write result: 28602 us
+[debug] Emitter: 441961 us
+[debug] BasicBackend: Write result: 36482 us
 [debug] BasicBackend: total modules: 1; re-written: 1

@@ -13,9 +13,11 @@ final case class Versioned(value: String, version: Long)
 enum Storage[X]:
   case Read(keys: List[String]) extends Storage[Map[String, Versioned]]
   case Keys(prefix: String) extends Storage[List[String]]
-  /** the writes (`None`: deleted) and the alarm, atomically — if each key read is still at the version read (0: absent);
+  /** the writes (`None`: deleted) and the alarm, atomically — if each key read is still at the version read
+   * (0: absent);
    * `false`: something read has changed, nothing written */
-  case Commit(read: Map[String, Long], writes: Map[String, Option[String]], alarm: Option[Long]) extends Storage[Boolean]
+  case Commit(read: Map[String, Long], writes: Map[String, Option[String]], alarm: Option[Long])
+    extends Storage[Boolean]
 
 /** THE PROGRAM'S WORDS for durable state: what a program says, whatever cloud it runs in (specs/durable.md) */
 enum Durable[X]:
@@ -32,7 +34,8 @@ enum Durable[X]:
 
 object Durable:
   def get[A, R[_]](key: String)(using c: Codec[A], at: In[Durable, R]): Option[A] ! R =
-    perform[Durable](Get(key)).map(_.map(s => c.decode(s).fold(e => throw IllegalStateException(s"$key: $e"), identity)))
+    perform[Durable](Get(key))
+      .map(_.map(s => c.decode(s).fold(e => throw IllegalStateException(s"$key: $e"), identity)))
   def put[A, R[_]](key: String, a: A)(using c: Codec[A], at: In[Durable, R]): Unit ! R =
     perform[Durable](Put(key, c.encode(a)))
   def delete[R[_]](key: String)(using In[Durable, R]): Unit ! R = perform[Durable](Delete(key))

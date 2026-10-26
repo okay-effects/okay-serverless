@@ -4,7 +4,8 @@ import { accountEvent, accountAlarm } from "./okay.js";
 
 export class Account extends DurableObject {
   async fetch(request) {
-    return new Response(accountEvent(this.ctx, await request.text()), { headers: { "content-type": "application/json" } });
+    const answer = accountEvent(this.ctx, await request.text());
+    return new Response(answer, { headers: { "content-type": "application/json" } });
   }
   async alarm() { accountAlarm(this.ctx); }
 }
