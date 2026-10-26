@@ -1,21 +1,6 @@
 [debug] [zinc] IncrementalCompile -----------
 [debug] IncrementalCompile.incrementalCompile
-[debug] previous = Stamps for: 0 products, 0 sources, 0 libraries
+[debug] previous = Stamps for: 1 products, 1 sources, 5 libraries
 [debug] current source = Set(${BASE}/policy/src/test/scala/okay/serverless/policy/DurableStatesSuite.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/policy/src/test/scala/okay/serverless/policy/DurableStatesSuite.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
-[debug] Full compilation, no sources in previous analysis.
-[debug] all 1 sources are invalidated
-[debug] Initial set of included nodes: 
-[debug] Recompiling all sources: number of invalidated sources > 50.0 percent of all sources
-[debug] compilation cycle 1
-[info] compiling 1 Scala source to /Users/sergiy/work/my/okay-serverless/policy/.jvm/target/scala-3.3.8/test-classes ...
-[debug] Returning already retrieved and compiled bridge: /Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.8/scala3-sbt-bridge-3.3.8.jar.
-[debug] [zinc] Running cached compiler 25e12841 for Scala Compiler version 3.3.8
-[debug] [zinc] The Scala compiler is invoked with:
-[debug] 	-deprecation
-[debug] 	-feature
-[debug] 	-Wunused:imports,privates,locals
-[debug] 	-classpath
-[debug] 	/Users/sergiy/work/my/okay-serverless/policy/.jvm/target/scala-3.3.8/test-classes:/Users/sergiy/work/my/okay-serverless/policy/.jvm/target/scala-3.3.8/classes:/Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.3.8/scala3-library_3-3.3.8.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-proof/maven/io/github/okay-effects/okay-policy_3/0.1.0/okay-policy_3-0.1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit_3/1.2.3/munit_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_3/0.1.1/okay-scala_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.18/scala-library-2.13.18.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-proof/maven/io/github/okay-effects/okay-proof_3/0.1.0/okay-proof_3-0.1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/junit-interface/1.2.3/junit-interface-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit-diff_3/1.2.3/munit-diff_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
-[debug] Scala compilation took 0.299325833 s
-[info] done compiling
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] No changes

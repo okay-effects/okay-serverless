@@ -16,7 +16,9 @@ val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
  * the scenarios every platform passes */
 lazy val core = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("core"))
   .settings(name := "okay-serverless",
-    libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1", munit.value))
+    libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1",
+      "io.github.okay-effects" %%% "okay-effects-json" % "0.1.1", munit.value))
+  .jvmSettings(libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.53.1.0")
 
 /** THE TWIN ON okay-simple, Scala 2.13 and 3: the same words, step, machine, `once`, the same stored format; the same
  * scenarios on the machine and on `Free` (`sbt +simpleJVM/test`) */
@@ -24,6 +26,7 @@ lazy val simple = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
   .settings(name := "okay-serverless-simple", crossScalaVersions := Seq("3.3.8", "2.13.18"),
     scalacOptions ++= (if (scalaVersion.value.startsWith("2.")) Seq("-Xsource:3") else Nil),
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-effects" % "0.1.1",
+      "io.github.okay-effects" %%% "okay-effects-json" % "0.1.1",
       "io.github.okay-effects" %%% "okay-effects-machine" % "0.1.1" % Test,
       "io.github.okay-effects" %%% "okay-effects-free" % "0.1.1" % Test, munit.value))
 

@@ -1,0 +1,27 @@
+[info] Fast optimizing /Users/sergiy/work/my/okay-serverless/simple/.js/target/scala-2.13/okay-serverless-simple-test-fastopt
+[debug] Linker: Compute reachability: 184500 us
+[debug] Linker: Assemble LinkedClasses: 12225 us
+[debug] Linker: 200728 us
+[debug] Desugarer: Desugar: 7858 us
+[debug] Desugarer: 7968 us
+[debug] Optimizer: Batch mode: true
+[debug] Optimizer: Incremental part: 36136 us
+[debug] Optimizer: Elidable constructors: 1792 us
+[debug] Optimizer: Optimizing 9590 methods.
+[debug] Optimizer: Optimizer part: 265071 us
+[debug] Optimizer: 308971 us
+[debug] Refiner: Compute reachability: 82369 us
+[debug] Refiner: Assemble LinkedClasses: 6864 us
+[debug] Refiner: 90002 us
+[debug] Module Splitter: Calculate Dependency Info: 898 us
+[debug] Module Splitter: Analyze Modules: 257 us
+[debug] Module Splitter: Assemble Modules: 2257 us
+[debug] Module Splitter: 3793 us
+[debug] Emitter: Generate Classes: 373134 us
+[debug] Emitter: Write trees: 13754 us
+[debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1170
+[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 5339
+[debug] Emitter: Pre prints: 7812
+[debug] Emitter: 401516 us
+[debug] BasicBackend: Write result: 34665 us
+[debug] BasicBackend: total modules: 1; re-written: 1

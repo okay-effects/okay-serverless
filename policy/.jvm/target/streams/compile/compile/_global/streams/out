@@ -1,0 +1,21 @@
+[error] -- [E008] Not Found Error: /Users/sergiy/work/my/okay-serverless/policy/src/main/scala/okay/serverless/policy/DurableStates.scala:27:12 
+[error] 27 |    j => (j.get("v"), j.get("since")) match
+[error]    |          ^^^^^
+[error]    |          value get is not a member of okay.effects.json.Json
+[error] -- [E008] Not Found Error: /Users/sergiy/work/my/okay-serverless/policy/src/main/scala/okay/serverless/policy/DurableStates.scala:27:24 
+[error] 27 |    j => (j.get("v"), j.get("since")) match
+[error]    |                      ^^^^^
+[error]    |                     value get is not a member of okay.effects.json.Json
+[error] -- [E006] Not Found Error: /Users/sergiy/work/my/okay-serverless/policy/src/main/scala/okay/serverless/policy/DurableStates.scala:28:60 
+[error] 28 |      case (Some(Json.Num(v)), Some(Json.Num(s))) => Right((v, s.toLong))
+[error]    |                                                            ^
+[error]    |                                                            Not found: v
+[error]    |
+[error]    | longer explanation available when compiling with `-explain`
+[error] -- [E006] Not Found Error: /Users/sergiy/work/my/okay-serverless/policy/src/main/scala/okay/serverless/policy/DurableStates.scala:28:63 
+[error] 28 |      case (Some(Json.Num(v)), Some(Json.Num(s))) => Right((v, s.toLong))
+[error]    |                                                               ^
+[error]    |                                                            Not found: s
+[error]    |
+[error]    | longer explanation available when compiling with `-explain`
+[error] four errors found

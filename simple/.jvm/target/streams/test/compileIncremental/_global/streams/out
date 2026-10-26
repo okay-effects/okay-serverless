@@ -1,0 +1,22 @@
+[debug] [zinc] IncrementalCompile -----------
+[debug] IncrementalCompile.incrementalCompile
+[debug] previous = Stamps for: 3 products, 1 sources, 6 libraries
+[debug] current source = Set(${BASE}/simple/src/test/scala/okay/serverless/simple/ScenariosChecks.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set(NamesChange(okay.serverless.simple.Codec,ModifiedNames(changes = UsedName(json,[Default]))), NamesChange(okay.serverless.simple.Codec$,ModifiedNames(changes = UsedName(json,[Default])))))
+[debug] The okay.serverless.simple.Codec has the following regular definitions changed:
+[debug] 	UsedName(json,[Default]).
+[debug] All member reference dependencies will be considered within this context.
+[debug] Files invalidated by inheriting from (external) okay.serverless.simple.Codec: Set()
+[debug] Now invalidating by inheritance (internally).
+[debug] Getting direct dependencies of all classes transitively invalidated by inheritance.
+[debug] Getting classes that directly depend on (external) okay.serverless.simple.Codec.
+[debug] None of the modified names appears in source file of okay.serverless.simple.ScenariosChecks. This dependency is not being considered for invalidation.
+[debug] The okay.serverless.simple.Codec$ has the following regular definitions changed:
+[debug] 	UsedName(json,[Default]).
+[debug] All member reference dependencies will be considered within this context.
+[debug] Files invalidated by inheriting from (external) okay.serverless.simple.Codec$: Set()
+[debug] Now invalidating by inheritance (internally).
+[debug] Getting direct dependencies of all classes transitively invalidated by inheritance.
+[debug] Getting classes that directly depend on (external) okay.serverless.simple.Codec$.
+[debug] None of the modified names appears in source file of okay.serverless.simple.ScenariosChecks. This dependency is not being considered for invalidation.
+[debug] No changes

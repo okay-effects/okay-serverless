@@ -2,7 +2,8 @@ package okay.serverless.policy
 
 import okay.policy.{Call, Change, Checked, Compiled, Decide, Decision, FactRef, Facts, States, Value, Window}
 import okay.scala3.*
-import okay.serverless.{Durable, Json, Storage}
+import okay.effects.json.Json
+import okay.serverless.{Durable, Storage, field}
 
 /**
  * A POLICY'S STATE ON `Durable`: each state's value under `policy/<state>/<key as JSON>`, with the start of its window;
@@ -11,7 +12,7 @@ import okay.serverless.{Durable, Json, Storage}
  */
 object DurableStates:
   private def key(ref: FactRef): String =
-    s"policy/${ref.name}/" + Json.Arr(ref.args.map(json)).render
+    s"policy/${ref.name}/" + Json.print(Json.Arr(ref.args.toVector.map(json)))
 
   private def json(v: Value): Json = v match
     case Value.I(i) => Json.Num(BigDecimal(i))
@@ -22,8 +23,8 @@ object DurableStates:
   private def windowStart(w: Window, now: Long): Long = now - Math.floorMod(now, w.millis)
 
   private given okay.serverless.Codec[(BigDecimal, Long)] = okay.serverless.Codec.json(
-    (v, since) => Json.Obj(List("v" -> Json.Num(v), "since" -> Json.Num(BigDecimal(since)))),
-    j => (j.get("v"), j.get("since")) match
+    (v, since) => Json.obj("v" -> Json.Num(v), "since" -> Json.Num(BigDecimal(since))),
+    j => (j.field("v"), j.field("since")) match
       case (Some(Json.Num(v)), Some(Json.Num(s))) => Right((v, s.toLong))
       case _ => Left(s"not a state: $j"))
 

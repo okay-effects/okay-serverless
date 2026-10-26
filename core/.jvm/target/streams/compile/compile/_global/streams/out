@@ -1,0 +1,5 @@
+[warn] -- Warning: /Users/sergiy/work/my/okay-serverless/core/src/main/scala/okay/serverless/cloud/MemoryCloud.scala:166:109 
+[warn] 166 |        queue = queue.recover(_ => ()).flatMap(_ => Async.toFuture(hosting.run(platform)(p)).andThen(promise.complete))
+[warn]     |                                                                                                     ^^^^^^^^^^^^^^^^
+[warn]     |method complete is eta-expanded even though PartialFunction[scala.util.Try[A], scala.concurrent.Promise[A]] does not have the @FunctionalInterface annotation.
+[warn] one warning found

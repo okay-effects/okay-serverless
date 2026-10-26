@@ -1,6 +1,51 @@
 [debug] [zinc] IncrementalCompile -----------
 [debug] IncrementalCompile.incrementalCompile
 [debug] previous = Stamps for: 1 products, 1 sources, 4 libraries
-[debug] current source = Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
-[debug] No changes
+[debug] current source = Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
+[debug] Invalidating '${CSR_CACHE}/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_sjs1_3/0.1.1/okay-scala_sjs1_3-0.1.1.jar' because ${CSR_CACHE}/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_sjs1_3/0.1.1/okay-scala_sjs1_3-0.1.1.jar (farm(99fb00196d6a425a)) != ${IVY_HOME}/local/io.github.okay-effects/okay-scala_sjs1_3/0.1.1/jars/okay-scala_sjs1_3.jar (farm(b67b84fa2404911f))
+[debug] > initialChanges = InitialChanges(Changes(added = Set(${BASE}/core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(${CSR_CACHE}/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_sjs1_3/0.1.1/okay-scala_sjs1_3-0.1.1.jar),API Changes: Set(NamesChange(okay.serverless.Codec,ModifiedNames(changes = UsedName(json,[Default]))), NamesChange(okay.serverless.Codec$,ModifiedNames(changes = UsedName(json,[Default])))))
+[debug] The okay.serverless.Codec has the following regular definitions changed:
+[debug] 	UsedName(json,[Default]).
+[debug] All member reference dependencies will be considered within this context.
+[debug] Files invalidated by inheriting from (external) okay.serverless.Codec: Set()
+[debug] Now invalidating by inheritance (internally).
+[debug] Getting direct dependencies of all classes transitively invalidated by inheritance.
+[debug] Getting classes that directly depend on (external) okay.serverless.Codec.
+[debug] None of the modified names appears in source file of okay.serverless.Scenarios. This dependency is not being considered for invalidation.
+[debug] The okay.serverless.Codec$ has the following regular definitions changed:
+[debug] 	UsedName(json,[Default]).
+[debug] All member reference dependencies will be considered within this context.
+[debug] Files invalidated by inheriting from (external) okay.serverless.Codec$: Set()
+[debug] Now invalidating by inheritance (internally).
+[debug] Getting direct dependencies of all classes transitively invalidated by inheritance.
+[debug] Getting classes that directly depend on (external) okay.serverless.Codec$.
+[debug] None of the modified names appears in source file of okay.serverless.Scenarios. This dependency is not being considered for invalidation.
+[debug] 
+[debug] Initial source changes:
+[debug] 	removed: Set()
+[debug] 	added: Set(${BASE}/core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
+[debug] 	modified: Set()
+[debug] Invalidated products: Set()
+[debug] External API changes: API Changes: Set(NamesChange(okay.serverless.Codec,ModifiedNames(changes = UsedName(json,[Default]))), NamesChange(okay.serverless.Codec$,ModifiedNames(changes = UsedName(json,[Default]))))
+[debug] Modified binary dependencies: Set(${CSR_CACHE}/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_sjs1_3/0.1.1/okay-scala_sjs1_3-0.1.1.jar)
+[debug] Initial directly invalidated classes: Set()
+[debug] Sources indirectly invalidated by:
+[debug] 	product: Set()
+[debug] 	binary dep: Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala)
+[debug] 	external source: Set()
+[debug] all 3 sources are invalidated
+[debug] Initial set of included nodes: 
+[debug] Recompiling all sources: number of invalidated sources > 50.0 percent of all sources
+[debug] compilation cycle 1
+[info] compiling 3 Scala sources to /Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/test-classes ...
+[debug] Returning already retrieved and compiled bridge: /Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.8/scala3-sbt-bridge-3.3.8.jar.
+[debug] [zinc] Running cached compiler 684517d2 for Scala Compiler version 3.3.8
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-deprecation
+[debug] 	-feature
+[debug] 	-Wunused:imports,privates,locals
+[debug] 	-scalajs
+[debug] 	-classpath
+[debug] 	/Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/test-classes:/Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/classes:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_sjs1_3/3.3.8/scala3-library_sjs1_3-3.3.8.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.22.0/scalajs-library_2.13-1.22.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-test-bridge_2.13/1.22.0/scalajs-test-bridge_2.13-1.22.0.jar:/Users/sergiy/.ivy2/local/io.github.okay-effects/okay-scala_sjs1_3/0.1.1/jars/okay-scala_sjs1_3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-json_sjs1_3/0.1.1/okay-effects-json_sjs1_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit_sjs1_3/1.2.3/munit_sjs1_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.18/scala-library-2.13.18.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-javalib/1.22.0/scalajs-javalib-1.22.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-scalalib_2.13/2.13.18%2B1.22.0/scalajs-scalalib_2.13-2.13.18%2B1.22.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-test-interface_2.13/1.22.0/scalajs-test-interface_2.13-1.22.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects_sjs1_3/0.1.1/okay-effects_sjs1_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-machine_sjs1_3/0.1.1/okay-effects-machine_sjs1_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-parsing_sjs1_3/0.1.1/okay-effects-parsing_sjs1_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-stream_sjs1_3/0.1.1/okay-effects-stream_sjs1_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit-diff_sjs1_3/1.2.3/munit-diff_sjs1_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-junit-test-runtime_2.13/1.20.2/scalajs-junit-test-runtime_2.13-1.20.2.jar
+[debug] Scala compilation took 1.037465875 s
+[info] done compiling

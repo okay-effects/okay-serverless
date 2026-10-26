@@ -1,0 +1,41 @@
+[warn] -- Feature Warning: /Users/sergiy/work/my/okay-serverless/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala:18:81 
+[warn] 18 |        a <- Sql.run[Cloud](db, "insert into notes (text, score) values (?, ?)", "one", 1.5)
+[warn]    |                                                                                 ^^^^^
+[warn]    |Use of implicit conversion given instance given_Conversion_String_SqlValue in object SqlValue should be enabled
+[warn]    |by adding the import clause 'import scala.language.implicitConversions'
+[warn]    |or by setting the compiler option -language:implicitConversions.
+[warn]    |See the Scala docs for value scala.language.implicitConversions for a discussion
+[warn]    |why the feature should be explicitly enabled.
+[warn] -- Feature Warning: /Users/sergiy/work/my/okay-serverless/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala:18:88 
+[warn] 18 |        a <- Sql.run[Cloud](db, "insert into notes (text, score) values (?, ?)", "one", 1.5)
+[warn]    |                                                                                        ^^^
+[warn]    |Use of implicit conversion given instance given_Conversion_Double_SqlValue in object SqlValue should be enabled
+[warn]    |by adding the import clause 'import scala.language.implicitConversions'
+[warn]    |or by setting the compiler option -language:implicitConversions.
+[warn]    |See the Scala docs for value scala.language.implicitConversions for a discussion
+[warn]    |why the feature should be explicitly enabled.
+[warn] -- Feature Warning: /Users/sergiy/work/my/okay-serverless/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala:19:81 
+[warn] 19 |        _ <- Sql.run[Cloud](db, "insert into notes (text, score) values (?, ?)", "two", 2.5)
+[warn]    |                                                                                 ^^^^^
+[warn]    |Use of implicit conversion given instance given_Conversion_String_SqlValue in object SqlValue should be enabled
+[warn]    |by adding the import clause 'import scala.language.implicitConversions'
+[warn]    |or by setting the compiler option -language:implicitConversions.
+[warn]    |See the Scala docs for value scala.language.implicitConversions for a discussion
+[warn]    |why the feature should be explicitly enabled.
+[warn] -- Feature Warning: /Users/sergiy/work/my/okay-serverless/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala:19:88 
+[warn] 19 |        _ <- Sql.run[Cloud](db, "insert into notes (text, score) values (?, ?)", "two", 2.5)
+[warn]    |                                                                                        ^^^
+[warn]    |Use of implicit conversion given instance given_Conversion_Double_SqlValue in object SqlValue should be enabled
+[warn]    |by adding the import clause 'import scala.language.implicitConversions'
+[warn]    |or by setting the compiler option -language:implicitConversions.
+[warn]    |See the Scala docs for value scala.language.implicitConversions for a discussion
+[warn]    |why the feature should be explicitly enabled.
+[warn] -- Feature Warning: /Users/sergiy/work/my/okay-serverless/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala:20:102 
+[warn] 20 |        rows <- Sql.query[Cloud](db, "select id, text, score from notes where score > ? order by id", 1.0)
+[warn]    |                                                                                                      ^^^
+[warn]    |Use of implicit conversion given instance given_Conversion_Double_SqlValue in object SqlValue should be enabled
+[warn]    |by adding the import clause 'import scala.language.implicitConversions'
+[warn]    |or by setting the compiler option -language:implicitConversions.
+[warn]    |See the Scala docs for value scala.language.implicitConversions for a discussion
+[warn]    |why the feature should be explicitly enabled.
+[warn] 5 warnings found
