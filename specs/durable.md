@@ -85,6 +85,9 @@ eviction, alarm, once), so state written by one is read by the other.
 - `cloudflare` (Scala.js): `Storage` on a Durable Object; an example Worker; tested on `wrangler dev`.
 - `aws` (Scala.js on Node, later the JVM): `Storage` on DynamoDB.
 - `simple` (okay-simple, Scala 2.13 and 3): the same, beside.
+- `policy` (okay-policy): `DurableStates` — a policy's `States` on `Durable` (`policy/<state>/<key>`, a value and its
+  window's start); `DurableStates.enforce(policy, call, scope, now)` — a decision and its changes one step: two
+  instances spending one budget at once cannot both pass (the second is decided again on the new value).
 
 Users: okay-guard's policy state (`States`: decide and change, atomically, in one step), okay-faces' and okay-ui's
 sessions on Workers.

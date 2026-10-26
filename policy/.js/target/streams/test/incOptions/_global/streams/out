@@ -1,0 +1,10 @@
+[debug] Created transactional ClassFileManager with tempDir = /Users/sergiy/work/my/okay-serverless/policy/.js/target/scala-3.3.8/test-classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Created transactional ClassFileManager with tempDir = /Users/sergiy/work/my/okay-serverless/policy/.js/target/scala-3.3.8/test-classes.bak
+[debug] About to delete class files:
+[debug] We backup class files:
+[debug] Registering generated classes:
+[debug] 	DurableStatesSuite.class
+[debug] 	DurableStatesSuite.tasty
+[debug] Removing the temporary directory used for backing up class files: /Users/sergiy/work/my/okay-serverless/policy/.js/target/scala-3.3.8/test-classes.bak

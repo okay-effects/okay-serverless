@@ -2,40 +2,5 @@
 [debug] IncrementalCompile.incrementalCompile
 [debug] previous = Stamps for: 51 products, 3 sources, 3 libraries
 [debug] current source = Set(${BASE}/core/src/main/scala/okay/serverless/Durable.scala, ${BASE}/core/src/main/scala/okay/serverless/Codec.scala, ${BASE}/core/src/main/scala/okay/serverless/Memory.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/core/src/main/scala/okay/serverless/Durable.scala, ${BASE}/core/src/main/scala/okay/serverless/Memory.scala), unmodified = ...),Set(),Set(),API Changes: Set())
-[debug] 
-[debug] Initial source changes:
-[debug] 	removed: Set()
-[debug] 	added: Set()
-[debug] 	modified: Set(${BASE}/core/src/main/scala/okay/serverless/Durable.scala, ${BASE}/core/src/main/scala/okay/serverless/Memory.scala)
-[debug] Invalidated products: Set()
-[debug] External API changes: API Changes: Set()
-[debug] Modified binary dependencies: Set()
-[debug] Initial directly invalidated classes: Set(okay.serverless.Durable$.Get, okay.serverless.Storage$.Read, okay.serverless.Storage$.Keys, okay.serverless.Durable$.WakeAt, okay.serverless.Durable, okay.serverless.Durable$.Key, okay.serverless.Durable$.Delete, okay.serverless.Durable$.Put, okay.serverless.Durable$.Keep, okay.serverless.Memory, okay.serverless.Crash, okay.serverless.Storage, okay.serverless.Durable$.Keys, okay.serverless.Versioned, okay.serverless.Durable$.Kept, okay.serverless.Storage$.Commit)
-[debug] Sources indirectly invalidated by:
-[debug] 	product: Set()
-[debug] 	binary dep: Set()
-[debug] 	external source: Set()
-[debug] All initially invalidated classes: Set(okay.serverless.Durable$.Get, okay.serverless.Storage$.Read, okay.serverless.Storage$.Keys, okay.serverless.Durable$.WakeAt, okay.serverless.Durable, okay.serverless.Durable$.Key, okay.serverless.Durable$.Delete, okay.serverless.Durable$.Put, okay.serverless.Durable$.Keep, okay.serverless.Memory, okay.serverless.Crash, okay.serverless.Storage, okay.serverless.Durable$.Keys, okay.serverless.Versioned, okay.serverless.Durable$.Kept, okay.serverless.Storage$.Commit)
-[debug] All initially invalidated sources:Set(${BASE}/core/src/main/scala/okay/serverless/Durable.scala, ${BASE}/core/src/main/scala/okay/serverless/Memory.scala)
-[debug] Initial set of included nodes: okay.serverless.Durable$.Get, okay.serverless.Storage$.Read, okay.serverless.Storage$.Keys, okay.serverless.Durable$.WakeAt, okay.serverless.Durable, okay.serverless.Durable$.Key, okay.serverless.Durable$.Delete, okay.serverless.Durable$.Put, okay.serverless.Durable$.Keep, okay.serverless.Memory, okay.serverless.Crash, okay.serverless.Storage, okay.serverless.Durable$.Keys, okay.serverless.Versioned, okay.serverless.Durable$.Kept, okay.serverless.Storage$.Commit
-[debug] Including okay.serverless.Durable$.Key by okay.serverless.Durable
-[debug] Including okay.serverless.Durable$.Delete by okay.serverless.Durable
-[debug] Including okay.serverless.Durable$.Put by okay.serverless.Durable
-[debug] Including okay.serverless.Durable$.Keep by okay.serverless.Durable
-[debug] Including okay.serverless.Durable$.Keys by okay.serverless.Durable
-[debug] Including okay.serverless.Durable$.Kept by okay.serverless.Durable
-[debug] Including okay.serverless.Storage$.Commit by okay.serverless.Storage
-[debug] Recompiling all sources: number of invalidated sources > 50.0 percent of all sources
-[debug] compilation cycle 1
-[info] compiling 3 Scala sources to /Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes ...
-[debug] Returning already retrieved and compiled bridge: /Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.8/scala3-sbt-bridge-3.3.8.jar.
-[debug] [zinc] Running cached compiler c1dc9da for Scala Compiler version 3.3.8
-[debug] [zinc] The Scala compiler is invoked with:
-[debug] 	-deprecation
-[debug] 	-feature
-[debug] 	-Wunused:imports,privates,locals
-[debug] 	-classpath
-[debug] 	/Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.3.8/scala3-library_3-3.3.8.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_3/0.1.1/okay-scala_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.18/scala-library-2.13.18.jar
-[debug] Scala compilation took 1.907622792 s
-[info] done compiling
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] No changes
