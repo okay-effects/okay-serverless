@@ -1,18 +1,25 @@
-// the example Worker: an account a Durable Object, its logic Scala (okay.js, linked by `sbt cloudflareExample`)
+// the example Worker: its logic Scala (okay.js, linked by `sbt cloudflareExample`); here only what JavaScript must
+// say — the entry points and the Durable Object classes, each handing its calls to the Scala worker
 import { DurableObject } from "cloudflare:workers";
-import { accountEvent, accountAlarm } from "./okay.js";
+import { EmailMessage } from "cloudflare:email";
+import { worker } from "./okay.js";
 
-export class Account extends DurableObject {
-  async fetch(request) {
-    const answer = accountEvent(this.ctx, await request.text());
-    return new Response(answer, { headers: { "content-type": "application/json" } });
-  }
-  async alarm() { accountAlarm(this.ctx); }
-}
+globalThis.OkayEmailMessage = EmailMessage;
+
+const objectClass = (ns) => class extends DurableObject {
+  fetch(request) { return worker.objectFetch(ns, this.ctx, this.env, request); }
+  alarm() { return worker.objectAlarm(ns, this.ctx, this.env); }
+  webSocketMessage(ws, message) { return worker.objectMessage(ns, this.ctx, this.env, ws, message); }
+  webSocketClose(ws) { return worker.objectClose(ns, this.ctx, this.env, ws); }
+};
+
+export const Account = objectClass("ACCOUNTS");
+export const Room = objectClass("ROOMS");
+export const Order = objectClass("ORDERS");
 
 export default {
-  async fetch(request, env) {
-    const name = new URL(request.url).searchParams.get("account") || "main";
-    return env.ACCOUNTS.get(env.ACCOUNTS.idFromName(name)).fetch(request);
-  },
+  fetch: (request, env, ctx) => worker.fetch(request, env, ctx),
+  scheduled: (event, env, ctx) => worker.scheduled(event, env, ctx),
+  queue: (batch, env, ctx) => worker.queue(batch, env, ctx),
+  email: (message, env, ctx) => worker.email(message, env, ctx),
 };

@@ -163,7 +163,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
     def one[A](p: A ! InActor): Future[A] =
       val promise = Promise[A]()
       MemoryCloud.this.synchronized {
-        queue = queue.recover(_ => ()).flatMap(_ => Async.toFuture(hosting.run(platform)(p)).andThen(promise.complete))
+        queue = queue.recover(_ => ()).flatMap(_ => Async.toFuture(hosting.run(platform)(p)).andThen { case t => promise.complete(t) })
       }
       promise.future
     val hosting: Hosting = new Hosting:

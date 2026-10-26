@@ -3,9 +3,9 @@ package okay.serverless.cloud
 import okay.effects.json.Json
 import okay.scala3.*
 import okay.scala3.std.*
-import okay.serverless.{Durable, Storage}
+import okay.serverless.Durable
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 
 /** A CLOUD'S EFFECTS on the memory platform: the same programs a Worker or a Lambda runs */
 class CloudSuite extends munit.FunSuite:

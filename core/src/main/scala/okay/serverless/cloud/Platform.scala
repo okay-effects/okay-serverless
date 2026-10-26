@@ -60,6 +60,8 @@ final case class Scheduled(cron: String, time: Long)
 
 /** A WORKER: its entry points, each a program of the cloud */
 trait App:
+  /** a request that goes to an object as it is — a WebSocket's, a stream's: its namespace and name */
+  def objectFor(request: Request): Option[(String, String)] = None
   def fetch(request: Request): Response ! Cloud = pure(Response.notFound)
   def scheduled(event: Scheduled): Unit ! Cloud = pure(())
   /** a message of `queue`: acknowledged, or given again later. A failure is a retry */

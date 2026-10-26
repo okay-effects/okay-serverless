@@ -35,7 +35,8 @@ object FlowState:
  * its alarm; an event a request. Restarted anywhere, it goes on from the stage committed: nothing is run again but
  * a `Do` whose commit did not happen (its work at least once, as on every cloud).
  *
- * Its requests: `POST /start` (the input, JSON), `POST /event/<name>` (the payload), `GET /` (where it is).
+ * Its requests, by how their paths end (an app may route `/order/<id>/…` to it as it is): `POST …/start` (the input,
+ * JSON), `POST …/event/<name>` (the payload), `GET` (where it is).
  */
 final class Workflow[S](stages: Vector[Stage[S]], start: Json => S)(using codec: Codec[S]) extends Actor:
   private val key = "flow"
@@ -90,16 +91,16 @@ final class Workflow[S](stages: Vector[Stage[S]], start: Json => S)(using codec:
 
   def fetch(name: String, request: Request): Response ! InActor =
     def body = Descent.parse(request.body.text).getOrElse(Json.Null)
-    (request.method, request.path) match
-      case ("POST", "/start") =>
+    val segments = request.path.split('/').toList.filter(_.nonEmpty)
+    (request.method, segments.reverse) match
+      case ("POST", "start" :: _) =>
         val first = FlowState(0, codec.encode(start(body)), "running")
         Durable.step[ActorStep, InActor, Boolean](name)(Durable.get[FlowState, ActorStep](key).flatMap {
           case Some(_) => pure(false)
           case None => Durable.put[FlowState, ActorStep](key, first).as(true)
         }).flatMap(started => if started then advance(name).andThen(load(name)).map(status)
           else pure(Response.text("started already", 409)))
-      case ("POST", path) if path.startsWith("/event/") =>
-        val event = path.stripPrefix("/event/")
+      case ("POST", event :: "event" :: _) =>
         load(name).flatMap {
           case Some(f) if f.status == s"waiting:$event" => stages(f.stage) match
             case Stage.Wait(_, _, fold) =>

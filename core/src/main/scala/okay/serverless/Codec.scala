@@ -17,6 +17,8 @@ object Codec:
   def json[A](to: A => Json, from: Json => Either[String, A]): Codec[A] =
     of(a => Json.print(to(a)), s => Descent.parse(s).left.map(_.message).flatMap(from))
 
+  /** JSON kept as it is */
+  given Codec[Json] = of(Json.print(_), s => Descent.parse(s).left.map(_.message))
   given Codec[String] = json(Json.Str(_), { case Json.Str(s) => Right(s); case j => Left(s"not a text: $j") })
   given Codec[Long] = json(n => Json.Num(BigDecimal(n)), {
     case Json.Num(n) if n.isValidLong => Right(n.toLong)

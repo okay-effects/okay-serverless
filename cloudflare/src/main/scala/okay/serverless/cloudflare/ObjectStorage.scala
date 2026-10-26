@@ -1,8 +1,10 @@
 package okay.serverless.cloudflare
 
 import okay.scala3.*
+import okay.serverless.cloud.Port
 import okay.serverless.{Storage, Versioned}
 
+import scala.concurrent.Future
 import scala.scalajs.js
 
 /**
@@ -45,6 +47,13 @@ final class ObjectStorage(ctx: js.Dynamic):
     }): js.Function0[Boolean]).asInstanceOf[Boolean]
     if ok then alarm.foreach(at => storage.setAlarm(at.toDouble))
     ok
+
+  /** `Storage` on this object, as a port */
+  val port: Port[Storage] = new Port[Storage]:
+    def apply[X](op: Storage[X]): Future[X] = Future.fromTry(scala.util.Try[X](op match
+      case Storage.Read(keys) => read(keys)
+      case Storage.Keys(prefix) => keys(prefix)
+      case Storage.Commit(r, w, a) => commit(r, w, a)))
 
   /** the handler of `Storage` on this object */
   def handler[R[_], Rest[_], A](p: A ! R)(using Split[Storage, R, Rest]): A ! Rest =

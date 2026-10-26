@@ -63,13 +63,21 @@ enum SqlValue:
   case Blob(b: Bytes)
 
 object SqlValue:
-  given Conversion[Long, SqlValue] = Int(_)
-  given Conversion[scala.Int, SqlValue] = n => Int(n.toLong)
-  given Conversion[Double, SqlValue] = Real(_)
-  given Conversion[String, SqlValue] = Text(_)
+  /** a parameter as written: a value, or a Scala one of its types */
+  type Param = SqlValue | Long | scala.Int | Double | String | Bytes | Null
+  def of(p: Param): SqlValue = p match
+    case v: SqlValue => v
+    case n: Long => Int(n)
+    case n: scala.Int => Int(n.toLong)
+    case d: Double => Real(d)
+    case s: String => Text(s)
+    case b: Bytes => Blob(b)
+    case null => Null
 
 type Row = Map[String, SqlValue]
 final case class Statement(sql: String, params: List[SqlValue] = Nil)
+object Statement:
+  def of(sql: String, params: SqlValue.Param*): Statement = Statement(sql, params.toList.map(SqlValue.of))
 /** what a statement changed */
 final case class Changes(changes: Long, lastRowId: Long)
 
@@ -81,10 +89,10 @@ enum Sql[X]:
   case Batch(db: String, statements: List[Statement]) extends Sql[List[List[Row]]]
 
 object Sql:
-  def query[R[_]](db: String, sql: String, params: SqlValue*)(using In[Sql, R]): List[Row] ! R =
-    perform[Sql](Query(db, Statement(sql, params.toList)))
-  def run[R[_]](db: String, sql: String, params: SqlValue*)(using In[Sql, R]): Changes ! R =
-    perform[Sql](Run(db, Statement(sql, params.toList)))
+  def query[R[_]](db: String, sql: String, params: SqlValue.Param*)(using In[Sql, R]): List[Row] ! R =
+    perform[Sql](Query(db, Statement.of(sql, params*)))
+  def run[R[_]](db: String, sql: String, params: SqlValue.Param*)(using In[Sql, R]): Changes ! R =
+    perform[Sql](Run(db, Statement.of(sql, params*)))
   def batch[R[_]](db: String, statements: Statement*)(using In[Sql, R]): List[List[Row]] ! R =
     perform[Sql](Batch(db, statements.toList))
 
