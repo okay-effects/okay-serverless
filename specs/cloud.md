@@ -1,7 +1,11 @@
 # okay-serverless — a cloud as effects (spec, 2026-10-26)
 
-Status: a design, built in this order — the effects and the memory platform (core), Cloudflare (every binding), AWS
-(what DynamoDB carries; the rest mapped below).
+Status 2026-10-26, built:
+- the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`), SQL on SQLite on the JVM (`SqliteSql`);
+- Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
+- AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Env`, `Fetch`, `Log`, `Analytics` (EMF); the Lambda's events
+  (API Gateway, SQS, EventBridge, an object's alarm). Not yet: S3, SQS out, Aurora, SES, Bedrock, S3 Vectors,
+  Lambda invoke, API Gateway WebSockets — their ports fail, naming them.
 
 ## The idea
 
@@ -22,24 +26,44 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 
 ## The effects
 
-| effect | operations | Cloudflare | AWS | elsewhere |
-|---|---|---|---|---|
-| `Kv` | get (with metadata), put (ttl, metadata), delete, list (prefix, cursor) | KV | DynamoDB (TTL attribute) | Firestore, Redis |
-| `Blobs` | put (content type, metadata), get (a range), head, delete, list | R2 | S3 | GCS, Azure Blob |
-| `Sql` | query, run (changes, last id), batch (atomic) — SQLite's dialect | D1 | Aurora Data API | SQLite file, Turso |
-| `Queues` | send (delay), send a batch; a consumer settles each message (ack, retry with delay) | Queues | SQS | Pub/Sub |
-| `Fetch` | an HTTP request out | `fetch` | `fetch` (Node) | JDK HttpClient |
-| `Cache` | match, put (ttl), delete — by URL | Cache API | in memory / ElastiCache | — |
-| `Env` | a variable, a secret | vars, secrets | env, Secrets Manager | env |
-| `Services` | a request to another service by name | service bindings | Lambda invoke / URL | HTTP |
-| `Limits` | may this key go now (a limit per period, configured per name) | Rate Limiting | DynamoDB counter | Redis |
-| `Ai` | run a model: JSON in, JSON out | Workers AI | Bedrock | Vertex AI |
-| `Vectors` | upsert, query (top k, filter), delete | Vectorize | S3 Vectors / OpenSearch | pgvector |
-| `Analytics` | write a data point (indexes, blobs, doubles) | Analytics Engine | CloudWatch EMF | BigQuery |
-| `Mail` | send a mail | Email Routing `send_email` | SES | SMTP |
-| `Objects` | a request to an object by namespace and name | Durable Objects | the same Lambda, its state a DynamoDB space | — |
-| `Sockets` | in an object: accept, send, close, the open ones by tag | DO WebSockets (hibernation) | API Gateway WebSockets | — |
-| `Log` | okay-scala's `Log` | console | console → CloudWatch | — |
+| effect | operations |
+|---|---|
+| `Kv` | get (with metadata), put (ttl, metadata), delete, list (prefix, cursor) |
+| `Blobs` | put (content type, metadata), get (a range), head, delete, list |
+| `Sql` | query, run (changes, last id), batch (atomic) — SQLite's dialect; parameters a union type |
+| `Queues` | send (a delay), send a batch; a consumer settles each message (ack, retry with a delay) |
+| `Fetch` | an HTTP request out |
+| `Cache` | match, put (ttl), delete — by URL; `Cache.through` |
+| `Env` | a variable, a secret — okay-scala's `std.Env` |
+| `Services` | a request to another service by name |
+| `Limits` | may this key go now (a limit per period, configured per name) |
+| `Ai` | run a model: JSON in, JSON out |
+| `Vectors` | upsert, query (top k, a filter), delete — cosine |
+| `Analytics` | write a data point (indexes, blobs, doubles) |
+| `Mails` | send a mail |
+| `Objects` | a request to an object by namespace and name |
+| `Sockets` | in an object: accept, send, close, the open ones (by tag) |
+| `Log`, `Clock`, `Async` | okay-scala's own |
+
+Where each is, on each cloud:
+
+| effect | Cloudflare | AWS | elsewhere |
+|---|---|---|---|
+| `Kv` | KV | DynamoDB (TTL attribute) | Firestore, Redis |
+| `Blobs` | R2 | S3 | GCS, Azure Blob |
+| `Sql` | D1 | Aurora Data API | an SQLite file (`SqliteSql`), Turso |
+| `Queues` | Queues | SQS | Pub/Sub |
+| `Fetch` | `fetch` | `fetch` (Node) | JDK HttpClient |
+| `Cache` | Cache API | memory / ElastiCache | — |
+| `Env` | vars, secrets | env, Secrets Manager | env |
+| `Services` | service bindings | Lambda invoke / URL | HTTP |
+| `Limits` | Rate Limiting | a DynamoDB counter | Redis |
+| `Ai` | Workers AI | Bedrock | Vertex AI |
+| `Vectors` | Vectorize | S3 Vectors / OpenSearch | pgvector |
+| `Analytics` | Analytics Engine | CloudWatch EMF | BigQuery |
+| `Mails` | Email Routing `send_email` | SES | SMTP |
+| `Objects` | Durable Objects | the same Lambda, its state a DynamoDB space | — |
+| `Sockets` | DO WebSockets (hibernation) | API Gateway WebSockets | — |
 
 ## The entry points
 
@@ -63,10 +87,20 @@ stage it is at and the workflow's value; each stage one `Durable` step, a sleep 
 `Flow.send`. Restarted anywhere, it goes on from the stage committed. A new version of the code goes on from the old
 state, the stages named.
 
+## What is the family's, what is here
+
+- JSON is okay-simple's `okay.effects.json` (as okay-guard's and okay-proof's): one JSON for both twins, the stored
+  format the same by construction.
+- `Env`, `Log`, `Clock`, `Async`, `Retry` are okay-scala's `std`: general, not a cloud's. `Env` was added there for
+  this.
+- `Request`/`Response` are here for now, their bodies bytes. okay-http (on okay-simple) has the same model with text
+  bodies; one model for the family is a later decision: okay-http with bytes, or this one moved there.
+
 ## Testing
 
 - memory: every effect, every entry point, the workflow — `sbt coreJVM/test coreJS/test`;
 - Cloudflare: the example Worker on `wrangler dev` (`cloudflare/example/e2e.sh`): KV, R2, D1, Queues, the cache,
   rate limits, analytics, a service binding, an object with WebSockets, cron. Workers AI and Vectorize have no local
   mode: their ports are written to the bindings' API, not run;
-- AWS: on DynamoDB Local (`aws/test.sh`): `Kv`, `Limits`, objects' state.
+- AWS: on DynamoDB Local (`aws/test.sh`): `Kv`, `Limits` across two instances, analytics in the log, a Lambda given
+  API Gateway's, SQS's and EventBridge's events, an object's state.

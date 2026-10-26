@@ -2,33 +2,39 @@
 [debug] About to delete class files:
 [debug] 	CloudSuite.class
 [debug] 	CloudSuite$Room$.class
+[debug] 	Scenarios.class
 [debug] 	CloudSuite$Back$.class
 [debug] 	CloudSuite$Mailer$.class
 [debug] 	CloudSuite$Front$.class
 [debug] 	CloudSuite.tasty
 [debug] 	CloudSuite$Room$.tasty
+[debug] 	Scenarios.tasty
 [debug] 	CloudSuite$Back$.tasty
 [debug] 	CloudSuite$Mailer$.tasty
 [debug] 	CloudSuite$Front$.tasty
 [debug] We backup class files:
 [debug] 	CloudSuite.class
 [debug] 	CloudSuite$Room$.class
+[debug] 	Scenarios.class
 [debug] 	CloudSuite$Back$.class
 [debug] 	CloudSuite$Mailer$.class
 [debug] 	CloudSuite$Front$.class
 [debug] 	CloudSuite.tasty
 [debug] 	CloudSuite$Room$.tasty
+[debug] 	Scenarios.tasty
 [debug] 	CloudSuite$Back$.tasty
 [debug] 	CloudSuite$Mailer$.tasty
 [debug] 	CloudSuite$Front$.tasty
 [debug] Registering generated classes:
 [debug] 	CloudSuite.class
 [debug] 	CloudSuite$Room$.class
+[debug] 	Scenarios.class
 [debug] 	CloudSuite$Back$.class
 [debug] 	CloudSuite$Mailer$.class
 [debug] 	CloudSuite$Front$.class
 [debug] 	CloudSuite.tasty
 [debug] 	CloudSuite$Room$.tasty
+[debug] 	Scenarios.tasty
 [debug] 	CloudSuite$Back$.tasty
 [debug] 	CloudSuite$Mailer$.tasty
 [debug] 	CloudSuite$Front$.tasty

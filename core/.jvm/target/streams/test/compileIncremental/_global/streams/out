@@ -2,35 +2,45 @@
 [debug] IncrementalCompile.incrementalCompile
 [debug] previous = Stamps for: 16 products, 4 sources, 6 libraries
 [debug] current source = Set(${BASE}/core/.jvm/src/test/scala/okay/serverless/cloud/SqliteSqlSuite.scala, ${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala), unmodified = ...),Set(),Set(),API Changes: Set())
 [debug] 
 [debug] Initial source changes:
 [debug] 	removed: Set()
 [debug] 	added: Set()
-[debug] 	modified: Set(${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
+[debug] 	modified: Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
 [debug] Invalidated products: Set()
 [debug] External API changes: API Changes: Set()
 [debug] Modified binary dependencies: Set()
-[debug] Initial directly invalidated classes: Set(okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front)
+[debug] Initial directly invalidated classes: Set(okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.Scenarios, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front)
 [debug] Sources indirectly invalidated by:
 [debug] 	product: Set()
 [debug] 	binary dep: Set()
 [debug] 	external source: Set()
-[debug] All initially invalidated classes: Set(okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front)
-[debug] All initially invalidated sources:Set(${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
-[debug] Initial set of included nodes: okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front
+[debug] All initially invalidated classes: Set(okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.Scenarios, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front)
+[debug] All initially invalidated sources:Set(${BASE}/core/src/test/scala/okay/serverless/Scenarios.scala, ${BASE}/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala)
+[debug] Initial set of included nodes: okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.Scenarios, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front
 [debug] compilation cycle 1
-[info] compiling 1 Scala source to /Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/test-classes ...
+[info] compiling 2 Scala sources to /Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/test-classes ...
 [debug] Returning already retrieved and compiled bridge: /Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.8/scala3-sbt-bridge-3.3.8.jar.
-[debug] [zinc] Running cached compiler 7147a3dc for Scala Compiler version 3.3.8
+[debug] [zinc] Running cached compiler 451feed1 for Scala Compiler version 3.3.8
 [debug] [zinc] The Scala compiler is invoked with:
 [debug] 	-deprecation
 [debug] 	-feature
 [debug] 	-Wunused:imports,privates,locals
 [debug] 	-classpath
 [debug] 	/Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/test-classes:/Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.3.8/scala3-library_3-3.3.8.jar:/Users/sergiy/.ivy2/local/io.github.okay-effects/okay-scala_3/0.1.1/jars/okay-scala_3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-json_3/0.1.1/okay-effects-json_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit_3/1.2.3/munit_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.53.1.0/sqlite-jdbc-3.53.1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.18/scala-library-2.13.18.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects_3/0.1.1/okay-effects_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-machine_3/0.1.1/okay-effects-machine_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-parsing_3/0.1.1/okay-effects-parsing_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-stream_3/0.1.1/okay-effects-stream_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/junit-interface/1.2.3/junit-interface-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scalameta/munit-diff_3/1.2.3/munit-diff_3-1.2.3.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/junit/junit/4.13.2/junit-4.13.2.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-sbt/test-interface/1.0/test-interface-1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar
-[debug] Scala compilation took 0.956641208 s
+[debug] Scala compilation took 0.908508958 s
 [info] done compiling
+[debug] Invalidating (transitively) by inheritance from okay.serverless.Scenarios...
+[debug] Initial set of included nodes: okay.serverless.Scenarios
+[debug] Invalidated by transitive inheritance dependency: Set(okay.serverless.Scenarios)
+[debug] Change NamesChange(okay.serverless.Scenarios,ModifiedNames(changes = UsedName(compileErrors,[Default]))) invalidates 1 classes due to The okay.serverless.Scenarios has the following regular definitions changed:
+[debug] 	UsedName(compileErrors,[Default]).
+[debug]   > by transitive inheritance: Set(okay.serverless.Scenarios)
+[debug]   > 
+[debug]   > 
+[debug]   > 
+[debug]         
 [debug] Invalidating (transitively) by inheritance from okay.serverless.cloud.CloudSuite...
 [debug] Initial set of included nodes: okay.serverless.cloud.CloudSuite
 [debug] Invalidated by transitive inheritance dependency: Set(okay.serverless.cloud.CloudSuite)
@@ -46,6 +56,6 @@
 [debug] Previously invalidated, but (transitively) depend on new invalidations:
 [debug] Final step, transitive dependencies:
 [debug] 	Set()
-[debug] Initial set of included nodes: okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front
+[debug] Initial set of included nodes: okay.serverless.cloud.CloudSuite, okay.serverless.cloud.CloudSuite.Back, okay.serverless.cloud.CloudSuite.Room, okay.serverless.Scenarios, okay.serverless.cloud.CloudSuite.Mailer, okay.serverless.cloud.CloudSuite.Front
 [debug] Invalidated macros due to upstream dependencies change: Set()
 [debug] No classes were invalidated.

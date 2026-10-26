@@ -21,8 +21,8 @@ object Port:
       [X] => (op: E[X], k: X => A ! Rest) => Async.fromFuture[X, Rest](port(op)).flatMap(k)))
 
 /** EVERYTHING A PROGRAM MAY USE IN A CLOUD (specs/cloud.md) */
-type Cloud[X] = (Async + Log + Clock + Kv + Blobs + Sql + Queues + Fetch + Cache + Env + Services + Limits + Ai + Vectors +
-  Analytics + Mails + Objects)[X]
+type Cloud[X] = (Async + Log + Clock + Kv + Blobs + Sql + Queues + Fetch + Cache + Env + Services + Limits + Ai +
+  Vectors + Analytics + Mails + Objects)[X]
 
 /** AN ACTOR'S ROW: the cloud, its own storage (for `Durable`), its sockets */
 type InActor[X] = (Cloud + Storage + Sockets)[X]

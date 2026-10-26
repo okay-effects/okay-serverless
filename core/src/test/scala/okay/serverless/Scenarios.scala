@@ -4,8 +4,9 @@ import okay.scala3.*
 import okay.scala3.std.*
 
 /**
- * THE SCENARIOS every platform passes (the TCK): a step's atomicity, its isolation, a conflict, a crash, an eviction,
- * an alarm, `once`. Each over a `Storage` handler made fresh per instance on the same storage — here memory with faults
+ * THE SCENARIOS every platform passes (the TCK): a step's atomicity, its isolation, a conflict, a crash, an
+ * eviction, an alarm, `once`. Each over a `Storage` handler made fresh per instance on the same storage — here memory
+ * with faults
  */
 class Scenarios extends munit.FunSuite:
   type S[X] = (Storage + Fail % String + Durable)[X]

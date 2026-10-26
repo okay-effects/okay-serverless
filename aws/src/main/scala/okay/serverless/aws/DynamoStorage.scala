@@ -2,12 +2,12 @@ package okay.serverless.aws
 
 import okay.scala3.*
 import okay.scala3.std.*
+import okay.serverless.cloud.Port
 import okay.serverless.{Storage, Versioned}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.global as g
-import scala.scalajs.js.Thenable.Implicits.*
 
 /**
  * `Storage` ON DYNAMODB, for AWS Lambda (Scala.js on Node; the runtime's own `@aws-sdk/client-dynamodb`). A table of
@@ -39,10 +39,15 @@ final class DynamoStorage(client: js.Dynamic, table: String, space: String, sche
 
   def keys(prefix: String): Future[List[String]] =
     def page(from: js.UndefOr[js.Dynamic], acc: List[String]): Future[List[String]] =
-      val input = js.Dynamic.literal(TableName = table, ConsistentRead = true,
-        KeyConditionExpression = "#s = :s AND begins_with(#k, :p)",
-        ExpressionAttributeNames = js.Dynamic.literal("#s" -> "space", "#k" -> "key"),
-        ExpressionAttributeValues = js.Dynamic.literal(":s" -> s(space), ":p" -> s(prefix)))
+      // DynamoDB takes no empty text in a key condition: no prefix, the whole space
+      val input =
+        if prefix.isEmpty then js.Dynamic.literal(TableName = table, ConsistentRead = true,
+          KeyConditionExpression = "#s = :s", ExpressionAttributeNames = js.Dynamic.literal("#s" -> "space"),
+          ExpressionAttributeValues = js.Dynamic.literal(":s" -> s(space)))
+        else js.Dynamic.literal(TableName = table, ConsistentRead = true,
+          KeyConditionExpression = "#s = :s AND begins_with(#k, :p)",
+          ExpressionAttributeNames = js.Dynamic.literal("#s" -> "space", "#k" -> "key"),
+          ExpressionAttributeValues = js.Dynamic.literal(":s" -> s(space), ":p" -> s(prefix)))
       from.foreach(f => input.ExclusiveStartKey = f)
       send("QueryCommand", input).flatMap { r =>
         val got = r.Items.asInstanceOf[js.Array[js.Dynamic]].toList.map(_.key.S.asInstanceOf[String])
@@ -107,6 +112,13 @@ final class DynamoStorage(client: js.Dynamic, table: String, space: String, sche
               ok
             }.recover { case _ => ok } // a later alarm than the one kept: the earlier stands
       }
+
+  /** `Storage` on this table and space, as a port */
+  val port: Port[Storage] = new Port[Storage]:
+    def apply[X](op: Storage[X]): Future[X] = op match
+      case Storage.Read(keys) => read(keys)
+      case Storage.Keys(prefix) => DynamoStorage.this.keys(prefix)
+      case Storage.Commit(r, w, a) => commit(r, w, a)
 
   /** the handler of `Storage` on this table and space: each operation awaited (`Async`) */
   def handler[R[_], Rest[_], A](p: A ! R)(using Split[Storage, R, Rest], In[Async, Rest]): A ! Rest =

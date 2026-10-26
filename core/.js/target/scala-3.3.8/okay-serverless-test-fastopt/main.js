@@ -10692,9 +10692,9 @@ $c_Lokay_serverless_Codec$.prototype.json__F1__F1__Lokay_serverless_Codec = (fun
 });
 $c_Lokay_serverless_Codec$.prototype.given_Codec_String__Lokay_serverless_Codec = (function() {
   if ((!this.Lokay_serverless_Codec$__f_given_Codec_Stringbitmap$1)) {
-    this.Lokay_serverless_Codec$__f_given_Codec_String$lzy1 = this.json__F1__F1__Lokay_serverless_Codec(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
-      var _$2$1 = $as_T(_$2);
-      return new $c_Lokay_effects_json_Json$Str(_$2$1);
+    this.Lokay_serverless_Codec$__f_given_Codec_String$lzy1 = this.json__F1__F1__Lokay_serverless_Codec(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$4) => {
+      var _$4$1 = $as_T(_$4);
+      return new $c_Lokay_effects_json_Json$Str(_$4$1);
     })), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
       var x$1$1 = $as_Lokay_effects_json_Json(x$1);
       if ((x$1$1 instanceof $c_Lokay_effects_json_Json$Str)) {
@@ -10793,8 +10793,8 @@ $c_Lokay_serverless_Codec$.prototype.given_Codec_List__Lokay_serverless_Codec__L
     if ((x1 instanceof $c_s_util_Left)) {
       var x2$1 = $as_s_util_Left(x1);
       var a$1 = $n(x2$1).s_util_Left__f_value;
-      var _$5 = $as_Lokay_effects_parsing_ParseError(a$1);
-      var $x_3 = new $c_s_util_Left($n(_$5).message__T());
+      var _$7 = $as_Lokay_effects_parsing_ParseError(a$1);
+      var $x_3 = new $c_s_util_Left($n(_$7).message__T());
     } else {
       var $x_3 = this$6.s_util_Either$LeftProjection__f_e;
     }
@@ -27916,107 +27916,184 @@ $c_Lokay_serverless_cloud_Workflow.prototype.message__T__Lokay_serverless_cloud_
   return new $c_Lokay_scala3_Prog$Value((void 0));
 });
 $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(name, request) {
+  var $x_2 = $m_s_Predef$();
+  var $x_1 = $m_sc_StringOps$();
+  var x = $n(request).path__T();
+  var this$2 = $n($x_2.wrapRefArray__AO__scm_ArraySeq$ofRef($x_1.split$extension__T__C__AT(x, 47)));
+  var this$7 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$2));
+  var f = ((_$2) => {
+    var _$2$1 = $as_T(_$2);
+    var this$6 = $n(_$2$1);
+    return (!(this$6 === ""));
+  });
+  var l = this$7;
+  block: {
+    var result;
+    while (true) {
+      if ($n(l).isEmpty__Z()) {
+        var result = $m_sci_Nil$();
+        break;
+      } else {
+        var h = $n(l).head__O();
+        var t = $as_sci_List($n(l).tail__O());
+        if ((!$uZ(f(h)))) {
+          l = t;
+          continue;
+        }
+        var start = l;
+        var remaining = t;
+        while (true) {
+          if ($n(remaining).isEmpty__Z()) {
+            var result = start;
+            break block;
+          } else {
+            var x$1 = $n(remaining).head__O();
+            if ($uZ(f(x$1))) {
+              remaining = $as_sci_List($n(remaining).tail__O());
+              continue;
+            }
+            var firstMiss = remaining;
+            var newHead = new $c_sci_$colon$colon($n(start).head__O(), $m_sci_Nil$());
+            var toProcess = $as_sci_List($n(start).tail__O());
+            var currentLast = newHead;
+            while ((toProcess !== firstMiss)) {
+              var newElem = new $c_sci_$colon$colon($n(toProcess).head__O(), $m_sci_Nil$());
+              $n(currentLast).sci_$colon$colon__f_next = newElem;
+              currentLast = newElem;
+              toProcess = $as_sci_List($n(toProcess).tail__O());
+            }
+            var next = $as_sci_List($n(firstMiss).tail__O());
+            var nextToCopy = next;
+            while ((!$n(next).isEmpty__Z())) {
+              var head = $n(next).head__O();
+              if ($uZ(f(head))) {
+                next = $as_sci_List($n(next).tail__O());
+              } else {
+                while ((nextToCopy !== next)) {
+                  var newElem$2 = new $c_sci_$colon$colon($n(nextToCopy).head__O(), $m_sci_Nil$());
+                  $n(currentLast).sci_$colon$colon__f_next = newElem$2;
+                  currentLast = newElem$2;
+                  nextToCopy = $as_sci_List($n(nextToCopy).tail__O());
+                }
+                nextToCopy = $as_sci_List($n(next).tail__O());
+                next = $as_sci_List($n(next).tail__O());
+              }
+            }
+            if ((!$n(nextToCopy).isEmpty__Z())) {
+              $n(currentLast).sci_$colon$colon__f_next = nextToCopy;
+            }
+            var result = newHead;
+            break block;
+          }
+        }
+      }
+    }
+  }
   var _1 = $n(request).Lokay_serverless_cloud_Request__f_method;
-  var _2 = $n(request).path__T();
-  if ((_1 === "POST")) {
-    if ((_2 === "/start")) {
+  var _2 = $n(result).reverse__sci_List();
+  if (((_1 === "POST") && (_2 instanceof $c_sci_$colon$colon))) {
+    var x129 = $as_sci_$colon$colon(_2);
+    var x130 = $as_T($n(x129).sci_$colon$colon__f_head);
+    var x131 = $n(x129).sci_$colon$colon__f_next;
+    if ((x130 === "start")) {
       var state = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(this.Lokay_serverless_cloud_Workflow__f_start).apply__O__O($ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request)));
       var wakeAt = $m_s_None$();
       var error = $m_s_None$();
       var first = new $c_Lokay_serverless_cloud_FlowState(0, state, "running", 0, wakeAt, error);
-      var $x_9 = $m_Lokay_serverless_Durable$();
-      var $x_3 = $m_Lokay_serverless_Durable$();
-      var $x_2 = this.Lokay_serverless_cloud_Workflow__f_key;
-      var $x_1 = $m_Lokay_serverless_cloud_FlowState$().given_Codec_FlowState__Lokay_serverless_Codec();
+      var $x_11 = $m_Lokay_serverless_Durable$();
+      var $x_5 = $m_Lokay_serverless_Durable$();
+      var $x_4 = this.Lokay_serverless_cloud_Workflow__f_key;
+      var $x_3 = $m_Lokay_serverless_cloud_FlowState$().given_Codec_FlowState__Lokay_serverless_Codec();
       var at = new $c_Lokay_scala3_Place$Last();
-      var p = $x_3.get__T__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog($x_2, $x_1, at);
-      var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
-        var x$1$1 = $as_s_Option(x$1);
-        if ((x$1$1 instanceof $c_s_Some)) {
+      var p = $x_5.get__T__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog($x_4, $x_3, at);
+      var f$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$1) => {
+        var x$1$2 = $as_s_Option(x$1$1);
+        if ((x$1$2 instanceof $c_s_Some)) {
           return new $c_Lokay_scala3_Prog$Value(false);
         }
-        var x = $m_s_None$();
-        if ((x === x$1$1)) {
-          var $x_7 = $m_Lokay_scala3_Prog$package$();
-          var $x_6 = $m_Lokay_serverless_Durable$();
-          var $x_5 = this.Lokay_serverless_cloud_Workflow__f_key;
-          var $x_4 = $m_Lokay_serverless_cloud_FlowState$().given_Codec_FlowState__Lokay_serverless_Codec();
+        var x$2 = $m_s_None$();
+        if ((x$2 === x$1$2)) {
+          var $x_9 = $m_Lokay_scala3_Prog$package$();
+          var $x_8 = $m_Lokay_serverless_Durable$();
+          var $x_7 = this.Lokay_serverless_cloud_Workflow__f_key;
+          var $x_6 = $m_Lokay_serverless_cloud_FlowState$().given_Codec_FlowState__Lokay_serverless_Codec();
           var at$1 = new $c_Lokay_scala3_Place$Last();
-          return $x_7.as__Lokay_scala3_Prog__O__Lokay_scala3_Prog($x_6.put__T__O__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog($x_5, first, $x_4, at$1), true);
+          return $x_9.as__Lokay_scala3_Prog__O__Lokay_scala3_Prog($x_8.put__T__O__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog($x_7, first, $x_6, at$1), true);
         }
-        throw new $c_s_MatchError(x$1$1);
+        throw new $c_s_MatchError(x$1$2);
       }));
-      var $x_8 = new $c_Lokay_scala3_Prog$FlatMap(p, f);
+      var $x_10 = new $c_Lokay_scala3_Prog$FlatMap(p, f$1);
       var at$2 = new $c_Lokay_scala3_Place$Last();
       var at$3 = new $c_Lokay_scala3_Place$Last();
       var at$4 = new $c_Lokay_scala3_Place$Init(at$3);
-      var p$2 = $x_9.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog(name, $x_8, at$2, at$4);
-      var f$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((started) => {
+      var p$2 = $x_11.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog(name, $x_10, at$2, at$4);
+      var f$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((started) => {
         var started$1 = $uZ(started);
         if (started$1) {
           var p$1 = $m_Lokay_scala3_Prog$package$().andThen__Lokay_scala3_Prog__F0__Lokay_scala3_Prog($p_Lokay_serverless_cloud_Workflow__advance__T__Lokay_scala3_Prog(this, name), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name))));
-          var f$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$1) => {
-            var f$2 = $as_s_Option(f$1);
-            return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$2);
+          var f$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$2) => {
+            var f$3 = $as_s_Option(f$2);
+            return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$3);
           }));
-          return new $c_Lokay_scala3_Prog$Map(p$1, f$3);
+          return new $c_Lokay_scala3_Prog$Map(p$1, f$4);
         } else {
           var a = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("started already", 409);
           return new $c_Lokay_scala3_Prog$Value(a);
         }
       }));
-      return new $c_Lokay_scala3_Prog$FlatMap(p$2, f$4);
+      return new $c_Lokay_scala3_Prog$FlatMap(p$2, f$5);
     }
-    var this$30 = $n(_2);
-    if ($uZ(this$30.startsWith("/event/"))) {
-      var event = $m_sc_StringOps$().stripPrefix$extension__T__T__T(_2, "/event/");
-      var p$5 = $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name);
-      var f$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2) => {
-        var x$1$3 = $as_s_Option(x$1$2);
-        if ((x$1$3 instanceof $c_s_Some)) {
-          var f$5 = $as_Lokay_serverless_cloud_FlowState($n($as_s_Some(x$1$3)).s_Some__f_value);
-          if (($n(f$5).Lokay_serverless_cloud_FlowState__f_status === ("waiting:" + event))) {
-            var x107 = $as_Lokay_serverless_cloud_Stage($n(this.Lokay_serverless_cloud_Workflow__f_stages).apply__I__O($n(f$5).Lokay_serverless_cloud_FlowState__f_stage));
-            if ((x107 instanceof $c_Lokay_serverless_cloud_Stage$Wait)) {
-              var x$1$4 = $as_Lokay_serverless_cloud_Stage$Wait(x107);
-              $n(x$1$4);
-              $n(x$1$4);
-              var this$35 = $n(x$1$4);
-              var x112 = this$35.Lokay_serverless_cloud_Stage$Wait__f_fold;
-              var $x_10 = $m_Lokay_scala3_Prog$package$();
-              var stage = ((1 + $n(f$5).Lokay_serverless_cloud_FlowState__f_stage) | 0);
-              var state$1 = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(x112).apply__O__O__O($p_Lokay_serverless_cloud_Workflow__decode__Lokay_serverless_cloud_FlowState__O(this, f$5), $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request)));
-              var wakeAt$1 = $m_s_None$();
-              var error$1 = $m_s_None$();
-              var p$3 = $p_Lokay_serverless_cloud_Workflow__commit__T__Lokay_serverless_cloud_FlowState__Lokay_serverless_cloud_FlowState__Lokay_scala3_Prog(this, name, f$5, new $c_Lokay_serverless_cloud_FlowState(stage, state$1, "running", 0, wakeAt$1, error$1));
-              var f$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
-                $uZ(_$2);
-                return $p_Lokay_serverless_cloud_Workflow__advance__T__Lokay_scala3_Prog(this, name);
-              }));
-              var p$4 = $x_10.andThen__Lokay_scala3_Prog__F0__Lokay_scala3_Prog(new $c_Lokay_scala3_Prog$FlatMap(p$3, f$6), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name))));
-              var f$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$2$1) => {
-                var f$7 = $as_s_Option(f$2$1);
-                return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$7);
-              }));
-              return new $c_Lokay_scala3_Prog$Map(p$4, f$8);
+    if ((x131 instanceof $c_sci_$colon$colon)) {
+      $n($as_sci_$colon$colon(x131));
+      if (($n($as_sci_$colon$colon(x131)).sci_$colon$colon__f_head === "event")) {
+        var p$5 = $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name);
+        var f$10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2$1) => {
+          var x$1$3 = $as_s_Option(x$1$2$1);
+          if ((x$1$3 instanceof $c_s_Some)) {
+            var f$6 = $as_Lokay_serverless_cloud_FlowState($n($as_s_Some(x$1$3)).s_Some__f_value);
+            if (($n(f$6).Lokay_serverless_cloud_FlowState__f_status === ("waiting:" + x130))) {
+              var x107 = $as_Lokay_serverless_cloud_Stage($n(this.Lokay_serverless_cloud_Workflow__f_stages).apply__I__O($n(f$6).Lokay_serverless_cloud_FlowState__f_stage));
+              if ((x107 instanceof $c_Lokay_serverless_cloud_Stage$Wait)) {
+                var x$1$4 = $as_Lokay_serverless_cloud_Stage$Wait(x107);
+                $n(x$1$4);
+                $n(x$1$4);
+                var this$40 = $n(x$1$4);
+                var x112 = this$40.Lokay_serverless_cloud_Stage$Wait__f_fold;
+                var $x_12 = $m_Lokay_scala3_Prog$package$();
+                var stage = ((1 + $n(f$6).Lokay_serverless_cloud_FlowState__f_stage) | 0);
+                var state$1 = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(x112).apply__O__O__O($p_Lokay_serverless_cloud_Workflow__decode__Lokay_serverless_cloud_FlowState__O(this, f$6), $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request)));
+                var wakeAt$1 = $m_s_None$();
+                var error$1 = $m_s_None$();
+                var p$3 = $p_Lokay_serverless_cloud_Workflow__commit__T__Lokay_serverless_cloud_FlowState__Lokay_serverless_cloud_FlowState__Lokay_scala3_Prog(this, name, f$6, new $c_Lokay_serverless_cloud_FlowState(stage, state$1, "running", 0, wakeAt$1, error$1));
+                var f$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$3) => {
+                  $uZ(_$3);
+                  return $p_Lokay_serverless_cloud_Workflow__advance__T__Lokay_scala3_Prog(this, name);
+                }));
+                var p$4 = $x_12.andThen__Lokay_scala3_Prog__F0__Lokay_scala3_Prog(new $c_Lokay_scala3_Prog$FlatMap(p$3, f$7), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name))));
+                var f$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$2$1) => {
+                  var f$8 = $as_s_Option(f$2$1);
+                  return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$8);
+                }));
+                return new $c_Lokay_scala3_Prog$Map(p$4, f$9);
+              }
+              var a$1 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("not waiting", 409);
+              return new $c_Lokay_scala3_Prog$Value(a$1);
             }
-            var a$1 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("not waiting", 409);
-            return new $c_Lokay_scala3_Prog$Value(a$1);
           }
-        }
-        var a$2 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response(("not waiting for " + event), 409);
-        return new $c_Lokay_scala3_Prog$Value(a$2);
-      }));
-      return new $c_Lokay_scala3_Prog$FlatMap(p$5, f$9);
+          var a$2 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response(("not waiting for " + x130), 409);
+          return new $c_Lokay_scala3_Prog$Value(a$2);
+        }));
+        return new $c_Lokay_scala3_Prog$FlatMap(p$5, f$10);
+      }
     }
   }
   if ((_1 === "GET")) {
     var p$6 = $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name);
-    var f$12 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$10) => {
-      var f$11 = $as_s_Option(f$10);
-      return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$11);
+    var f$13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$11) => {
+      var f$12 = $as_s_Option(f$11);
+      return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$12);
     }));
-    return new $c_Lokay_scala3_Prog$Map(p$6, f$12);
+    return new $c_Lokay_scala3_Prog$Map(p$6, f$13);
   }
   var a$3 = $m_Lokay_serverless_cloud_Response$().Lokay_serverless_cloud_Response$__f_notFound;
   return new $c_Lokay_scala3_Prog$Value(a$3);
@@ -28055,9 +28132,9 @@ $c_Lokay_serverless_cloud_Workflow.prototype.alarm__T__Lokay_scala3_Prog = (func
           if ((!this$37.isEmpty__Z())) {
             var x0 = this$37.get__O();
             var $x_4 = $uJ(x0);
-            var _$3_$_lo = $x_4.l;
-            var _$3_$_hi = $x_4.h;
-            var $x_3 = ((_$3_$_hi === t$1_$_hi) ? ((_$3_$_lo >>> 0) > (t$1_$_lo >>> 0)) : (_$3_$_hi > t$1_$_hi));
+            var _$4_$_lo = $x_4.l;
+            var _$4_$_hi = $x_4.h;
+            var $x_3 = ((_$4_$_hi === t$1_$_hi) ? ((_$4_$_lo >>> 0) > (t$1_$_lo >>> 0)) : (_$4_$_hi > t$1_$_hi));
           } else {
             var $x_3 = false;
           }
@@ -34714,7 +34791,7 @@ function $s_Lokay_serverless_cloud_Settle$__Ack__Lokay_serverless_cloud_Settle()
 /** @constructor */
 function $c_Lokay_serverless_cloud_Settle$() {
   $n_Lokay_serverless_cloud_Settle$ = this;
-  $t_Lokay_serverless_cloud_Settle$__Ack = new $c_Lokay_serverless_cloud_Settle$$anon$6("Ack", 0);
+  $t_Lokay_serverless_cloud_Settle$__Ack = new $c_Lokay_serverless_cloud_Settle$$anon$2("Ack", 0);
 }
 $c_Lokay_serverless_cloud_Settle$.prototype = new $h_O();
 $c_Lokay_serverless_cloud_Settle$.prototype.constructor = $c_Lokay_serverless_cloud_Settle$;
@@ -34801,8 +34878,7 @@ function $h_Lokay_serverless_cloud_Sql$() {
 }
 $h_Lokay_serverless_cloud_Sql$.prototype = $c_Lokay_serverless_cloud_Sql$.prototype;
 $c_Lokay_serverless_cloud_Sql$.prototype.query__T__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog = (function(db, sql, params, x$4) {
-  var params$1 = $n(params).toList__sci_List();
-  var statement = new $c_Lokay_serverless_cloud_Statement(sql, params$1);
+  var statement = $m_Lokay_serverless_cloud_Statement$().of__T__sci_Seq__Lokay_serverless_cloud_Statement(sql, params);
   var op$proxy11 = new $c_Lokay_serverless_cloud_Sql$Query(db, statement);
   return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy11);
 });
@@ -34817,6 +34893,108 @@ function $m_Lokay_serverless_cloud_Sql$() {
     $n_Lokay_serverless_cloud_Sql$ = new $c_Lokay_serverless_cloud_Sql$();
   }
   return $n_Lokay_serverless_cloud_Sql$;
+}
+function $s_Lokay_serverless_cloud_SqlValue$__Null__Lokay_serverless_cloud_SqlValue() {
+  $m_Lokay_serverless_cloud_SqlValue$();
+  return $t_Lokay_serverless_cloud_SqlValue$__Null;
+}
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$() {
+  $n_Lokay_serverless_cloud_SqlValue$ = this;
+  $t_Lokay_serverless_cloud_SqlValue$__Null = new $c_Lokay_serverless_cloud_SqlValue$$anon$1("Null", 0);
+}
+$c_Lokay_serverless_cloud_SqlValue$.prototype = new $h_O();
+$c_Lokay_serverless_cloud_SqlValue$.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$() {
+}
+$h_Lokay_serverless_cloud_SqlValue$.prototype = $c_Lokay_serverless_cloud_SqlValue$.prototype;
+$c_Lokay_serverless_cloud_SqlValue$.prototype.of__O__Lokay_serverless_cloud_SqlValue = (function(p) {
+  if ((p instanceof $c_Lokay_serverless_cloud_SqlValue)) {
+    var v = $as_Lokay_serverless_cloud_SqlValue(p);
+    return v;
+  }
+  if ((p instanceof $Long)) {
+    var $x_1 = $uJ(p);
+    var n_$_lo = $x_1.l;
+    var n_$_hi = $x_1.h;
+    return new $c_Lokay_serverless_cloud_SqlValue$Int(n_$_lo, n_$_hi);
+  }
+  if ($isInt(p)) {
+    var n$2 = $uI(p);
+    var hi = (n$2 >> 31);
+    return new $c_Lokay_serverless_cloud_SqlValue$Int(n$2, hi);
+  }
+  if (((typeof p) === "number")) {
+    var d = $uD(p);
+    return new $c_Lokay_serverless_cloud_SqlValue$Real(d);
+  }
+  if (((typeof p) === "string")) {
+    var s = $as_T(p);
+    return new $c_Lokay_serverless_cloud_SqlValue$Text(s);
+  }
+  if ((p instanceof $c_Lokay_serverless_cloud_Bytes)) {
+    var b = $as_Lokay_serverless_cloud_Bytes(p);
+    return new $c_Lokay_serverless_cloud_SqlValue$Blob(b);
+  }
+  if ((p === null)) {
+    return $s_Lokay_serverless_cloud_SqlValue$__Null__Lokay_serverless_cloud_SqlValue();
+  }
+  throw new $c_s_MatchError(p);
+});
+var $d_Lokay_serverless_cloud_SqlValue$ = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$, "okay.serverless.cloud.SqlValue$", ({
+  Lokay_serverless_cloud_SqlValue$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Sum: 1
+}));
+var $n_Lokay_serverless_cloud_SqlValue$;
+function $m_Lokay_serverless_cloud_SqlValue$() {
+  if ((!$n_Lokay_serverless_cloud_SqlValue$)) {
+    $n_Lokay_serverless_cloud_SqlValue$ = new $c_Lokay_serverless_cloud_SqlValue$();
+  }
+  return $n_Lokay_serverless_cloud_SqlValue$;
+}
+/** @constructor */
+function $c_Lokay_serverless_cloud_Statement$() {
+}
+$c_Lokay_serverless_cloud_Statement$.prototype = new $h_O();
+$c_Lokay_serverless_cloud_Statement$.prototype.constructor = $c_Lokay_serverless_cloud_Statement$;
+/** @constructor */
+function $h_Lokay_serverless_cloud_Statement$() {
+}
+$h_Lokay_serverless_cloud_Statement$.prototype = $c_Lokay_serverless_cloud_Statement$.prototype;
+$c_Lokay_serverless_cloud_Statement$.prototype.of__T__sci_Seq__Lokay_serverless_cloud_Statement = (function(sql, params) {
+  var this$1 = $n($n(params).toList__sci_List());
+  var f = ((p) => $m_Lokay_serverless_cloud_SqlValue$().of__O__Lokay_serverless_cloud_SqlValue(p));
+  if ((this$1 === $m_sci_Nil$())) {
+    var params$1 = $m_sci_Nil$();
+  } else {
+    var x0 = this$1.head__O();
+    var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+    var t = h;
+    var rest = $as_sci_List(this$1.tail__O());
+    while ((rest !== $m_sci_Nil$())) {
+      var x0$1 = $n(rest).head__O();
+      var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+      $n(t).sci_$colon$colon__f_next = nx;
+      t = nx;
+      rest = $as_sci_List($n(rest).tail__O());
+    }
+    var params$1 = h;
+  }
+  return new $c_Lokay_serverless_cloud_Statement(sql, params$1);
+});
+var $d_Lokay_serverless_cloud_Statement$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Statement$, "okay.serverless.cloud.Statement$", ({
+  Lokay_serverless_cloud_Statement$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_serverless_cloud_Statement$;
+function $m_Lokay_serverless_cloud_Statement$() {
+  if ((!$n_Lokay_serverless_cloud_Statement$)) {
+    $n_Lokay_serverless_cloud_Statement$ = new $c_Lokay_serverless_cloud_Statement$();
+  }
+  return $n_Lokay_serverless_cloud_Statement$;
 }
 /** @constructor */
 function $c_Lokay_serverless_cloud_Vectors$() {
@@ -50857,13 +51035,27 @@ $h_Lokay_serverless_cloud_Sql.prototype = $c_Lokay_serverless_cloud_Sql.prototyp
 $c_Lokay_serverless_cloud_Sql.prototype.productIterator__sc_Iterator = (function() {
   return new $c_s_Product$$anon$1(this);
 });
-var $d_Lokay_serverless_cloud_SqlValue = new $TypeData().initClass(0, "okay.serverless.cloud.SqlValue", ({
-  Lokay_serverless_cloud_SqlValue: 1,
-  s_Equals: 1,
-  s_Product: 1,
-  Ljava_io_Serializable: 1,
-  s_reflect_Enum: 1
-}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue() {
+}
+$c_Lokay_serverless_cloud_SqlValue.prototype = new $h_O();
+$c_Lokay_serverless_cloud_SqlValue.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue() {
+}
+$h_Lokay_serverless_cloud_SqlValue.prototype = $c_Lokay_serverless_cloud_SqlValue.prototype;
+$c_Lokay_serverless_cloud_SqlValue.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+function $as_Lokay_serverless_cloud_SqlValue(obj) {
+  return (((obj instanceof $c_Lokay_serverless_cloud_SqlValue) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.SqlValue"));
+}
+function $isArrayOf_Lokay_serverless_cloud_SqlValue(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_SqlValue)));
+}
+function $asArrayOf_Lokay_serverless_cloud_SqlValue(obj, depth) {
+  return (($isArrayOf_Lokay_serverless_cloud_SqlValue(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.SqlValue;", depth));
+}
 /** @constructor */
 function $c_Lokay_serverless_cloud_Stage() {
 }
@@ -62770,6 +62962,279 @@ var $d_Lokay_serverless_cloud_Sql$Query = new $TypeData().initClass($c_Lokay_ser
   s_reflect_Enum: 1
 }));
 /** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$Blob(b) {
+  this.Lokay_serverless_cloud_SqlValue$Blob__f_b = null;
+  this.Lokay_serverless_cloud_SqlValue$Blob__f_b = b;
+}
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype = new $h_Lokay_serverless_cloud_SqlValue();
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$Blob;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$Blob() {
+}
+$h_Lokay_serverless_cloud_SqlValue$Blob.prototype = $c_Lokay_serverless_cloud_SqlValue$Blob.prototype;
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 691163114, true);
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_SqlValue$Blob)) {
+    var x$0$2 = $as_Lokay_serverless_cloud_SqlValue$Blob(x$0);
+    var x = this.Lokay_serverless_cloud_SqlValue$Blob__f_b;
+    var x$2 = $n(x$0$2).Lokay_serverless_cloud_SqlValue$Blob__f_b;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.productPrefix__T = (function() {
+  return "Blob";
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_serverless_cloud_SqlValue$Blob__f_b;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_serverless_cloud_SqlValue$Blob.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "b";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_serverless_cloud_SqlValue$Blob(obj) {
+  return (((obj instanceof $c_Lokay_serverless_cloud_SqlValue$Blob) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.SqlValue$Blob"));
+}
+function $isArrayOf_Lokay_serverless_cloud_SqlValue$Blob(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_SqlValue$Blob)));
+}
+function $asArrayOf_Lokay_serverless_cloud_SqlValue$Blob(obj, depth) {
+  return (($isArrayOf_Lokay_serverless_cloud_SqlValue$Blob(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.SqlValue$Blob;", depth));
+}
+var $d_Lokay_serverless_cloud_SqlValue$Blob = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$Blob, "okay.serverless.cloud.SqlValue$Blob", ({
+  Lokay_serverless_cloud_SqlValue$Blob: 1,
+  Lokay_serverless_cloud_SqlValue: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$Int(n_$_lo, n_$_hi) {
+  this.Lokay_serverless_cloud_SqlValue$Int__f_n_$lo = 0;
+  this.Lokay_serverless_cloud_SqlValue$Int__f_n_$hi = 0;
+  this.Lokay_serverless_cloud_SqlValue$Int__f_n_$lo = n_$_lo;
+  this.Lokay_serverless_cloud_SqlValue$Int__f_n_$hi = n_$_hi;
+}
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype = new $h_Lokay_serverless_cloud_SqlValue();
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$Int;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$Int() {
+}
+$h_Lokay_serverless_cloud_SqlValue$Int.prototype = $c_Lokay_serverless_cloud_SqlValue$Int.prototype;
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 73679);
+  var hash$1 = acc;
+  var lv_$_lo = this.Lokay_serverless_cloud_SqlValue$Int__f_n_$lo;
+  var lv_$_hi = this.Lokay_serverless_cloud_SqlValue$Int__f_n_$hi;
+  var data = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$2, 1);
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_SqlValue$Int)) {
+    var x$0$2 = $as_Lokay_serverless_cloud_SqlValue$Int(x$0);
+    var x_$_lo = this.Lokay_serverless_cloud_SqlValue$Int__f_n_$lo;
+    var x_$_hi = this.Lokay_serverless_cloud_SqlValue$Int__f_n_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_serverless_cloud_SqlValue$Int__f_n_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_serverless_cloud_SqlValue$Int__f_n_$hi;
+    return (((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.productPrefix__T = (function() {
+  return "Int";
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return $bL(this.Lokay_serverless_cloud_SqlValue$Int__f_n_$lo, this.Lokay_serverless_cloud_SqlValue$Int__f_n_$hi);
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_serverless_cloud_SqlValue$Int.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "n";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_serverless_cloud_SqlValue$Int(obj) {
+  return (((obj instanceof $c_Lokay_serverless_cloud_SqlValue$Int) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.SqlValue$Int"));
+}
+function $isArrayOf_Lokay_serverless_cloud_SqlValue$Int(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_SqlValue$Int)));
+}
+function $asArrayOf_Lokay_serverless_cloud_SqlValue$Int(obj, depth) {
+  return (($isArrayOf_Lokay_serverless_cloud_SqlValue$Int(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.SqlValue$Int;", depth));
+}
+var $d_Lokay_serverless_cloud_SqlValue$Int = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$Int, "okay.serverless.cloud.SqlValue$Int", ({
+  Lokay_serverless_cloud_SqlValue$Int: 1,
+  Lokay_serverless_cloud_SqlValue: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$Real(d) {
+  this.Lokay_serverless_cloud_SqlValue$Real__f_d = 0.0;
+  this.Lokay_serverless_cloud_SqlValue$Real__f_d = d;
+}
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype = new $h_Lokay_serverless_cloud_SqlValue();
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$Real;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$Real() {
+}
+$h_Lokay_serverless_cloud_SqlValue$Real.prototype = $c_Lokay_serverless_cloud_SqlValue$Real.prototype;
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 2543038);
+  var hash$1 = acc;
+  var dv = this.Lokay_serverless_cloud_SqlValue$Real__f_d;
+  var data = $m_sr_Statics$().doubleHash__D__I(dv);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$2, 1);
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_SqlValue$Real)) {
+    var x$0$2 = $as_Lokay_serverless_cloud_SqlValue$Real(x$0);
+    return (this.Lokay_serverless_cloud_SqlValue$Real__f_d === $n(x$0$2).Lokay_serverless_cloud_SqlValue$Real__f_d);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.productPrefix__T = (function() {
+  return "Real";
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_serverless_cloud_SqlValue$Real__f_d;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_serverless_cloud_SqlValue$Real.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "d";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_serverless_cloud_SqlValue$Real(obj) {
+  return (((obj instanceof $c_Lokay_serverless_cloud_SqlValue$Real) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.SqlValue$Real"));
+}
+function $isArrayOf_Lokay_serverless_cloud_SqlValue$Real(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_SqlValue$Real)));
+}
+function $asArrayOf_Lokay_serverless_cloud_SqlValue$Real(obj, depth) {
+  return (($isArrayOf_Lokay_serverless_cloud_SqlValue$Real(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.SqlValue$Real;", depth));
+}
+var $d_Lokay_serverless_cloud_SqlValue$Real = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$Real, "okay.serverless.cloud.SqlValue$Real", ({
+  Lokay_serverless_cloud_SqlValue$Real: 1,
+  Lokay_serverless_cloud_SqlValue: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$Text(s) {
+  this.Lokay_serverless_cloud_SqlValue$Text__f_s = null;
+  this.Lokay_serverless_cloud_SqlValue$Text__f_s = s;
+}
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype = new $h_Lokay_serverless_cloud_SqlValue();
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$Text;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$Text() {
+}
+$h_Lokay_serverless_cloud_SqlValue$Text.prototype = $c_Lokay_serverless_cloud_SqlValue$Text.prototype;
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1131730718), true);
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_SqlValue$Text)) {
+    var x$0$2 = $as_Lokay_serverless_cloud_SqlValue$Text(x$0);
+    return (this.Lokay_serverless_cloud_SqlValue$Text__f_s === $n(x$0$2).Lokay_serverless_cloud_SqlValue$Text__f_s);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.productPrefix__T = (function() {
+  return "Text";
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_serverless_cloud_SqlValue$Text__f_s;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_serverless_cloud_SqlValue$Text.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "s";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_serverless_cloud_SqlValue$Text(obj) {
+  return (((obj instanceof $c_Lokay_serverless_cloud_SqlValue$Text) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.SqlValue$Text"));
+}
+function $isArrayOf_Lokay_serverless_cloud_SqlValue$Text(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_SqlValue$Text)));
+}
+function $asArrayOf_Lokay_serverless_cloud_SqlValue$Text(obj, depth) {
+  return (($isArrayOf_Lokay_serverless_cloud_SqlValue$Text(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.SqlValue$Text;", depth));
+}
+var $d_Lokay_serverless_cloud_SqlValue$Text = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$Text, "okay.serverless.cloud.SqlValue$Text", ({
+  Lokay_serverless_cloud_SqlValue$Text: 1,
+  Lokay_serverless_cloud_SqlValue: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
 function $c_Lokay_serverless_cloud_Stage$Do(name, run, retries, backoffMs_$_lo, backoffMs_$_hi) {
   this.Lokay_serverless_cloud_Stage$Do__f_name = null;
   this.Lokay_serverless_cloud_Stage$Do__f_run = null;
@@ -70111,37 +70576,78 @@ var $d_Lokay_scala3_std_Level$$anon$7 = new $TypeData().initClass($c_Lokay_scala
   s_deriving_Mirror$Singleton: 1
 }));
 /** @constructor */
-function $c_Lokay_serverless_cloud_Settle$$anon$6(\u03b4name$4, _$ordinal$4) {
-  this.Lokay_serverless_cloud_Settle$$anon$6__f_$name$2 = null;
-  this.Lokay_serverless_cloud_Settle$$anon$6__f_$name$2 = \u03b4name$4;
+function $c_Lokay_serverless_cloud_Settle$$anon$2(\u03b4name$4, _$ordinal$4) {
+  this.Lokay_serverless_cloud_Settle$$anon$2__f_$name$2 = null;
+  this.Lokay_serverless_cloud_Settle$$anon$2__f_$name$2 = \u03b4name$4;
 }
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype = new $h_Lokay_serverless_cloud_Settle();
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.constructor = $c_Lokay_serverless_cloud_Settle$$anon$6;
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype = new $h_Lokay_serverless_cloud_Settle();
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.constructor = $c_Lokay_serverless_cloud_Settle$$anon$2;
 /** @constructor */
-function $h_Lokay_serverless_cloud_Settle$$anon$6() {
+function $h_Lokay_serverless_cloud_Settle$$anon$2() {
 }
-$h_Lokay_serverless_cloud_Settle$$anon$6.prototype = $c_Lokay_serverless_cloud_Settle$$anon$6.prototype;
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.productArity__I = (function() {
+$h_Lokay_serverless_cloud_Settle$$anon$2.prototype = $c_Lokay_serverless_cloud_Settle$$anon$2.prototype;
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.productArity__I = (function() {
   return 0;
 });
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.productElement__I__O = (function(n) {
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.productElement__I__O = (function(n) {
   return $f_sr_EnumValue__productElement__I__O(this, n);
 });
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.productElementName__I__T = (function(n) {
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.productElementName__I__T = (function(n) {
   return $f_sr_EnumValue__productElementName__I__T(this, n);
 });
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.productPrefix__T = (function() {
-  return this.Lokay_serverless_cloud_Settle$$anon$6__f_$name$2;
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.productPrefix__T = (function() {
+  return this.Lokay_serverless_cloud_Settle$$anon$2__f_$name$2;
 });
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.toString__T = (function() {
-  return this.Lokay_serverless_cloud_Settle$$anon$6__f_$name$2;
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.toString__T = (function() {
+  return this.Lokay_serverless_cloud_Settle$$anon$2__f_$name$2;
 });
-$c_Lokay_serverless_cloud_Settle$$anon$6.prototype.hashCode__I = (function() {
-  return $f_T__hashCode__I($n(this.Lokay_serverless_cloud_Settle$$anon$6__f_$name$2));
+$c_Lokay_serverless_cloud_Settle$$anon$2.prototype.hashCode__I = (function() {
+  return $f_T__hashCode__I($n(this.Lokay_serverless_cloud_Settle$$anon$2__f_$name$2));
 });
-var $d_Lokay_serverless_cloud_Settle$$anon$6 = new $TypeData().initClass($c_Lokay_serverless_cloud_Settle$$anon$6, "okay.serverless.cloud.Settle$$anon$6", ({
-  Lokay_serverless_cloud_Settle$$anon$6: 1,
+var $d_Lokay_serverless_cloud_Settle$$anon$2 = new $TypeData().initClass($c_Lokay_serverless_cloud_Settle$$anon$2, "okay.serverless.cloud.Settle$$anon$2", ({
+  Lokay_serverless_cloud_Settle$$anon$2: 1,
   Lokay_serverless_cloud_Settle: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1,
+  sr_EnumValue: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1,
+  s_deriving_Mirror$Singleton: 1
+}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_SqlValue$$anon$1(\u03b4name$3, _$ordinal$3) {
+  this.Lokay_serverless_cloud_SqlValue$$anon$1__f_$name$1 = null;
+  this.Lokay_serverless_cloud_SqlValue$$anon$1__f_$name$1 = \u03b4name$3;
+}
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype = new $h_Lokay_serverless_cloud_SqlValue();
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.constructor = $c_Lokay_serverless_cloud_SqlValue$$anon$1;
+/** @constructor */
+function $h_Lokay_serverless_cloud_SqlValue$$anon$1() {
+}
+$h_Lokay_serverless_cloud_SqlValue$$anon$1.prototype = $c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype;
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.productElement__I__O = (function(n) {
+  return $f_sr_EnumValue__productElement__I__O(this, n);
+});
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.productElementName__I__T = (function(n) {
+  return $f_sr_EnumValue__productElementName__I__T(this, n);
+});
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.productPrefix__T = (function() {
+  return this.Lokay_serverless_cloud_SqlValue$$anon$1__f_$name$1;
+});
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.toString__T = (function() {
+  return this.Lokay_serverless_cloud_SqlValue$$anon$1__f_$name$1;
+});
+$c_Lokay_serverless_cloud_SqlValue$$anon$1.prototype.hashCode__I = (function() {
+  return $f_T__hashCode__I($n(this.Lokay_serverless_cloud_SqlValue$$anon$1__f_$name$1));
+});
+var $d_Lokay_serverless_cloud_SqlValue$$anon$1 = new $TypeData().initClass($c_Lokay_serverless_cloud_SqlValue$$anon$1, "okay.serverless.cloud.SqlValue$$anon$1", ({
+  Lokay_serverless_cloud_SqlValue$$anon$1: 1,
+  Lokay_serverless_cloud_SqlValue: 1,
   s_Equals: 1,
   s_Product: 1,
   Ljava_io_Serializable: 1,
@@ -71516,7 +72022,7 @@ function $c_Lokay_serverless_Scenarios() {
     var value = new $c_T2(_1, _2$1);
     var expected = new $c_s_util_Right(value);
     var clue = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 34);
+    var loc = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 35);
     var compare = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, got, expected, clue, loc, compare, diffOptions);
@@ -71525,18 +72031,18 @@ function $c_Lokay_serverless_Scenarios() {
     var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("p/name", "\"ann\""), new $c_T2("p/scores", "[1,2,3]"), new $c_T2("p/#steps", "1")]));
     var expected$1 = this$43.from__sc_IterableOnce__sci_Map(elems);
     var clue$1 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$1 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 35);
+    var loc$1 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 36);
     var compare$1 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$1 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained, expected$1, clue$1, loc$1, compare$1, diffOptions$1);
     var obtained$1 = m.Lokay_serverless_Memory__f_commits;
     var clue$2 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$2 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 36);
+    var loc$2 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 37);
     var compare$2 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$2 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$1, 1, clue$2, loc$2, compare$2, diffOptions$2);
   }));
-  var loc$3 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 37);
+  var loc$3 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 38);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a step: read your writes; committed all at once; a value of each type by its codec", body, loc$3);
   var body$2 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$1 = new $c_Lokay_serverless_Memory();
@@ -71557,7 +72063,7 @@ function $c_Lokay_serverless_Scenarios() {
     var failed = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$1, $x_17.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("p", $x_12, at$10, at$12));
     var expected$2 = new $c_s_util_Left("no");
     var clue$3 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$4 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 43);
+    var loc$4 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 44);
     var compare$3 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$3 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, failed, expected$2, clue$3, loc$4, compare$3, diffOptions$3);
@@ -71579,17 +72085,17 @@ function $c_Lokay_serverless_Scenarios() {
       return this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$1, $x_22.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("p", $x_18, at$14, at$16));
     }));
     var T = new $c_s_reflect_ClassTag$GenericClassTag($d_jl_IllegalStateException.getClassOf());
-    var loc$5 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 45);
+    var loc$5 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 46);
     $p_Lmunit_Assertions__runIntercept__s_Option__F0__s_reflect_ClassTag__Lmunit_Location__jl_Throwable(this, $m_s_None$(), body$1, T, loc$5);
     var obtained$2 = m$1.snapshot__sci_Map();
     var expected$3 = $m_sci_Map$EmptyMap$();
     var clue$4 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$6 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 46);
+    var loc$6 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 47);
     var compare$4 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$4 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$2, expected$3, clue$4, loc$6, compare$4, diffOptions$4);
   }));
-  var loc$7 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 47);
+  var loc$7 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 48);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a step that fails, or throws, writes nothing", body$2, loc$7);
   var body$3 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$2 = new $c_Lokay_serverless_Memory();
@@ -71615,24 +72121,24 @@ function $c_Lokay_serverless_Scenarios() {
     var got$1 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$2, $x_26.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("c", $x_25, at$20, at$22));
     var expected$4 = new $c_s_util_Right($bL(11, 0));
     var clue$5 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$8 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 55);
+    var loc$8 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 56);
     var compare$5 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$5 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, got$1, expected$4, clue$5, loc$8, compare$5, diffOptions$5);
     var obtained$3 = runs.sr_IntRef__f_elem;
     var clue$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$9 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 56);
+    var loc$9 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 57);
     var compare$6 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$6 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$3, 2, clue$6, loc$9, compare$6, diffOptions$6);
     var obtained$4 = $n(m$2.snapshot__sci_Map()).apply__O__O("c/n");
     var clue$7 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$10 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 57);
+    var loc$10 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 58);
     var compare$7 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$7 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$4, "11", clue$7, loc$10, compare$7, diffOptions$7);
   }));
-  var loc$11 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 58);
+  var loc$11 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 59);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a CONFLICT: another writer between the step's read and its commit \u2014 the step runs again, nothing lost", body$3, loc$11);
   var body$5 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$3 = new $c_Lokay_serverless_Memory();
@@ -71646,12 +72152,12 @@ function $c_Lokay_serverless_Scenarios() {
       return this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$3, $x_28.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("c", $x_27, at$23, at$25));
     }));
     var T$1 = new $c_s_reflect_ClassTag$GenericClassTag($d_Lokay_serverless_Crash.getClassOf());
-    var loc$12 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 63);
+    var loc$12 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 64);
     $p_Lmunit_Assertions__runIntercept__s_Option__F0__s_reflect_ClassTag__Lmunit_Location__jl_Throwable(this, $m_s_None$(), body$4, T$1, loc$12);
     var obtained$5 = $n(m$3.snapshot__sci_Map()).get__O__s_Option("c/n");
     var expected$5 = $m_s_None$();
     var clue$8 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$13 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 64);
+    var loc$13 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 65);
     var compare$8 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$8 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$5, expected$5, clue$8, loc$13, compare$8, diffOptions$8);
@@ -71663,12 +72169,12 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$6 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$3, $x_30.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("c", $x_29, at$26, at$28));
     var expected$6 = new $c_s_util_Right($bL(1, 0));
     var clue$9 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$14 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 65);
+    var loc$14 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 66);
     var compare$9 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$9 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$6, expected$6, clue$9, loc$14, compare$9, diffOptions$9);
   }));
-  var loc$15 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 66);
+  var loc$15 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 67);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a CRASH before the commit: nothing written; the next instance does the step as if it never began", body$5, loc$15);
   var body$7 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$4 = new $c_Lokay_serverless_Memory();
@@ -71686,37 +72192,37 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$7 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$4, $ps_Lokay_serverless_Scenarios__event$1__F2__J__Lokay_scala3_Prog(add, 5, 0));
     var expected$7 = new $c_s_util_Right($bL(5, 0));
     var clue$10 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$16 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 72);
+    var loc$16 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 73);
     var compare$10 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$10 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$7, expected$7, clue$10, loc$16, compare$10, diffOptions$10);
     var obtained$8 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$4, $ps_Lokay_serverless_Scenarios__event$1__F2__J__Lokay_scala3_Prog(add, 7, 0));
     var expected$8 = new $c_s_util_Right($bL(12, 0));
     var clue$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$17 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 73);
+    var loc$17 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 74);
     var compare$11 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$11 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$8, expected$8, clue$11, loc$17, compare$11, diffOptions$11);
     m$4.Lokay_serverless_Memory__f_crashAfterCommit = true;
     var body$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$4, $ps_Lokay_serverless_Scenarios__event$1__F2__J__Lokay_scala3_Prog(add, 1, 0))));
     var T$2 = new $c_s_reflect_ClassTag$GenericClassTag($d_Lokay_serverless_Crash.getClassOf());
-    var loc$18 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 75);
+    var loc$18 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 76);
     $p_Lmunit_Assertions__runIntercept__s_Option__F0__s_reflect_ClassTag__Lmunit_Location__jl_Throwable(this, $m_s_None$(), body$6, T$2, loc$18);
     var obtained$9 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$4, $ps_Lokay_serverless_Scenarios__event$1__F2__J__Lokay_scala3_Prog(add, 0, 0));
     var expected$9 = new $c_s_util_Right($bL(13, 0));
     var clue$12 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$19 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 76);
+    var loc$19 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 77);
     var compare$12 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$12 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$9, expected$9, clue$12, loc$19, compare$12, diffOptions$12);
     var obtained$10 = $n(m$4.snapshot__sci_Map()).apply__O__O("acc/#steps");
     var clue$13 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$20 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 77);
+    var loc$20 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 78);
     var compare$13 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$13 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$10, "4", clue$13, loc$20, compare$13, diffOptions$13);
   }));
-  var loc$21 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 78);
+  var loc$21 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 79);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "an EVICTION: a new instance on the same storage goes on from the last committed state, no replay", body$7, loc$21);
   var body$9 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$5 = new $c_Lokay_serverless_Memory();
@@ -71732,14 +72238,14 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$11 = this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$5, $x_34.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("pay", $x_33, at$29, at$31));
     var expected$10 = new $c_s_util_Right($bL(101, 0));
     var clue$14 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$22 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 88);
+    var loc$22 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 89);
     var compare$14 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$14 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$11, expected$10, clue$14, loc$22, compare$14, diffOptions$14);
     var obtained$12 = calls.toList__sci_List();
     var expected$11 = new $c_sci_$colon$colon("pay/1/charge", $m_sci_Nil$());
     var clue$15 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$23 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 89);
+    var loc$23 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 90);
     var compare$15 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$15 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$12, expected$11, clue$15, loc$23, compare$15, diffOptions$15);
@@ -71753,7 +72259,7 @@ function $c_Lokay_serverless_Scenarios() {
       return this.instance__Lokay_serverless_Memory__Lokay_scala3_Prog__s_util_Either(m$5, $x_36.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog("pay", $x_35, at$32, at$34));
     }));
     var T$3 = new $c_s_reflect_ClassTag$GenericClassTag($d_Lokay_serverless_Crash.getClassOf());
-    var loc$24 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 91);
+    var loc$24 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 92);
     $p_Lmunit_Assertions__runIntercept__s_Option__F0__s_reflect_ClassTag__Lmunit_Location__jl_Throwable(this, $m_s_None$(), body$8, T$3, loc$24);
     var $x_38 = $m_Lokay_serverless_Durable$();
     var $x_37 = $p_Lokay_serverless_Scenarios__charge$1__scm_ListBuffer__Lokay_scala3_Prog(this, calls);
@@ -71764,12 +72270,12 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$13 = calls.toList__sci_List();
     var expected$12 = new $c_sci_$colon$colon("pay/1/charge", new $c_sci_$colon$colon("pay/2/charge", new $c_sci_$colon$colon("pay/2/charge", $m_sci_Nil$())));
     var clue$16 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$25 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 93);
+    var loc$25 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 94);
     var compare$16 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$16 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$13, expected$12, clue$16, loc$25, compare$16, diffOptions$16);
   }));
-  var loc$26 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 94);
+  var loc$26 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 95);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "ONCE: an external call run once across a step's runs; its key the same each run, another next step", body$9, loc$26);
   var body$10 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$6 = new $c_Lokay_serverless_Memory();
@@ -71790,7 +72296,7 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$14 = m$6.Lokay_serverless_Memory__f_alarm;
     var expected$13 = $m_s_None$();
     var clue$17 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$27 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 100);
+    var loc$27 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 101);
     var compare$17 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$17 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$14, expected$13, clue$17, loc$27, compare$17, diffOptions$17);
@@ -71810,12 +72316,12 @@ function $c_Lokay_serverless_Scenarios() {
     var obtained$15 = m$6.Lokay_serverless_Memory__f_alarm;
     var expected$14 = new $c_s_Some($bL(3000, 0));
     var clue$18 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$28 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 103);
+    var loc$28 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 104);
     var compare$18 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$18 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$15, expected$14, clue$18, loc$28, compare$18, diffOptions$18);
   }));
-  var loc$29 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 104);
+  var loc$29 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 105);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "an ALARM: set only if the step commits; the earliest kept", body$10, loc$29);
   var body$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var m$7 = new $c_Lokay_serverless_Memory();
@@ -71856,12 +72362,12 @@ function $c_Lokay_serverless_Scenarios() {
     var value$1 = new $c_sci_$colon$colon("k/b", new $c_sci_$colon$colon("k/c", $m_sci_Nil$()));
     var expected$15 = new $c_s_util_Right(value$1);
     var clue$19 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
-    var loc$30 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 112);
+    var loc$30 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 113);
     var compare$19 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
     var diffOptions$19 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, got$2, expected$15, clue$19, loc$30, compare$19, diffOptions$19);
   }));
-  var loc$31 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 113);
+  var loc$31 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/Scenarios.scala", 114);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "keys by prefix: the stored and this step's writes, its deletes left out", body$11, loc$31);
 }
 $c_Lokay_serverless_Scenarios.prototype = new $h_Lmunit_FunSuite();
@@ -72927,7 +73433,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
   var body$14 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var $x_78 = $n(this.c0__Lokay_serverless_cloud_MemoryCloud()).Lokay_serverless_cloud_MemoryCloud__f_platform;
     var $x_77 = $m_Lokay_serverless_cloud_Sql$();
-    var $x_76 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_serverless_cloud_SqlValue.getArrayOf().constr)([]));
+    var $x_76 = $m_sr_ScalaRunTime$().genericWrapArray__O__sci_ArraySeq(new $ac_O([]));
     var at$335 = new $c_Lokay_scala3_Place$Last();
     var at$336 = new $c_Lokay_scala3_Place$Init(at$335);
     var at$337 = new $c_Lokay_scala3_Place$Init(at$336);
@@ -81660,6 +82166,17 @@ $c_sci_List.prototype.foreach__F1__V = (function(f) {
     these = $as_sci_List($n(these).tail__O());
   }
 });
+$c_sci_List.prototype.reverse__sci_List = (function() {
+  var result = $m_sci_Nil$();
+  var these = this;
+  while ((!$n(these).isEmpty__Z())) {
+    var rassoc$6 = $n(these).head__O();
+    var this$1 = $n(result);
+    result = new $c_sci_$colon$colon(rassoc$6, this$1);
+    these = $as_sci_List($n(these).tail__O());
+  }
+  return result;
+});
 $c_sci_List.prototype.length__I = (function() {
   var these = this;
   var len = 0;
@@ -88162,6 +88679,7 @@ var $t_Lokay_scala3_std_Level$__Info = null;
 var $t_Lokay_scala3_std_Level$__Warn = null;
 var $t_Lokay_scala3_std_Level$__Error = null;
 var $t_Lokay_serverless_cloud_Settle$__Ack = null;
+var $t_Lokay_serverless_cloud_SqlValue$__Null = null;
 $sct_Lcom_novocode_junit_JUnitFramework__stinit__();
 $sct_Lorg_scalajs_junit_JUnitFramework__stinit__();
 $sct_Lmunit_Framework__stinit__();

@@ -9,7 +9,8 @@ final class SqliteSql(dir: Option[java.io.File] = None) extends Port[Sql]:
   private val open = mutable.Map.empty[String, Connection]
 
   private def connection(db: String): Connection = synchronized(open.getOrElseUpdate(db, {
-    val url = dir.fold(s"jdbc:sqlite:file:$db?mode=memory&cache=shared")(d => s"jdbc:sqlite:${java.io.File(d, s"$db.sqlite")}")
+    val url = dir.fold(s"jdbc:sqlite:file:$db?mode=memory&cache=shared")(d =>
+      s"jdbc:sqlite:${java.io.File(d, s"$db.sqlite")}")
     DriverManager.getConnection(url)
   }))
 

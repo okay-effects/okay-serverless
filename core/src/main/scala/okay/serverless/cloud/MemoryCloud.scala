@@ -118,7 +118,8 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   val limits: Port[Limits] = new Port[Limits]:
     def apply[X](op: Limits[X]): Future[X] = now[X](synchronized[X](op match
       case Limits.Take(name, key) =>
-        val (limit, period) = limitsConfig.getOrElse(name, throw java.util.NoSuchElementException(s"no rate limit $name"))
+        val (limit, period) =
+          limitsConfig.getOrElse(name, throw java.util.NoSuchElementException(s"no rate limit $name"))
         val window = clock() / (period * 1000)
         val used = windows.get((name, key)).collect { case (w, n) if w == window => n }.getOrElse(0)
         if used < limit then { windows((name, key)) = (window, used + 1); true } else false))
@@ -163,7 +164,8 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
     def one[A](p: A ! InActor): Future[A] =
       val promise = Promise[A]()
       MemoryCloud.this.synchronized {
-        queue = queue.recover(_ => ()).flatMap(_ => Async.toFuture(hosting.run(platform)(p)).andThen { case t => promise.complete(t) })
+        queue = queue.recover(_ => ()).flatMap(_ =>
+          Async.toFuture(hosting.run(platform)(p)).andThen { case t => promise.complete(t) })
       }
       promise.future
     val hosting: Hosting = new Hosting:

@@ -104,8 +104,8 @@ class CloudSuite extends munit.FunSuite:
   test("vectors: the nearest, filtered") {
     val c = cloud()
     c.platform.future(for
-      _ <- Vectors.upsert[Cloud]("docs", Embedding("a", List(1, 0)), Embedding("b", List(0.9, 0.1), Map("lang" -> "en")),
-        Embedding("c", List(0, 1), Map("lang" -> "en")))
+      _ <- Vectors.upsert[Cloud]("docs", Embedding("a", List(1, 0)),
+        Embedding("b", List(0.9, 0.1), Map("lang" -> "en")), Embedding("c", List(0, 1), Map("lang" -> "en")))
       all <- Vectors.query[Cloud]("docs", List(1, 0), topK = 2)
       en <- Vectors.query[Cloud]("docs", List(1, 0), topK = 1, filter = Map("lang" -> "en"))
     yield

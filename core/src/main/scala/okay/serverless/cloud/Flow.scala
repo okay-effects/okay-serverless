@@ -35,8 +35,8 @@ object FlowState:
  * its alarm; an event a request. Restarted anywhere, it goes on from the stage committed: nothing is run again but
  * a `Do` whose commit did not happen (its work at least once, as on every cloud).
  *
- * Its requests, by how their paths end (an app may route `/order/<id>/…` to it as it is): `POST …/start` (the input,
- * JSON), `POST …/event/<name>` (the payload), `GET` (where it is).
+ * Its requests, by how their paths end (an app may route `/order/<id>/…` to it as it is): `POST …/start` (the
+ * input, JSON), `POST …/event/<name>` (the payload), `GET` (where it is).
  */
 final class Workflow[S](stages: Vector[Stage[S]], start: Json => S)(using codec: Codec[S]) extends Actor:
   private val key = "flow"

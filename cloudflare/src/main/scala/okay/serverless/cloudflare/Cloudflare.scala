@@ -1,51 +1,16 @@
 package okay.serverless.cloudflare
 
-import okay.effects.json.{Descent, Json}
 import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.Storage
 import okay.serverless.cloud.*
 
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.Future
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{global as g, literal as obj}
 import scala.scalajs.js.JSConverters.*
-import scala.scalajs.js.typedarray.{AB2TA, ArrayBuffer, Int8Array, Uint8Array}
 
-/** between Scala's values and the Workers runtime's */
-object Js:
-  given ExecutionContext = scala.scalajs.concurrent.JSExecutionContext.queue
-
-  def await(p: js.Dynamic): Future[js.Dynamic] = p.asInstanceOf[js.Promise[js.Dynamic]].toFuture
-  def bytes(buffer: js.Dynamic): Bytes = Bytes(new Int8Array(buffer.asInstanceOf[ArrayBuffer]).toArray)
-  def uint8(b: Bytes): Uint8Array = new Uint8Array(b.toArray.toTypedArray.buffer)
-  def str(d: js.Dynamic): Option[String] = if js.isUndefined(d) || d == null then None else Some(d.toString)
-  def toJson(d: js.Any): Json = Descent.parse(g.JSON.stringify(d).asInstanceOf[String]).getOrElse(Json.Null)
-  def fromJson(j: Json): js.Dynamic = g.JSON.parse(Json.print(j))
-  def headers(h: js.Dynamic): Map[String, String] =
-    val out = scala.collection.mutable.Map.empty[String, String]
-    h.forEach(((v: String, k: String) => out(k) = v): js.Function2[String, String, Unit])
-    out.toMap
-
-  def request(r: js.Dynamic): Future[Request] =
-    val method = r.method.asInstanceOf[String]
-    val body = if method == "GET" || method == "HEAD" then Future.successful(Bytes.empty)
-      else await(r.arrayBuffer()).map(bytes)
-    body.map(b => Request(method, r.url.asInstanceOf[String], headers(r.headers), b))
-
-  def toRequest(r: Request): js.Dynamic =
-    val init = obj(method = r.method, headers = r.headers.toJSDictionary)
-    if r.body.size > 0 then init.body = uint8(r.body)
-    js.Dynamic.newInstance(g.Request)(r.url, init)
-
-  def response(r: js.Dynamic): Future[Response] =
-    await(r.arrayBuffer()).map(b => Response(r.status.asInstanceOf[Int], headers(r.headers), bytes(b)))
-
-  def toResponse(r: Response): js.Dynamic =
-    js.Dynamic.newInstance(g.Response)(if r.body.size == 0 then null else uint8(r.body),
-      obj(status = r.status, headers = r.headers.toJSDictionary))
-
-import Js.{*, given}
+import WebJs.{*, given}
 
 /**
  * THE PORTS ON CLOUDFLARE: each effect by its binding in `env` — the resource's name the binding's (KV namespaces,
@@ -92,7 +57,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
         range.foreach((from, until) => o.range = obj(offset = from.toDouble, length = (until - from).toDouble))
         await(binding(bucket).get(key, o)).flatMap(r =>
           if r == null then Future.successful(None) else await(r.arrayBuffer()).map(b => Some((info(r), bytes(b)))))
-      case Blobs.Head(bucket, key) => await(binding(bucket).head(key)).map(r => if r == null then None else Some(info(r)))
+      case Blobs.Head(bucket, key) =>
+        await(binding(bucket).head(key)).map(r => if r == null then None else Some(info(r)))
       case Blobs.Delete(bucket, keys) => await(binding(bucket).delete(keys.toJSArray)).map(_ => ())
       case Blobs.List(bucket, prefix, cursor, limit) =>
         val o = obj(prefix = prefix, limit = limit, include = js.Array("httpMetadata", "customMetadata"))
@@ -134,9 +100,7 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
       case Queues.Send(queue, messages) => await(binding(queue).sendBatch(messages.map(m =>
           obj(body = m.body, delaySeconds = m.delaySeconds.toDouble)).toJSArray)).map(_ => ()))
 
-  val fetch: Port[Fetch] = new Port[Fetch]:
-    def apply[X](op: Fetch[X]): Future[X] = guard[X](op match
-      case Fetch.Call(r) => await(g.fetch(toRequest(r))).flatMap(response))
+  val fetch: Port[Fetch] = WebJs.fetch
 
   val cache: Port[Cache] = new Port[Cache]:
     private def default = g.caches.default
@@ -188,7 +152,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
   val mails: Port[Mails] = new Port[Mails]:
     def apply[X](op: Mails[X]): Future[X] = guard[X](op match
       case Mails.Send(b, m) =>
-        val raw = s"From: ${m.from}\r\nTo: ${m.to}\r\nSubject: ${m.subject}\r\nMessage-ID: <${g.crypto.randomUUID()}@okay>" +
+        val raw = s"From: ${m.from}\r\nTo: ${m.to}\r\nSubject: ${m.subject}\r\n" +
+          s"Message-ID: <${g.crypto.randomUUID()}@okay>" +
           s"\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n${m.text}"
         await(binding(b).send(js.Dynamic.newInstance(g.OkayEmailMessage)(m.from, m.to, raw))).map(_ => ()))
 
@@ -246,7 +211,7 @@ final class Worker(app: App, actors: Map[String, Actor]):
         n.get(n.idFromName(name)).fetch(js.Dynamic.newInstance(g.Request)(request, obj(headers = h)))
           .asInstanceOf[js.Promise[js.Dynamic]]
       case None =>
-        Js.request(request).flatMap(r => ports(env).platform.future(app.fetch(r))).map(toResponse).toJSPromise
+        WebJs.request(request).flatMap(r => ports(env).platform.future(app.fetch(r))).map(toResponse).toJSPromise
 
   @scala.scalajs.js.annotation.JSExport
   def scheduled(event: js.Dynamic, env: js.Dynamic, ctx: js.Dynamic): js.Promise[Unit] =
@@ -297,7 +262,7 @@ final class Worker(app: App, actors: Map[String, Actor]):
 
   @scala.scalajs.js.annotation.JSExport
   def objectFetch(ns: String, ctx: js.Dynamic, env: js.Dynamic, request: js.Dynamic): js.Promise[js.Dynamic] =
-    Js.request(request).flatMap { r =>
+    WebJs.request(request).flatMap { r =>
       val n = name(ctx, r.header("okay-object-name"))
       run(ctx, env)(actor(ns).fetch(n, r.copy(headers = r.headers - "okay-object-name"))).map { res =>
         res.header("okay-socket").flatMap(host(ctx)._2.accepted.remove) match

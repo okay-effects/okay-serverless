@@ -30,13 +30,36 @@ stay deterministic and unchanged while a run lives. Here what is kept is the sta
 step — so a new version of the code goes on from the old state. Why not keep the continuation? It holds closures:
 code, not data. The design: [specs/durable.md](specs/durable.md).
 
+## A cloud as effects
+
+Everything a Cloudflare Worker can use is an effect a program names — and each cloud a platform, one port an effect:
+`Kv`, `Blobs`, `Sql`, `Queues`, `Fetch`, `Cache`, `Env`, `Services`, `Limits`, `Ai`, `Vectors`, `Analytics`, `Mails`,
+`Objects` and, in an object, `Sockets`. A Worker is an `App` (`fetch`, `scheduled`, `queue`, `mail`), an object class
+an `Actor` (`fetch`, `alarm`, a socket's messages), its state `Durable`'s. A `Workflow` is a list of stages — steps
+retried, sleeps, events — run by an object without replay.
+
+```scala
+object Shop extends App:
+  override def fetch(r: Request): Response ! Cloud = r.path match
+    case "/cached" => Cache.through[Cloud](r.url, 60)(Fetch[Cloud](Request.get("https://prices.example/today")))
+    case "/upload" => Blobs.put[Cloud]("BUCKET", r.query("name"), r.body).map(i => Response.text(i.etag))
+    case "/job" => Queues.send[Cloud]("JOBS", r.body.text).as(Response.text("queued"))
+    case _ => pure(Response.notFound)
+  override def queue(q: String, m: Message): Settle ! Cloud =
+    Sql.run[Cloud]("DB", "insert into jobs (body) values (?)", m.body).as(Settle.Ack)
+```
+
+The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
+(`Lambda`: what DynamoDB carries so far). The design and the map of each effect to each cloud:
+[specs/cloud.md](specs/cloud.md).
+
 ## Platforms
 
 | | module | status |
 |---|---|---|
-| memory, with faults (crash, conflict, eviction) | `core` | the scenarios every platform passes |
-| Cloudflare Durable Objects | `cloudflare` | SQLite storage, `transactionSync`, alarms; end to end on `wrangler dev` |
-| AWS Lambda + DynamoDB | `aws` | conditional `TransactWriteItems`, a step run again on a conflict; on DynamoDB Local |
+| memory, with faults (crash, conflict, eviction) | `core` | the scenarios; every cloud effect (`MemoryCloud`) |
+| Cloudflare Workers | `cloudflare` | every effect on its binding; objects, sockets, workflows; e2e on `wrangler dev` |
+| AWS Lambda + DynamoDB | `aws` | `Durable`, KV, rate limits, objects; API Gateway, SQS, EventBridge; DynamoDB Local |
 
 The twin on [okay-simple](https://github.com/okay-effects/okay-simple), module `simple` (Scala 2.13 and 3, one
 source): the same words, step, machine and `once`, and the same stored format, so state written by one is read by
@@ -49,8 +72,8 @@ Scala 3.3, sbt, on [okay-scala](https://github.com/okay-effects/okay-scala) 0.1.
 ```text
 sbt coreJVM/test coreJS/test                       # the scenarios
 sbt +simpleJVM/test +simpleJS/test                 # the same on okay-simple, Scala 3 and 2.13
-sbt cloudflareExample && cloudflare/example/e2e.sh  # the example account on a local workerd
-aws/test.sh                                         # DynamoDB on DynamoDB Local (Java, Node)
+sbt cloudflareExample && cloudflare/example/e2e.sh  # the example Worker on a local workerd
+aws/test.sh                                         # AWS on DynamoDB Local (Java, Node)
 ```
 
 One of the [okay-effects](https://github.com/okay-effects) family. License: Apache 2.0.

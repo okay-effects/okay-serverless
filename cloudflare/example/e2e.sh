@@ -31,12 +31,14 @@ expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")
 expect "$(curl -s "$P/cached")" "$first" "the cache: the same, cached"
-expect "$(for i in 1 2 3; do curl -s "$P/limit?key=ann"; echo -n ' '; done)" "true true false" "a rate limit: 2 a minute"
+expect "$(for i in 1 2 3; do curl -s "$P/limit?key=ann"; echo -n ' '; done)" "true true false" \
+  "a rate limit: 2 a minute"
 expect "$(curl -s "$P/env")" "hello from vars key:true" "a var, a secret"
 expect "$(curl -s "$P/analytics")" "written" "Analytics Engine: a data point"
 expect "$(curl -s "$P/service")" "via service: hello" "a service binding"
 expect "$(curl -s "$P/mail")" "sent" "send_email"
-expect "$(curl -s "$P/__scheduled?cron=*/5+*+*+*+*"; curl -s "$P/kv?key=cron")" "*/5 * * * *" "cron: the app's scheduled"
+expect "$(curl -s "$P/__scheduled?cron=*/5+*+*+*+*"; curl -s "$P/kv?key=cron")" "*/5 * * * *" \
+  "cron: the app's scheduled"
 sleep 2
 expect "$(curl -s "$P/kv?key=job:j1")" "done after 1" "a queue: consumed, acknowledged"
 expect "$(node sockets.mjs $port)" "SOCKETS OK" "an object's WebSockets: a line to both members, kept"

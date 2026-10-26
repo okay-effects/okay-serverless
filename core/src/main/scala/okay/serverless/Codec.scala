@@ -2,8 +2,8 @@ package okay.serverless
 
 import okay.effects.json.{Descent, Json}
 
-/** how a value is kept: as a text — JSON (okay-simple's `okay.effects.json`, the family's one JSON), the stored format
- * every implementation reads (specs/durable.md) */
+/** how a value is kept: as a text — JSON (okay-simple's `okay.effects.json`, the family's one JSON), the stored
+ * format every implementation reads (specs/durable.md) */
 trait Codec[A]:
   def encode(a: A): String
   def decode(s: String): Either[String, A]

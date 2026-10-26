@@ -70,8 +70,8 @@ object Example:
 
   /** AN ORDER: a workflow — charged, a pause, approved, a mail */
   val Orders: Workflow[Json] = Workflow[Json](identity)(
-    Stage.Do("charge", o => Kv.put[InActor + Fail % String]("KV", s"charged:${o.field("id").fold("?")(j => Json.print(j))}",
-      "yes").as(o)),
+    Stage.Do("charge", o => Kv.put[InActor + Fail % String]("KV",
+      s"charged:${o.field("id").fold("?")(j => Json.print(j))}", "yes").as(o)),
     Stage.Sleep("pause", 1000),
     Stage.Wait("approval", "approved", (o, j) => o match
       case Json.Obj(fs) => Json.Obj(fs :+ ("approvedBy" -> j.field("by").getOrElse(Json.Null)))
