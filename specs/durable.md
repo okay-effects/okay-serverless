@@ -3,7 +3,8 @@
 Status 2026-10-26: `core` (the effect, steps, machines, `once`, memory with faults, the scenarios — JVM and Scala.js)
 and `cloudflare` (`ObjectStorage` on a Durable Object's SQLite storage; the example account, end to end on
 `wrangler dev`: `cloudflare/example/e2e.sh` — events, a refusal, a restart going on from the committed state, an
-alarm) built. Next: `aws`, the twin on okay-simple.
+alarm) and `aws` (`DynamoStorage` on DynamoDB, tested on DynamoDB Local: `aws/test.sh`) built. Next: the twin on
+okay-simple.
 
 ## The problem
 
@@ -65,7 +66,8 @@ Storage.Commit(read, writes, alarm): Boolean                      -- false: what
 ```
 
 - CLOUDFLARE DURABLE OBJECTS (Scala.js): one thread an object, its storage transactional (SQLite-backed objects:
-  `ctx.storage.transactionSync`, the synchronous `kv` API) — a commit never conflicts; the alarm `ctx.storage.setAlarm`.
+  `ctx.storage.transactionSync`, the synchronous `kv` API) — a commit never conflicts; the alarm
+  `ctx.storage.setAlarm`.
 - AWS LAMBDA + DynamoDB: no single writer — a commit is a `TransactWriteItems` conditioned on the versions read;
   `false` on a conflict, and the step runs again. Alarms by EventBridge Scheduler.
 - Later the same way: Azure (Cosmos DB etags), GCP (Firestore transactions).
@@ -83,7 +85,15 @@ eviction, alarm, once), so state written by one is read by the other.
 - `core` (okay-scala, JVM + Scala.js): `Durable`, `step`, `machine`, `once`, `Codec`, `Storage`, the in-memory store
   with faults, the TCK of scenarios.
 - `cloudflare` (Scala.js): `Storage` on a Durable Object; an example Worker; tested on `wrangler dev`.
-- `aws` (Scala.js on Node, later the JVM): `Storage` on DynamoDB.
+- `aws` (Scala.js on Node, later the JVM): `DynamoStorage(client, table, space, schedule)` — `Storage` on DynamoDB.
+  A table of items `(space, key) → value, version`. A commit is one `TransactWriteItems`:
+  - a key read and written: updated (or deleted) on condition its version is still the one read, or it still absent;
+  - a key only read: a `ConditionCheck`;
+  - a key written unread: updated as it is (`ADD version 1`).
+  A conflict cancels it all (`ConditionalCheckFailed`): `false`, and the step runs again. At most 100 items a step.
+  Reads strongly consistent. The alarm an item `#alarm`, kept the earliest, handed to `schedule` (EventBridge
+  Scheduler's, the caller's) once the commit is in. Tested on DynamoDB Local (`aws/test.sh`): a step, a conflict
+  injected, two instances incrementing one counter at once (twenty of twenty), an eviction, the earliest alarm.
 - `simple` (okay-simple, Scala 2.13 and 3): the same, beside.
 - `policy` (okay-policy): `DurableStates` — a policy's `States` on `Durable` (`policy/<state>/<key>`, a value and its
   window's start); `DurableStates.enforce(policy, call, scope, now)` — a decision and its changes one step: two

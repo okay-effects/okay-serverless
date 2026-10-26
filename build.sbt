@@ -1,4 +1,5 @@
-// okay-serverless: durable state as an effect, without replay — a step a transaction, the state data (specs/durable.md)
+// okay-serverless: durable state as an effect, without replay — a step a transaction, the state data
+// (specs/durable.md)
 import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 ThisBuild / scalaVersion := "3.3.8"
@@ -22,6 +23,16 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
   .settings(name := "okay-serverless-policy",
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-policy" % "0.1.0", munit.value))
 
+/** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
+ * is
+ * a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests run
+ * on DynamoDB Local: `aws/test.sh` */
+lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
+  .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
+    Test / jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(org.scalajs.jsenv.nodejs.NodeJSEnv.Config()
+      .withEnv(Map("NODE_PATH" -> ((ThisBuild / baseDirectory).value / "aws" / "node_modules").getPath) ++
+        sys.env.get("OKAY_DYNAMODB").map("OKAY_DYNAMODB" -> _))))
+
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
 lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
@@ -38,4 +49,5 @@ cloudflareExample := {
   to
 }
 
-lazy val root = (project in file(".")).aggregate(core.jvm, core.js, policy.jvm, policy.js, cloudflare).settings(publish / skip := true)
+lazy val root = (project in file(".")).aggregate(core.jvm, core.js, policy.jvm, policy.js, aws, cloudflare)
+  .settings(publish / skip := true)

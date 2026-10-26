@@ -1,7 +1,7 @@
 # okay-serverless
 
 Durable state for serverless programs as an algebraic effect — **without replay**. A step is a transaction, a process
-keeps its state as data, and each cloud is a handler: Cloudflare Durable Objects today, AWS Lambda + DynamoDB next.
+keeps its state as data, and each cloud is a handler: Cloudflare Durable Objects and AWS Lambda + DynamoDB.
 
 ```scala
 import okay.scala3.*
@@ -36,7 +36,7 @@ code, not data. The design: [specs/durable.md](specs/durable.md).
 |---|---|---|
 | memory, with faults (crash, conflict, eviction) | `core` | the scenarios every platform passes |
 | Cloudflare Durable Objects | `cloudflare` | SQLite storage, `transactionSync`, alarms; end to end on `wrangler dev` |
-| AWS Lambda + DynamoDB | `aws` | next: conditional `TransactWriteItems`, a step run again on a conflict |
+| AWS Lambda + DynamoDB | `aws` | conditional `TransactWriteItems`, a step run again on a conflict; on DynamoDB Local |
 
 A twin on [okay-simple](https://github.com/okay-effects/okay-simple) (Scala 2) will follow, with the same stored
 format, so state written by one is read by the other.
@@ -48,6 +48,7 @@ Scala 3.3, sbt, on [okay-scala](https://github.com/okay-effects/okay-scala) 0.1.
 ```text
 sbt coreJVM/test coreJS/test                       # the scenarios
 sbt cloudflareExample && cloudflare/example/e2e.sh  # the example account on a local workerd
+aws/test.sh                                         # DynamoDB on DynamoDB Local (Java, Node)
 ```
 
 One of the [okay-effects](https://github.com/okay-effects) family. License: Apache 2.0.
