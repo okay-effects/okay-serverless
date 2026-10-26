@@ -3,8 +3,8 @@
 Status 2026-10-26: `core` (the effect, steps, machines, `once`, memory with faults, the scenarios — JVM and Scala.js)
 and `cloudflare` (`ObjectStorage` on a Durable Object's SQLite storage; the example account, end to end on
 `wrangler dev`: `cloudflare/example/e2e.sh` — events, a refusal, a restart going on from the committed state, an
-alarm) and `aws` (`DynamoStorage` on DynamoDB, tested on DynamoDB Local: `aws/test.sh`) built. Next: the twin on
-okay-simple.
+alarm) and `aws` (`DynamoStorage` on DynamoDB, tested on DynamoDB Local: `aws/test.sh`) built; `simple`, the twin on
+okay-simple (Scala 2.13 and 3, JVM and Scala.js), built: the scenarios on the machine and on `Free`.
 
 ## The problem
 
@@ -94,7 +94,12 @@ eviction, alarm, once), so state written by one is read by the other.
   Reads strongly consistent. The alarm an item `#alarm`, kept the earliest, handed to `schedule` (EventBridge
   Scheduler's, the caller's) once the commit is in. Tested on DynamoDB Local (`aws/test.sh`): a step, a conflict
   injected, two instances incrementing one counter at once (twenty of twenty), an eviction, the earliest alarm.
-- `simple` (okay-simple, Scala 2.13 and 3): the same, beside.
+- `simple` (okay-simple 0.1.1, Scala 2.13 and 3, one shared source): `Serverless()` over any implementation —
+  `get`, `put`, `delete`, `keys`, `wakeAt`, `once`, `step`, `machine`, and `memory(m)` the in-memory handler. The
+  operations carry their answers (`Durable.Get(key, answer)`), as okay-simple's effects do. The scenarios are the
+  core's, on the machine and on `Free`, and check the stored text against the same literals as the core's
+  (`"\"ann\""`, `[1,2,3]`, `p/#steps`). A platform's handler for it (DynamoDB, a Durable Object) is the same code
+  as the core's over its `Storage`: not written yet.
 - `policy` (okay-policy): `DurableStates` — a policy's `States` on `Durable` (`policy/<state>/<key>`, a value and its
   window's start); `DurableStates.enforce(policy, call, scope, now)` — a decision and its changes one step: two
   instances spending one budget at once cannot both pass (the second is decided again on the new value).

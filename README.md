@@ -38,8 +38,9 @@ code, not data. The design: [specs/durable.md](specs/durable.md).
 | Cloudflare Durable Objects | `cloudflare` | SQLite storage, `transactionSync`, alarms; end to end on `wrangler dev` |
 | AWS Lambda + DynamoDB | `aws` | conditional `TransactWriteItems`, a step run again on a conflict; on DynamoDB Local |
 
-A twin on [okay-simple](https://github.com/okay-effects/okay-simple) (Scala 2) will follow, with the same stored
-format, so state written by one is read by the other.
+The twin on [okay-simple](https://github.com/okay-effects/okay-simple), module `simple` (Scala 2.13 and 3, one
+source): the same words, step, machine and `once`, and the same stored format, so state written by one is read by
+the other.
 
 ## Build
 
@@ -47,6 +48,7 @@ Scala 3.3, sbt, on [okay-scala](https://github.com/okay-effects/okay-scala) 0.1.
 
 ```text
 sbt coreJVM/test coreJS/test                       # the scenarios
+sbt +simpleJVM/test +simpleJS/test                 # the same on okay-simple, Scala 3 and 2.13
 sbt cloudflareExample && cloudflare/example/e2e.sh  # the example account on a local workerd
 aws/test.sh                                         # DynamoDB on DynamoDB Local (Java, Node)
 ```

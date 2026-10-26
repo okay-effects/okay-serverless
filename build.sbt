@@ -7,7 +7,8 @@ ThisBuild / organization := "io.github.okay-effects"
 ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature", "-Wunused:imports,privates,locals")
 ThisBuild / resolvers ++= Seq("okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
-  "okay-proof" at "https://okay-effects.github.io/okay-proof/maven")
+  "okay-proof" at "https://okay-effects.github.io/okay-proof/maven",
+  "okay-effects" at "https://okay-effects.github.io/okay-simple/maven")
 
 val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
 
@@ -17,6 +18,15 @@ lazy val core = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).
   .settings(name := "okay-serverless",
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1", munit.value))
 
+/** THE TWIN ON okay-simple, Scala 2.13 and 3: the same words, step, machine, `once`, the same stored format; the same
+ * scenarios on the machine and on `Free` (`sbt +simpleJVM/test`) */
+lazy val simple = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("simple"))
+  .settings(name := "okay-serverless-simple", crossScalaVersions := Seq("3.3.8", "2.13.18"),
+    scalacOptions ++= (if (scalaVersion.value.startsWith("2.")) Seq("-Xsource:3") else Nil),
+    libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-effects" % "0.1.1",
+      "io.github.okay-effects" %%% "okay-effects-machine" % "0.1.1" % Test,
+      "io.github.okay-effects" %%% "okay-effects-free" % "0.1.1" % Test, munit.value))
+
 /** A POLICY'S STATE, DURABLE: okay-policy's `States` kept by `Durable` — a decision and its changes one step, one
  * transaction; decided again if the state changed meanwhile */
 lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("policy")).dependsOn(core)
@@ -24,9 +34,8 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-policy" % "0.1.0", munit.value))
 
 /** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
- * is
- * a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests run
- * on DynamoDB Local: `aws/test.sh` */
+ * is a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests
+ * run on DynamoDB Local: `aws/test.sh` */
 lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
     Test / jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(org.scalajs.jsenv.nodejs.NodeJSEnv.Config()
@@ -49,5 +58,6 @@ cloudflareExample := {
   to
 }
 
-lazy val root = (project in file(".")).aggregate(core.jvm, core.js, policy.jvm, policy.js, aws, cloudflare)
+lazy val root = (project in file(".")).aggregate(core.jvm, core.js, simple.jvm, simple.js, policy.jvm, policy.js,
+  aws, cloudflare)
   .settings(publish / skip := true)
