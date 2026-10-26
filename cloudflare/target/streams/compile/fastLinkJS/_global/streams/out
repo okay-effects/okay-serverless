@@ -1,0 +1,27 @@
+[info] Fast optimizing /Users/sergiy/work/my/okay-serverless/cloudflare/target/scala-3.3.8/okay-serverless-cloudflare-fastopt
+[debug] Linker: Compute reachability: 172552 us
+[debug] Linker: Assemble LinkedClasses: 12515 us
+[debug] Linker: 193285 us
+[debug] Desugarer: Desugar: 4494 us
+[debug] Desugarer: 4620 us
+[debug] Optimizer: Batch mode: true
+[debug] Optimizer: Incremental part: 34281 us
+[debug] Optimizer: Elidable constructors: 1527 us
+[debug] Optimizer: Optimizing 5850 methods.
+[debug] Optimizer: Optimizer part: 233338 us
+[debug] Optimizer: 273242 us
+[debug] Refiner: Compute reachability: 59203 us
+[debug] Refiner: Assemble LinkedClasses: 6090 us
+[debug] Refiner: 65948 us
+[debug] Module Splitter: Calculate Dependency Info: 596 us
+[debug] Module Splitter: Analyze Modules: 197 us
+[debug] Module Splitter: Assemble Modules: 1598 us
+[debug] Module Splitter: 2752 us
+[debug] Emitter: Generate Classes: 306522 us
+[debug] Emitter: Write trees: 15584 us
+[debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 617
+[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 2878
+[debug] Emitter: Pre prints: 4184
+[debug] Emitter: 333943 us
+[debug] BasicBackend: Write result: 23252 us
+[debug] BasicBackend: total modules: 1; re-written: 1

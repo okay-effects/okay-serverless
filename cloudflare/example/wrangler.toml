@@ -1,0 +1,12 @@
+# the example: `npx wrangler dev` here, after `sbt cloudflareExample`
+name = "okay-serverless-example"
+main = "entry.js"
+compatibility_date = "2026-10-01"
+
+[[durable_objects.bindings]]
+name = "ACCOUNTS"
+class_name = "Account"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Account"]

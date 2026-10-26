@@ -15,4 +15,20 @@ lazy val core = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).
   .settings(name := "okay-serverless",
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1", munit.value))
 
-lazy val root = (project in file(".")).aggregate(core.jvm, core.js).settings(publish / skip := true)
+/** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
+ * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
+lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
+  .settings(name := "okay-serverless-cloudflare",
+    scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
+
+/** the example Worker's Scala, linked into cloudflare/example/okay.js */
+val cloudflareExample = taskKey[File]("the example Worker's code, linked")
+cloudflareExample := {
+  val out = (cloudflare / Compile / fastLinkJS / scalaJSLinkerOutputDirectory).value
+  val _ = (cloudflare / Compile / fastLinkJS).value
+  val to = baseDirectory.value / "cloudflare" / "example" / "okay.js"
+  IO.copyFile(out / "main.js", to)
+  to
+}
+
+lazy val root = (project in file(".")).aggregate(core.jvm, core.js, cloudflare).settings(publish / skip := true)

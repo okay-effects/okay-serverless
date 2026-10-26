@@ -8,3 +8,6 @@ Read before anything else, then `specs/durable.md`: a change of design is a chan
   the SAME stored format (JSON text values, `<scope>/#steps`, `<name>/state`) and the same scenarios.
 - `Scenarios` is the TCK: every platform's handler passes it (memory here; a Durable Object on `wrangler dev`).
 - `sbt coreJVM/test coreJS/test`. Lines at most 120 wide. Commits: plain messages, no attribution trailers.
+- `cloudflare`: `ObjectStorage(ctx)` — a table `okay_values(key, value, version)` in the object's SQLite storage, a
+  commit one `transactionSync`, the alarm `setAlarm`. End to end: `sbt cloudflareExample && cloudflare/example/e2e.sh`
+  (wrangler from the example's own node_modules; `--persist-to` a temp dir, the Worker killed and started again).

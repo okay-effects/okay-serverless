@@ -1,5 +1,10 @@
 # okay-serverless — durable state as an effect (spec, 2026-10-26)
 
+Status 2026-10-26: `core` (the effect, steps, machines, `once`, memory with faults, the scenarios — JVM and Scala.js)
+and `cloudflare` (`ObjectStorage` on a Durable Object's SQLite storage; the example account, end to end on
+`wrangler dev`: `cloudflare/example/e2e.sh` — events, a refusal, a restart going on from the committed state, an
+alarm) built. Next: `aws`, the twin on okay-simple.
+
 ## The problem
 
 A serverless instance — a Cloudflare Durable Object, an AWS Lambda, an Azure function — is evicted, restarted,
