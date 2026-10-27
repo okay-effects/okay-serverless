@@ -1,51 +1,5 @@
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:30:69 
-[error] 30 |    body.map(b => Request(method, r.url.asInstanceOf[String], headers(r.headers), b))
-[error]    |                                                              ^^^^^^^^^^^^^^^^^^
-[error]    |                                     Found:    Map[String, String]
-[error]    |                                     Required: Map[String, List[String]]
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:30:82 
-[error] 30 |    body.map(b => Request(method, r.url.asInstanceOf[String], headers(r.headers), b))
-[error]    |                                                                                  ^
-[error]    |                                     Found:    (b : okay.http.Bytes)
-[error]    |                                     Required: Map[String, List[String]]
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:34:48 
-[error] 34 |    if r.body.size > 0 then init.body = uint8(r.body)
-[error]    |                                              ^^^^^^
-[error]    |                                   Found:    (r.body : String)
-[error]    |                                   Required: okay.serverless.cloud.Bytes
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] -- [E008] Not Found Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:35:40 
-[error] 35 |    js.Dynamic.newInstance(g.Request)(r.url, init)
-[error]    |                                      ^^^^^
-[error]    |              value url is not a member of okay.serverless.cloud.Request
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:38:98 
-[error] 38 |    await(r.arrayBuffer()).map(b => Response(r.status.asInstanceOf[Int], headers(r.headers), bytes(b)))
-[error]    |                                                                                             ^^^^^^^^
-[error]    |                                   Found:    okay.serverless.cloud.Bytes
-[error]    |                                   Required: String
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:41:82 
-[error] 41 |    js.Dynamic.newInstance(g.Response)(if r.body.size == 0 then null else uint8(r.body),
-[error]    |                                                                                ^^^^^^
-[error]    |                                   Found:    (r.body : String)
-[error]    |                                   Required: okay.serverless.cloud.Bytes
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] -- [E008] Not Found Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:47:17 
-[error] 47 |      case Fetch.Call(r) => await(g.fetch(toRequest(r))).flatMap(response)
-[error]    |           ^^^^^^^^^^
-[error]    |value Call is not a member of object okay.serverless.cloud.Http$package.Fetch
-[error] -- [E007] Type Mismatch Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/WebJs.scala:47:52 
-[error] 47 |      case Fetch.Call(r) => await(g.fetch(toRequest(r))).flatMap(response)
-[error]    |                                                    ^
-[error]    |                                 Found:    (r : Any)
-[error]    |                                 Required: okay.serverless.cloud.Request
-[error]    |
-[error]    | longer explanation available when compiling with `-explain`
-[error] 8 errors found
+[error] -- [E008] Not Found Error: /Users/sergiy/work/my/okay-serverless/core/.js/src/main/scala/okay/serverless/cloud/PostgresSql.scala:52:19 
+[error] 52 |        else if js.instanceOf(d, g.Date) then SqlValue.Text(d.toISOString().asInstanceOf[String])
+[error]    |                ^^^^^^^^^^^^^
+[error]    |                value instanceOf is not a member of scala.scalajs.js
+[error] one error found

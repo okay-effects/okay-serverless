@@ -81,7 +81,8 @@ object Statement:
 /** what a statement changed */
 final case class Changes(changes: Long, lastRowId: Long)
 
-/** SQL in SQLite's dialect: D1 on Cloudflare, an SQLite file locally, Aurora's Data API on AWS */
+/** SQL — a database by its name, in its own dialect (the program knows its database): SQLite's (D1, an SQLite file)
+ * or Postgres' (through Hyperdrive on Cloudflare, RDS Proxy on AWS); parameters `?` everywhere */
 enum Sql[X]:
   case Query(db: String, statement: Statement) extends Sql[List[Row]]
   case Run(db: String, statement: Statement) extends Sql[Changes]
@@ -95,6 +96,35 @@ object Sql:
     perform[Sql](Run(db, Statement.of(sql, params*)))
   def batch[R[_]](db: String, statements: Statement*)(using In[Sql, R]): List[List[Row]] ! R =
     perform[Sql](Batch(db, statements.toList))
+
+  /** `?` parameters as Postgres numbers them (`$1`, `$2`, …): those in quotes, in quoted names and in comments
+   * left */
+  def numbered(sql: String): String =
+    val b = StringBuilder()
+    var i = 0
+    var n = 0
+    while i < sql.length do
+      sql(i) match
+        case q @ ('\'' | '"') =>
+          val end = sql.indexOf(q, i + 1) match
+            case -1 => sql.length
+            case j => j + 1
+          b ++= sql.substring(i, end)
+          i = end
+        case '-' if sql.startsWith("--", i) =>
+          val end = sql.indexOf('\n', i) match
+            case -1 => sql.length
+            case j => j
+          b ++= sql.substring(i, end)
+          i = end
+        case '?' =>
+          n += 1
+          b ++= s"$$$n"
+          i += 1
+        case c =>
+          b += c
+          i += 1
+    b.toString
 
 /** a message to a queue: its body (text, JSON as a rule) and how long it waits first */
 final case class Outgoing(body: String, delaySeconds: Long = 0)

@@ -21,13 +21,16 @@ import scala.scalajs.js.JSConverters.*
  *    caller's) and come back as an `okayAlarm` event;
  *  - `Env` the process's, `Fetch` Node's, `Log` the console (CloudWatch Logs), `Analytics` CloudWatch's embedded
  *    metric format, written to the log.
- * Blobs (S3), SQL (Aurora's Data API), queues out (SQS), mail (SES), AI (Bedrock), vectors (S3 Vectors), services
+ *  - `Sql` on Postgres (`AwsPorts.postgres`): RDS Proxy, as Hyperdrive on Cloudflare, by `pg`, a pool a database.
+ * Blobs (S3), queues out (SQS), mail (SES), AI (Bedrock), vectors (S3 Vectors), services
  * (Lambda invoke) are mapped in specs/cloud.md and not written yet: their ports fail, naming them.
  */
 final class AwsPorts(client: js.Dynamic, table: String, limits: Map[String, (Int, Long)] = Map.empty,
                      actors: Map[String, Actor] = Map.empty,
                      schedule: (String, String, Long) => Unit = (_, _, _) => (),
-                     log: String => Unit = s => g.console.log(s))(using ExecutionContext):
+                     log: String => Unit = s => g.console.log(s),
+                     sql: Port[Sql] = Port.missing("SQL (AwsPorts.postgres: RDS Proxy, Aurora, any Postgres)"))(
+  using ExecutionContext):
   private val sdk = g.require("@aws-sdk/client-dynamodb")
   private def send(command: String, input: js.Object): Future[js.Dynamic] =
     client.send(js.Dynamic.newInstance(sdk.selectDynamic(command))(input)).asInstanceOf[js.Promise[js.Dynamic]].toFuture
@@ -124,7 +127,14 @@ final class AwsPorts(client: js.Dynamic, table: String, limits: Map[String, (Int
       case Objects.Call(ns, name, r) => Async.toFuture(hosting(ns, name).run(platform)(actor(ns).fetch(name, r)))
 
   lazy val platform: Platform = Platform(kv = kv, limits = limitsPort, env = env, fetch = WebJs.fetch,
-    analytics = analytics, objects = objects, log = (l, m) => log(s"[$l] $m"))
+    analytics = analytics, objects = objects, sql = sql, log = (l, m) => log(s"[$l] $m"))
+
+object AwsPorts:
+  /** SQL on Postgres — RDS Proxy (AWS's Hyperdrive), Aurora, any — by `pg`, a pool a database, kept across the
+   * Lambda's invocations: a database's URL `url`'s, by default the variable `DATABASE_URL_<db>` */
+  def postgres(url: String => Option[String] = db =>
+    g.process.env.selectDynamic(s"DATABASE_URL_$db").asInstanceOf[js.UndefOr[String]].toOption)(
+    using ExecutionContext): Port[Sql] = PostgresSql(g.require("pg"), url, pooled = true)
 
 /**
  * A LAMBDA: an app and its actors given AWS's events — API Gateway's HTTP API (payload 2.0): a request; SQS: each

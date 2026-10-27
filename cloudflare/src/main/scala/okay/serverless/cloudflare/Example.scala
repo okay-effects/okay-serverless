@@ -111,6 +111,13 @@ object Example:
           .andThen(Sql.run[Cloud]("DB", "insert into notes (text) values (?)", r.text)).flatMap(c =>
             Sql.query[Cloud]("DB", "select id, text from notes order by id")
               .map(rows => Response.text(s"${c.changes} " + rows.map(row => text(row("text"))).mkString(","))))
+      case "/pg" => // Postgres through Hyperdrive: the same effect, another database
+        Sql.batch[Cloud]("PG",
+          Statement("create table if not exists notes (id serial primary key, text text not null, at timestamptz " +
+            "default now(), ok boolean default true)"),
+          Statement.of("insert into notes (text) values (?)", r.text)).andThen(
+          Sql.query[Cloud]("PG", "select id, text, ok from notes where text <> ? order by id", "?")).map(rows =>
+          Response.text(rows.map(row => s"${row("id")}:${row("text")}:${row("ok")}").mkString(",")))
       case "/queue" => Queues.send[Cloud]("JOBS", q(r, "body")).as(Response.text("queued"))
       case "/cached" => Cache.through[Cloud]("https://okay.example/cached", 60)(
           Clock.now[Cloud].map(t => Response.text(s"made at $t")))

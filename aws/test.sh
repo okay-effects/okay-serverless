@@ -10,9 +10,17 @@ if [ ! -f "$dir/DynamoDBLocal.jar" ]; then
 fi
 [ -d aws/node_modules/@aws-sdk/client-dynamodb ] || (cd aws && npm install --silent)
 port=$(python3 -c "import socket;s=socket.socket();s.bind(('',0));print(s.getsockname()[1])")
-(cd "$dir" && java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -inMemory -port "$port" \
+(cd "$dir" && exec java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -inMemory -port "$port" \
   >/tmp/okay-dynamodb.log 2>&1) &
 pid=$!
 trap 'kill $pid 2>/dev/null' EXIT
 for _ in $(seq 1 40); do curl -s -o /dev/null "http://localhost:$port" && break; sleep 0.25; done
-OKAY_DYNAMODB="http://localhost:$port" sbt -batch aws/test
+# a Postgres (tools/: from npm), for SQL as RDS Proxy gives it
+[ -d tools/node_modules/embedded-postgres ] || (cd tools && npm install --silent &&
+  (cd node_modules/@embedded-postgres/*/ && node scripts/hydrate-symlinks.js))
+pgurl=$(mktemp)
+node tools/postgres.mjs >"$pgurl" 2>/dev/null &
+pgpid=$!
+trap 'kill $pid $pgpid 2>/dev/null' EXIT
+for _ in $(seq 1 120); do [ -s "$pgurl" ] && break; sleep 0.5; done
+OKAY_DYNAMODB="http://localhost:$port" OKAY_POSTGRES=$(cat "$pgurl") sbt -batch aws/test

@@ -1,1 +1,1 @@
-{ "private": true, "devDependencies": { "wrangler": "^4" } }
+{"private":true,"devDependencies":{"wrangler":"^4"},"dependencies":{"pg":"^8.23.1"}}

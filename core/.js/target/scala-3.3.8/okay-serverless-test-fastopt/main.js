@@ -35434,6 +35434,111 @@ $c_Lokay_serverless_cloud_Sql$.prototype.query__T__T__sci_Seq__Lokay_scala3_Plac
   var op$proxy11 = new $c_Lokay_serverless_cloud_Sql$Query(db, statement);
   return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy11);
 });
+$c_Lokay_serverless_cloud_Sql$.prototype.numbered__T__T = (function(sql) {
+  var b = $ct_scm_StringBuilder__(new $c_scm_StringBuilder());
+  var i = 0;
+  var n = 0;
+  while (true) {
+    var $x_2 = i;
+    var this$1 = $n(sql);
+    if (($x_2 < this$1.length)) {
+      var i$1 = i;
+      var this$4 = $n(sql);
+      var x95 = $charAt(this$4, i$1);
+      matchAlts1: {
+        matchAlts2: {
+          if ((x95 === 39)) {
+            break matchAlts2;
+          }
+          if ((x95 === 34)) {
+            break matchAlts2;
+          }
+          break matchAlts1;
+        }
+        matchResult66: {
+          var end;
+          var x93 = $f_T__indexOf__I__I__I($n(sql), x95, ((1 + i) | 0));
+          if ((x93 === (-1))) {
+            var this$6 = $n(sql);
+            var end = this$6.length;
+            break matchResult66;
+          }
+          var end = ((1 + x93) | 0);
+        }
+        var this$7 = $n(sql);
+        var beginIndex = i;
+        var count = ((end - beginIndex) | 0);
+        var length = this$7.length;
+        if (((((beginIndex | count) | end) | ((length - end) | 0)) < 0)) {
+          if ((beginIndex < 0)) {
+            $charAt(this$7, beginIndex);
+          }
+          if ((end < beginIndex)) {
+            $charAt(this$7, (-1));
+          }
+          $charAt(this$7, end);
+        }
+        var s = $as_T(this$7.substring(beginIndex, end));
+        b.addAll__T__scm_StringBuilder(s);
+        i = end;
+        continue;
+      }
+      if ((x95 === 45)) {
+        var this$9 = $n(sql);
+        var toffset = i;
+        var length$1 = this$9.length;
+        if ((!((toffset >>> 0) > (length$1 >>> 0)))) {
+          var $x_1 = $uZ(this$9.startsWith("--", toffset));
+        } else {
+          var $x_1 = false;
+        }
+      } else {
+        var $x_1 = false;
+      }
+      if ($x_1) {
+        matchResult67: {
+          var end$2;
+          var x94 = $f_T__indexOf__I__I__I($n(sql), 10, i);
+          if ((x94 === (-1))) {
+            var this$12 = $n(sql);
+            var end$2 = this$12.length;
+            break matchResult67;
+          }
+          var end$2 = x94;
+        }
+        var this$13 = $n(sql);
+        var beginIndex$1 = i;
+        var count$1 = ((end$2 - beginIndex$1) | 0);
+        var length$2 = this$13.length;
+        if (((((beginIndex$1 | count$1) | end$2) | ((length$2 - end$2) | 0)) < 0)) {
+          if ((beginIndex$1 < 0)) {
+            $charAt(this$13, beginIndex$1);
+          }
+          if ((end$2 < beginIndex$1)) {
+            $charAt(this$13, (-1));
+          }
+          $charAt(this$13, end$2);
+        }
+        var s$1 = $as_T(this$13.substring(beginIndex$1, end$2));
+        b.addAll__T__scm_StringBuilder(s$1);
+        i = end$2;
+        continue;
+      }
+      if ((x95 === 63)) {
+        n = ((1 + n) | 0);
+        var s$2 = ("$" + n);
+        b.addAll__T__scm_StringBuilder(s$2);
+        i = ((1 + i) | 0);
+        continue;
+      }
+      b.addOne__C__scm_StringBuilder(x95);
+      i = ((1 + i) | 0);
+    } else {
+      break;
+    }
+  }
+  return $n(b.scm_StringBuilder__f_underlying).jl_StringBuilder__f_java$lang$StringBuilder$$content;
+});
 var $d_Lokay_serverless_cloud_Sql$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Sql$, "okay.serverless.cloud.Sql$", ({
   Lokay_serverless_cloud_Sql$: 1,
   s_deriving_Mirror: 1,
@@ -73831,6 +73936,16 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
   }));
   var loc$35 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 166);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a port the cloud lacks: the program fails, naming it", body$10, loc$35);
+  var body$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+    var obtained$22 = $m_Lokay_serverless_cloud_Sql$().numbered__T__T("select * from t where a = ? and b = '?' and \"c?\" = ? -- why?\nand d = ?");
+    var clue$28 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
+    var loc$36 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 171);
+    var compare$27 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
+    var diffOptions$27 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
+    $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$22, "select * from t where a = $1 and b = '?' and \"c?\" = $2 -- why?\nand d = $3", clue$28, loc$36, compare$27, diffOptions$27);
+  }));
+  var loc$37 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 172);
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "SQL's ? parameters numbered for Postgres, not those quoted or commented", body$11, loc$37);
 }
 $c_Lokay_serverless_cloud_CloudSuite.prototype = new $h_Lmunit_FunSuite();
 $c_Lokay_serverless_cloud_CloudSuite.prototype.constructor = $c_Lokay_serverless_cloud_CloudSuite;
@@ -87439,6 +87554,11 @@ $c_scm_StringBuilder.prototype.addOne__C__scm_StringBuilder = (function(x) {
 });
 $c_scm_StringBuilder.prototype.clear__V = (function() {
   $n(this.scm_StringBuilder__f_underlying).setLength__I__V(0);
+});
+$c_scm_StringBuilder.prototype.addAll__T__scm_StringBuilder = (function(s) {
+  var this$1 = $n(this.scm_StringBuilder__f_underlying);
+  this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content = (("" + this$1.jl_StringBuilder__f_java$lang$StringBuilder$$content) + s);
+  return this;
 });
 $c_scm_StringBuilder.prototype.toString__T = (function() {
   return $n(this.scm_StringBuilder__f_underlying).jl_StringBuilder__f_java$lang$StringBuilder$$content;

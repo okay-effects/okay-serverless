@@ -61,8 +61,8 @@ UTF-8. The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare
 | | module | status |
 |---|---|---|
 | memory, with faults (crash, conflict, eviction) | `core` | the scenarios; every cloud effect (`MemoryCloud`) |
-| Cloudflare Workers | `cloudflare` | every effect on its binding; objects, sockets, workflows; e2e on `wrangler dev` |
-| AWS Lambda + DynamoDB | `aws` | `Durable`, KV, rate limits, objects; API Gateway, SQS, EventBridge; DynamoDB Local |
+| Cloudflare Workers | `cloudflare` | every effect on its binding, Hyperdrive too; objects, sockets, workflows; e2e |
+| AWS Lambda + DynamoDB | `aws` | `Durable`, KV, limits, objects, Postgres; API Gateway, SQS, EventBridge events |
 
 The twin on [okay-simple](https://github.com/okay-effects/okay-simple), module `simple` (Scala 2.13 and 3, one
 source): the same words, step, machine and `once`, and the same stored format, so state written by one is read by

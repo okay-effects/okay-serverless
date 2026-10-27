@@ -35,14 +35,20 @@ class AwsSuite extends munit.FunSuite:
       case "/kv" => Kv.put[Cloud]("main", "k", r.text).andThen(Kv.get[Cloud]("main", "k"))
           .map(v => Response.text(v.getOrElse("?")))
       case "/via" => Objects.call[Cloud]("COUNTERS", "c", r).map(x => Response.text(s"object said ${x.text}"))
+      case "/notes" => Sql.batch[Cloud]("main",
+          Statement("create table if not exists notes (id serial primary key, body text, data bytea)"),
+          Statement.of("insert into notes (body, data) values (?, ?)", r.text, Bytes(Array[Byte](0, -1)))).andThen(
+          Sql.query[Cloud]("main", "select count(*)::int as n, max(body) as last from notes")).map(rows =>
+          Response.text(s"${rows.head("n")} ${rows.head("last")}"))
       case "/flip" => pure(Response.binary(Bytes(r.content.toArray.map(b => (~b).toByte))))
       case _ => pure(Response.notFound())
     override def queue(queue: String, m: Message): Settle ! Cloud =
       if m.body == "again" then pure(Settle.Retry()) else Kv.put[Cloud]("jobs", m.body, queue).as(Settle.Ack)
     override def scheduled(e: Scheduled): Unit ! Cloud = Kv.put[Cloud]("main", "cron", e.cron)
 
+  val postgres: Option[String] = g.process.env.OKAY_POSTGRES.asInstanceOf[js.UndefOr[String]].toOption
   lazy val ports = AwsPorts(client, table, limits = Map("api" -> (2, 60)), actors = Map("COUNTERS" -> Counters),
-    log = s => logged += s)
+    log = s => logged += s, sql = postgres.fold(Port.missing[Sql]("SQL"))(u => AwsPorts.postgres(_ => Some(u))))
   lazy val lambda = Lambda(Shop, ports)
   def ready: Future[Unit] = DynamoStorage.table(client, table)
 
@@ -105,6 +111,30 @@ class AwsSuite extends munit.FunSuite:
       val out = g.Buffer.from(r.asInstanceOf[js.Dynamic].body, "base64")
       assertEquals(out.toJSON().data.asInstanceOf[js.Array[Int]].toList, List(255, 0, 127, 128, 60, 215))
     }
+  }
+
+  test("POSTGRES (RDS Proxy's way): a batch in one transaction, rolled back whole; types; through the Lambda") {
+    assume(postgres.isDefined, "OKAY_POSTGRES")
+    val t = s"t$unique"
+    for
+      out <- ports.platform.future(for
+        _ <- Sql.run[Cloud]("main", s"create table $t (id serial primary key, name text not null, n bigint, " +
+          "x double precision, ok boolean, data bytea)")
+        c <- Sql.run[Cloud]("main", s"insert into $t (name, n, x, ok, data) values (?, ?, ?, ?, ?)", "ann", 7L, 1.5,
+          SqlValue.Int(1), Bytes(Array[Byte](1, -2)))
+        rows <- Sql.query[Cloud]("main", s"select name, x, ok, data from $t where name = ? and name <> '?'", "ann")
+      yield (c, rows))
+      failed <- ports.platform.future(Sql.batch[Cloud]("main", Statement(s"insert into $t (name) values ('b')"),
+        Statement(s"insert into $t (name) values (null)"))).failed
+      count <- ports.platform.future(Sql.query[Cloud]("main", s"select count(*)::int as n from $t"))
+      viaLambda <- lambda.handle(httpEvent("POST", "/notes", "hello"))
+    yield
+      assertEquals(out._1.changes, 1L)
+      assertEquals(out._2, List(Map("name" -> SqlValue.Text("ann"), "x" -> SqlValue.Real(1.5),
+        "ok" -> SqlValue.Int(1), "data" -> SqlValue.Blob(Bytes(Array[Byte](1, -2))))))
+      assert(failed.getMessage.contains("null value"), failed.getMessage)
+      assertEquals(count, List(Map("n" -> SqlValue.Int(1))))
+      assertEquals(text(viaLambda), "Int(1) Text(hello)")
   }
 
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {

@@ -8,7 +8,16 @@ set -euo pipefail
 cd "$(dirname "$0")"
 [ -d node_modules/wrangler ] || npm install --silent
 [ -f .dev.vars ] || printf 'API_KEY=local-secret\n' > .dev.vars
+[ -d ../../tools/node_modules/embedded-postgres ] || (cd ../../tools && npm install --silent &&
+  (cd node_modules/@embedded-postgres/*/ && node scripts/hydrate-symlinks.js))
 state=$(mktemp -d)
+# a Postgres for Hyperdrive, from tools/: its URL the binding's local connection string
+node ../../tools/postgres.mjs >"$state/pg.url" 2>"$state/pg.log" &
+pgpid=$!
+trap 'kill $pgpid 2>/dev/null' EXIT
+for _ in $(seq 1 120); do [ -s "$state/pg.url" ] && break; sleep 0.5; done
+export CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_PG=$(cat "$state/pg.url")
+export WRANGLER_HYPERDRIVE_LOCAL_CONNECTION_STRING_PG=$CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_PG
 port=8799
 P="http://localhost:$port"
 start() {
@@ -30,8 +39,12 @@ head -c 4096 /dev/urandom > "$state/in.bin"
 curl -s -XPUT "$P/blob?key=r.bin" -H 'content-type: application/octet-stream' --data-binary @"$state/in.bin" \
   >/dev/null
 curl -s "$P/blob?key=r.bin" -o "$state/out.bin"
-expect "$(cmp -s "$state/in.bin" "$state/out.bin" && echo same)" "same" "R2: 4 KB of random bytes, up and back, byte for byte"
+expect "$(cmp -s "$state/in.bin" "$state/out.bin" && echo same)" "same" \
+  "R2: 4 KB of random bytes, up and back, byte for byte"
 expect "$(curl -s -XPOST "$P/sql" -d first; curl -s -XPOST "$P/sql" -d second)" "1 first,second" "D1: run, query"
+expect "$(curl -s -XPOST "$P/pg" -d first; echo; curl -s -XPOST "$P/pg" -d second)" \
+  $'Int(1):Text(first):Int(1)\nInt(1):Text(first):Int(1),Int(2):Text(second):Int(1)' \
+  "Hyperdrive: Postgres, a batch and a query"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")

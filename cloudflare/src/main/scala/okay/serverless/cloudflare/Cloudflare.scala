@@ -86,7 +86,21 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
   private def prepare(db: js.Dynamic, s: Statement): js.Dynamic =
     db.prepare(s.sql).applyDynamic("bind")(s.params.map(param)*)
 
+  /** a Hyperdrive binding (a Postgres behind it, pooled and cached by Cloudflare): its connection string */
+  private def hyperdrive(db: String): Option[String] =
+    val b = env.selectDynamic(db)
+    if js.isUndefined(b) || js.isUndefined(b.connectionString) then None else Some(b.connectionString.toString)
+  /** Postgres through Hyperdrive, by `pg` (the Worker's `globalThis.OkayPg`): a connection a call */
+  private lazy val postgres = PostgresSql(g.OkayPg, hyperdrive)
+
+  /** SQL: a D1 binding's (SQLite), or a Hyperdrive binding's (Postgres) — by what the binding is */
   val sql: Port[Sql] = new Port[Sql]:
+    private def db(op: Sql[?]): String = op match
+      case Sql.Query(db, _) => db
+      case Sql.Run(db, _) => db
+      case Sql.Batch(db, _) => db
+    def apply[X](op: Sql[X]): Future[X] = if hyperdrive(db(op)).isDefined then postgres(op) else d1(op)
+  private val d1: Port[Sql] = new Port[Sql]:
     def apply[X](op: Sql[X]): Future[X] = guard[X](op match
       case Sql.Query(db, s) => await(prepare(binding(db), s).all()).map(rows)
       case Sql.Run(db, s) => await(prepare(binding(db), s).run()).map(r =>

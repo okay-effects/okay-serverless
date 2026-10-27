@@ -1,29 +1,2 @@
 [debug] Created transactional ClassFileManager with tempDir = /Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/classes.bak
-[debug] About to delete class files:
-[debug] 	Http$package$$anon$1.class
-[debug] 	Http$package$.class
-[debug] 	Http$package$Fetch$.class
-[debug] 	Http$package.class
-[debug] 	Http$package$$anon$1.tasty
-[debug] 	Http$package$.tasty
-[debug] 	Http$package$Fetch$.tasty
-[debug] 	Http$package.tasty
-[debug] We backup class files:
-[debug] 	Http$package$$anon$1.class
-[debug] 	Http$package$.class
-[debug] 	Http$package$Fetch$.class
-[debug] 	Http$package.class
-[debug] 	Http$package$$anon$1.tasty
-[debug] 	Http$package$.tasty
-[debug] 	Http$package$Fetch$.tasty
-[debug] 	Http$package.tasty
-[debug] Registering generated classes:
-[debug] 	Http$package$$anon$1.class
-[debug] 	Http$package.class
-[debug] 	Http$package$.class
-[debug] 	Http$package$Fetch$.class
-[debug] 	Http$package$$anon$1.tasty
-[debug] 	Http$package.tasty
-[debug] 	Http$package$.tasty
-[debug] 	Http$package$Fetch$.tasty
 [debug] Removing the temporary directory used for backing up class files: /Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/classes.bak

@@ -165,3 +165,8 @@ class CloudSuite extends munit.FunSuite:
       assert(e.getMessage.startsWith("no SQL here"), e.getMessage))
   }
   lazy val c0: MemoryCloud = cloud()
+
+  test("SQL's ? parameters numbered for Postgres, not those quoted or commented") {
+    assertEquals(Sql.numbered("select * from t where a = ? and b = '?' and \"c?\" = ? -- why?\nand d = ?"),
+      "select * from t where a = $1 and b = '?' and \"c?\" = $2 -- why?\nand d = $3")
+  }

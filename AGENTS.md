@@ -15,8 +15,10 @@ first.
   the effects. What is general goes to the family: JSON okay-simple's, `Env`/`Log`/`Clock` okay-scala's `std`.
 - `aws`: `DynamoStorage(client, table, space, schedule)` — a commit one conditional `TransactWriteItems`. Tests:
   `aws/test.sh` (DynamoDB Local in ~/.cache/dynamodb-local, `OKAY_DYNAMODB`; the suite is ignored without it).
-- `aws`: `AwsPorts` (KV, limits, objects on DynamoDB; env, fetch, log, analytics as EMF), `Lambda` (API Gateway,
-  SQS, EventBridge, `okayAlarm`).
+- `aws`: `AwsPorts` (KV, limits, objects on DynamoDB; env, fetch, log, analytics as EMF; SQL by
+  `AwsPorts.postgres`), `Lambda` (API Gateway, SQS, EventBridge, `okayAlarm`).
+- Postgres for tests: `node tools/postgres.mjs` (npm's embedded-postgres; prints its URL, stops on SIGTERM) — used by
+  `aws/test.sh` and `cloudflare/example/e2e.sh` (Hyperdrive's local connection string).
 - `cloudflare`: `CloudflarePorts(env)` every binding, `Worker(app, actors)` the entry points; the example and its
   e2e use every binding locally but Workers AI and Vectorize (remote only).
 - `cloudflare`: `ObjectStorage(ctx)` — a table `okay_values(key, value, version)` in the object's SQLite storage, a

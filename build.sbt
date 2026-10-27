@@ -45,7 +45,7 @@ lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(c
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
     Test / jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(org.scalajs.jsenv.nodejs.NodeJSEnv.Config()
       .withEnv(Map("NODE_PATH" -> ((ThisBuild / baseDirectory).value / "aws" / "node_modules").getPath) ++
-        sys.env.get("OKAY_DYNAMODB").map("OKAY_DYNAMODB" -> _))))
+        Seq("OKAY_DYNAMODB", "OKAY_POSTGRES").flatMap(v => sys.env.get(v).map(v -> _)))))
 
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */

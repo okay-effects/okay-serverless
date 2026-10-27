@@ -3,6 +3,7 @@
 name = "okay-serverless-example"
 main = "entry.js"
 compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
 
 [vars]
 GREETING = "hello from vars"
@@ -22,6 +23,12 @@ bucket_name = "okay-example"
 binding = "DB"
 database_name = "okay-example"
 database_id = "00000000-0000-0000-0000-000000000000"
+
+# Postgres through Hyperdrive; locally its connection string from CLOUDFLARE_HYPERDRIVE_LOCAL_CONNECTION_STRING_PG
+# (e2e.sh starts a Postgres from tools/)
+[[hyperdrive]]
+binding = "PG"
+id = "00000000000000000000000000000000"
 
 [[queues.producers]]
 binding = "JOBS"
