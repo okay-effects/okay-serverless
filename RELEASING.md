@@ -21,7 +21,8 @@ libraryDependencies ++= Seq(
 
 `okay-serverless-store` (okay-store's data in the cloud) needs the `okay-store` resolver too, and
 `okay-serverless-faces` (okay-faces' REST and MCP) the `okay-faces` and `okay-mcp` ones; `okay-serverless-policy`
-the `okay-proof` one. `okay-serverless-simple` is the twin on okay-simple, for Scala 2.13 and 3. Built on Scala 3.3 LTS.
+the `okay-proof` one. `okay-serverless-simple` is the twin on okay-simple, for Scala 2.13 and 3. Built on Scala 3.3 LTS
+and Scala.js 1.22: a Scala.js build needs 1.22 or newer.
 
 ## Making one
 

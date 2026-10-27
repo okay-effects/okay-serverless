@@ -98,7 +98,7 @@ libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare"
 
 Modules: `okay-serverless` (the effect, the cloud's effects, memory; JVM and Scala.js), `-cloudflare` and `-aws`
 (Scala.js), `-store` (okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state),
-`-simple` (the twin on okay-simple, Scala 2.13 and 3).
+`-simple` (the twin on okay-simple, Scala 2.13 and 3). Scala 3.3 LTS; Scala.js 1.22 or newer.
 
 ## Build
 
