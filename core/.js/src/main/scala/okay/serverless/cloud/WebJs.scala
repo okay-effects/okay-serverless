@@ -23,25 +23,33 @@ object WebJs:
     h.forEach(((v: String, k: String) => out(k) = v): js.Function2[String, String, Unit])
     out.toMap
 
+  /** a request of the runtime's: its path and query, its headers (names lowercased), its body as it came */
   def request(r: js.Dynamic): Future[Request] =
     val method = r.method.asInstanceOf[String]
-    val body = if method == "GET" || method == "HEAD" then Future.successful(Bytes.empty)
-      else await(r.arrayBuffer()).map(bytes)
-    body.map(b => Request(method, r.url.asInstanceOf[String], headers(r.headers), b))
+    val url = js.Dynamic.newInstance(g.URL)(r.url)
+    val head = Request(method, url.pathname.toString + url.search.toString)
+      .copy(headers = headers(r.headers).map((k, v) => k.toLowerCase -> List(v)))
+    if method == "GET" || method == "HEAD" then Future.successful(head)
+    else await(r.arrayBuffer()).map(b => head.withContent(bytes(b)))
 
-  def toRequest(r: Request): js.Dynamic =
-    val init = obj(method = r.method, headers = r.headers.toJSDictionary)
-    if r.body.size > 0 then init.body = uint8(r.body)
-    js.Dynamic.newInstance(g.Request)(r.url, init)
+  /** a request to `base`: the runtime's */
+  def toRequest(base: String, r: Request): js.Dynamic =
+    val init = obj(method = r.method, headers = r.headers.map((k, vs) => k -> vs.mkString(", ")).toJSDictionary)
+    if r.bytes.isDefined || r.body.nonEmpty then init.body = uint8(r.content)
+    js.Dynamic.newInstance(g.Request)(okay.http.Fetch.target(base, r), init)
 
   def response(r: js.Dynamic): Future[Response] =
-    await(r.arrayBuffer()).map(b => Response(r.status.asInstanceOf[Int], headers(r.headers), bytes(b)))
+    await(r.arrayBuffer()).map(b => Response(r.status.asInstanceOf[Int], headers(r.headers)).withContent(bytes(b)))
 
   def toResponse(r: Response): js.Dynamic =
-    js.Dynamic.newInstance(g.Response)(if r.body.size == 0 then null else uint8(r.body),
+    val body = r.content
+    js.Dynamic.newInstance(g.Response)(if body.size == 0 then null else uint8(body),
       obj(status = r.status, headers = r.headers.toJSDictionary))
 
   /** `fetch`, the runtime's */
   val fetch: Port[Fetch] = new Port[Fetch]:
     def apply[X](op: Fetch[X]): Future[X] = op match
-      case Fetch.Call(r) => await(g.fetch(toRequest(r))).flatMap(response)
+      case okay.http.Fetch.Send(base, r, answer) => await(g.fetch(toRequest(base, r))).flatMap(response).map(answer)
+      case okay.http.Fetch.Call(m, url, h, body, answer) =>
+        await(g.fetch(toRequest(okay.http.Fetch.base(url), okay.http.Fetch.request(m, url, h, body))))
+          .flatMap(response).map(answer)

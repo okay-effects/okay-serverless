@@ -32,10 +32,11 @@ class AwsSuite extends munit.FunSuite:
       case List("", "count", name) => Some(("COUNTERS", name))
       case _ => None
     override def fetch(r: Request): Response ! Cloud = r.path match
-      case "/kv" => Kv.put[Cloud]("main", "k", r.body.text).andThen(Kv.get[Cloud]("main", "k"))
+      case "/kv" => Kv.put[Cloud]("main", "k", r.text).andThen(Kv.get[Cloud]("main", "k"))
           .map(v => Response.text(v.getOrElse("?")))
       case "/via" => Objects.call[Cloud]("COUNTERS", "c", r).map(x => Response.text(s"object said ${x.text}"))
-      case _ => pure(Response.notFound)
+      case "/flip" => pure(Response.binary(Bytes(r.content.toArray.map(b => (~b).toByte))))
+      case _ => pure(Response.notFound())
     override def queue(queue: String, m: Message): Settle ! Cloud =
       if m.body == "again" then pure(Settle.Retry()) else Kv.put[Cloud]("jobs", m.body, queue).as(Settle.Ack)
     override def scheduled(e: Scheduled): Unit ! Cloud = Kv.put[Cloud]("main", "cron", e.cron)
@@ -93,6 +94,17 @@ class AwsSuite extends munit.FunSuite:
       assertEquals(text(kv), "stored")
       assertEquals((text(c1), text(c2)), ("1", "2"))
       assert(text(via).startsWith("object said "), text(via))
+  }
+
+  test("A LAMBDA: a binary body in (base64, as API Gateway gives it) and out") {
+    val raw = js.Array[Short](0, 255, 128, 127, 195, 40)
+    val in = g.Buffer.from(raw).applyDynamic("toString")("base64")
+    val e = httpEvent("POST", "/flip", in.toString)
+    e.isBase64Encoded = true
+    lambda.handle(e).map { r =>
+      val out = g.Buffer.from(r.asInstanceOf[js.Dynamic].body, "base64")
+      assertEquals(out.toJSON().data.asInstanceOf[js.Array[Int]].toList, List(255, 0, 127, 128, 60, 215))
+    }
   }
 
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {

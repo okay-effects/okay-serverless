@@ -121,7 +121,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
 
   val services: Port[Services] = new Port[Services]:
     def apply[X](op: Services[X]): Future[X] = guard[X](op match
-      case Services.Call(name, r) => await(binding(name).fetch(toRequest(r))).flatMap(response))
+      case Services.Call(name, r) =>
+        await(binding(name).fetch(toRequest(s"https://$name", r))).flatMap(response))
 
   val limits: Port[Limits] = new Port[Limits]:
     def apply[X](op: Limits[X]): Future[X] = guard[X](op match
@@ -161,7 +162,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
     def apply[X](op: Objects[X]): Future[X] = guard[X](op match
       case Objects.Call(ns, name, r) =>
         val n = binding(ns)
-        await(n.get(n.idFromName(name)).fetch(toRequest(r.copy(headers = r.headers + ("okay-object-name" -> name)))))
+        await(n.get(n.idFromName(name)).fetch(toRequest(s"https://$ns",
+          r.copy(headers = r.headers + ("okay-object-name" -> List(name))))))
           .flatMap(response))
 
   val platform: Platform = Platform(kv = kv, blobs = blobs, sql = sql, queues = queues, fetch = fetch, cache = cache,
@@ -202,7 +204,9 @@ final class Worker(app: App, actors: Map[String, Actor]):
 
   @scala.scalajs.js.annotation.JSExport
   def fetch(request: js.Dynamic, env: js.Dynamic, ctx: js.Dynamic): js.Promise[js.Dynamic] =
-    val head = Request(request.method.asInstanceOf[String], request.url.asInstanceOf[String], headers(request.headers))
+    val url = js.Dynamic.newInstance(g.URL)(request.url)
+    val head = Request(request.method.asInstanceOf[String], url.pathname.toString + url.search.toString)
+      .copy(headers = headers(request.headers).map((k, v) => k.toLowerCase -> List(v)))
     app.objectFor(head) match
       case Some((ns, name)) => // to the object as it is: its body, its upgrade
         val h = js.Dynamic.newInstance(g.Headers)(request.headers)
@@ -265,7 +269,7 @@ final class Worker(app: App, actors: Map[String, Actor]):
     WebJs.request(request).flatMap { r =>
       val n = name(ctx, r.header("okay-object-name"))
       run(ctx, env)(actor(ns).fetch(n, r.copy(headers = r.headers - "okay-object-name"))).map { res =>
-        res.header("okay-socket").flatMap(host(ctx)._2.accepted.remove) match
+        res.headerOf("okay-socket").flatMap(host(ctx)._2.accepted.remove) match
           case Some(client) => js.Dynamic.newInstance(g.Response)(null, obj(status = 101, webSocket = client))
           case None => toResponse(res)
       }

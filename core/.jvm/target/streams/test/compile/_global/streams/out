@@ -1,9 +1,0 @@
-[warn] -- [E198] Unused Symbol Warning: /Users/sergiy/work/my/okay-serverless/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala:6:33 
-[warn] 6 |import okay.serverless.{Durable, Storage}
-[warn]   |                                 ^^^^^^^
-[warn]   |                                 unused import
-[warn] -- [E198] Unused Symbol Warning: /Users/sergiy/work/my/okay-serverless/core/src/test/scala/okay/serverless/cloud/CloudSuite.scala:8:43 
-[warn] 8 |import scala.concurrent.{ExecutionContext, Future}
-[warn]   |                                           ^^^^^^
-[warn]   |                                           unused import
-[warn] two warnings found

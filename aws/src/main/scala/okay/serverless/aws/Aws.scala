@@ -144,15 +144,14 @@ final class Lambda(app: App, ports: AwsPorts)(using ExecutionContext):
     val body = if e.isBase64Encoded.asInstanceOf[js.UndefOr[Boolean]].getOrElse(false) then
       Bytes(g.Buffer.from(raw, "base64").asInstanceOf[js.typedarray.Uint8Array].toArray.map(_.toByte))
     else Bytes.of(raw)
-    val host = headers.getOrElse("host", "lambda")
-    val r = Request(e.requestContext.http.method.asInstanceOf[String], s"https://$host${e.rawPath}$query", headers,
-      body)
+    val r = Request(e.requestContext.http.method.asInstanceOf[String], s"${e.rawPath}$query")
+      .copy(headers = headers.map((k, v) => k.toLowerCase -> List(v))).withContent(body)
     val answer = app.objectFor(r) match
       case Some((ns, name)) => Async.toFuture(ports.hosting(ns, name).run(ports.platform)(ports.actor(ns).fetch(name,
           r)))
       case None => ports.platform.future(app.fetch(r))
     answer.map(res => obj(statusCode = res.status, headers = res.headers.toJSDictionary,
-      body = g.Buffer.from(WebJs.uint8(res.body)).applyDynamic("toString")("base64"), isBase64Encoded = true))
+      body = g.Buffer.from(WebJs.uint8(res.content)).applyDynamic("toString")("base64"), isBase64Encoded = true))
 
   private def sqs(records: js.Array[js.Dynamic]): Future[js.Dynamic] =
     Future.traverse(records.toList) { m =>

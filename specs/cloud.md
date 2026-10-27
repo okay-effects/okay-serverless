@@ -32,7 +32,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Blobs` | put (content type, metadata), get (a range), head, delete, list |
 | `Sql` | query, run (changes, last id), batch (atomic) — SQLite's dialect; parameters a union type |
 | `Queues` | send (a delay), send a batch; a consumer settles each message (ack, retry with a delay) |
-| `Fetch` | an HTTP request out |
+| `Fetch` | an HTTP request out — okay-http's own effect |
 | `Cache` | match, put (ttl), delete — by URL; `Cache.through` |
 | `Env` | a variable, a secret — okay-scala's `std.Env` |
 | `Services` | a request to another service by name |
@@ -93,8 +93,10 @@ state, the stages named.
   format the same by construction.
 - `Env`, `Log`, `Clock`, `Async`, `Retry` are okay-scala's `std`: general, not a cloud's. `Env` was added there for
   this.
-- `Request`/`Response` are here for now, their bodies bytes. okay-http (on okay-simple) has the same model with text
-  bodies; one model for the family is a later decision: okay-http with bytes, or this one moved there.
+- HTTP is okay-http's (0.1.1): `Request`, `Response`, `Bytes` — a body text, or bytes when it is not UTF-8 — and its
+  `Fetch` effect (`Fetch.Send` any request, `Fetch.Call` a text one), performed from the cloud's row; the cloud names
+  them (`okay.serverless.cloud.Request`, …) as aliases. A request's path and query, never a URL: where it goes is the
+  effect's (`Fetch(base, request)`, `Services.call(name, …)`, `Objects.call(ns, name, …)`).
 
 ## Testing
 

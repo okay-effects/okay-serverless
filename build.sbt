@@ -8,7 +8,8 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature", "-Wunused:imports,privates,locals")
 ThisBuild / resolvers ++= Seq("okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
   "okay-proof" at "https://okay-effects.github.io/okay-proof/maven",
-  "okay-effects" at "https://okay-effects.github.io/okay-simple/maven")
+  "okay-effects" at "https://okay-effects.github.io/okay-simple/maven",
+  "okay-http" at "https://okay-effects.github.io/okay-http/maven")
 
 val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
 
@@ -17,7 +18,8 @@ val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
 lazy val core = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("core"))
   .settings(name := "okay-serverless",
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1",
-      "io.github.okay-effects" %%% "okay-effects-json" % "0.1.1", munit.value))
+      "io.github.okay-effects" %%% "okay-effects-json" % "0.1.1", "io.github.okay-effects" %%% "okay-http" % "0.1.1",
+      munit.value))
   .jvmSettings(libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.53.1.0")
 
 /** THE TWIN ON okay-simple, Scala 2.13 and 3: the same words, step, machine, `once`, the same stored format; the same

@@ -1,27 +1,27 @@
 [info] Fast optimizing /Users/sergiy/work/my/okay-serverless/core/.js/target/scala-3.3.8/okay-serverless-test-fastopt
-[debug] Linker: Compute reachability: 255040 us
-[debug] Linker: Assemble LinkedClasses: 22608 us
-[debug] Linker: 287871 us
-[debug] Desugarer: Desugar: 15169 us
-[debug] Desugarer: 15300 us
+[debug] Linker: Compute reachability: 241723 us
+[debug] Linker: Assemble LinkedClasses: 22147 us
+[debug] Linker: 282664 us
+[debug] Desugarer: Desugar: 16244 us
+[debug] Desugarer: 16372 us
 [debug] Optimizer: Batch mode: true
-[debug] Optimizer: Incremental part: 48802 us
-[debug] Optimizer: Elidable constructors: 2901 us
-[debug] Optimizer: Optimizing 12948 methods.
-[debug] Optimizer: Optimizer part: 534538 us
-[debug] Optimizer: 591646 us
-[debug] Refiner: Compute reachability: 110805 us
-[debug] Refiner: Assemble LinkedClasses: 10610 us
-[debug] Refiner: 122156 us
-[debug] Module Splitter: Calculate Dependency Info: 897 us
-[debug] Module Splitter: Analyze Modules: 262 us
-[debug] Module Splitter: Assemble Modules: 2605 us
-[debug] Module Splitter: 4157 us
-[debug] Emitter: Generate Classes: 493150 us
-[debug] Emitter: Write trees: 16348 us
+[debug] Optimizer: Incremental part: 50052 us
+[debug] Optimizer: Elidable constructors: 2533 us
+[debug] Optimizer: Optimizing 12996 methods.
+[debug] Optimizer: Optimizer part: 534635 us
+[debug] Optimizer: 592543 us
+[debug] Refiner: Compute reachability: 129668 us
+[debug] Refiner: Assemble LinkedClasses: 10327 us
+[debug] Refiner: 140803 us
+[debug] Module Splitter: Calculate Dependency Info: 811 us
+[debug] Module Splitter: Analyze Modules: 229 us
+[debug] Module Splitter: Assemble Modules: 2571 us
+[debug] Module Splitter: 3947 us
+[debug] Emitter: Generate Classes: 490229 us
+[debug] Emitter: Write trees: 15893 us
 [debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1421
-[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 7038
-[debug] Emitter: Pre prints: 10138
-[debug] Emitter: 537061 us
-[debug] BasicBackend: Write result: 35716 us
+[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 7041
+[debug] Emitter: Pre prints: 10142
+[debug] Emitter: 524175 us
+[debug] BasicBackend: Write result: 37400 us
 [debug] BasicBackend: total modules: 1; re-written: 1

@@ -77,14 +77,14 @@ class CloudSuite extends munit.FunSuite:
   test("fetch through the cache; env; rate limits; a model; analytics; logs") {
     val c = cloud()
     var calls = 0
-    c.internet = r => { calls += 1; Response.text(s"price of ${r.path}") }
+    c.internet = (_, r) => { calls += 1; Response.text(s"price of ${r.path}") }
     c.vars("CURRENCY") = "EUR"
     c.secrets("KEY") = "k"
     c.limitsConfig("api") = (2, 60)
     c.model = (_, in) => Json.obj("echo" -> in)
     c.platform.future(for
-      a <- Cache.through[Cloud]("https://p/x", 60)(Fetch[Cloud](Request.get("https://p/x")))
-      b <- Cache.through[Cloud]("https://p/x", 60)(Fetch[Cloud](Request.get("https://p/x")))
+      a <- Cache.through[Cloud]("https://p/x", 60)(Fetch.get[Cloud]("https://p/x"))
+      b <- Cache.through[Cloud]("https://p/x", 60)(Fetch.get[Cloud]("https://p/x"))
       cur <- Env.variable[Cloud]("CURRENCY")
       key <- Env.secret[Cloud]("KEY")
       l <- Limits.take[Cloud]("api", "ann").flatMap(a => Limits.take[Cloud]("api", "ann").flatMap(b =>
@@ -117,7 +117,7 @@ class CloudSuite extends munit.FunSuite:
   object Room extends Actor:
     def fetch(name: String, request: Request): Response ! InActor =
       if request.header("upgrade").contains("websocket") then
-        Sockets.accept[InActor](request, request.query.getOrElse("who", "guest"))
+        Sockets.accept[InActor](request, request.param("who").getOrElse("guest"))
       else Durable.step[ActorStep, InActor, List[String]](name)(Durable.get[List[String], ActorStep]("history")
         .map(_.getOrElse(Nil))).map(h => Response.text(h.mkString("\n")))
     override def message(name: String, socket: Socket, text: String): Unit ! InActor =
@@ -131,13 +131,13 @@ class CloudSuite extends munit.FunSuite:
   test("objects: one a name; sockets accepted, a message broadcast and kept; an alarm; the state durable") {
     val c = cloud()
     c.actors("rooms") = Room
-    val ws = Map("upgrade" -> "websocket")
+    val ws = Map("upgrade" -> List("websocket"))
     for
-      ann <- c.connect("rooms", "lobby", Request("GET", "https://x/?who=ann", ws))
-      bob <- c.connect("rooms", "lobby", Request("GET", "https://x/?who=bob", ws))
-      other <- c.connect("rooms", "other", Request("GET", "https://x/?who=cy", ws))
+      ann <- c.connect("rooms", "lobby", Request.get("/?who=ann").copy(headers = ws))
+      bob <- c.connect("rooms", "lobby", Request.get("/?who=bob").copy(headers = ws))
+      other <- c.connect("rooms", "other", Request.get("/?who=cy").copy(headers = ws))
       _ <- ann.send("hello")
-      history <- c.platform.future(Objects.call[Cloud]("rooms", "lobby", Request.get("https://x/")))
+      history <- c.platform.future(Objects.call[Cloud]("rooms", "lobby", Request.get("/")))
       _ = time += 1000
       fired <- c.fireAlarms()
     yield
@@ -150,14 +150,14 @@ class CloudSuite extends munit.FunSuite:
 
   object Front extends App:
     override def fetch(request: Request): Response ! Cloud =
-      Services.call[Cloud]("back", request.copy(url = "https://back/hi")).map(r => Response.text("front+" + r.text))
+      Services.call[Cloud]("back", request.copy(path = "/hi")).map(r => Response.text("front+" + r.text))
   object Back extends App:
     override def fetch(request: Request): Response ! Cloud = pure(Response.text("back"))
 
   test("services: one app calling another by name") {
     val c = cloud()
     c.apps("back") = Back
-    c.platform.future(Front.fetch(Request.get("https://front/"))).map(r => assertEquals(r.text, "front+back"))
+    c.platform.future(Front.fetch(Request.get("/"))).map(r => assertEquals(r.text, "front+back"))
   }
 
   test("a port the cloud lacks: the program fails, naming it") {

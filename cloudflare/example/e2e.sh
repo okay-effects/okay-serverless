@@ -26,6 +26,11 @@ expect "$(curl -s -XPOST "$P/kv?key=a" -d one; curl -s "$P/kv?key=a")" "okone" "
 expect "$(curl -s -XPUT "$P/blob?key=f.txt" -H 'content-type: text/plain' --data-binary 'hello, world')" "12" \
   "R2: put"
 expect "$(curl -s "$P/blob?key=f.txt&range=7-12")" "world" "R2: a range"
+head -c 4096 /dev/urandom > "$state/in.bin"
+curl -s -XPUT "$P/blob?key=r.bin" -H 'content-type: application/octet-stream' --data-binary @"$state/in.bin" \
+  >/dev/null
+curl -s "$P/blob?key=r.bin" -o "$state/out.bin"
+expect "$(cmp -s "$state/in.bin" "$state/out.bin" && echo same)" "same" "R2: 4 KB of random bytes, up and back, byte for byte"
 expect "$(curl -s -XPOST "$P/sql" -d first; curl -s -XPOST "$P/sql" -d second)" "1 first,second" "D1: run, query"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"

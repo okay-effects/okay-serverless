@@ -115,13 +115,6 @@ object Queues:
   def sendAll[R[_]](queue: String, messages: List[Outgoing])(using In[Queues, R]): Unit ! R =
     perform[Queues](Send(queue, messages))
 
-/** HTTP OUT */
-enum Fetch[X]:
-  case Call(request: Request) extends Fetch[Response]
-
-object Fetch:
-  def apply[R[_]](request: Request)(using In[Fetch, R]): Response ! R = perform[Fetch](Call(request))
-
 /** A CACHE OF RESPONSES by URL, near the caller: the Cache API on Cloudflare */
 enum Cache[X]:
   case Match(url: String) extends Cache[Option[Response]]

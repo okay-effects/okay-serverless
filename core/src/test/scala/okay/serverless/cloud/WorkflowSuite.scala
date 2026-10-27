@@ -40,20 +40,20 @@ class WorkflowSuite extends munit.FunSuite:
     c.actors("orders") = order
     def call(r: Request) = c.platform.future(Objects.call[Cloud]("orders", "o-1", r))
     for
-      started <- call(Request.post("https://w/start", """{"id":"o-1","total":250}"""))
+      started <- call(Request.post("/start", """{"id":"o-1","total":250}"""))
       _ = time += 1000
       _ <- c.fireAlarms() // the second try: down again
-      afterTwo <- call(Request.get("https://w/"))
+      afterTwo <- call(Request.get("/"))
       early <- c.fireAlarms() // the backoff doubled: not yet
       _ = time += 2000
       _ <- c.fireAlarms() // the third: charged; then asleep a day
-      asleep <- call(Request.get("https://w/"))
-      tooEarly <- call(Request.post("https://w/event/approved", """{"by":"bob"}"""))
+      asleep <- call(Request.get("/"))
+      tooEarly <- call(Request.post("/event/approved", """{"by":"bob"}"""))
       _ = time += 86_400_000L
       _ <- c.fireAlarms()
-      waiting <- call(Request.get("https://w/"))
-      done <- call(Request.post("https://w/event/approved", """{"by":"bob"}"""))
-      again <- call(Request.post("https://w/start", "{}"))
+      waiting <- call(Request.get("/"))
+      done <- call(Request.post("/event/approved", """{"by":"bob"}"""))
+      again <- call(Request.post("/start", "{}"))
     yield
       assertEquals(field(started, "status"), Some(Json.Str("retrying")))
       assertEquals(field(afterTwo, "error"), Some(Json.Str("the bank is down")))

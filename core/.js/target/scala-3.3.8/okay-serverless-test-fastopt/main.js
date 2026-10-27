@@ -2041,6 +2041,19 @@ $c_jl_UnicodeData$.prototype.isLetter__I__Z = (function(cp) {
     return ((62 & (1 << data)) !== 0);
   }
 });
+$c_jl_UnicodeData$.prototype.isLetterOrDigit__I__Z = (function(cp) {
+  if (((cp >>> 0) < 161)) {
+    var cp$1 = (32 | cp);
+    if (((((cp$1 - 97) | 0) >>> 0) <= 25)) {
+      return true;
+    } else {
+      return ((((cp - 48) | 0) >>> 0) <= 9);
+    }
+  } else {
+    var data = this.java$lang$UnicodeData$$getDataRanges__I__I(cp);
+    return ((574 & (1 << data)) !== 0);
+  }
+});
 var $d_jl_UnicodeData$ = new $TypeData().initClass($c_jl_UnicodeData$, "java.lang.UnicodeData$", ({
   jl_UnicodeData$: 1
 }));
@@ -3709,126 +3722,6 @@ function $m_Ljava_math_Multiplication$() {
   }
   return $n_Ljava_math_Multiplication$;
 }
-function $ps_Ljava_net_URLDecoder$__throwIllegalHex$1__E() {
-  throw $ct_jl_IllegalArgumentException__T__(new $c_jl_IllegalArgumentException(), "URLDecoder: Illegal hex characters in escape (%) pattern");
-}
-/** @constructor */
-function $c_Ljava_net_URLDecoder$() {
-}
-$c_Ljava_net_URLDecoder$.prototype = new $h_O();
-$c_Ljava_net_URLDecoder$.prototype.constructor = $c_Ljava_net_URLDecoder$;
-/** @constructor */
-function $h_Ljava_net_URLDecoder$() {
-}
-$h_Ljava_net_URLDecoder$.prototype = $c_Ljava_net_URLDecoder$.prototype;
-$c_Ljava_net_URLDecoder$.prototype.decode__T__T__T = (function(s, enc) {
-  var this$1 = $m_Ljava_nio_charset_Charset$();
-  var dict = $p_Ljava_nio_charset_Charset$__CharsetMap__O(this$1);
-  var this$2 = $n(enc);
-  var key = $as_T(this$2.toLowerCase());
-  if ((!$uZ($m_jl_Utils$Cache$().jl_Utils$Cache$__f_safeHasOwnProperty.call(dict, key)))) {
-    throw new $c_Ljava_io_UnsupportedEncodingException(enc);
-  }
-  return this.decode__T__Ljava_nio_charset_Charset__T(s, $m_Ljava_nio_charset_Charset$().forName__T__Ljava_nio_charset_Charset(enc));
-});
-$c_Ljava_net_URLDecoder$.prototype.decode__T__Ljava_nio_charset_Charset__T = (function(s, charset) {
-  var this$1 = $n(s);
-  var len = this$1.length;
-  var charBuffer = $m_Ljava_nio_CharBuffer$().allocate__I__Ljava_nio_CharBuffer(len);
-  var decoder = null;
-  var byteBuffer = null;
-  var i = 0;
-  while ((i < len)) {
-    var this$2 = $n(s);
-    var index = i;
-    var x1 = $charAt(this$2, index);
-    switch (x1) {
-      case 43: {
-        var this$3 = $n(charBuffer);
-        this$3.put__C__Ljava_nio_CharBuffer(32);
-        i = ((1 + i) | 0);
-        break;
-      }
-      case 37: {
-        if ((((3 + i) | 0) > len)) {
-          $ps_Ljava_net_URLDecoder$__throwIllegalHex$1__E();
-        } else {
-          if ((decoder === null)) {
-            decoder = $n(charset).newDecoder__Ljava_nio_charset_CharsetDecoder();
-            byteBuffer = $m_Ljava_nio_ByteBuffer$().allocate__I__Ljava_nio_ByteBuffer(((len / 3) | 0));
-          } else {
-            var this$4 = $n(byteBuffer);
-            $c_Ljava_nio_Buffer.prototype.clear__Ljava_nio_Buffer.call(this$4);
-            $n(decoder).reset__Ljava_nio_charset_CharsetDecoder();
-          }
-          while (true) {
-            if ((((3 + i) | 0) <= len)) {
-              var this$5 = $n(s);
-              var index$1 = i;
-              var $x_1 = ($charAt(this$5, index$1) === 37);
-            } else {
-              var $x_1 = false;
-            }
-            if ($x_1) {
-              var this$7 = $m_jl_Character$();
-              var this$6 = $n(s);
-              var index$2 = ((1 + i) | 0);
-              var ch = $charAt(this$6, index$2);
-              var codePoint = ch;
-              var c1 = this$7.digitWithValidRadix__I__I__I(codePoint, 16);
-              var this$9 = $m_jl_Character$();
-              var this$8 = $n(s);
-              var index$3 = ((2 + i) | 0);
-              var ch$1 = $charAt(this$8, index$3);
-              var codePoint$1 = ch$1;
-              var c2 = this$9.digitWithValidRadix__I__I__I(codePoint$1, 16);
-              if (((c1 < 0) || (c2 < 0))) {
-                $ps_Ljava_net_URLDecoder$__throwIllegalHex$1__E();
-              }
-              $n(byteBuffer).put__B__Ljava_nio_ByteBuffer((((((c1 << 4) + c2) | 0) << 24) >> 24));
-              i = ((3 + i) | 0);
-            } else {
-              break;
-            }
-          }
-          var this$10 = $n(byteBuffer);
-          $c_Ljava_nio_Buffer.prototype.flip__Ljava_nio_Buffer.call(this$10);
-          var decodeResult = $n(decoder).decode__Ljava_nio_ByteBuffer__Ljava_nio_CharBuffer__Z__Ljava_nio_charset_CoderResult(byteBuffer, charBuffer, true);
-          var flushResult = $n(decoder).flush__Ljava_nio_CharBuffer__Ljava_nio_charset_CoderResult(charBuffer);
-          var this$11 = $n(decodeResult);
-          if (((this$11.Ljava_nio_charset_CoderResult__f_java$nio$charset$CoderResult$$kind === 2) || (this$11.Ljava_nio_charset_CoderResult__f_java$nio$charset$CoderResult$$kind === 3))) {
-            var $x_2 = true;
-          } else {
-            var this$12 = $n(flushResult);
-            var $x_2 = ((this$12.Ljava_nio_charset_CoderResult__f_java$nio$charset$CoderResult$$kind === 2) || (this$12.Ljava_nio_charset_CoderResult__f_java$nio$charset$CoderResult$$kind === 3));
-          }
-          if ($x_2) {
-            $ps_Ljava_net_URLDecoder$__throwIllegalHex$1__E();
-          }
-        }
-        break;
-      }
-      default: {
-        var this$13 = $n(charBuffer);
-        this$13.put__C__Ljava_nio_CharBuffer(x1);
-        i = ((1 + i) | 0);
-      }
-    }
-  }
-  var this$14 = $n(charBuffer);
-  $c_Ljava_nio_Buffer.prototype.flip__Ljava_nio_Buffer.call(this$14);
-  return $n(charBuffer).toString__T();
-});
-var $d_Ljava_net_URLDecoder$ = new $TypeData().initClass($c_Ljava_net_URLDecoder$, "java.net.URLDecoder$", ({
-  Ljava_net_URLDecoder$: 1
-}));
-var $n_Ljava_net_URLDecoder$;
-function $m_Ljava_net_URLDecoder$() {
-  if ((!$n_Ljava_net_URLDecoder$)) {
-    $n_Ljava_net_URLDecoder$ = new $c_Ljava_net_URLDecoder$();
-  }
-  return $n_Ljava_net_URLDecoder$;
-}
 function $ct_Ljava_nio_Buffer__I__($thiz, _capacity) {
   $thiz.Ljava_nio_Buffer__f__capacity = _capacity;
   $thiz.Ljava_nio_Buffer__f__limit = $thiz.Ljava_nio_Buffer__f__capacity;
@@ -3872,12 +3765,6 @@ $c_Ljava_nio_Buffer.prototype.limit__I__Ljava_nio_Buffer = (function(newLimit) {
       this.Ljava_nio_Buffer__f__mark = (-1);
     }
   }
-  return this;
-});
-$c_Ljava_nio_Buffer.prototype.clear__Ljava_nio_Buffer = (function() {
-  this.Ljava_nio_Buffer__f__mark = (-1);
-  this.Ljava_nio_Buffer__f_java$nio$Buffer$$_position = 0;
-  this.Ljava_nio_Buffer__f__limit = this.Ljava_nio_Buffer__f__capacity;
   return this;
 });
 $c_Ljava_nio_Buffer.prototype.flip__Ljava_nio_Buffer = (function() {
@@ -10006,6 +9893,510 @@ function $isArrayOf_Lokay_effects_json_Json$Todo(obj, depth) {
 function $asArrayOf_Lokay_effects_json_Json$Todo(obj, depth) {
   return (($isArrayOf_Lokay_effects_json_Json$Todo(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.json.Json$Todo;", depth));
 }
+/** @constructor */
+function $c_Lokay_http_Bytes(a) {
+  this.Lokay_http_Bytes__f_a = null;
+  this.Lokay_http_Bytes__f_a = a;
+}
+$c_Lokay_http_Bytes.prototype = new $h_O();
+$c_Lokay_http_Bytes.prototype.constructor = $c_Lokay_http_Bytes;
+/** @constructor */
+function $h_Lokay_http_Bytes() {
+}
+$h_Lokay_http_Bytes.prototype = $c_Lokay_http_Bytes.prototype;
+$c_Lokay_http_Bytes.prototype.slice__I__I__Lokay_http_Bytes = (function(from, until) {
+  var xs = this.Lokay_http_Bytes__f_a;
+  return new $c_Lokay_http_Bytes($asArrayOf_B($m_sc_ArrayOps$().slice$extension__O__I__I__O(xs, from, until), 1));
+});
+$c_Lokay_http_Bytes.prototype.equals__O__Z = (function(o) {
+  if ((o instanceof $c_Lokay_http_Bytes)) {
+    var b = $as_Lokay_http_Bytes(o);
+    var a = this.Lokay_http_Bytes__f_a;
+    var b$1 = $n(b).Lokay_http_Bytes__f_a;
+    return $m_ju_Arrays$().equals__AB__AB__Z(a, b$1);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_http_Bytes.prototype.hashCode__I = (function() {
+  var a = this.Lokay_http_Bytes__f_a;
+  return $m_ju_Arrays$().hashCode__AB__I(a);
+});
+$c_Lokay_http_Bytes.prototype.toString__T = (function() {
+  return (("Bytes(" + $n(this.Lokay_http_Bytes__f_a).u.length) + ")");
+});
+function $as_Lokay_http_Bytes(obj) {
+  return (((obj instanceof $c_Lokay_http_Bytes) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Bytes"));
+}
+function $isArrayOf_Lokay_http_Bytes(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Bytes)));
+}
+function $asArrayOf_Lokay_http_Bytes(obj, depth) {
+  return (($isArrayOf_Lokay_http_Bytes(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Bytes;", depth));
+}
+var $d_Lokay_http_Bytes = new $TypeData().initClass($c_Lokay_http_Bytes, "okay.http.Bytes", ({
+  Lokay_http_Bytes: 1
+}));
+/** @constructor */
+function $c_Lokay_http_Bytes$() {
+  $n_Lokay_http_Bytes$ = this;
+  $m_s_Array$EmptyArrays$();
+}
+$c_Lokay_http_Bytes$.prototype = new $h_O();
+$c_Lokay_http_Bytes$.prototype.constructor = $c_Lokay_http_Bytes$;
+/** @constructor */
+function $h_Lokay_http_Bytes$() {
+}
+$h_Lokay_http_Bytes$.prototype = $c_Lokay_http_Bytes$.prototype;
+$c_Lokay_http_Bytes$.prototype.of__T__Lokay_http_Bytes = (function(text) {
+  return new $c_Lokay_http_Bytes($f_T__getBytes__Ljava_nio_charset_Charset__AB($n(text), $m_Ljava_nio_charset_UTF\uff3f8$()));
+});
+var $d_Lokay_http_Bytes$ = new $TypeData().initClass($c_Lokay_http_Bytes$, "okay.http.Bytes$", ({
+  Lokay_http_Bytes$: 1
+}));
+var $n_Lokay_http_Bytes$;
+function $m_Lokay_http_Bytes$() {
+  if ((!$n_Lokay_http_Bytes$)) {
+    $n_Lokay_http_Bytes$ = new $c_Lokay_http_Bytes$();
+  }
+  return $n_Lokay_http_Bytes$;
+}
+function $is_Lokay_http_Fetch(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_http_Fetch)));
+}
+function $as_Lokay_http_Fetch(obj) {
+  return (($is_Lokay_http_Fetch(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Fetch"));
+}
+function $isArrayOf_Lokay_http_Fetch(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Fetch)));
+}
+function $asArrayOf_Lokay_http_Fetch(obj, depth) {
+  return (($isArrayOf_Lokay_http_Fetch(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Fetch;", depth));
+}
+/** @constructor */
+function $c_Lokay_http_Query$() {
+}
+$c_Lokay_http_Query$.prototype = new $h_O();
+$c_Lokay_http_Query$.prototype.constructor = $c_Lokay_http_Query$;
+/** @constructor */
+function $h_Lokay_http_Query$() {
+}
+$h_Lokay_http_Query$.prototype = $c_Lokay_http_Query$.prototype;
+$c_Lokay_http_Query$.prototype.parse__T__sci_Map = (function(q) {
+  var this$1 = $n(q);
+  if ((this$1 === "")) {
+    return $m_sci_Map$EmptyMap$();
+  } else {
+    var $x_1 = $m_s_Predef$();
+    var this$3 = $n(q);
+    var this$4 = $n($x_1.wrapRefArray__AO__scm_ArraySeq$ofRef($f_T__split__T__I__AT(this$3, "&", 0)));
+    var this$9 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$4));
+    var f = ((_$4) => {
+      var _$4$1 = $as_T(_$4);
+      var this$8 = $n(_$4$1);
+      return (!(this$8 === ""));
+    });
+    var l = this$9;
+    block: {
+      var result;
+      while (true) {
+        if ($n(l).isEmpty__Z()) {
+          var result = $m_sci_Nil$();
+          break;
+        } else {
+          var h = $n(l).head__O();
+          var t = $as_sci_List($n(l).tail__O());
+          if ((!$uZ(f(h)))) {
+            l = t;
+            continue;
+          }
+          var start = l;
+          var remaining = t;
+          while (true) {
+            if ($n(remaining).isEmpty__Z()) {
+              var result = start;
+              break block;
+            } else {
+              var x = $n(remaining).head__O();
+              if ($uZ(f(x))) {
+                remaining = $as_sci_List($n(remaining).tail__O());
+                continue;
+              }
+              var firstMiss = remaining;
+              var newHead = new $c_sci_$colon$colon($n(start).head__O(), $m_sci_Nil$());
+              var toProcess = $as_sci_List($n(start).tail__O());
+              var currentLast = newHead;
+              while ((toProcess !== firstMiss)) {
+                var newElem = new $c_sci_$colon$colon($n(toProcess).head__O(), $m_sci_Nil$());
+                $n(currentLast).sci_$colon$colon__f_next = newElem;
+                currentLast = newElem;
+                toProcess = $as_sci_List($n(toProcess).tail__O());
+              }
+              var next = $as_sci_List($n(firstMiss).tail__O());
+              var nextToCopy = next;
+              while ((!$n(next).isEmpty__Z())) {
+                var head = $n(next).head__O();
+                if ($uZ(f(head))) {
+                  next = $as_sci_List($n(next).tail__O());
+                } else {
+                  while ((nextToCopy !== next)) {
+                    var newElem$2 = new $c_sci_$colon$colon($n(nextToCopy).head__O(), $m_sci_Nil$());
+                    $n(currentLast).sci_$colon$colon__f_next = newElem$2;
+                    currentLast = newElem$2;
+                    nextToCopy = $as_sci_List($n(nextToCopy).tail__O());
+                  }
+                  nextToCopy = $as_sci_List($n(next).tail__O());
+                  next = $as_sci_List($n(next).tail__O());
+                }
+              }
+              if ((!$n(nextToCopy).isEmpty__Z())) {
+                $n(currentLast).sci_$colon$colon__f_next = nextToCopy;
+              }
+              var result = newHead;
+              break block;
+            }
+          }
+        }
+      }
+    }
+    var this$17 = $n(result);
+    var f$1 = ((kv) => {
+      var kv$1 = $as_T(kv);
+      var x9 = $f_T__indexOf__I__I($n(kv$1), 61);
+      if ((x9 === (-1))) {
+        var _1 = $m_Lokay_http_Query$().decode__T__T(kv$1);
+        return new $c_T2(_1, "");
+      }
+      var $x_2 = $m_Lokay_http_Query$();
+      var this$11 = $n(kv$1);
+      var length = this$11.length;
+      if ((((x9 | x9) | ((length - x9) | 0)) < 0)) {
+        if ((x9 < 0)) {
+          $charAt(this$11, (-1));
+        }
+        $charAt(this$11, x9);
+      }
+      var _1$1 = $x_2.decode__T__T($as_T(this$11.substring(0, x9)));
+      var $x_3 = $m_Lokay_http_Query$();
+      var this$13 = $n(kv$1);
+      var beginIndex = ((1 + x9) | 0);
+      var length$1 = this$13.length;
+      if (((beginIndex >>> 0) > (length$1 >>> 0))) {
+        $charAt(this$13, beginIndex);
+      }
+      var _2 = $x_3.decode__T__T($as_T(this$13.substring(beginIndex)));
+      return new $c_T2(_1$1, _2);
+    });
+    if ((this$17 === $m_sci_Nil$())) {
+      var this$18 = $m_sci_Nil$();
+    } else {
+      var x0 = this$17.head__O();
+      var h$1 = new $c_sci_$colon$colon(f$1(x0), $m_sci_Nil$());
+      var t$1 = h$1;
+      var rest = $as_sci_List(this$17.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var x0$1 = $n(rest).head__O();
+        var nx = new $c_sci_$colon$colon(f$1(x0$1), $m_sci_Nil$());
+        $n(t$1).sci_$colon$colon__f_next = nx;
+        t$1 = nx;
+        rest = $as_sci_List($n(rest).tail__O());
+      }
+      var this$18 = h$1;
+    }
+    var m = $as_scm_Map($m_scm_Map$().empty__O());
+    var it = this$18.iterator__sc_Iterator();
+    while ($n(it).hasNext__Z()) {
+      var elem = $n(it).next__O();
+      var _$5 = $as_T2(elem);
+      var key = $as_T($n(_$5)._1__O());
+      var bldr = $as_scm_Builder($n(m).getOrElseUpdate__O__F0__O(key, new $c_sr_AbstractFunction0_$$Lambda$07eded5776954a9c145e92c329afd52873ad179c((() => new $c_scm_ListBuffer()))));
+      var this$20 = $n(bldr);
+      this$20.addOne__O__scm_Growable(elem);
+    }
+    var this$21 = $m_sci_HashMap$();
+    var result$1 = this$21.sci_HashMap$__f_EmptyMap;
+    var mapIt = $n(m).iterator__sc_Iterator();
+    while ($n(mapIt).hasNext__Z()) {
+      var x1 = $as_T2($n(mapIt).next__O());
+      if ((x1 === null)) {
+        throw new $c_s_MatchError(x1);
+      }
+      var k = $n(x1)._1__O();
+      var v = $as_scm_Builder($n(x1)._2__O());
+      result$1 = $n(result$1).updated__O__O__sci_HashMap(k, $n(v).result__O());
+    }
+    var this$22 = $n(result$1);
+    $m_sci_HashMap$();
+    var b = new $c_sci_HashMapBuilder();
+    var it$1 = this$22.iterator__sc_Iterator();
+    while ($n(it$1).hasNext__Z()) {
+      var x0$2 = $n(it$1).next__O();
+      var x$1 = $as_T2(x0$2);
+      matchResult7: {
+        var elem$1___1;
+        var elem$1___2;
+        if ((x$1 !== null)) {
+          var k$1 = $as_T($n(x$1)._1__O());
+          var vs = $as_sci_List($n(x$1)._2__O());
+          var this$25 = $n(vs);
+          var f$2 = ((_$6) => {
+            var _$6$1 = $as_T2(_$6);
+            return $as_T($n(_$6$1)._2__O());
+          });
+          if ((this$25 === $m_sci_Nil$())) {
+            var y = $m_sci_Nil$();
+          } else {
+            var x0$3 = this$25.head__O();
+            var h$2 = new $c_sci_$colon$colon(f$2(x0$3), $m_sci_Nil$());
+            var t$2 = h$2;
+            var rest$1 = $as_sci_List(this$25.tail__O());
+            while ((rest$1 !== $m_sci_Nil$())) {
+              var x0$4 = $n(rest$1).head__O();
+              var nx$1 = new $c_sci_$colon$colon(f$2(x0$4), $m_sci_Nil$());
+              $n(t$2).sci_$colon$colon__f_next = nx$1;
+              t$2 = nx$1;
+              rest$1 = $as_sci_List($n(rest$1).tail__O());
+            }
+            var y = h$2;
+          }
+          var elem$1___1 = k$1;
+          var elem$1___2 = y;
+          break matchResult7;
+        }
+        throw new $c_s_MatchError(x$1);
+      }
+      $p_sci_HashMapBuilder__ensureUnaliased__V(b);
+      var x$2 = elem$1___1;
+      var h$3 = $m_sr_Statics$().anyHash__O__I(x$2);
+      var im = $m_sc_Hashing$().improve__I__I(h$3);
+      b.update__sci_MapNode__O__O__I__I__I__V(b.sci_HashMapBuilder__f_scala$collection$immutable$HashMapBuilder$$rootNode, elem$1___1, elem$1___2, h$3, im, 0);
+    }
+    return b.result__sci_HashMap();
+  }
+});
+$c_Lokay_http_Query$.prototype.print__sci_Map__T = (function(q) {
+  var this$1 = $n(q);
+  var this$3 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$1));
+  var rest = this$3;
+  var h = null;
+  var t = null;
+  while ((rest !== $m_sci_Nil$())) {
+    var x0 = $n(rest).head__O();
+    var x$1 = $as_T2(x0);
+    matchResult8: {
+      var $x_1;
+      if ((x$1 !== null)) {
+        var k = $as_T($n(x$1)._1__O());
+        var vs = $as_sci_List($n(x$1)._2__O());
+        var this$4 = $n(vs);
+        var f = ((k) => ((v) => {
+          var v$1 = $as_T(v);
+          return (($m_Lokay_http_Query$().encode__T__T(k) + "=") + $m_Lokay_http_Query$().encode__T__T(v$1));
+        }))(k);
+        if ((this$4 === $m_sci_Nil$())) {
+          var $x_1 = $m_sci_Nil$();
+          break matchResult8;
+        } else {
+          var x0$1 = this$4.head__O();
+          var h$1 = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+          var t$1 = h$1;
+          var rest$1 = $as_sci_List(this$4.tail__O());
+          while ((rest$1 !== $m_sci_Nil$())) {
+            var x0$2 = $n(rest$1).head__O();
+            var nx = new $c_sci_$colon$colon(f(x0$2), $m_sci_Nil$());
+            $n(t$1).sci_$colon$colon__f_next = nx;
+            t$1 = nx;
+            rest$1 = $as_sci_List($n(rest$1).tail__O());
+          }
+          var $x_1 = h$1;
+          break matchResult8;
+        }
+      }
+      throw new $c_s_MatchError(x$1);
+    }
+    var it = $x_1.iterator__sc_Iterator();
+    while ($n(it).hasNext__Z()) {
+      var nx$1 = new $c_sci_$colon$colon($n(it).next__O(), $m_sci_Nil$());
+      if ((t === null)) {
+        h = nx$1;
+      } else {
+        $n(t).sci_$colon$colon__f_next = nx$1;
+      }
+      t = nx$1;
+    }
+    rest = $as_sci_List($n(rest).tail__O());
+  }
+  var this$5 = $n(((h === null) ? $m_sci_Nil$() : h));
+  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$5, "", "&", "");
+});
+$c_Lokay_http_Query$.prototype.decode__T__T = (function(s) {
+  var b = $ct_jl_StringBuilder__(new $c_jl_StringBuilder());
+  var i = 0;
+  while (true) {
+    var $x_4 = i;
+    var this$1 = $n(s);
+    if (($x_4 < this$1.length)) {
+      var this$2 = $n(s);
+      var index = i;
+      var x16 = $charAt(this$2, index);
+      if ((x16 === 43)) {
+        b.jl_StringBuilder__f_java$lang$StringBuilder$$content = (b.jl_StringBuilder__f_java$lang$StringBuilder$$content + " ");
+        i = ((1 + i) | 0);
+        continue;
+      }
+      if ((x16 === 37)) {
+        var $x_2 = i;
+        var this$4 = $n(s);
+        if ((((2 + $x_2) | 0) < this$4.length)) {
+          var $x_3 = i;
+          var this$5 = $n(s);
+          var $x_1 = (((2 + $x_3) | 0) <= ((this$5.length - 1) | 0));
+        } else {
+          var $x_1 = false;
+        }
+      } else {
+        var $x_1 = false;
+      }
+      if ($x_1) {
+        try {
+          var this$6 = $n(s);
+          var beginIndex = ((1 + i) | 0);
+          var endIndex = ((3 + i) | 0);
+          var count = ((endIndex - beginIndex) | 0);
+          var length = this$6.length;
+          if (((((beginIndex | count) | endIndex) | ((length - endIndex) | 0)) < 0)) {
+            if ((beginIndex < 0)) {
+              $charAt(this$6, beginIndex);
+            }
+            if ((endIndex < beginIndex)) {
+              $charAt(this$6, (-1));
+            }
+            $charAt(this$6, endIndex);
+          }
+          var s$1 = $as_T(this$6.substring(beginIndex, endIndex));
+          var this$8 = $m_jl_Integer$();
+          var c = (65535 & this$8.java$lang$Integer$$parseIntImpl__T__I__I__I(s$1, 16, 134217728));
+          var str = ("" + $cToS(c));
+          b.jl_StringBuilder__f_java$lang$StringBuilder$$content = (b.jl_StringBuilder__f_java$lang$StringBuilder$$content + str);
+          i = ((3 + i) | 0);
+          continue;
+        } catch (e) {
+          if ((e instanceof $c_jl_NumberFormatException)) {
+            b.jl_StringBuilder__f_java$lang$StringBuilder$$content = (b.jl_StringBuilder__f_java$lang$StringBuilder$$content + "%");
+            i = ((1 + i) | 0);
+            continue;
+          } else {
+            throw e;
+          }
+        }
+      }
+      var str$1 = ("" + $cToS(x16));
+      b.jl_StringBuilder__f_java$lang$StringBuilder$$content = (b.jl_StringBuilder__f_java$lang$StringBuilder$$content + str$1);
+      i = ((1 + i) | 0);
+    } else {
+      break;
+    }
+  }
+  var raw = b.jl_StringBuilder__f_java$lang$StringBuilder$$content;
+  _return: {
+    var this$16 = $n(raw);
+    var len = this$16.length;
+    var i$1 = 0;
+    while ((i$1 < len)) {
+      var this$17 = $n(raw);
+      var index$1 = i$1;
+      var x0 = $charAt(this$17, index$1);
+      if ((x0 > 127)) {
+        var $x_5 = i$1;
+        break _return;
+      }
+      i$1 = ((1 + i$1) | 0);
+    }
+    var $x_5 = (-1);
+  }
+  if (($x_5 !== (-1))) {
+    var this$20 = $n(raw);
+    var len$1 = this$20.length;
+    var dst = new $ac_O(len$1);
+    var i$2 = 0;
+    while ((i$2 < len$1)) {
+      var $x_6 = i$2;
+      var this$21 = $n(raw);
+      var index$2 = i$2;
+      var x0$1 = $charAt(this$21, index$2);
+      dst.set($x_6, ((x0$1 << 24) >> 24));
+      i$2 = ((1 + i$2) | 0);
+    }
+    var this$23 = new $c_sci_ArraySeq$ofRef(dst);
+    if (($n(this$23.sci_ArraySeq$ofRef__f_unsafeArray).u.length >= 0)) {
+      var len$2 = $n(this$23.sci_ArraySeq$ofRef__f_unsafeArray).u.length;
+      var destination = new $ac_B(len$2);
+      this$23.copyToArray__O__I__I__I(destination, 0, 2147483647);
+      var bytes = destination;
+    } else {
+      var capacity = 0;
+      var size = 0;
+      var jsElems = null;
+      capacity = 0;
+      size = 0;
+      jsElems = [];
+      var it = $ct_sc_ArrayOps$ArrayIterator__O__(new $c_sc_ArrayOps$ArrayIterator(), this$23.sci_ArraySeq$ofRef__f_unsafeArray);
+      while (it.hasNext__Z()) {
+        var elem = it.next__O();
+        var unboxedElem = ((elem === null) ? 0 : elem);
+        jsElems.push(unboxedElem);
+      }
+      var bytes = new $ac_B(new Int8Array(jsElems));
+    }
+    return $m_jl_String$().new__AB__T__T(bytes, "UTF-8");
+  } else {
+    return raw;
+  }
+});
+$c_Lokay_http_Query$.prototype.encode__T__T = (function(s) {
+  var $x_1 = $m_s_Predef$();
+  var xs = $f_T__getBytes__T__AB($n(s), "UTF-8");
+  var capacity = 0;
+  var size = 0;
+  var jsElems = null;
+  capacity = 0;
+  size = 0;
+  jsElems = [];
+  var i = 0;
+  while ((i < $n(xs).u.length)) {
+    var x1 = i;
+    var x0 = $n(xs).get(x1);
+    var c = (65535 & (255 & x0));
+    var codePoint = c;
+    if ((($m_jl_UnicodeData$().isLetterOrDigit__I__Z(codePoint) && (c < 128)) || $m_sc_StringOps$().contains$extension__T__C__Z("-_.~", c))) {
+      var x0$1 = ("" + $cToS(c));
+    } else {
+      var x0$1 = $m_sc_StringOps$().format$extension__T__sci_Seq__T("%%%02X", $m_sr_ScalaRunTime$().genericWrapArray__O__sci_ArraySeq(new $ac_O([(255 & x0)])));
+    }
+    var elems = $m_s_Predef$().wrapString__T__sci_WrappedString(x0$1);
+    var this$12 = $n(elems);
+    var this$13 = new $c_sc_StringView(this$12.sci_WrappedString__f_scala$collection$immutable$WrappedString$$self);
+    var it = $ct_sc_IndexedSeqView$IndexedSeqViewIterator__sc_IndexedSeqView__(new $c_sc_IndexedSeqView$IndexedSeqViewIterator(), this$13);
+    while ((it.sc_IndexedSeqView$IndexedSeqViewIterator__f_scala$collection$IndexedSeqView$IndexedSeqViewIterator$$remainder > 0)) {
+      var elem = it.next__O();
+      var unboxedElem = $uC(elem);
+      jsElems.push(unboxedElem);
+    }
+    i = ((1 + i) | 0);
+  }
+  var this$14 = $n($x_1.wrapCharArray__AC__scm_ArraySeq$ofChar(new $ac_C(new Uint16Array(jsElems))));
+  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$14, "", "", "");
+});
+var $d_Lokay_http_Query$ = new $TypeData().initClass($c_Lokay_http_Query$, "okay.http.Query$", ({
+  Lokay_http_Query$: 1
+}));
+var $n_Lokay_http_Query$;
+function $m_Lokay_http_Query$() {
+  if ((!$n_Lokay_http_Query$)) {
+    $n_Lokay_http_Query$ = new $c_Lokay_http_Query$();
+  }
+  return $n_Lokay_http_Query$;
+}
 function $p_Lokay_scala3_Cek$__inPlace__Lokay_scala3_At__Lokay_scala3_Levels__Lokay_scala3_Handler($thiz, at, \u01ce\u01ba) {
   var \u01ce\u01ba$tailLocal1 = \u01ce\u01ba;
   var at$tailLocal1 = at;
@@ -11103,6 +11494,13 @@ function $isArrayOf_Lokay_serverless_cloud_Actor(obj, depth) {
 function $asArrayOf_Lokay_serverless_cloud_Actor(obj, depth) {
   return (($isArrayOf_Lokay_serverless_cloud_Actor(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Actor;", depth));
 }
+function $f_Lokay_serverless_cloud_App__fetch__Lokay_http_Request__Lokay_scala3_Prog($thiz, request) {
+  var this$1 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+  $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+  var what = "not found";
+  var a = this$1.text__T__I__Lokay_http_Response(what, 404);
+  return new $c_Lokay_scala3_Prog$Value(a);
+}
 function $is_Lokay_serverless_cloud_App(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_serverless_cloud_App)));
 }
@@ -11114,86 +11512,6 @@ function $isArrayOf_Lokay_serverless_cloud_App(obj, depth) {
 }
 function $asArrayOf_Lokay_serverless_cloud_App(obj, depth) {
   return (($isArrayOf_Lokay_serverless_cloud_App(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.App;", depth));
-}
-/** @constructor */
-function $c_Lokay_serverless_cloud_Bytes(a) {
-  this.Lokay_serverless_cloud_Bytes__f_a = null;
-  this.Lokay_serverless_cloud_Bytes__f_a = a;
-}
-$c_Lokay_serverless_cloud_Bytes.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Bytes.prototype.constructor = $c_Lokay_serverless_cloud_Bytes;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Bytes() {
-}
-$h_Lokay_serverless_cloud_Bytes.prototype = $c_Lokay_serverless_cloud_Bytes.prototype;
-$c_Lokay_serverless_cloud_Bytes.prototype.slice__I__I__Lokay_serverless_cloud_Bytes = (function(from, until) {
-  $m_Lokay_serverless_cloud_Bytes$();
-  var xs = this.Lokay_serverless_cloud_Bytes__f_a;
-  var a = $asArrayOf_B($m_sc_ArrayOps$().slice$extension__O__I__I__O(xs, from, until), 1);
-  var this$3 = $n(a);
-  return new $c_Lokay_serverless_cloud_Bytes(this$3.clone__O());
-});
-$c_Lokay_serverless_cloud_Bytes.prototype.equals__O__Z = (function(o) {
-  if ((o instanceof $c_Lokay_serverless_cloud_Bytes)) {
-    var b = $as_Lokay_serverless_cloud_Bytes(o);
-    var a = this.Lokay_serverless_cloud_Bytes__f_a;
-    var b$1 = $n(b).Lokay_serverless_cloud_Bytes__f_a;
-    return $m_ju_Arrays$().equals__AB__AB__Z(a, b$1);
-  } else {
-    return false;
-  }
-});
-$c_Lokay_serverless_cloud_Bytes.prototype.hashCode__I = (function() {
-  var a = this.Lokay_serverless_cloud_Bytes__f_a;
-  return $m_ju_Arrays$().hashCode__AB__I(a);
-});
-$c_Lokay_serverless_cloud_Bytes.prototype.toString__T = (function() {
-  if (($n(this.Lokay_serverless_cloud_Bytes__f_a).u.length <= 64)) {
-    var bytes = this.Lokay_serverless_cloud_Bytes__f_a;
-    return (("Bytes(" + $m_jl_String$().new__AB__T__T(bytes, "UTF-8")) + ")");
-  } else {
-    return (("Bytes(" + $n(this.Lokay_serverless_cloud_Bytes__f_a).u.length) + ")");
-  }
-});
-function $as_Lokay_serverless_cloud_Bytes(obj) {
-  return (((obj instanceof $c_Lokay_serverless_cloud_Bytes) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Bytes"));
-}
-function $isArrayOf_Lokay_serverless_cloud_Bytes(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_Bytes)));
-}
-function $asArrayOf_Lokay_serverless_cloud_Bytes(obj, depth) {
-  return (($isArrayOf_Lokay_serverless_cloud_Bytes(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Bytes;", depth));
-}
-var $d_Lokay_serverless_cloud_Bytes = new $TypeData().initClass($c_Lokay_serverless_cloud_Bytes, "okay.serverless.cloud.Bytes", ({
-  Lokay_serverless_cloud_Bytes: 1
-}));
-/** @constructor */
-function $c_Lokay_serverless_cloud_Bytes$() {
-  this.Lokay_serverless_cloud_Bytes$__f_empty = null;
-  $n_Lokay_serverless_cloud_Bytes$ = this;
-  $m_Lokay_serverless_cloud_Bytes$();
-  var a = $m_s_Array$EmptyArrays$().s_Array$EmptyArrays$__f_emptyByteArray;
-  var this$3 = $n(a);
-  this.Lokay_serverless_cloud_Bytes$__f_empty = new $c_Lokay_serverless_cloud_Bytes(this$3.clone__O());
-}
-$c_Lokay_serverless_cloud_Bytes$.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Bytes$.prototype.constructor = $c_Lokay_serverless_cloud_Bytes$;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Bytes$() {
-}
-$h_Lokay_serverless_cloud_Bytes$.prototype = $c_Lokay_serverless_cloud_Bytes$.prototype;
-$c_Lokay_serverless_cloud_Bytes$.prototype.of__T__Lokay_serverless_cloud_Bytes = (function(text) {
-  return new $c_Lokay_serverless_cloud_Bytes($f_T__getBytes__T__AB($n(text), "UTF-8"));
-});
-var $d_Lokay_serverless_cloud_Bytes$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Bytes$, "okay.serverless.cloud.Bytes$", ({
-  Lokay_serverless_cloud_Bytes$: 1
-}));
-var $n_Lokay_serverless_cloud_Bytes$;
-function $m_Lokay_serverless_cloud_Bytes$() {
-  if ((!$n_Lokay_serverless_cloud_Bytes$)) {
-    $n_Lokay_serverless_cloud_Bytes$ = new $c_Lokay_serverless_cloud_Bytes$();
-  }
-  return $n_Lokay_serverless_cloud_Bytes$;
 }
 function $f_Lokay_serverless_cloud_Hosting__run__Lokay_serverless_cloud_Platform__Lokay_scala3_Prog__Lokay_scala3_Prog($thiz, platform, p) {
   var $x_6 = $n(platform);
@@ -11241,6 +11559,93 @@ function $f_Lokay_serverless_cloud_Hosting__run__Lokay_serverless_cloud_Platform
   var at$36 = new $c_Lokay_scala3_Place$Init(at$35);
   var at$37 = new $c_Lokay_scala3_Place$Init(at$36);
   return $x_6.run__Lokay_scala3_Prog__Lokay_scala3_Prog($x_5.handle__Lokay_serverless_cloud_Port__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog($x_4, $x_1, at$20, at$37));
+}
+/** @constructor */
+function $c_Lokay_serverless_cloud_Http$package$() {
+  this.Lokay_serverless_cloud_Http$package$__f_Request = null;
+  this.Lokay_serverless_cloud_Http$package$__f_Response = null;
+  this.Lokay_serverless_cloud_Http$package$__f_Bytes = null;
+  $n_Lokay_serverless_cloud_Http$package$ = this;
+  this.Lokay_serverless_cloud_Http$package$__f_Request = $m_Lokay_http_Request$();
+  this.Lokay_serverless_cloud_Http$package$__f_Response = $m_Lokay_http_Response$();
+  this.Lokay_serverless_cloud_Http$package$__f_Bytes = $m_Lokay_http_Bytes$();
+}
+$c_Lokay_serverless_cloud_Http$package$.prototype = new $h_O();
+$c_Lokay_serverless_cloud_Http$package$.prototype.constructor = $c_Lokay_serverless_cloud_Http$package$;
+/** @constructor */
+function $h_Lokay_serverless_cloud_Http$package$() {
+}
+$h_Lokay_serverless_cloud_Http$package$.prototype = $c_Lokay_serverless_cloud_Http$package$.prototype;
+$c_Lokay_serverless_cloud_Http$package$.prototype.text__Lokay_http_Request__T = (function(r) {
+  var this$1 = $n($n(r).Lokay_http_Request__f_bytes);
+  if (this$1.isEmpty__Z()) {
+    return $n(r).Lokay_http_Request__f_body;
+  } else {
+    var x0 = this$1.get__O();
+    var _$1 = $as_Lokay_http_Bytes(x0);
+    var this$2 = $n(_$1);
+    var bytes = this$2.Lokay_http_Bytes__f_a;
+    var charset = $m_Ljava_nio_charset_UTF\uff3f8$();
+    return $m_jl_String$().new__AB__Ljava_nio_charset_Charset__T(bytes, charset);
+  }
+});
+$c_Lokay_serverless_cloud_Http$package$.prototype.text__Lokay_http_Response__T = (function(r) {
+  var this$1 = $n($n(r).Lokay_http_Response__f_bytes);
+  if (this$1.isEmpty__Z()) {
+    return $n(r).Lokay_http_Response__f_body;
+  } else {
+    var x0 = this$1.get__O();
+    var _$2 = $as_Lokay_http_Bytes(x0);
+    var this$2 = $n(_$2);
+    var bytes = this$2.Lokay_http_Bytes__f_a;
+    var charset = $m_Ljava_nio_charset_UTF\uff3f8$();
+    return $m_jl_String$().new__AB__Ljava_nio_charset_Charset__T(bytes, charset);
+  }
+});
+$c_Lokay_serverless_cloud_Http$package$.prototype.headerOf__Lokay_http_Response__T__s_Option = (function(r, name) {
+  var this$1 = $n($n(r).Lokay_http_Response__f_headers);
+  var pf = new $c_Lokay_serverless_cloud_Http$package$$anon$1(name);
+  return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this$1, pf);
+});
+var $d_Lokay_serverless_cloud_Http$package$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Http$package$, "okay.serverless.cloud.Http$package$", ({
+  Lokay_serverless_cloud_Http$package$: 1
+}));
+var $n_Lokay_serverless_cloud_Http$package$;
+function $m_Lokay_serverless_cloud_Http$package$() {
+  if ((!$n_Lokay_serverless_cloud_Http$package$)) {
+    $n_Lokay_serverless_cloud_Http$package$ = new $c_Lokay_serverless_cloud_Http$package$();
+  }
+  return $n_Lokay_serverless_cloud_Http$package$;
+}
+/** @constructor */
+function $c_Lokay_serverless_cloud_Http$package$Fetch$() {
+}
+$c_Lokay_serverless_cloud_Http$package$Fetch$.prototype = new $h_O();
+$c_Lokay_serverless_cloud_Http$package$Fetch$.prototype.constructor = $c_Lokay_serverless_cloud_Http$package$Fetch$;
+/** @constructor */
+function $h_Lokay_serverless_cloud_Http$package$Fetch$() {
+}
+$h_Lokay_serverless_cloud_Http$package$Fetch$.prototype = $c_Lokay_serverless_cloud_Http$package$Fetch$.prototype;
+$c_Lokay_serverless_cloud_Http$package$Fetch$.prototype.apply__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(base, request, x$3) {
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_Lokay_http_Response(x);
+    return x$1;
+  }));
+  var op$proxy1 = new $c_Lokay_http_Fetch$Send(base, request, answer);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy1);
+});
+$c_Lokay_serverless_cloud_Http$package$Fetch$.prototype.get__T__Lokay_scala3_Place__Lokay_scala3_Prog = (function(url, x$2) {
+  return this.apply__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog($m_Lokay_http_Fetch$().base__T__T(url), $m_Lokay_http_Fetch$().request__T__T__sci_Map__T__Lokay_http_Request("GET", url, $m_sci_Map$EmptyMap$(), ""), x$2);
+});
+var $d_Lokay_serverless_cloud_Http$package$Fetch$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Http$package$Fetch$, "okay.serverless.cloud.Http$package$Fetch$", ({
+  Lokay_serverless_cloud_Http$package$Fetch$: 1
+}));
+var $n_Lokay_serverless_cloud_Http$package$Fetch$;
+function $m_Lokay_serverless_cloud_Http$package$Fetch$() {
+  if ((!$n_Lokay_serverless_cloud_Http$package$Fetch$)) {
+    $n_Lokay_serverless_cloud_Http$package$Fetch$ = new $c_Lokay_serverless_cloud_Http$package$Fetch$();
+  }
+  return $n_Lokay_serverless_cloud_Http$package$Fetch$;
 }
 function $s_Lokay_serverless_cloud_MemoryCloud__okay$serverless$cloud$MemoryCloud$$anon$15$$_$norm$1__sci_List__D(xs) {
   var this$1 = $n(xs);
@@ -11321,9 +11726,10 @@ function $c_Lokay_serverless_cloud_MemoryCloud(clock, ec) {
   this.Lokay_serverless_cloud_MemoryCloud__f_dead = new $c_scm_ListBuffer();
   this.Lokay_serverless_cloud_MemoryCloud__f_maxAttempts = 3;
   this.Lokay_serverless_cloud_MemoryCloud__f_queues = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$6(this);
-  this.Lokay_serverless_cloud_MemoryCloud__f_internet = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$11) => {
-    $as_Lokay_serverless_cloud_Request(_$11);
-    return $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("no internet in memory", 502);
+  this.Lokay_serverless_cloud_MemoryCloud__f_internet = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((_$11, _$12) => {
+    $as_T(_$11);
+    $as_Lokay_http_Request(_$12);
+    return $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response("no internet in memory", 502);
   }));
   this.Lokay_serverless_cloud_MemoryCloud__f_fetch = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$7(this);
   this.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached = $as_scm_Map($m_scm_Map$().empty__O());
@@ -11336,9 +11742,9 @@ function $c_Lokay_serverless_cloud_MemoryCloud(clock, ec) {
   this.Lokay_serverless_cloud_MemoryCloud__f_limitsConfig = $as_scm_Map($m_scm_Map$().empty__O());
   this.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$windows = $as_scm_Map($m_scm_Map$().empty__O());
   this.Lokay_serverless_cloud_MemoryCloud__f_limits = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$12(this);
-  this.Lokay_serverless_cloud_MemoryCloud__f_model = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((m, _$12) => {
+  this.Lokay_serverless_cloud_MemoryCloud__f_model = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((m, _$13) => {
     var m$1 = $as_T(m);
-    $as_Lokay_effects_json_Json(_$12);
+    $as_Lokay_effects_json_Json(_$13);
     throw $ct_jl_UnsupportedOperationException__T__(new $c_jl_UnsupportedOperationException(), ("no model " + m$1));
   }));
   this.Lokay_serverless_cloud_MemoryCloud__f_ai = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$14(this);
@@ -11466,12 +11872,12 @@ $c_Lokay_serverless_cloud_MemoryCloud.prototype.pending__I = (function() {
 $c_Lokay_serverless_cloud_MemoryCloud.prototype.okay$serverless$cloud$MemoryCloud$$instance__T__T__Lokay_serverless_cloud_MemoryCloud$Instance = (function(ns, name) {
   return $as_Lokay_serverless_cloud_MemoryCloud$Instance($n(this.Lokay_serverless_cloud_MemoryCloud__f_instances).getOrElseUpdate__O__F0__O(new $c_T2(ns, name), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => new $c_Lokay_serverless_cloud_MemoryCloud$Instance(this, ns, name)))));
 });
-$c_Lokay_serverless_cloud_MemoryCloud.prototype.connect__T__T__Lokay_serverless_cloud_Request__s_concurrent_Future = (function(ns, name, request) {
+$c_Lokay_serverless_cloud_MemoryCloud.prototype.connect__T__T__Lokay_http_Request__s_concurrent_Future = (function(ns, name, request) {
   return $n($n(this.Lokay_serverless_cloud_MemoryCloud__f_objects).apply__O__s_concurrent_Future(new $c_Lokay_serverless_cloud_Objects$Call(ns, name, request))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r) => {
-    var r$1 = $as_Lokay_serverless_cloud_Response(r);
-    var this$3 = $n($n(r$1).header__T__s_Option("okay-socket"));
+    var r$1 = $as_Lokay_http_Response(r);
+    var this$3 = $n($m_Lokay_serverless_cloud_Http$package$().headerOf__Lokay_http_Response__T__s_Option(r$1, "okay-socket"));
     if (this$3.isEmpty__Z()) {
-      throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("not accepted: " + $n(r$1).Lokay_serverless_cloud_Response__f_status));
+      throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("not accepted: " + $n(r$1).Lokay_http_Response__f_status));
     }
     var id = $as_T(this$3.get__O());
     var a = this.okay$serverless$cloud$MemoryCloud$$instance__T__T__Lokay_serverless_cloud_MemoryCloud$Instance(ns, name);
@@ -11488,18 +11894,18 @@ $c_Lokay_serverless_cloud_MemoryCloud.prototype.stored__T__T__sci_Map = (functio
 $c_Lokay_serverless_cloud_MemoryCloud.prototype.fireAlarms__s_concurrent_Future = (function() {
   var this$1 = $n(this.Lokay_serverless_cloud_MemoryCloud__f_instances);
   var this$5 = new $c_sc_MapOps$$anon$1(this$1);
-  var pred = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$21) => {
-    var _$21$1 = $as_Lokay_serverless_cloud_MemoryCloud$Instance(_$21);
-    var this$3 = $n($n($n(_$21$1).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).Lokay_serverless_Memory__f_alarm);
+  var pred = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$22) => {
+    var _$22$1 = $as_Lokay_serverless_cloud_MemoryCloud$Instance(_$22);
+    var this$3 = $n($n($n(_$22$1).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).Lokay_serverless_Memory__f_alarm);
     if ((!this$3.isEmpty__Z())) {
       var x0 = this$3.get__O();
       var $x_1 = $uJ(x0);
-      var _$22_$_lo = $x_1.l;
-      var _$22_$_hi = $x_1.h;
+      var _$23_$_lo = $x_1.l;
+      var _$23_$_hi = $x_1.h;
       var $x_2 = $uJ($n(this.Lokay_serverless_cloud_MemoryCloud__f_clock).apply__O());
       var x_$_lo = $x_2.l;
       var x_$_hi = $x_2.h;
-      return ((_$22_$_hi === x_$_hi) ? ((_$22_$_lo >>> 0) <= (x_$_lo >>> 0)) : (_$22_$_hi < x_$_hi));
+      return ((_$23_$_hi === x_$_hi) ? ((_$23_$_lo >>> 0) <= (x_$_lo >>> 0)) : (_$23_$_hi < x_$_hi));
     } else {
       return false;
     }
@@ -11512,9 +11918,9 @@ $c_Lokay_serverless_cloud_MemoryCloud.prototype.fireAlarms__s_concurrent_Future 
     return $n(i$1).one__Lokay_scala3_Prog__s_concurrent_Future($n($n(i$1).actor__Lokay_serverless_cloud_Actor()).alarm__T__Lokay_scala3_Prog($n(i$1).Lokay_serverless_cloud_MemoryCloud$Instance__f_name));
   }));
   var this$6 = $m_sc_BuildFrom$();
-  return $n($x_4.traverse__sc_IterableOnce__F1__sc_BuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(due, $x_3, new $c_sc_BuildFromLowPriority2$$anon$11(this$6), this.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec)).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$23) => {
-    var _$23$1 = $as_sci_List(_$23);
-    var this$7 = $n(_$23$1);
+  return $n($x_4.traverse__sc_IterableOnce__F1__sc_BuildFrom__s_concurrent_ExecutionContext__s_concurrent_Future(due, $x_3, new $c_sc_BuildFromLowPriority2$$anon$11(this$6), this.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec)).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$24) => {
+    var _$24$1 = $as_sci_List(_$24);
+    var this$7 = $n(_$24$1);
     return this$7.length__I();
   })), this.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec);
 });
@@ -11557,7 +11963,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$Instance.prototype.one__Lokay_scala3_Prog_
   if ((this.Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer === null)) {
     throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
   }
-  this.Lokay_serverless_cloud_MemoryCloud$Instance__f_queue = $n($n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_queue).recover__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_serverless_cloud_MemoryCloud$$anon$24(), $n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec)).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$17) => {
+  this.Lokay_serverless_cloud_MemoryCloud$Instance__f_queue = $n($n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_queue).recover__s_PartialFunction__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_serverless_cloud_MemoryCloud$$anon$24(), $n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec)).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$18) => {
     var $x_1 = $m_Lokay_scala3_std_Async$();
     var this$3 = $n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_hosting);
     var platform = $n(this.Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_platform;
@@ -15606,28 +16012,6 @@ function $m_s_Array$EmptyArrays$() {
   }
   return $n_s_Array$EmptyArrays$;
 }
-/** @constructor */
-function $c_s_Array$UnapplySeqWrapper$() {
-}
-$c_s_Array$UnapplySeqWrapper$.prototype = new $h_O();
-$c_s_Array$UnapplySeqWrapper$.prototype.constructor = $c_s_Array$UnapplySeqWrapper$;
-/** @constructor */
-function $h_s_Array$UnapplySeqWrapper$() {
-}
-$h_s_Array$UnapplySeqWrapper$.prototype = $c_s_Array$UnapplySeqWrapper$.prototype;
-$c_s_Array$UnapplySeqWrapper$.prototype.lengthCompare$extension__O__I__I = (function(this$, len) {
-  return $m_sc_ArrayOps$().lengthCompare$extension__O__I__I(this$, len);
-});
-var $d_s_Array$UnapplySeqWrapper$ = new $TypeData().initClass($c_s_Array$UnapplySeqWrapper$, "scala.Array$UnapplySeqWrapper$", ({
-  s_Array$UnapplySeqWrapper$: 1
-}));
-var $n_s_Array$UnapplySeqWrapper$;
-function $m_s_Array$UnapplySeqWrapper$() {
-  if ((!$n_s_Array$UnapplySeqWrapper$)) {
-    $n_s_Array$UnapplySeqWrapper$ = new $c_s_Array$UnapplySeqWrapper$();
-  }
-  return $n_s_Array$UnapplySeqWrapper$;
-}
 function $is_F0(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.F0)));
 }
@@ -15730,10 +16114,6 @@ $c_sc_ArrayOps$.prototype.constructor = $c_sc_ArrayOps$;
 function $h_sc_ArrayOps$() {
 }
 $h_sc_ArrayOps$.prototype = $c_sc_ArrayOps$.prototype;
-$c_sc_ArrayOps$.prototype.lengthCompare$extension__O__I__I = (function(this$, len) {
-  var x = $m_jl_reflect_Array$().getLength__O__I(this$);
-  return ((x === len) ? 0 : ((x < len) ? (-1) : 1));
-});
 $c_sc_ArrayOps$.prototype.slice$extension__O__I__I__O = (function(this$, from, until) {
   var lo = ((from > 0) ? from : 0);
   var b = $m_jl_reflect_Array$().getLength__O__I(this$);
@@ -25964,8 +26344,8 @@ $c_Lokay_serverless_cloud_CloudSuite$Back$.prototype.queue__T__Lokay_serverless_
   var a = $s_Lokay_serverless_cloud_Settle$__Ack__Lokay_serverless_cloud_Settle();
   return new $c_Lokay_scala3_Prog$Value(a);
 });
-$c_Lokay_serverless_cloud_CloudSuite$Back$.prototype.fetch__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(request) {
-  var a = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("back", ($m_Lokay_serverless_cloud_Response$(), 200));
+$c_Lokay_serverless_cloud_CloudSuite$Back$.prototype.fetch__Lokay_http_Request__Lokay_scala3_Prog = (function(request) {
+  var a = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response("back", ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
   return new $c_Lokay_scala3_Prog$Value(a);
 });
 var $d_Lokay_serverless_cloud_CloudSuite$Back$ = new $TypeData().initClass($c_Lokay_serverless_cloud_CloudSuite$Back$, "okay.serverless.cloud.CloudSuite$Back$", ({
@@ -25985,16 +26365,20 @@ $c_Lokay_serverless_cloud_CloudSuite$Front$.prototype.queue__T__Lokay_serverless
   var a = $s_Lokay_serverless_cloud_Settle$__Ack__Lokay_serverless_cloud_Settle();
   return new $c_Lokay_scala3_Prog$Value(a);
 });
-$c_Lokay_serverless_cloud_CloudSuite$Front$.prototype.fetch__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(request) {
+$c_Lokay_serverless_cloud_CloudSuite$Front$.prototype.fetch__Lokay_http_Request__Lokay_scala3_Prog = (function(request) {
   var $x_2 = $m_Lokay_serverless_cloud_Services$();
   $n(request);
   var this$1 = $n(request);
-  var method = this$1.Lokay_serverless_cloud_Request__f_method;
+  var method = this$1.Lokay_http_Request__f_method;
   var this$2 = $n(request);
-  var headers = this$2.Lokay_serverless_cloud_Request__f_headers;
+  var query = this$2.Lokay_http_Request__f_query;
   var this$3 = $n(request);
-  var body = this$3.Lokay_serverless_cloud_Request__f_body;
-  var $x_1 = new $c_Lokay_serverless_cloud_Request(method, "https://back/hi", headers, body);
+  var headers = this$3.Lokay_http_Request__f_headers;
+  var this$4 = $n(request);
+  var body = this$4.Lokay_http_Request__f_body;
+  var this$5 = $n(request);
+  var bytes = this$5.Lokay_http_Request__f_bytes;
+  var $x_1 = new $c_Lokay_http_Request(method, "/hi", query, headers, body, bytes);
   var at = new $c_Lokay_scala3_Place$Last();
   var at$1 = new $c_Lokay_scala3_Place$Init(at);
   var at$2 = new $c_Lokay_scala3_Place$Init(at$1);
@@ -26002,14 +26386,10 @@ $c_Lokay_serverless_cloud_CloudSuite$Front$.prototype.fetch__Lokay_serverless_cl
   var at$4 = new $c_Lokay_scala3_Place$Init(at$3);
   var at$5 = new $c_Lokay_scala3_Place$Init(at$4);
   var at$6 = new $c_Lokay_scala3_Place$Init(at$5);
-  var p = $x_2.call__T__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog("back", $x_1, at$6);
+  var p = $x_2.call__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog("back", $x_1, at$6);
   var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r) => {
-    var r$1 = $as_Lokay_serverless_cloud_Response(r);
-    var $x_3 = $m_Lokay_serverless_cloud_Response$();
-    var this$20 = $n(r$1);
-    var this$21 = $n(this$20.Lokay_serverless_cloud_Response__f_body);
-    var bytes = this$21.Lokay_serverless_cloud_Bytes__f_a;
-    return $x_3.text__T__I__Lokay_serverless_cloud_Response(("front+" + $m_jl_String$().new__AB__T__T(bytes, "UTF-8")), ($m_Lokay_serverless_cloud_Response$(), 200));
+    var r$1 = $as_Lokay_http_Response(r);
+    return $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response(("front+" + $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(r$1)), ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
   }));
   return new $c_Lokay_scala3_Prog$Map(p, f);
 });
@@ -26026,9 +26406,8 @@ $c_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype.constructor = $c_Lokay_se
 function $h_Lokay_serverless_cloud_CloudSuite$Mailer$() {
 }
 $h_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype = $c_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype;
-$c_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype.fetch__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(request) {
-  var a = $m_Lokay_serverless_cloud_Response$().Lokay_serverless_cloud_Response$__f_notFound;
-  return new $c_Lokay_scala3_Prog$Value(a);
+$c_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype.fetch__Lokay_http_Request__Lokay_scala3_Prog = (function(request) {
+  return $f_Lokay_serverless_cloud_App__fetch__Lokay_http_Request__Lokay_scala3_Prog(this, request);
 });
 $c_Lokay_serverless_cloud_CloudSuite$Mailer$.prototype.queue__T__Lokay_serverless_cloud_Message__Lokay_scala3_Prog = (function(queue, m) {
   if ((($n(m).Lokay_serverless_cloud_Message__f_body === "flaky") && ($n(m).Lokay_serverless_cloud_Message__f_attempts < 2))) {
@@ -26067,33 +26446,35 @@ $c_Lokay_serverless_cloud_CloudSuite$Room$.prototype.constructor = $c_Lokay_serv
 function $h_Lokay_serverless_cloud_CloudSuite$Room$() {
 }
 $h_Lokay_serverless_cloud_CloudSuite$Room$.prototype = $c_Lokay_serverless_cloud_CloudSuite$Room$.prototype;
-$c_Lokay_serverless_cloud_CloudSuite$Room$.prototype.fetch__T__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(name, request) {
+$c_Lokay_serverless_cloud_CloudSuite$Room$.prototype.fetch__T__Lokay_http_Request__Lokay_scala3_Prog = (function(name, request) {
   if ($n($n(request).header__T__s_Option("upgrade")).contains__O__Z("websocket")) {
-    var $x_2 = $m_Lokay_serverless_cloud_Sockets$();
-    var $x_1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([$as_T($n($n(request).query__sci_Map()).getOrElse__O__F0__O("who", new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "guest"))))]));
+    var $x_3 = $m_Lokay_serverless_cloud_Sockets$();
+    var $x_2 = $m_sr_ScalaRunTime$();
+    var this$1 = $n($n(request).param__T__s_Option("who"));
+    var $x_1 = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)([$as_T((this$1.isEmpty__Z() ? "guest" : this$1.get__O()))]));
     var at = new $c_Lokay_scala3_Place$Last();
-    return $x_2.accept__Lokay_serverless_cloud_Request__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog(request, $x_1, at);
+    return $x_3.accept__Lokay_http_Request__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog(request, $x_1, at);
   } else {
-    var $x_6 = $m_Lokay_serverless_Durable$();
-    var $x_4 = $m_Lokay_serverless_Durable$();
-    var $x_3 = $m_Lokay_serverless_Codec$().given_Codec_List__Lokay_serverless_Codec__Lokay_serverless_Codec($m_Lokay_serverless_Codec$().given_Codec_String__Lokay_serverless_Codec());
+    var $x_7 = $m_Lokay_serverless_Durable$();
+    var $x_5 = $m_Lokay_serverless_Durable$();
+    var $x_4 = $m_Lokay_serverless_Codec$().given_Codec_List__Lokay_serverless_Codec__Lokay_serverless_Codec($m_Lokay_serverless_Codec$().given_Codec_String__Lokay_serverless_Codec());
     var at$1 = new $c_Lokay_scala3_Place$Last();
-    var p = $x_4.get__T__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog("history", $x_3, at$1);
-    var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$9) => {
-      var _$9$1 = $as_s_Option(_$9);
-      var this$7 = $n(_$9$1);
-      return $as_sci_List((this$7.isEmpty__Z() ? $m_sci_Nil$() : this$7.get__O()));
+    var p = $x_5.get__T__Lokay_serverless_Codec__Lokay_scala3_Place__Lokay_scala3_Prog("history", $x_4, at$1);
+    var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$10) => {
+      var _$10$1 = $as_s_Option(_$10);
+      var this$8 = $n(_$10$1);
+      return $as_sci_List((this$8.isEmpty__Z() ? $m_sci_Nil$() : this$8.get__O()));
     }));
-    var $x_5 = new $c_Lokay_scala3_Prog$Map(p, f);
+    var $x_6 = new $c_Lokay_scala3_Prog$Map(p, f);
     var at$2 = new $c_Lokay_scala3_Place$Last();
     var at$3 = new $c_Lokay_scala3_Place$Last();
     var at$4 = new $c_Lokay_scala3_Place$Init(at$3);
-    var p$1 = $x_6.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog(name, $x_5, at$2, at$4);
+    var p$1 = $x_7.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog(name, $x_6, at$2, at$4);
     var f$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((h) => {
       var h$1 = $as_sci_List(h);
-      var $x_7 = $m_Lokay_serverless_cloud_Response$();
-      var this$18 = $n(h$1);
-      return $x_7.text__T__I__Lokay_serverless_cloud_Response($f_sc_IterableOnceOps__mkString__T__T__T__T(this$18, "", "\n", ""), ($m_Lokay_serverless_cloud_Response$(), 200));
+      var $x_8 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+      var this$19 = $n(h$1);
+      return $x_8.text__T__I__Lokay_http_Response($f_sc_IterableOnceOps__mkString__T__T__T__T(this$19, "", "\n", ""), ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
     }));
     return new $c_Lokay_scala3_Prog$Map(p$1, f$1);
   }
@@ -26320,15 +26701,15 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$10.prototype.apply__Lokay_scala3_std
       if ((op instanceof $c_Lokay_scala3_std_Env$Var)) {
         var x$1 = $as_Lokay_scala3_std_Env$Var(op);
         var this$4 = $n(x$1);
-        var x133 = this$4.Lokay_scala3_std_Env$Var__f_name;
-        var r1 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$10__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_vars).get__O__s_Option(x133);
+        var x142 = this$4.Lokay_scala3_std_Env$Var__f_name;
+        var r1 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$10__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_vars).get__O__s_Option(x142);
         break matchResult22;
       }
       if ((op instanceof $c_Lokay_scala3_std_Env$Secret)) {
         var x$1$1 = $as_Lokay_scala3_std_Env$Secret(op);
         var this$6 = $n(x$1$1);
-        var x130 = this$6.Lokay_scala3_std_Env$Secret__f_name;
-        var r1 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$10__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_secrets).get__O__s_Option(x130);
+        var x139 = this$6.Lokay_scala3_std_Env$Secret__f_name;
+        var r1 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$10__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_secrets).get__O__s_Option(x139);
         break matchResult22;
       }
       throw new $c_s_MatchError(op);
@@ -26372,19 +26753,19 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$11.prototype.apply__Lokay_serverless
   if ((op instanceof $c_Lokay_serverless_cloud_Services$Call)) {
     var x$1 = $as_Lokay_serverless_cloud_Services$Call(op);
     var this$2 = $n(x$1);
-    var x140 = this$2.Lokay_serverless_cloud_Services$Call__f_service;
+    var x149 = this$2.Lokay_serverless_cloud_Services$Call__f_service;
     var this$3 = $n(x$1);
-    var x141 = this$3.Lokay_serverless_cloud_Services$Call__f_request;
-    var x134 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_apps).get__O__s_Option(x140);
-    if ((x134 instanceof $c_s_Some)) {
-      var app = $as_Lokay_serverless_cloud_App($n($as_s_Some(x134)).s_Some__f_value);
-      return $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_platform).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($n(app).fetch__Lokay_serverless_cloud_Request__Lokay_scala3_Prog(x141), $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec);
+    var x150 = this$3.Lokay_serverless_cloud_Services$Call__f_request;
+    var x143 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_apps).get__O__s_Option(x149);
+    if ((x143 instanceof $c_s_Some)) {
+      var app = $as_Lokay_serverless_cloud_App($n($as_s_Some(x143)).s_Some__f_value);
+      return $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_platform).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($n(app).fetch__Lokay_http_Request__Lokay_scala3_Prog(x150), $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$11__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ec);
     }
     var x = $m_s_None$();
-    if ((x === x134)) {
-      return $m_s_concurrent_Future$().failed__jl_Throwable__s_concurrent_Future($ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("no service " + x140)));
+    if ((x === x143)) {
+      return $m_s_concurrent_Future$().failed__jl_Throwable__s_concurrent_Future($ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("no service " + x149)));
     }
-    throw new $c_s_MatchError(x134);
+    throw new $c_s_MatchError(x143);
   }
   throw new $c_s_MatchError(op);
 });
@@ -26418,25 +26799,25 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$12.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Limits$Take)) {
         var x$1 = $as_Lokay_serverless_cloud_Limits$Take(op);
         var this$4 = $n(x$1);
-        var x154 = this$4.Lokay_serverless_cloud_Limits$Take__f_name;
+        var x163 = this$4.Lokay_serverless_cloud_Limits$Take__f_name;
         var this$5 = $n(x$1);
-        var x155 = this$5.Lokay_serverless_cloud_Limits$Take__f_key;
+        var x164 = this$5.Lokay_serverless_cloud_Limits$Take__f_key;
         matchResult25: {
           var \u03b43$___1;
           var \u03b43$___2;
-          var x142 = $as_T2($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$12__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_limitsConfig).getOrElse__O__F0__O(x154, new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
-            throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("no rate limit " + x154));
+          var x151 = $as_T2($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$12__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_limitsConfig).getOrElse__O__F0__O(x163, new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+            throw $ct_ju_NoSuchElementException__T__(new $c_ju_NoSuchElementException(), ("no rate limit " + x163));
           }))));
-          if ((x142 !== null)) {
-            var limit = $uI($n(x142)._1__O());
-            var $x_2 = $uJ($n(x142)._2__O());
+          if ((x151 !== null)) {
+            var limit = $uI($n(x151)._1__O());
+            var $x_2 = $uJ($n(x151)._2__O());
             var period_$_lo = $x_2.l;
             var period_$_hi = $x_2.h;
             var \u03b43$___1 = limit;
             var \u03b43$___2 = $bL(period_$_lo, period_$_hi);
             break matchResult25;
           }
-          throw new $c_s_MatchError(x142);
+          throw new $c_s_MatchError(x151);
         }
         var limit$2 = $uI(\u03b43$___1);
         var $x_3 = $uJ(\u03b43$___2);
@@ -26455,7 +26836,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$12.prototype.apply__Lokay_serverless
         var $x_5 = $m_RTLong$().divide__I__I__I__I__J(x_$_lo, x_$_hi, lo, hi);
         var window_$_lo = $x_5.l;
         var window_$_hi = $x_5.h;
-        var this$9 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$12__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$windows).get__O__s_Option(new $c_T2(x154, x155)));
+        var this$9 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$12__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$windows).get__O__s_Option(new $c_T2(x163, x164)));
         var pf = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$13(window_$_lo, window_$_hi);
         if ((!this$9.isEmpty__Z())) {
           var this$10 = new $c_s_PartialFunction$Lifted(pf);
@@ -26468,7 +26849,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$12.prototype.apply__Lokay_serverless
         var used = $uI((this$11.isEmpty__Z() ? 0 : this$11.get__O()));
         if ((used < limit$2)) {
           var $x_8 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$12__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$windows);
-          var $x_7 = new $c_T2(x154, x155);
+          var $x_7 = new $c_T2(x163, x164);
           var _2 = ((1 + used) | 0);
           $x_8.update__O__O__V($x_7, new $c_T2($bL(window_$_lo, window_$_hi), _2));
           var r1 = true;
@@ -26519,13 +26900,13 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$14.prototype.apply__Lokay_serverless
   if ((op instanceof $c_Lokay_serverless_cloud_Ai$Run)) {
     var x$1 = $as_Lokay_serverless_cloud_Ai$Run(op);
     var this$2 = $n(x$1);
-    var x159 = this$2.Lokay_serverless_cloud_Ai$Run__f_model;
+    var x168 = this$2.Lokay_serverless_cloud_Ai$Run__f_model;
     var this$3 = $n(x$1);
-    var x160 = this$3.Lokay_serverless_cloud_Ai$Run__f_input;
+    var x169 = this$3.Lokay_serverless_cloud_Ai$Run__f_input;
     $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$14__f_$outer);
     var $x_2 = $m_s_concurrent_Future$();
     try {
-      var r1 = $as_Lokay_effects_json_Json($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$14__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_model).apply__O__O__O(x159, x160));
+      var r1 = $as_Lokay_effects_json_Json($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$14__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_model).apply__O__O__O(x168, x169));
       var $x_1 = new $c_s_util_Success(r1);
     } catch (e) {
       var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
@@ -26572,17 +26953,17 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$15.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Vectors$Upsert)) {
         var x$1 = $as_Lokay_serverless_cloud_Vectors$Upsert(op);
         var this$4 = $n(x$1);
-        var x184 = this$4.Lokay_serverless_cloud_Vectors$Upsert__f_index;
+        var x193 = this$4.Lokay_serverless_cloud_Vectors$Upsert__f_index;
         var this$5 = $n(x$1);
-        var x185 = this$5.Lokay_serverless_cloud_Vectors$Upsert__f_vectors;
-        var this$6 = $n(x185);
+        var x194 = this$5.Lokay_serverless_cloud_Vectors$Upsert__f_vectors;
+        var this$6 = $n(x194);
         var these = this$6;
         while ((!$n(these).isEmpty__Z())) {
           var x0 = $n(these).head__O();
           var v = $as_Lokay_serverless_cloud_Embedding(x0);
           var $x_2 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$15__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$vectorsStored);
           var _2 = $n(v).Lokay_serverless_cloud_Embedding__f_id;
-          $x_2.update__O__O__V(new $c_T2(x184, _2), v);
+          $x_2.update__O__O__V(new $c_T2(x193, _2), v);
           these = $as_sci_List($n(these).tail__O());
         }
         var r1 = (void 0);
@@ -26590,14 +26971,14 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$15.prototype.apply__Lokay_serverless
       }
       if (false) {
         var x$1$1 = $as_Lokay_serverless_cloud_Vectors$Delete(op);
-        var x180 = $n(x$1$1)._1__T();
-        var x181 = $n(x$1$1)._2__sci_List();
-        var this$9 = $n(x181);
+        var x189 = $n(x$1$1)._1__T();
+        var x190 = $n(x$1$1)._2__sci_List();
+        var this$9 = $n(x190);
         var these$1 = this$9;
         while ((!$n(these$1).isEmpty__Z())) {
           var x0$1 = $n(these$1).head__O();
           var id = $as_T(x0$1);
-          $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$15__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$vectorsStored).remove__O__s_Option(new $c_T2(x180, id));
+          $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$15__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$vectorsStored).remove__O__s_Option(new $c_T2(x189, id));
           these$1 = $as_sci_List($n(these$1).tail__O());
         }
         var r1 = (void 0);
@@ -26606,20 +26987,20 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$15.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Vectors$Query)) {
         var x$1$2 = $as_Lokay_serverless_cloud_Vectors$Query(op);
         var this$12 = $n(x$1$2);
-        var x174 = this$12.Lokay_serverless_cloud_Vectors$Query__f_index;
+        var x183 = this$12.Lokay_serverless_cloud_Vectors$Query__f_index;
         var this$13 = $n(x$1$2);
-        var x175 = this$13.Lokay_serverless_cloud_Vectors$Query__f_values;
+        var x184 = this$13.Lokay_serverless_cloud_Vectors$Query__f_values;
         var this$14 = $n(x$1$2);
-        var x176 = this$14.Lokay_serverless_cloud_Vectors$Query__f_topK;
+        var x185 = this$14.Lokay_serverless_cloud_Vectors$Query__f_topK;
         var this$15 = $n(x$1$2);
-        var x177 = this$15.Lokay_serverless_cloud_Vectors$Query__f_filter;
-        var this$16 = $n($n($as_sc_IterableOnceOps($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$15__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$vectorsStored).collect__s_PartialFunction__O(new $c_Lokay_serverless_cloud_MemoryCloud$$anon$16(x174, x177, x175, this)))).toList__sci_List());
-        var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$15) => {
-          var _$15$1 = $as_Lokay_serverless_cloud_Nearest(_$15);
-          return (-$n(_$15$1).Lokay_serverless_cloud_Nearest__f_score);
+        var x186 = this$15.Lokay_serverless_cloud_Vectors$Query__f_filter;
+        var this$16 = $n($n($as_sc_IterableOnceOps($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$15__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$vectorsStored).collect__s_PartialFunction__O(new $c_Lokay_serverless_cloud_MemoryCloud$$anon$16(x183, x186, x184, this)))).toList__sci_List());
+        var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$16) => {
+          var _$16$1 = $as_Lokay_serverless_cloud_Nearest(_$16);
+          return (-$n(_$16$1).Lokay_serverless_cloud_Nearest__f_score);
         }));
         var ord = $m_s_math_Ordering$DeprecatedDoubleOrdering$();
-        var r1 = $n($as_sci_List($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$16, f, ord))).take__I__sci_List(x176);
+        var r1 = $n($as_sci_List($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$16, f, ord))).take__I__sci_List(x185);
         break matchResult32;
       }
       throw new $c_s_MatchError(op);
@@ -26668,11 +27049,11 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$17.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Analytics$Write)) {
         var x$1 = $as_Lokay_serverless_cloud_Analytics$Write(op);
         var this$4 = $n(x$1);
-        var x189 = this$4.Lokay_serverless_cloud_Analytics$Write__f_dataset;
+        var x198 = this$4.Lokay_serverless_cloud_Analytics$Write__f_dataset;
         var this$5 = $n(x$1);
-        var x190 = this$5.Lokay_serverless_cloud_Analytics$Write__f_point;
+        var x199 = this$5.Lokay_serverless_cloud_Analytics$Write__f_point;
         var this$8 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$17__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_points);
-        var elem = new $c_T2(x189, x190);
+        var elem = new $c_T2(x198, x199);
         this$8.addOne__O__scm_ListBuffer(elem);
         var r1 = (void 0);
         break matchResult33;
@@ -26723,11 +27104,11 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$18.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Mails$Send)) {
         var x$1 = $as_Lokay_serverless_cloud_Mails$Send(op);
         var this$4 = $n(x$1);
-        var x194 = this$4.Lokay_serverless_cloud_Mails$Send__f_binding;
+        var x203 = this$4.Lokay_serverless_cloud_Mails$Send__f_binding;
         var this$5 = $n(x$1);
-        var x195 = this$5.Lokay_serverless_cloud_Mails$Send__f_mail;
+        var x204 = this$5.Lokay_serverless_cloud_Mails$Send__f_mail;
         var this$8 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$18__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_sent);
-        var elem = new $c_T2(x194, x195);
+        var elem = new $c_T2(x203, x204);
         this$8.addOne__O__scm_ListBuffer(elem);
         var r1 = (void 0);
         break matchResult34;
@@ -26773,14 +27154,14 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$19.prototype.apply__Lokay_serverless
   if ((op instanceof $c_Lokay_serverless_cloud_Objects$Call)) {
     var x$1 = $as_Lokay_serverless_cloud_Objects$Call(op);
     var this$2 = $n(x$1);
-    var x232 = this$2.Lokay_serverless_cloud_Objects$Call__f_namespace;
+    var x241 = this$2.Lokay_serverless_cloud_Objects$Call__f_namespace;
     var this$3 = $n(x$1);
-    var x233 = this$3.Lokay_serverless_cloud_Objects$Call__f_name;
+    var x242 = this$3.Lokay_serverless_cloud_Objects$Call__f_name;
     var this$4 = $n(x$1);
-    var x234 = this$4.Lokay_serverless_cloud_Objects$Call__f_request;
+    var x243 = this$4.Lokay_serverless_cloud_Objects$Call__f_request;
     $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$19__f_$outer);
-    var a = $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$19__f_$outer).okay$serverless$cloud$MemoryCloud$$instance__T__T__Lokay_serverless_cloud_MemoryCloud$Instance(x232, x233);
-    return $n(a).one__Lokay_scala3_Prog__s_concurrent_Future($n($n(a).actor__Lokay_serverless_cloud_Actor()).fetch__T__Lokay_serverless_cloud_Request__Lokay_scala3_Prog(x233, x234));
+    var a = $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$19__f_$outer).okay$serverless$cloud$MemoryCloud$$instance__T__T__Lokay_serverless_cloud_MemoryCloud$Instance(x241, x242);
+    return $n(a).one__Lokay_scala3_Prog__s_concurrent_Future($n($n(a).actor__Lokay_serverless_cloud_Actor()).fetch__T__Lokay_http_Request__Lokay_scala3_Prog(x242, x243));
   }
   throw new $c_s_MatchError(op);
 });
@@ -26836,26 +27217,26 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$22.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_Storage$Read)) {
         var x$1 = $as_Lokay_serverless_Storage$Read(op);
         var this$4 = $n(x$1);
-        var x211 = this$4.Lokay_serverless_Storage$Read__f_keys;
-        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).read__sci_List__sci_Map(x211);
+        var x220 = this$4.Lokay_serverless_Storage$Read__f_keys;
+        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).read__sci_List__sci_Map(x220);
         break matchResult39;
       }
       if ((op instanceof $c_Lokay_serverless_Storage$Keys)) {
         var x$1$1 = $as_Lokay_serverless_Storage$Keys(op);
         var this$6 = $n(x$1$1);
-        var x208 = this$6.Lokay_serverless_Storage$Keys__f_prefix;
-        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).keys__T__sci_List(x208);
+        var x217 = this$6.Lokay_serverless_Storage$Keys__f_prefix;
+        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).keys__T__sci_List(x217);
         break matchResult39;
       }
       if ((op instanceof $c_Lokay_serverless_Storage$Commit)) {
         var x$1$2 = $as_Lokay_serverless_Storage$Commit(op);
         var this$8 = $n(x$1$2);
-        var x203 = this$8.Lokay_serverless_Storage$Commit__f_read;
+        var x212 = this$8.Lokay_serverless_Storage$Commit__f_read;
         var this$9 = $n(x$1$2);
-        var x204 = this$9.Lokay_serverless_Storage$Commit__f_writes;
+        var x213 = this$9.Lokay_serverless_Storage$Commit__f_writes;
         var this$10 = $n(x$1$2);
-        var x205 = this$10.Lokay_serverless_Storage$Commit__f_alarm;
-        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).commit__sci_Map__sci_Map__s_Option__Z(x203, x204, x205);
+        var x214 = this$10.Lokay_serverless_Storage$Commit__f_alarm;
+        var r1 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$22__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_memory).commit__sci_Map__sci_Map__s_Option__Z(x212, x213, x214);
         break matchResult39;
       }
       throw new $c_s_MatchError(op);
@@ -26908,7 +27289,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$23.prototype.apply__Lokay_serverless
         var x$1 = $as_Lokay_serverless_cloud_Sockets$Accept(op);
         $n(x$1);
         var this$5 = $n(x$1);
-        var x228 = this$5.Lokay_serverless_cloud_Sockets$Accept__f_tags;
+        var x237 = this$5.Lokay_serverless_cloud_Sockets$Accept__f_tags;
         var $x_3 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer);
         var $x_2 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer;
         var x_$_lo = $n($x_2).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ids_$lo;
@@ -26919,49 +27300,51 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$23.prototype.apply__Lokay_serverless
         $x_3.Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ids_$hi = hi;
         var $x_4 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer;
         var id = ("s" + $s_RTLong__toString__I__I__T($n($x_4).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ids_$lo, $n($x_4).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$ids_$hi));
-        var s = new $c_Lokay_serverless_cloud_Socket(id, x228);
+        var s = new $c_Lokay_serverless_cloud_Socket(id, x237);
         var this$9 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets);
         var key = s.Lokay_serverless_cloud_Socket__f_id;
         var _2 = new $c_Lokay_serverless_cloud_MemoryCloud$MemorySocket($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_$outer, s, $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer);
         var value = new $c_T2(s, _2);
         $p_scm_LinkedHashMap__put0__O__O__Z__s_Some(this$9, key, value, false);
-        $m_Lokay_serverless_cloud_Response$();
+        $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
         var this$12 = $m_sci_Map$();
         var $x_5 = $m_sr_ScalaRunTime$();
         var y = s.Lokay_serverless_cloud_Socket__f_id;
         var elems = $x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("okay-socket", y)]));
         var headers = this$12.from__sc_IterableOnce__sci_Map(elems);
-        $m_Lokay_serverless_cloud_Response$();
-        var body = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-        var r1 = new $c_Lokay_serverless_cloud_Response(101, headers, body);
+        $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+        var body = "";
+        $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+        var bytes = $m_s_None$();
+        var r1 = new $c_Lokay_http_Response(101, headers, body, bytes);
         break matchResult40;
       }
       if ((op instanceof $c_Lokay_serverless_cloud_Sockets$Send)) {
         var x$1$1 = $as_Lokay_serverless_cloud_Sockets$Send(op);
         var this$16 = $n(x$1$1);
-        var x223 = this$16.Lokay_serverless_cloud_Sockets$Send__f_socket;
+        var x232 = this$16.Lokay_serverless_cloud_Sockets$Send__f_socket;
         var this$17 = $n(x$1$1);
-        var x224 = this$17.Lokay_serverless_cloud_Sockets$Send__f_text;
-        var this$18 = $n($n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets).get__O__s_Option($n(x223).Lokay_serverless_cloud_Socket__f_id));
+        var x233 = this$17.Lokay_serverless_cloud_Sockets$Send__f_text;
+        var this$18 = $n($n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets).get__O__s_Option($n(x232).Lokay_serverless_cloud_Socket__f_id));
         if ((!this$18.isEmpty__Z())) {
           var x0 = this$18.get__O();
-          var _$18 = $as_T2(x0);
-          var this$19 = $n($n($as_Lokay_serverless_cloud_MemoryCloud$MemorySocket($n(_$18)._2__O())).Lokay_serverless_cloud_MemoryCloud$MemorySocket__f_received);
-          this$19.addOne__O__scm_ListBuffer(x224);
+          var _$19 = $as_T2(x0);
+          var this$19 = $n($n($as_Lokay_serverless_cloud_MemoryCloud$MemorySocket($n(_$19)._2__O())).Lokay_serverless_cloud_MemoryCloud$MemorySocket__f_received);
+          this$19.addOne__O__scm_ListBuffer(x233);
         }
         var r1 = (void 0);
         break matchResult40;
       }
       if (false) {
         var x$1$2 = $as_Lokay_serverless_cloud_Sockets$Close(op);
-        var x218 = $n(x$1$2)._1__Lokay_serverless_cloud_Socket();
-        var x219 = $n(x$1$2)._2__I();
+        var x227 = $n(x$1$2)._1__Lokay_serverless_cloud_Socket();
+        var x228 = $n(x$1$2)._2__I();
         $n(x$1$2)._3__T();
-        var this$21 = $n($n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets).remove__O__s_Option($n(x218).Lokay_serverless_cloud_Socket__f_id));
+        var this$21 = $n($n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets).remove__O__s_Option($n(x227).Lokay_serverless_cloud_Socket__f_id));
         if ((!this$21.isEmpty__Z())) {
           var x0$1 = this$21.get__O();
-          var _$19 = $as_T2(x0$1);
-          $n($as_Lokay_serverless_cloud_MemoryCloud$MemorySocket($n(_$19)._2__O()));
+          var _$20 = $as_T2(x0$1);
+          $n($as_Lokay_serverless_cloud_MemoryCloud$MemorySocket($n(_$20)._2__O()));
         }
         var r1 = (void 0);
         break matchResult40;
@@ -26969,16 +27352,16 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$23.prototype.apply__Lokay_serverless
       if ((op instanceof $c_Lokay_serverless_cloud_Sockets$Open)) {
         var x$1$3 = $as_Lokay_serverless_cloud_Sockets$Open(op);
         var this$24 = $n(x$1$3);
-        var x215 = this$24.Lokay_serverless_cloud_Sockets$Open__f_tag;
+        var x224 = this$24.Lokay_serverless_cloud_Sockets$Open__f_tag;
         var this$25 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$23__f_$outer).Lokay_serverless_cloud_MemoryCloud$$anon$21__f_$outer).Lokay_serverless_cloud_MemoryCloud$Instance__f_sockets);
         var this$26 = new $c_sc_MapOps$$anon$1(this$25);
-        var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$20) => {
-          var _$20$1 = $as_T2(_$20);
-          return $as_Lokay_serverless_cloud_Socket($n(_$20$1)._1__O());
+        var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$21) => {
+          var _$21$1 = $as_T2(_$21);
+          return $as_Lokay_serverless_cloud_Socket($n(_$21$1)._1__O());
         }));
         var r1 = $n($as_sc_IterableOnceOps($n($as_sc_IterableOps($f_sc_IterableOps__map__F1__O(this$26, f))).filter__F1__O(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((s$4) => {
           var s$1 = $as_Lokay_serverless_cloud_Socket(s$4);
-          var this$27 = $n(x215);
+          var this$27 = $n(x224);
           if (this$27.isEmpty__Z()) {
             return true;
           } else {
@@ -27045,12 +27428,12 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$4.prototype.apply__Lokay_serverless_
         var this$8 = $n(x$1);
         var x89 = this$8.Lokay_serverless_cloud_Blobs$Put__f_metadata;
         var this$9 = $n(x87);
-        var value = $n(this$9.Lokay_serverless_cloud_Bytes__f_a).u.length;
+        var value = $n(this$9.Lokay_http_Bytes__f_a).u.length;
         var hi = (value >> 31);
         var $x_3 = $m_sc_StringOps$();
         var $x_2 = $m_sr_ScalaRunTime$();
         var this$11 = $n(x87);
-        var a = this$11.Lokay_serverless_cloud_Bytes__f_a;
+        var a = this$11.Lokay_http_Bytes__f_a;
         var etag = $x_3.format$extension__T__sci_Seq__T("%08x", $x_2.genericWrapArray__O__sci_ArraySeq(new $ac_O([$m_ju_Arrays$().hashCode__AB__I(a)])));
         var info = new $c_Lokay_serverless_cloud_BlobInfo(x86, value, hi, etag, x88, x89);
         $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$4__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$blobs).update__O__O__V(new $c_T2(x85, x86), new $c_T2(info, x87));
@@ -27073,7 +27456,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$4.prototype.apply__Lokay_serverless_
           var x0 = this$20.get__O();
           var x$1$2 = $as_T2(x0);
           var info$1 = $as_Lokay_serverless_cloud_BlobInfo($n(x$1$2)._1__O());
-          var b = $as_Lokay_serverless_cloud_Bytes($n(x$1$2)._2__O());
+          var b = $as_Lokay_http_Bytes($n(x$1$2)._2__O());
           var this$21 = $n(x82);
           if (this$21.isEmpty__Z()) {
             var _2 = b;
@@ -27088,7 +27471,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$4.prototype.apply__Lokay_serverless_
             var until_$_hi = $x_5.h;
             var $x_6 = $n(b);
             var this$23 = $n(b);
-            var value$1 = $n(this$23.Lokay_serverless_cloud_Bytes__f_a).u.length;
+            var value$1 = $n(this$23.Lokay_http_Bytes__f_a).u.length;
             var hi$1 = (value$1 >> 31);
             if (((until_$_hi === hi$1) ? ((until_$_lo >>> 0) < (value$1 >>> 0)) : (until_$_hi < hi$1))) {
               var x_$_lo = until_$_lo;
@@ -27097,7 +27480,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$4.prototype.apply__Lokay_serverless_
               var x_$_lo = value$1;
               var x_$_hi = hi$1;
             }
-            var _2 = $x_6.slice__I__I__Lokay_serverless_cloud_Bytes(from_$_lo, x_$_lo);
+            var _2 = $x_6.slice__I__I__Lokay_http_Bytes(from_$_lo, x_$_lo);
           }
           var r1 = new $c_s_Some(new $c_T2(info$1, _2));
           break matchResult10;
@@ -27314,15 +27697,19 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype.constructor = $c_Lokay_s
 function $h_Lokay_serverless_cloud_MemoryCloud$$anon$7() {
 }
 $h_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype = $c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype;
-$c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype.apply__Lokay_serverless_cloud_Fetch__s_concurrent_Future = (function(op) {
-  if ((op instanceof $c_Lokay_serverless_cloud_Fetch$Call)) {
-    var x$1 = $as_Lokay_serverless_cloud_Fetch$Call(op);
+$c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype.apply__Lokay_http_Fetch__s_concurrent_Future = (function(op) {
+  if ((op instanceof $c_Lokay_http_Fetch$Send)) {
+    var x$1 = $as_Lokay_http_Fetch$Send(op);
     var this$2 = $n(x$1);
-    var x108 = this$2.Lokay_serverless_cloud_Fetch$Call__f_request;
+    var x115 = this$2.Lokay_http_Fetch$Send__f_url;
+    var this$3 = $n(x$1);
+    var x116 = this$3.Lokay_http_Fetch$Send__f_request;
+    var this$4 = $n(x$1);
+    var x117 = this$4.Lokay_http_Fetch$Send__f_answer;
     $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$7__f_$outer);
     var $x_2 = $m_s_concurrent_Future$();
     try {
-      var r1 = $as_Lokay_serverless_cloud_Response($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$7__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_internet).apply__O__O(x108));
+      var r1 = $n(x117).apply__O__O($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$7__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_internet).apply__O__O__O($m_Lokay_http_Fetch$().target__T__Lokay_http_Request__T(x115, x116), x116));
       var $x_1 = new $c_s_util_Success(r1);
     } catch (e) {
       var e$2 = ((e instanceof $c_jl_Throwable) ? e : new $c_sjs_js_JavaScriptException(e));
@@ -27337,10 +27724,35 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype.apply__Lokay_serverless_
     }
     return $x_2.fromTry__s_util_Try__s_concurrent_Future($x_1);
   }
+  if (false) {
+    var x$1$1 = $as_Lokay_http_Fetch$Call(op);
+    var x108 = $n(x$1$1)._1__T();
+    var x109 = $n(x$1$1)._2__T();
+    var x110 = $n(x$1$1)._3__sci_Map();
+    var x111 = $n(x$1$1)._4__T();
+    var x112 = $n(x$1$1)._5__F1();
+    $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$7__f_$outer);
+    var $x_4 = $m_s_concurrent_Future$();
+    try {
+      var r1$1 = $n(x112).apply__O__O($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$7__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_internet).apply__O__O__O(x109, $m_Lokay_http_Fetch$().request__T__T__sci_Map__T__Lokay_http_Request(x108, x109, x110, x111)));
+      var $x_3 = new $c_s_util_Success(r1$1);
+    } catch (e$1) {
+      var e$2$1 = ((e$1 instanceof $c_jl_Throwable) ? e$1 : new $c_sjs_js_JavaScriptException(e$1));
+      matchEnd8$1: {
+        var $x_3;
+        if ($m_s_util_control_NonFatal$().apply__jl_Throwable__Z(e$2$1)) {
+          var $x_3 = new $c_s_util_Failure(e$2$1);
+          break matchEnd8$1;
+        }
+        throw ((e$2$1 instanceof $c_sjs_js_JavaScriptException) ? e$2$1.sjs_js_JavaScriptException__f_exception : e$2$1);
+      }
+    }
+    return $x_4.fromTry__s_util_Try__s_concurrent_Future($x_3);
+  }
   throw new $c_s_MatchError(op);
 });
 $c_Lokay_serverless_cloud_MemoryCloud$$anon$7.prototype.apply__O__s_concurrent_Future = (function(op) {
-  return this.apply__Lokay_serverless_cloud_Fetch__s_concurrent_Future($as_Lokay_serverless_cloud_Fetch(op));
+  return this.apply__Lokay_http_Fetch__s_concurrent_Future($as_Lokay_http_Fetch(op));
 });
 var $d_Lokay_serverless_cloud_MemoryCloud$$anon$7 = new $TypeData().initClass($c_Lokay_serverless_cloud_MemoryCloud$$anon$7, "okay.serverless.cloud.MemoryCloud$$anon$7", ({
   Lokay_serverless_cloud_MemoryCloud$$anon$7: 1,
@@ -27369,8 +27781,8 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$8.prototype.apply__Lokay_serverless_
       if ((op instanceof $c_Lokay_serverless_cloud_Cache$Match)) {
         var x$1 = $as_Lokay_serverless_cloud_Cache$Match(op);
         var this$4 = $n(x$1);
-        var x126 = this$4.Lokay_serverless_cloud_Cache$Match__f_url;
-        var this$5 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached).get__O__s_Option(x126));
+        var x135 = this$4.Lokay_serverless_cloud_Cache$Match__f_url;
+        var this$5 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached).get__O__s_Option(x135));
         var pf = new $c_Lokay_serverless_cloud_MemoryCloud$$anon$9(this);
         if ((!this$5.isEmpty__Z())) {
           var this$6 = new $c_s_PartialFunction$Lifted(pf);
@@ -27385,33 +27797,33 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$8.prototype.apply__Lokay_serverless_
       if ((op instanceof $c_Lokay_serverless_cloud_Cache$Put)) {
         var x$1$1 = $as_Lokay_serverless_cloud_Cache$Put(op);
         var this$8 = $n(x$1$1);
-        var x121 = this$8.Lokay_serverless_cloud_Cache$Put__f_url;
+        var x130 = this$8.Lokay_serverless_cloud_Cache$Put__f_url;
         var this$9 = $n(x$1$1);
-        var x122 = this$9.Lokay_serverless_cloud_Cache$Put__f_response;
+        var x131 = this$9.Lokay_serverless_cloud_Cache$Put__f_response;
         var this$10 = $n(x$1$1);
-        var x123_$_lo = this$10.Lokay_serverless_cloud_Cache$Put__f_ttlSeconds_$lo;
-        var x123_$_hi = this$10.Lokay_serverless_cloud_Cache$Put__f_ttlSeconds_$hi;
+        var x132_$_lo = this$10.Lokay_serverless_cloud_Cache$Put__f_ttlSeconds_$lo;
+        var x132_$_hi = this$10.Lokay_serverless_cloud_Cache$Put__f_ttlSeconds_$hi;
         var $x_3 = $n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached);
         var $x_2 = $uJ($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_clock).apply__O());
         var x_$_lo = $x_2.l;
         var x_$_hi = $x_2.h;
-        var b0 = (65535 & x123_$_lo);
-        var b1 = ((x123_$_lo >>> 16) | 0);
+        var b0 = (65535 & x132_$_lo);
+        var b1 = ((x132_$_lo >>> 16) | 0);
         var a0b0 = Math.imul(1000, b0);
         var a0b1 = Math.imul(1000, b1);
         var lo = ((a0b0 + (a0b1 << 16)) | 0);
         var c1part = ((((a0b0 >>> 16) | 0) + a0b1) | 0);
-        var hi = ((Math.imul(1000, x123_$_hi) + ((c1part >>> 16) | 0)) | 0);
+        var hi = ((Math.imul(1000, x132_$_hi) + ((c1part >>> 16) | 0)) | 0);
         var lo$1 = ((x_$_lo + lo) | 0);
         var hi$1 = ((((x_$_hi + hi) | 0) + (((lo$1 >>> 0) < (x_$_lo >>> 0)) | 0)) | 0);
-        $x_3.update__O__O__V(x121, new $c_T2(x122, $bL(lo$1, hi$1)));
+        $x_3.update__O__O__V(x130, new $c_T2(x131, $bL(lo$1, hi$1)));
         var r1 = (void 0);
         break matchResult21;
       }
       if (false) {
         var x$1$2 = $as_Lokay_serverless_cloud_Cache$Delete(op);
-        var x118 = $n(x$1$2)._1__T();
-        var this$15 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached).remove__O__s_Option(x118));
+        var x127 = $n(x$1$2)._1__T();
+        var this$15 = $n($n($n(this.Lokay_serverless_cloud_MemoryCloud$$anon$8__f_$outer).Lokay_serverless_cloud_MemoryCloud__f_okay$serverless$cloud$MemoryCloud$$cached).remove__O__s_Option(x127));
         var r1 = (!this$15.isEmpty__Z());
         break matchResult21;
       }
@@ -27793,21 +28205,21 @@ function $p_Lokay_serverless_cloud_Workflow__advance__T__Lokay_scala3_Prog($thiz
   }));
   return new $c_Lokay_scala3_Prog$FlatMap(p$4, f$5);
 }
-function $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response($thiz, f) {
+function $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_http_Response($thiz, f) {
   var x = $m_s_None$();
   if ((x === f)) {
-    var $x_2 = $m_Lokay_serverless_cloud_Response$();
+    var $x_2 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
     var $x_1 = $m_sr_ScalaRunTime$();
     var y = new $c_Lokay_effects_json_Json$Str("none");
     var fields = $x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("status", y)]));
     $m_Lokay_effects_json_Json$Obj$();
     var this$5 = $n(fields);
     var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$5);
-    return $x_2.json__Lokay_effects_json_Json__I__Lokay_serverless_cloud_Response(new $c_Lokay_effects_json_Json$Obj(fields$1), 404);
+    return $x_2.json__Lokay_effects_json_Json__I__Lokay_http_Response(new $c_Lokay_effects_json_Json$Obj(fields$1), 404);
   }
   if ((f instanceof $c_s_Some)) {
     var f$2 = $as_Lokay_serverless_cloud_FlowState($n($as_s_Some(f)).s_Some__f_value);
-    var $x_5 = $m_Lokay_serverless_cloud_Response$();
+    var $x_5 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
     $m_Lokay_effects_json_Json$Obj$();
     var this$12 = $m_sci_Vector$();
     var $x_4 = $m_sr_ScalaRunTime$();
@@ -27850,7 +28262,7 @@ function $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_
       var suffix$2 = new $c_s_Some(new $c_T2("error", y$4));
     }
     var fields$2 = this$28.appendedAll__sc_IterableOnce__sci_Vector(suffix$2);
-    return $x_5.json__Lokay_effects_json_Json__I__Lokay_serverless_cloud_Response(new $c_Lokay_effects_json_Json$Obj(fields$2), ($m_Lokay_serverless_cloud_Response$(), 200));
+    return $x_5.json__Lokay_effects_json_Json__I__Lokay_http_Response(new $c_Lokay_effects_json_Json$Obj(fields$2), ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
   }
   throw new $c_s_MatchError(f);
 }
@@ -27881,19 +28293,16 @@ function $p_Lokay_serverless_cloud_Workflow__stageName__Lokay_serverless_cloud_S
   }
   throw new $c_s_MatchError(s);
 }
-function $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request$1) {
-  var $x_1 = $m_Lokay_effects_json_Descent$();
-  var this$1 = $n($n(request$1).Lokay_serverless_cloud_Request__f_body);
-  var bytes = this$1.Lokay_serverless_cloud_Bytes__f_a;
-  var this$2 = $n($x_1.parse__T__I__s_util_Either($m_jl_String$().new__AB__T__T(bytes, "UTF-8"), 1000));
-  if ((this$2 instanceof $c_s_util_Right)) {
-    var x2 = $as_s_util_Right(this$2);
+function $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_http_Request__Lokay_effects_json_Json(request$1) {
+  var this$1 = $n($m_Lokay_effects_json_Descent$().parse__T__I__s_util_Either($m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Request__T(request$1), 1000));
+  if ((this$1 instanceof $c_s_util_Right)) {
+    var x2 = $as_s_util_Right(this$1);
     var b = $n(x2).s_util_Right__f_value;
-    var $x_2 = b;
+    var $x_1 = b;
   } else {
-    var $x_2 = $m_Lokay_effects_json_Json$Null$();
+    var $x_1 = $m_Lokay_effects_json_Json$Null$();
   }
-  return $as_Lokay_effects_json_Json($x_2);
+  return $as_Lokay_effects_json_Json($x_1);
 }
 /** @constructor */
 function $c_Lokay_serverless_cloud_Workflow(stages, start, codec) {
@@ -27915,10 +28324,10 @@ $h_Lokay_serverless_cloud_Workflow.prototype = $c_Lokay_serverless_cloud_Workflo
 $c_Lokay_serverless_cloud_Workflow.prototype.message__T__Lokay_serverless_cloud_Socket__T__Lokay_scala3_Prog = (function(name, socket, text) {
   return new $c_Lokay_scala3_Prog$Value((void 0));
 });
-$c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Request__Lokay_scala3_Prog = (function(name, request) {
+$c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_http_Request__Lokay_scala3_Prog = (function(name, request) {
   var $x_2 = $m_s_Predef$();
   var $x_1 = $m_sc_StringOps$();
-  var x = $n(request).path__T();
+  var x = $n(request).Lokay_http_Request__f_path;
   var this$2 = $n($x_2.wrapRefArray__AO__scm_ArraySeq$ofRef($x_1.split$extension__T__C__AT(x, 47)));
   var this$7 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$2));
   var f = ((_$2) => {
@@ -27989,14 +28398,14 @@ $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Re
       }
     }
   }
-  var _1 = $n(request).Lokay_serverless_cloud_Request__f_method;
+  var _1 = $n(request).Lokay_http_Request__f_method;
   var _2 = $n(result).reverse__sci_List();
   if (((_1 === "POST") && (_2 instanceof $c_sci_$colon$colon))) {
     var x129 = $as_sci_$colon$colon(_2);
     var x130 = $as_T($n(x129).sci_$colon$colon__f_head);
     var x131 = $n(x129).sci_$colon$colon__f_next;
     if ((x130 === "start")) {
-      var state = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(this.Lokay_serverless_cloud_Workflow__f_start).apply__O__O($ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request)));
+      var state = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(this.Lokay_serverless_cloud_Workflow__f_start).apply__O__O($ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_http_Request__Lokay_effects_json_Json(request)));
       var wakeAt = $m_s_None$();
       var error = $m_s_None$();
       var first = new $c_Lokay_serverless_cloud_FlowState(0, state, "running", 0, wakeAt, error);
@@ -28033,11 +28442,11 @@ $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Re
           var p$1 = $m_Lokay_scala3_Prog$package$().andThen__Lokay_scala3_Prog__F0__Lokay_scala3_Prog($p_Lokay_serverless_cloud_Workflow__advance__T__Lokay_scala3_Prog(this, name), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name))));
           var f$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$2) => {
             var f$3 = $as_s_Option(f$2);
-            return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$3);
+            return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_http_Response(this, f$3);
           }));
           return new $c_Lokay_scala3_Prog$Map(p$1, f$4);
         } else {
-          var a = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("started already", 409);
+          var a = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response("started already", 409);
           return new $c_Lokay_scala3_Prog$Value(a);
         }
       }));
@@ -28061,7 +28470,7 @@ $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Re
                 var x112 = this$40.Lokay_serverless_cloud_Stage$Wait__f_fold;
                 var $x_12 = $m_Lokay_scala3_Prog$package$();
                 var stage = ((1 + $n(f$6).Lokay_serverless_cloud_FlowState__f_stage) | 0);
-                var state$1 = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(x112).apply__O__O__O($p_Lokay_serverless_cloud_Workflow__decode__Lokay_serverless_cloud_FlowState__O(this, f$6), $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_serverless_cloud_Request__Lokay_effects_json_Json(request)));
+                var state$1 = $n(this.Lokay_serverless_cloud_Workflow__f_codec).encode__O__T($n(x112).apply__O__O__O($p_Lokay_serverless_cloud_Workflow__decode__Lokay_serverless_cloud_FlowState__O(this, f$6), $ps_Lokay_serverless_cloud_Workflow__body$1__Lokay_http_Request__Lokay_effects_json_Json(request)));
                 var wakeAt$1 = $m_s_None$();
                 var error$1 = $m_s_None$();
                 var p$3 = $p_Lokay_serverless_cloud_Workflow__commit__T__Lokay_serverless_cloud_FlowState__Lokay_serverless_cloud_FlowState__Lokay_scala3_Prog(this, name, f$6, new $c_Lokay_serverless_cloud_FlowState(stage, state$1, "running", 0, wakeAt$1, error$1));
@@ -28072,15 +28481,15 @@ $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Re
                 var p$4 = $x_12.andThen__Lokay_scala3_Prog__F0__Lokay_scala3_Prog(new $c_Lokay_scala3_Prog$FlatMap(p$3, f$7), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name))));
                 var f$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$2$1) => {
                   var f$8 = $as_s_Option(f$2$1);
-                  return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$8);
+                  return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_http_Response(this, f$8);
                 }));
                 return new $c_Lokay_scala3_Prog$Map(p$4, f$9);
               }
-              var a$1 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response("not waiting", 409);
+              var a$1 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response("not waiting", 409);
               return new $c_Lokay_scala3_Prog$Value(a$1);
             }
           }
-          var a$2 = $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response(("not waiting for " + x130), 409);
+          var a$2 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response(("not waiting for " + x130), 409);
           return new $c_Lokay_scala3_Prog$Value(a$2);
         }));
         return new $c_Lokay_scala3_Prog$FlatMap(p$5, f$10);
@@ -28091,11 +28500,14 @@ $c_Lokay_serverless_cloud_Workflow.prototype.fetch__T__Lokay_serverless_cloud_Re
     var p$6 = $p_Lokay_serverless_cloud_Workflow__load__T__Lokay_scala3_Prog(this, name);
     var f$13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f$11) => {
       var f$12 = $as_s_Option(f$11);
-      return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_serverless_cloud_Response(this, f$12);
+      return $p_Lokay_serverless_cloud_Workflow__status__s_Option__Lokay_http_Response(this, f$12);
     }));
     return new $c_Lokay_scala3_Prog$Map(p$6, f$13);
   }
-  var a$3 = $m_Lokay_serverless_cloud_Response$().Lokay_serverless_cloud_Response$__f_notFound;
+  var this$56 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+  $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response);
+  var what = "not found";
+  var a$3 = this$56.text__T__I__Lokay_http_Response(what, 404);
   return new $c_Lokay_scala3_Prog$Value(a$3);
 });
 $c_Lokay_serverless_cloud_Workflow.prototype.alarm__T__Lokay_scala3_Prog = (function(name) {
@@ -31115,6 +31527,12 @@ $c_s_LowPriorityImplicits.prototype.wrapRefArray__AO__scm_ArraySeq$ofRef = (func
     return new $c_scm_ArraySeq$ofRef(xs);
   }
 });
+$c_s_LowPriorityImplicits.prototype.wrapCharArray__AC__scm_ArraySeq$ofChar = (function(xs) {
+  return ((xs !== null) ? new $c_scm_ArraySeq$ofChar(xs) : null);
+});
+$c_s_LowPriorityImplicits.prototype.wrapString__T__sci_WrappedString = (function(s) {
+  return ((s !== null) ? new $c_sci_WrappedString(s) : null);
+});
 /** @constructor */
 function $c_s_Option$() {
 }
@@ -33351,6 +33769,230 @@ function $m_Lokay_effects_parsing_ParseError$() {
   return $n_Lokay_effects_parsing_ParseError$;
 }
 /** @constructor */
+function $c_Lokay_http_Fetch$() {
+}
+$c_Lokay_http_Fetch$.prototype = new $h_O();
+$c_Lokay_http_Fetch$.prototype.constructor = $c_Lokay_http_Fetch$;
+/** @constructor */
+function $h_Lokay_http_Fetch$() {
+}
+$h_Lokay_http_Fetch$.prototype = $c_Lokay_http_Fetch$.prototype;
+$c_Lokay_http_Fetch$.prototype.target__T__Lokay_http_Request__T = (function(base, r) {
+  var this$1 = $n($n(r).Lokay_http_Request__f_path);
+  if ((this$1 === "")) {
+    var $x_1 = true;
+  } else {
+    var this$2 = $n($n(r).Lokay_http_Request__f_path);
+    var $x_1 = $uZ(this$2.startsWith("/"));
+  }
+  if ($x_1) {
+    var path = $n(r).Lokay_http_Request__f_path;
+  } else {
+    var path = ("/" + $n(r).Lokay_http_Request__f_path);
+  }
+  return ((("" + $m_sc_StringOps$().stripSuffix$extension__T__T__T(base, "/")) + path) + ($n($n(r).Lokay_http_Request__f_query).isEmpty__Z() ? "" : ("?" + $m_Lokay_http_Query$().print__sci_Map__T($n(r).Lokay_http_Request__f_query))));
+});
+$c_Lokay_http_Fetch$.prototype.request__T__T__sci_Map__T__Lokay_http_Request = (function(method, url, headers, body) {
+  var this$1 = $n(url);
+  var i = $uI(this$1.indexOf("://"));
+  if ((i < 0)) {
+    var target = url;
+  } else {
+    matchResult14: {
+      var target;
+      var this$2 = $n(url);
+      var beginIndex = ((3 + i) | 0);
+      var length = this$2.length;
+      if (((beginIndex >>> 0) > (length >>> 0))) {
+        $charAt(this$2, beginIndex);
+      }
+      var x20 = $f_T__indexOf__I__I($n($as_T(this$2.substring(beginIndex))), 47);
+      if ((x20 === (-1))) {
+        var target = "/";
+        break matchResult14;
+      }
+      var this$5 = $n(url);
+      var beginIndex$1 = ((((3 + i) | 0) + x20) | 0);
+      var length$1 = this$5.length;
+      if (((beginIndex$1 >>> 0) > (length$1 >>> 0))) {
+        $charAt(this$5, beginIndex$1);
+      }
+      var target = $as_T(this$5.substring(beginIndex$1));
+    }
+  }
+  var \u03b41$ = $m_Lokay_http_Request$().apply__T__T__Lokay_http_Request(method, target);
+  var headers$1 = $as_sci_Map($n(headers).map__F1__sc_IterableOps(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
+    var x$1$1 = $as_T2(x$1);
+    if ((x$1$1 !== null)) {
+      var k = $as_T($n(x$1$1)._1__O());
+      var v = $as_T($n(x$1$1)._2__O());
+      var this$8 = $n(k);
+      var self = $as_T(this$8.toLowerCase());
+      var y = new $c_sci_$colon$colon(v, $m_sci_Nil$());
+      return new $c_T2(self, y);
+    }
+    throw new $c_s_MatchError(x$1$1);
+  }))));
+  var this$11 = $n(\u03b41$);
+  var method$1 = this$11.Lokay_http_Request__f_method;
+  var this$12 = $n(\u03b41$);
+  var path$1 = this$12.Lokay_http_Request__f_path;
+  var this$13 = $n(\u03b41$);
+  var query$1 = this$13.Lokay_http_Request__f_query;
+  var this$14 = $n(\u03b41$);
+  var bytes$1 = this$14.Lokay_http_Request__f_bytes;
+  $n(\u03b41$);
+  return new $c_Lokay_http_Request(method$1, path$1, query$1, headers$1, body, bytes$1);
+});
+$c_Lokay_http_Fetch$.prototype.base__T__T = (function(url) {
+  var this$1 = $n(url);
+  var i = $uI(this$1.indexOf("://"));
+  if ((i < 0)) {
+    return "";
+  } else {
+    var this$2 = $n(url);
+    var beginIndex = ((3 + i) | 0);
+    var length = this$2.length;
+    if (((beginIndex >>> 0) > (length >>> 0))) {
+      $charAt(this$2, beginIndex);
+    }
+    var x24 = $f_T__indexOf__I__I($n($as_T(this$2.substring(beginIndex))), 47);
+    if ((x24 === (-1))) {
+      return url;
+    }
+    var this$5 = $n(url);
+    var endIndex = ((((3 + i) | 0) + x24) | 0);
+    var length$1 = this$5.length;
+    if ((((endIndex | endIndex) | ((length$1 - endIndex) | 0)) < 0)) {
+      if ((endIndex < 0)) {
+        $charAt(this$5, (-1));
+      }
+      $charAt(this$5, endIndex);
+    }
+    return $as_T(this$5.substring(0, endIndex));
+  }
+});
+var $d_Lokay_http_Fetch$ = new $TypeData().initClass($c_Lokay_http_Fetch$, "okay.http.Fetch$", ({
+  Lokay_http_Fetch$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Sum: 1
+}));
+var $n_Lokay_http_Fetch$;
+function $m_Lokay_http_Fetch$() {
+  if ((!$n_Lokay_http_Fetch$)) {
+    $n_Lokay_http_Fetch$ = new $c_Lokay_http_Fetch$();
+  }
+  return $n_Lokay_http_Fetch$;
+}
+/** @constructor */
+function $c_Lokay_http_Request$() {
+}
+$c_Lokay_http_Request$.prototype = new $h_O();
+$c_Lokay_http_Request$.prototype.constructor = $c_Lokay_http_Request$;
+/** @constructor */
+function $h_Lokay_http_Request$() {
+}
+$h_Lokay_http_Request$.prototype = $c_Lokay_http_Request$.prototype;
+$c_Lokay_http_Request$.prototype.apply__T__T__Lokay_http_Request = (function(method, target) {
+  matchResult5: {
+    var \u03b42$___1;
+    var \u03b42$___2;
+    var x8 = $f_T__indexOf__I__I($n(target), 63);
+    if ((x8 === (-1))) {
+      var \u03b42$___1 = target;
+      var \u03b42$___2 = "";
+      break matchResult5;
+    }
+    var this$2 = $n(target);
+    var length = this$2.length;
+    if ((((x8 | x8) | ((length - x8) | 0)) < 0)) {
+      if ((x8 < 0)) {
+        $charAt(this$2, (-1));
+      }
+      $charAt(this$2, x8);
+    }
+    var _1 = $as_T(this$2.substring(0, x8));
+    var this$4 = $n(target);
+    var beginIndex = ((1 + x8) | 0);
+    var length$1 = this$4.length;
+    if (((beginIndex >>> 0) > (length$1 >>> 0))) {
+      $charAt(this$4, beginIndex);
+    }
+    var _2 = $as_T(this$4.substring(beginIndex));
+    var \u03b42$___1 = _1;
+    var \u03b42$___2 = _2;
+  }
+  var path = $as_T(\u03b42$___1);
+  var q = $as_T(\u03b42$___2);
+  return new $c_Lokay_http_Request(method, path, $m_Lokay_http_Query$().parse__T__sci_Map(q), $m_sci_Map$EmptyMap$(), "", $m_s_None$());
+});
+$c_Lokay_http_Request$.prototype.post__T__T__T__Lokay_http_Request = (function(target, body, contentType) {
+  var \u03b43$ = this.apply__T__T__Lokay_http_Request("POST", target);
+  var this$3 = $m_sci_Map$();
+  var $x_1 = $m_sr_ScalaRunTime$();
+  var y = new $c_sci_$colon$colon(contentType, $m_sci_Nil$());
+  var elems = $x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("content-type", y)]));
+  var headers$1 = this$3.from__sc_IterableOnce__sci_Map(elems);
+  var this$4 = $n(\u03b43$);
+  var method$1 = this$4.Lokay_http_Request__f_method;
+  var this$5 = $n(\u03b43$);
+  var path$1 = this$5.Lokay_http_Request__f_path;
+  var this$6 = $n(\u03b43$);
+  var query$1 = this$6.Lokay_http_Request__f_query;
+  var this$7 = $n(\u03b43$);
+  var bytes$1 = this$7.Lokay_http_Request__f_bytes;
+  $n(\u03b43$);
+  return new $c_Lokay_http_Request(method$1, path$1, query$1, headers$1, body, bytes$1);
+});
+var $d_Lokay_http_Request$ = new $TypeData().initClass($c_Lokay_http_Request$, "okay.http.Request$", ({
+  Lokay_http_Request$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_http_Request$;
+function $m_Lokay_http_Request$() {
+  if ((!$n_Lokay_http_Request$)) {
+    $n_Lokay_http_Request$ = new $c_Lokay_http_Request$();
+  }
+  return $n_Lokay_http_Request$;
+}
+/** @constructor */
+function $c_Lokay_http_Response$() {
+}
+$c_Lokay_http_Response$.prototype = new $h_O();
+$c_Lokay_http_Response$.prototype.constructor = $c_Lokay_http_Response$;
+/** @constructor */
+function $h_Lokay_http_Response$() {
+}
+$h_Lokay_http_Response$.prototype = $c_Lokay_http_Response$.prototype;
+$c_Lokay_http_Response$.prototype.json__Lokay_effects_json_Json__I__Lokay_http_Response = (function(j, status) {
+  var this$3 = $m_sci_Map$();
+  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("Content-Type", "application/json")]));
+  var headers = this$3.from__sc_IterableOnce__sci_Map(elems);
+  var body = $m_Lokay_effects_json_Json$().print__Lokay_effects_json_Json__Z__T(j, false);
+  var bytes = $m_s_None$();
+  return new $c_Lokay_http_Response(status, headers, body, bytes);
+});
+$c_Lokay_http_Response$.prototype.text__T__I__Lokay_http_Response = (function(body, status) {
+  var this$3 = $m_sci_Map$();
+  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("Content-Type", "text/plain; charset=utf-8")]));
+  var headers = this$3.from__sc_IterableOnce__sci_Map(elems);
+  var bytes = $m_s_None$();
+  return new $c_Lokay_http_Response(status, headers, body, bytes);
+});
+var $d_Lokay_http_Response$ = new $TypeData().initClass($c_Lokay_http_Response$, "okay.http.Response$", ({
+  Lokay_http_Response$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_http_Response$;
+function $m_Lokay_http_Response$() {
+  if ((!$n_Lokay_http_Response$)) {
+    $n_Lokay_http_Response$ = new $c_Lokay_http_Response$();
+  }
+  return $n_Lokay_http_Response$;
+}
+/** @constructor */
 function $c_Lokay_scala3_Crossed$() {
 }
 $c_Lokay_scala3_Crossed$.prototype = new $h_O();
@@ -34229,8 +34871,8 @@ function $h_Lokay_serverless_cloud_Ai$() {
 }
 $h_Lokay_serverless_cloud_Ai$.prototype = $c_Lokay_serverless_cloud_Ai$.prototype;
 $c_Lokay_serverless_cloud_Ai$.prototype.run__T__Lokay_effects_json_Json__Lokay_scala3_Place__Lokay_scala3_Prog = (function(model, input, x$3) {
-  var op$proxy22 = new $c_Lokay_serverless_cloud_Ai$Run(model, input);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy22);
+  var op$proxy21 = new $c_Lokay_serverless_cloud_Ai$Run(model, input);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy21);
 });
 var $d_Lokay_serverless_cloud_Ai$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Ai$, "okay.serverless.cloud.Ai$", ({
   Lokay_serverless_cloud_Ai$: 1,
@@ -34254,8 +34896,8 @@ function $h_Lokay_serverless_cloud_Analytics$() {
 }
 $h_Lokay_serverless_cloud_Analytics$.prototype = $c_Lokay_serverless_cloud_Analytics$.prototype;
 $c_Lokay_serverless_cloud_Analytics$.prototype.write__T__Lokay_serverless_cloud_DataPoint__Lokay_scala3_Place__Lokay_scala3_Prog = (function(dataset, point, x$3) {
-  var op$proxy26 = new $c_Lokay_serverless_cloud_Analytics$Write(dataset, point);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy26);
+  var op$proxy25 = new $c_Lokay_serverless_cloud_Analytics$Write(dataset, point);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy25);
 });
 var $d_Lokay_serverless_cloud_Analytics$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Analytics$, "okay.serverless.cloud.Analytics$", ({
   Lokay_serverless_cloud_Analytics$: 1,
@@ -34278,7 +34920,7 @@ $c_Lokay_serverless_cloud_Blobs$.prototype.constructor = $c_Lokay_serverless_clo
 function $h_Lokay_serverless_cloud_Blobs$() {
 }
 $h_Lokay_serverless_cloud_Blobs$.prototype = $c_Lokay_serverless_cloud_Blobs$.prototype;
-$c_Lokay_serverless_cloud_Blobs$.prototype.put__T__T__Lokay_serverless_cloud_Bytes__s_Option__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog = (function(bucket, key, body, contentType, metadata, x$6) {
+$c_Lokay_serverless_cloud_Blobs$.prototype.put__T__T__Lokay_http_Bytes__s_Option__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog = (function(bucket, key, body, contentType, metadata, x$6) {
   var op$proxy6 = new $c_Lokay_serverless_cloud_Blobs$Put(bucket, key, body, contentType, metadata);
   return new $c_Lokay_scala3_Prog$Perform(x$6, op$proxy6);
 });
@@ -34321,27 +34963,27 @@ function $h_Lokay_serverless_cloud_Cache$() {
 }
 $h_Lokay_serverless_cloud_Cache$.prototype = $c_Lokay_serverless_cloud_Cache$.prototype;
 $c_Lokay_serverless_cloud_Cache$.prototype.get__T__Lokay_scala3_Place__Lokay_scala3_Prog = (function(url, x$2) {
-  var op$proxy17 = new $c_Lokay_serverless_cloud_Cache$Match(url);
-  return new $c_Lokay_scala3_Prog$Perform(x$2, op$proxy17);
+  var op$proxy16 = new $c_Lokay_serverless_cloud_Cache$Match(url);
+  return new $c_Lokay_scala3_Prog$Perform(x$2, op$proxy16);
 });
-$c_Lokay_serverless_cloud_Cache$.prototype.put__T__Lokay_serverless_cloud_Response__J__Lokay_scala3_Place__Lokay_scala3_Prog = (function(url, response, ttlSeconds_$_lo, ttlSeconds_$_hi, x$4) {
-  var op$proxy18 = new $c_Lokay_serverless_cloud_Cache$Put(url, response, ttlSeconds_$_lo, ttlSeconds_$_hi);
-  return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy18);
+$c_Lokay_serverless_cloud_Cache$.prototype.put__T__Lokay_http_Response__J__Lokay_scala3_Place__Lokay_scala3_Prog = (function(url, response, ttlSeconds_$_lo, ttlSeconds_$_hi, x$4) {
+  var op$proxy17 = new $c_Lokay_serverless_cloud_Cache$Put(url, response, ttlSeconds_$_lo, ttlSeconds_$_hi);
+  return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy17);
 });
 $c_Lokay_serverless_cloud_Cache$.prototype.through__T__J__F0__Lokay_scala3_Place__Lokay_scala3_Prog = (function(url, ttlSeconds_$_lo, ttlSeconds_$_hi, make, x$4) {
   var p$1 = this.get__T__Lokay_scala3_Place__Lokay_scala3_Prog(url, x$4);
   var f$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
     var x$1$1 = $as_s_Option(x$1);
     if ((x$1$1 instanceof $c_s_Some)) {
-      var r = $as_Lokay_serverless_cloud_Response($n($as_s_Some(x$1$1)).s_Some__f_value);
+      var r = $as_Lokay_http_Response($n($as_s_Some(x$1$1)).s_Some__f_value);
       return new $c_Lokay_scala3_Prog$Value(r);
     }
     var x = $m_s_None$();
     if ((x === x$1$1)) {
       var p = $as_Lokay_scala3_Prog($n(make).apply__O());
       var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$2) => {
-        var r$1 = $as_Lokay_serverless_cloud_Response(r$2);
-        return (($n(r$1).Lokay_serverless_cloud_Response__f_status === 200) ? $m_Lokay_scala3_Prog$package$().as__Lokay_scala3_Prog__O__Lokay_scala3_Prog($m_Lokay_serverless_cloud_Cache$().put__T__Lokay_serverless_cloud_Response__J__Lokay_scala3_Place__Lokay_scala3_Prog(url, r$1, ttlSeconds_$_lo, ttlSeconds_$_hi, x$4), r$1) : new $c_Lokay_scala3_Prog$Value(r$1));
+        var r$1 = $as_Lokay_http_Response(r$2);
+        return (($n(r$1).Lokay_http_Response__f_status === 200) ? $m_Lokay_scala3_Prog$package$().as__Lokay_scala3_Prog__O__Lokay_scala3_Prog($m_Lokay_serverless_cloud_Cache$().put__T__Lokay_http_Response__J__Lokay_scala3_Place__Lokay_scala3_Prog(url, r$1, ttlSeconds_$_lo, ttlSeconds_$_hi, x$4), r$1) : new $c_Lokay_scala3_Prog$Value(r$1));
       }));
       return new $c_Lokay_scala3_Prog$FlatMap(p, f);
     }
@@ -34360,31 +35002,6 @@ function $m_Lokay_serverless_cloud_Cache$() {
     $n_Lokay_serverless_cloud_Cache$ = new $c_Lokay_serverless_cloud_Cache$();
   }
   return $n_Lokay_serverless_cloud_Cache$;
-}
-/** @constructor */
-function $c_Lokay_serverless_cloud_Fetch$() {
-}
-$c_Lokay_serverless_cloud_Fetch$.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Fetch$.prototype.constructor = $c_Lokay_serverless_cloud_Fetch$;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Fetch$() {
-}
-$h_Lokay_serverless_cloud_Fetch$.prototype = $c_Lokay_serverless_cloud_Fetch$.prototype;
-$c_Lokay_serverless_cloud_Fetch$.prototype.apply__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(request, x$2) {
-  var op$proxy16 = new $c_Lokay_serverless_cloud_Fetch$Call(request);
-  return new $c_Lokay_scala3_Prog$Perform(x$2, op$proxy16);
-});
-var $d_Lokay_serverless_cloud_Fetch$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Fetch$, "okay.serverless.cloud.Fetch$", ({
-  Lokay_serverless_cloud_Fetch$: 1,
-  s_deriving_Mirror: 1,
-  s_deriving_Mirror$Sum: 1
-}));
-var $n_Lokay_serverless_cloud_Fetch$;
-function $m_Lokay_serverless_cloud_Fetch$() {
-  if ((!$n_Lokay_serverless_cloud_Fetch$)) {
-    $n_Lokay_serverless_cloud_Fetch$ = new $c_Lokay_serverless_cloud_Fetch$();
-  }
-  return $n_Lokay_serverless_cloud_Fetch$;
 }
 /** @constructor */
 function $c_Lokay_serverless_cloud_FlowState$() {
@@ -34578,8 +35195,8 @@ function $h_Lokay_serverless_cloud_Limits$() {
 }
 $h_Lokay_serverless_cloud_Limits$.prototype = $c_Lokay_serverless_cloud_Limits$.prototype;
 $c_Lokay_serverless_cloud_Limits$.prototype.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog = (function(name, key, x$3) {
-  var op$proxy21 = new $c_Lokay_serverless_cloud_Limits$Take(name, key);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy21);
+  var op$proxy20 = new $c_Lokay_serverless_cloud_Limits$Take(name, key);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy20);
 });
 var $d_Lokay_serverless_cloud_Limits$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Limits$, "okay.serverless.cloud.Limits$", ({
   Lokay_serverless_cloud_Limits$: 1,
@@ -34603,8 +35220,8 @@ function $h_Lokay_serverless_cloud_Mails$() {
 }
 $h_Lokay_serverless_cloud_Mails$.prototype = $c_Lokay_serverless_cloud_Mails$.prototype;
 $c_Lokay_serverless_cloud_Mails$.prototype.send__T__Lokay_serverless_cloud_Mail__Lokay_scala3_Place__Lokay_scala3_Prog = (function(binding, mail, x$3) {
-  var op$proxy27 = new $c_Lokay_serverless_cloud_Mails$Send(binding, mail);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy27);
+  var op$proxy26 = new $c_Lokay_serverless_cloud_Mails$Send(binding, mail);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy26);
 });
 var $d_Lokay_serverless_cloud_Mails$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Mails$, "okay.serverless.cloud.Mails$", ({
   Lokay_serverless_cloud_Mails$: 1,
@@ -34652,9 +35269,9 @@ $c_Lokay_serverless_cloud_Objects$.prototype.constructor = $c_Lokay_serverless_c
 function $h_Lokay_serverless_cloud_Objects$() {
 }
 $h_Lokay_serverless_cloud_Objects$.prototype = $c_Lokay_serverless_cloud_Objects$.prototype;
-$c_Lokay_serverless_cloud_Objects$.prototype.call__T__T__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(namespace, name, request, x$4) {
-  var op$proxy28 = new $c_Lokay_serverless_cloud_Objects$Call(namespace, name, request);
-  return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy28);
+$c_Lokay_serverless_cloud_Objects$.prototype.call__T__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(namespace, name, request, x$4) {
+  var op$proxy27 = new $c_Lokay_serverless_cloud_Objects$Call(namespace, name, request);
+  return new $c_Lokay_scala3_Prog$Perform(x$4, op$proxy27);
 });
 var $d_Lokay_serverless_cloud_Objects$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Objects$, "okay.serverless.cloud.Objects$", ({
   Lokay_serverless_cloud_Objects$: 1,
@@ -34695,71 +35312,6 @@ function $m_Lokay_serverless_cloud_Queues$() {
   return $n_Lokay_serverless_cloud_Queues$;
 }
 /** @constructor */
-function $c_Lokay_serverless_cloud_Request$() {
-}
-$c_Lokay_serverless_cloud_Request$.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Request$.prototype.constructor = $c_Lokay_serverless_cloud_Request$;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Request$() {
-}
-$h_Lokay_serverless_cloud_Request$.prototype = $c_Lokay_serverless_cloud_Request$.prototype;
-$c_Lokay_serverless_cloud_Request$.prototype.post__T__T__sci_Map__Lokay_serverless_cloud_Request = (function(url, body, headers) {
-  var body$1 = $m_Lokay_serverless_cloud_Bytes$().of__T__Lokay_serverless_cloud_Bytes(body);
-  return new $c_Lokay_serverless_cloud_Request("POST", url, headers, body$1);
-});
-var $d_Lokay_serverless_cloud_Request$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Request$, "okay.serverless.cloud.Request$", ({
-  Lokay_serverless_cloud_Request$: 1,
-  s_deriving_Mirror: 1,
-  s_deriving_Mirror$Product: 1
-}));
-var $n_Lokay_serverless_cloud_Request$;
-function $m_Lokay_serverless_cloud_Request$() {
-  if ((!$n_Lokay_serverless_cloud_Request$)) {
-    $n_Lokay_serverless_cloud_Request$ = new $c_Lokay_serverless_cloud_Request$();
-  }
-  return $n_Lokay_serverless_cloud_Request$;
-}
-/** @constructor */
-function $c_Lokay_serverless_cloud_Response$() {
-  this.Lokay_serverless_cloud_Response$__f_notFound = null;
-  $n_Lokay_serverless_cloud_Response$ = this;
-  this.Lokay_serverless_cloud_Response$__f_notFound = this.text__T__I__Lokay_serverless_cloud_Response("not found", 404);
-}
-$c_Lokay_serverless_cloud_Response$.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Response$.prototype.constructor = $c_Lokay_serverless_cloud_Response$;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Response$() {
-}
-$h_Lokay_serverless_cloud_Response$.prototype = $c_Lokay_serverless_cloud_Response$.prototype;
-$c_Lokay_serverless_cloud_Response$.prototype.text__T__I__Lokay_serverless_cloud_Response = (function(s, status) {
-  $m_Lokay_serverless_cloud_Response$();
-  var this$3 = $m_sci_Map$();
-  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("content-type", "text/plain; charset=utf-8")]));
-  var headers = this$3.from__sc_IterableOnce__sci_Map(elems);
-  var body = $m_Lokay_serverless_cloud_Bytes$().of__T__Lokay_serverless_cloud_Bytes(s);
-  return new $c_Lokay_serverless_cloud_Response(status, headers, body);
-});
-$c_Lokay_serverless_cloud_Response$.prototype.json__Lokay_effects_json_Json__I__Lokay_serverless_cloud_Response = (function(j, status) {
-  $m_Lokay_serverless_cloud_Response$();
-  var this$3 = $m_sci_Map$();
-  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("content-type", "application/json")]));
-  var headers = this$3.from__sc_IterableOnce__sci_Map(elems);
-  var body = $m_Lokay_serverless_cloud_Bytes$().of__T__Lokay_serverless_cloud_Bytes($m_Lokay_effects_json_Json$().print__Lokay_effects_json_Json__Z__T(j, false));
-  return new $c_Lokay_serverless_cloud_Response(status, headers, body);
-});
-var $d_Lokay_serverless_cloud_Response$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Response$, "okay.serverless.cloud.Response$", ({
-  Lokay_serverless_cloud_Response$: 1,
-  s_deriving_Mirror: 1,
-  s_deriving_Mirror$Product: 1
-}));
-var $n_Lokay_serverless_cloud_Response$;
-function $m_Lokay_serverless_cloud_Response$() {
-  if ((!$n_Lokay_serverless_cloud_Response$)) {
-    $n_Lokay_serverless_cloud_Response$ = new $c_Lokay_serverless_cloud_Response$();
-  }
-  return $n_Lokay_serverless_cloud_Response$;
-}
-/** @constructor */
 function $c_Lokay_serverless_cloud_Services$() {
 }
 $c_Lokay_serverless_cloud_Services$.prototype = new $h_O();
@@ -34768,9 +35320,9 @@ $c_Lokay_serverless_cloud_Services$.prototype.constructor = $c_Lokay_serverless_
 function $h_Lokay_serverless_cloud_Services$() {
 }
 $h_Lokay_serverless_cloud_Services$.prototype = $c_Lokay_serverless_cloud_Services$.prototype;
-$c_Lokay_serverless_cloud_Services$.prototype.call__T__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(service, request, x$3) {
-  var op$proxy20 = new $c_Lokay_serverless_cloud_Services$Call(service, request);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy20);
+$c_Lokay_serverless_cloud_Services$.prototype.call__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog = (function(service, request, x$3) {
+  var op$proxy19 = new $c_Lokay_serverless_cloud_Services$Call(service, request);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy19);
 });
 var $d_Lokay_serverless_cloud_Services$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Services$, "okay.serverless.cloud.Services$", ({
   Lokay_serverless_cloud_Services$: 1,
@@ -34820,18 +35372,18 @@ $c_Lokay_serverless_cloud_Sockets$.prototype.constructor = $c_Lokay_serverless_c
 function $h_Lokay_serverless_cloud_Sockets$() {
 }
 $h_Lokay_serverless_cloud_Sockets$.prototype = $c_Lokay_serverless_cloud_Sockets$.prototype;
-$c_Lokay_serverless_cloud_Sockets$.prototype.accept__Lokay_serverless_cloud_Request__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog = (function(request, tags, x$3) {
+$c_Lokay_serverless_cloud_Sockets$.prototype.accept__Lokay_http_Request__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog = (function(request, tags, x$3) {
   var tags$1 = $n(tags).toList__sci_List();
-  var op$proxy29 = new $c_Lokay_serverless_cloud_Sockets$Accept(request, tags$1);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy29);
+  var op$proxy28 = new $c_Lokay_serverless_cloud_Sockets$Accept(request, tags$1);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy28);
 });
 $c_Lokay_serverless_cloud_Sockets$.prototype.send__Lokay_serverless_cloud_Socket__T__Lokay_scala3_Place__Lokay_scala3_Prog = (function(socket, text, x$3) {
-  var op$proxy30 = new $c_Lokay_serverless_cloud_Sockets$Send(socket, text);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy30);
+  var op$proxy29 = new $c_Lokay_serverless_cloud_Sockets$Send(socket, text);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy29);
 });
 $c_Lokay_serverless_cloud_Sockets$.prototype.open__s_Option__Lokay_scala3_Place__Lokay_scala3_Prog = (function(tag, x$2) {
-  var op$proxy32 = new $c_Lokay_serverless_cloud_Sockets$Open(tag);
-  return new $c_Lokay_scala3_Prog$Perform(x$2, op$proxy32);
+  var op$proxy31 = new $c_Lokay_serverless_cloud_Sockets$Open(tag);
+  return new $c_Lokay_scala3_Prog$Perform(x$2, op$proxy31);
 });
 $c_Lokay_serverless_cloud_Sockets$.prototype.broadcast__T__s_Option__Lokay_scala3_Place__Lokay_scala3_Prog = (function(text, tag, x$3) {
   var p$1 = this.open__s_Option__Lokay_scala3_Place__Lokay_scala3_Prog(tag, x$3);
@@ -34933,8 +35485,8 @@ $c_Lokay_serverless_cloud_SqlValue$.prototype.of__O__Lokay_serverless_cloud_SqlV
     var s = $as_T(p);
     return new $c_Lokay_serverless_cloud_SqlValue$Text(s);
   }
-  if ((p instanceof $c_Lokay_serverless_cloud_Bytes)) {
-    var b = $as_Lokay_serverless_cloud_Bytes(p);
+  if ((p instanceof $c_Lokay_http_Bytes)) {
+    var b = $as_Lokay_http_Bytes(p);
     return new $c_Lokay_serverless_cloud_SqlValue$Blob(b);
   }
   if ((p === null)) {
@@ -35007,12 +35559,12 @@ function $h_Lokay_serverless_cloud_Vectors$() {
 $h_Lokay_serverless_cloud_Vectors$.prototype = $c_Lokay_serverless_cloud_Vectors$.prototype;
 $c_Lokay_serverless_cloud_Vectors$.prototype.upsert__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog = (function(index, vectors, x$3) {
   var vectors$1 = $n(vectors).toList__sci_List();
-  var op$proxy23 = new $c_Lokay_serverless_cloud_Vectors$Upsert(index, vectors$1);
-  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy23);
+  var op$proxy22 = new $c_Lokay_serverless_cloud_Vectors$Upsert(index, vectors$1);
+  return new $c_Lokay_scala3_Prog$Perform(x$3, op$proxy22);
 });
 $c_Lokay_serverless_cloud_Vectors$.prototype.query__T__sci_List__I__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog = (function(index, values, topK, filter, x$5) {
-  var op$proxy24 = new $c_Lokay_serverless_cloud_Vectors$Query(index, values, topK, filter);
-  return new $c_Lokay_scala3_Prog$Perform(x$5, op$proxy24);
+  var op$proxy23 = new $c_Lokay_serverless_cloud_Vectors$Query(index, values, topK, filter);
+  return new $c_Lokay_scala3_Prog$Perform(x$5, op$proxy23);
 });
 var $d_Lokay_serverless_cloud_Vectors$ = new $TypeData().initClass($c_Lokay_serverless_cloud_Vectors$, "okay.serverless.cloud.Vectors$", ({
   Lokay_serverless_cloud_Vectors$: 1,
@@ -42519,6 +43071,306 @@ var $d_Lokay_effects_parsing_ParseError = new $TypeData().initClass($c_Lokay_eff
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
+function $c_Lokay_http_Request(method, path, query, headers, body, bytes) {
+  this.Lokay_http_Request__f_method = null;
+  this.Lokay_http_Request__f_path = null;
+  this.Lokay_http_Request__f_query = null;
+  this.Lokay_http_Request__f_headers = null;
+  this.Lokay_http_Request__f_body = null;
+  this.Lokay_http_Request__f_bytes = null;
+  this.Lokay_http_Request__f_method = method;
+  this.Lokay_http_Request__f_path = path;
+  this.Lokay_http_Request__f_query = query;
+  this.Lokay_http_Request__f_headers = headers;
+  this.Lokay_http_Request__f_body = body;
+  this.Lokay_http_Request__f_bytes = bytes;
+}
+$c_Lokay_http_Request.prototype = new $h_O();
+$c_Lokay_http_Request.prototype.constructor = $c_Lokay_http_Request;
+/** @constructor */
+function $h_Lokay_http_Request() {
+}
+$h_Lokay_http_Request.prototype = $c_Lokay_http_Request.prototype;
+$c_Lokay_http_Request.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_http_Request.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1878821404, true);
+});
+$c_Lokay_http_Request.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_http_Request)) {
+    var x$0$2 = $as_Lokay_http_Request(x$0);
+    if (((this.Lokay_http_Request__f_method === $n(x$0$2).Lokay_http_Request__f_method) && (this.Lokay_http_Request__f_path === $n(x$0$2).Lokay_http_Request__f_path))) {
+      var x = this.Lokay_http_Request__f_query;
+      var x$2 = $n(x$0$2).Lokay_http_Request__f_query;
+      var $x_2 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$3 = this.Lokay_http_Request__f_headers;
+      var x$4 = $n(x$0$2).Lokay_http_Request__f_headers;
+      var $x_1 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_1 = false;
+    }
+    if (($x_1 && (this.Lokay_http_Request__f_body === $n(x$0$2).Lokay_http_Request__f_body))) {
+      var x$5 = this.Lokay_http_Request__f_bytes;
+      var x$6 = $n(x$0$2).Lokay_http_Request__f_bytes;
+      return ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_http_Request.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_http_Request.prototype.productArity__I = (function() {
+  return 6;
+});
+$c_Lokay_http_Request.prototype.productPrefix__T = (function() {
+  return "Request";
+});
+$c_Lokay_http_Request.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_http_Request__f_method;
+      break;
+    }
+    case 1: {
+      return this.Lokay_http_Request__f_path;
+      break;
+    }
+    case 2: {
+      return this.Lokay_http_Request__f_query;
+      break;
+    }
+    case 3: {
+      return this.Lokay_http_Request__f_headers;
+      break;
+    }
+    case 4: {
+      return this.Lokay_http_Request__f_body;
+      break;
+    }
+    case 5: {
+      return this.Lokay_http_Request__f_bytes;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_http_Request.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "method";
+      break;
+    }
+    case 1: {
+      return "path";
+      break;
+    }
+    case 2: {
+      return "query";
+      break;
+    }
+    case 3: {
+      return "headers";
+      break;
+    }
+    case 4: {
+      return "body";
+      break;
+    }
+    case 5: {
+      return "bytes";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_http_Request.prototype.header__T__s_Option = (function(name) {
+  var $x_1 = this.Lokay_http_Request__f_headers;
+  var this$1 = $n(name);
+  var this$2 = $n($n($x_1).get__O__s_Option($as_T(this$1.toLowerCase())));
+  if (this$2.isEmpty__Z()) {
+    return $m_s_None$();
+  } else {
+    var x0 = this$2.get__O();
+    var _$1 = $as_sci_List(x0);
+    return $n(_$1).headOption__s_Option();
+  }
+});
+$c_Lokay_http_Request.prototype.param__T__s_Option = (function(name) {
+  var this$1 = $n($n(this.Lokay_http_Request__f_query).get__O__s_Option(name));
+  if (this$1.isEmpty__Z()) {
+    return $m_s_None$();
+  } else {
+    var x0 = this$1.get__O();
+    var _$2 = $as_sci_List(x0);
+    return $n(_$2).headOption__s_Option();
+  }
+});
+function $as_Lokay_http_Request(obj) {
+  return (((obj instanceof $c_Lokay_http_Request) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Request"));
+}
+function $isArrayOf_Lokay_http_Request(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Request)));
+}
+function $asArrayOf_Lokay_http_Request(obj, depth) {
+  return (($isArrayOf_Lokay_http_Request(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Request;", depth));
+}
+var $d_Lokay_http_Request = new $TypeData().initClass($c_Lokay_http_Request, "okay.http.Request", ({
+  Lokay_http_Request: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_http_Response(status, headers, body, bytes) {
+  this.Lokay_http_Response__f_status = 0;
+  this.Lokay_http_Response__f_headers = null;
+  this.Lokay_http_Response__f_body = null;
+  this.Lokay_http_Response__f_bytes = null;
+  this.Lokay_http_Response__f_status = status;
+  this.Lokay_http_Response__f_headers = headers;
+  this.Lokay_http_Response__f_body = body;
+  this.Lokay_http_Response__f_bytes = bytes;
+}
+$c_Lokay_http_Response.prototype = new $h_O();
+$c_Lokay_http_Response.prototype.constructor = $c_Lokay_http_Response;
+/** @constructor */
+function $h_Lokay_http_Response() {
+}
+$h_Lokay_http_Response.prototype = $c_Lokay_http_Response.prototype;
+$c_Lokay_http_Response.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_http_Response.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-275679135));
+  var hash$1 = acc;
+  var data = this.Lokay_http_Response__f_status;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x = this.Lokay_http_Response__f_headers;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$1 = this.Lokay_http_Response__f_body;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  var x$2 = this.Lokay_http_Response__f_bytes;
+  var data$3 = $m_sr_Statics$().anyHash__O__I(x$2);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$3);
+  var hash$5 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$5, 4);
+});
+$c_Lokay_http_Response.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_http_Response)) {
+    var x$0$2 = $as_Lokay_http_Response(x$0);
+    if ((this.Lokay_http_Response__f_status === $n(x$0$2).Lokay_http_Response__f_status)) {
+      var x = this.Lokay_http_Response__f_headers;
+      var x$2 = $n(x$0$2).Lokay_http_Response__f_headers;
+      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_1 = false;
+    }
+    if (($x_1 && (this.Lokay_http_Response__f_body === $n(x$0$2).Lokay_http_Response__f_body))) {
+      var x$3 = this.Lokay_http_Response__f_bytes;
+      var x$4 = $n(x$0$2).Lokay_http_Response__f_bytes;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_http_Response.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_http_Response.prototype.productArity__I = (function() {
+  return 4;
+});
+$c_Lokay_http_Response.prototype.productPrefix__T = (function() {
+  return "Response";
+});
+$c_Lokay_http_Response.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_http_Response__f_status;
+      break;
+    }
+    case 1: {
+      return this.Lokay_http_Response__f_headers;
+      break;
+    }
+    case 2: {
+      return this.Lokay_http_Response__f_body;
+      break;
+    }
+    case 3: {
+      return this.Lokay_http_Response__f_bytes;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_http_Response.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "status";
+      break;
+    }
+    case 1: {
+      return "headers";
+      break;
+    }
+    case 2: {
+      return "body";
+      break;
+    }
+    case 3: {
+      return "bytes";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_http_Response(obj) {
+  return (((obj instanceof $c_Lokay_http_Response) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Response"));
+}
+function $isArrayOf_Lokay_http_Response(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Response)));
+}
+function $asArrayOf_Lokay_http_Response(obj, depth) {
+  return (($isArrayOf_Lokay_http_Response(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Response;", depth));
+}
+var $d_Lokay_http_Response = new $TypeData().initClass($c_Lokay_http_Response, "okay.http.Response", ({
+  Lokay_http_Response: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_scala3_Cek$State(c, \u01cf\u0183, \u01ce\u01ba) {
   this.Lokay_scala3_Cek$State__f_c = null;
   this.Lokay_scala3_Cek$State__f_\u01cf\u0183 = null;
@@ -44711,426 +45563,6 @@ var $d_Lokay_serverless_cloud_Platform = new $TypeData().initClass($c_Lokay_serv
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
-function $c_Lokay_serverless_cloud_Request(method, url, headers, body) {
-  this.Lokay_serverless_cloud_Request__f_method = null;
-  this.Lokay_serverless_cloud_Request__f_url = null;
-  this.Lokay_serverless_cloud_Request__f_headers = null;
-  this.Lokay_serverless_cloud_Request__f_body = null;
-  this.Lokay_serverless_cloud_Request__f_method = method;
-  this.Lokay_serverless_cloud_Request__f_url = url;
-  this.Lokay_serverless_cloud_Request__f_headers = headers;
-  this.Lokay_serverless_cloud_Request__f_body = body;
-}
-$c_Lokay_serverless_cloud_Request.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Request.prototype.constructor = $c_Lokay_serverless_cloud_Request;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Request() {
-}
-$h_Lokay_serverless_cloud_Request.prototype = $c_Lokay_serverless_cloud_Request.prototype;
-$c_Lokay_serverless_cloud_Request.prototype.productIterator__sc_Iterator = (function() {
-  return new $c_s_Product$$anon$1(this);
-});
-$c_Lokay_serverless_cloud_Request.prototype.hashCode__I = (function() {
-  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1878821404, true);
-});
-$c_Lokay_serverless_cloud_Request.prototype.equals__O__Z = (function(x$0) {
-  if ((this === x$0)) {
-    return true;
-  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_Request)) {
-    var x$0$2 = $as_Lokay_serverless_cloud_Request(x$0);
-    if (((this.Lokay_serverless_cloud_Request__f_method === $n(x$0$2).Lokay_serverless_cloud_Request__f_method) && (this.Lokay_serverless_cloud_Request__f_url === $n(x$0$2).Lokay_serverless_cloud_Request__f_url))) {
-      var x = this.Lokay_serverless_cloud_Request__f_headers;
-      var x$2 = $n(x$0$2).Lokay_serverless_cloud_Request__f_headers;
-      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
-    } else {
-      var $x_1 = false;
-    }
-    if ($x_1) {
-      var x$3 = this.Lokay_serverless_cloud_Request__f_body;
-      var x$4 = $n(x$0$2).Lokay_serverless_cloud_Request__f_body;
-      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-});
-$c_Lokay_serverless_cloud_Request.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
-});
-$c_Lokay_serverless_cloud_Request.prototype.productArity__I = (function() {
-  return 4;
-});
-$c_Lokay_serverless_cloud_Request.prototype.productPrefix__T = (function() {
-  return "Request";
-});
-$c_Lokay_serverless_cloud_Request.prototype.productElement__I__O = (function(n) {
-  switch (n) {
-    case 0: {
-      return this.Lokay_serverless_cloud_Request__f_method;
-      break;
-    }
-    case 1: {
-      return this.Lokay_serverless_cloud_Request__f_url;
-      break;
-    }
-    case 2: {
-      return this.Lokay_serverless_cloud_Request__f_headers;
-      break;
-    }
-    case 3: {
-      return this.Lokay_serverless_cloud_Request__f_body;
-      break;
-    }
-    default: {
-      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-    }
-  }
-});
-$c_Lokay_serverless_cloud_Request.prototype.productElementName__I__T = (function(n) {
-  switch (n) {
-    case 0: {
-      return "method";
-      break;
-    }
-    case 1: {
-      return "url";
-      break;
-    }
-    case 2: {
-      return "headers";
-      break;
-    }
-    case 3: {
-      return "body";
-      break;
-    }
-    default: {
-      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-    }
-  }
-});
-$c_Lokay_serverless_cloud_Request.prototype.header__T__s_Option = (function(name) {
-  var this$1 = $n(this.Lokay_serverless_cloud_Request__f_headers);
-  var pf = new $c_Lokay_serverless_cloud_Request$$anon$1(name);
-  return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this$1, pf);
-});
-$c_Lokay_serverless_cloud_Request.prototype.path__T = (function() {
-  matchResult8: {
-    var rest;
-    var this$1 = $n(this.Lokay_serverless_cloud_Request__f_url);
-    var x14 = $uI(this$1.indexOf("://"));
-    if ((x14 === (-1))) {
-      var rest = this.Lokay_serverless_cloud_Request__f_url;
-      break matchResult8;
-    }
-    var x13 = $f_T__indexOf__I__I__I($n(this.Lokay_serverless_cloud_Request__f_url), 47, ((3 + x14) | 0));
-    if ((x13 === (-1))) {
-      var rest = "/";
-      break matchResult8;
-    }
-    var this$2 = $n(this.Lokay_serverless_cloud_Request__f_url);
-    var length = this$2.length;
-    if (((x13 >>> 0) > (length >>> 0))) {
-      $charAt(this$2, x13);
-    }
-    var rest = $as_T(this$2.substring(x13));
-  }
-  _return: {
-    var this$8 = $n(rest);
-    var len = this$8.length;
-    var i = 0;
-    while ((i < len)) {
-      var this$9 = $n(rest);
-      var index = i;
-      var x0 = $charAt(this$9, index);
-      if ((x0 === 63)) {
-        var x1 = i;
-        break _return;
-      }
-      i = ((1 + i) | 0);
-    }
-    var x1 = (-1);
-  }
-  if ((x1 === (-1))) {
-    return rest;
-  } else {
-    var this$10 = $n(rest);
-    var length$1 = this$10.length;
-    if ((((x1 | x1) | ((length$1 - x1) | 0)) < 0)) {
-      if ((x1 < 0)) {
-        $charAt(this$10, (-1));
-      }
-      $charAt(this$10, x1);
-    }
-    return $as_T(this$10.substring(0, x1));
-  }
-});
-$c_Lokay_serverless_cloud_Request.prototype.query__sci_Map = (function() {
-  var x21 = $f_T__indexOf__I__I($n(this.Lokay_serverless_cloud_Request__f_url), 63);
-  if ((x21 === (-1))) {
-    return $m_sci_Map$EmptyMap$();
-  }
-  var $x_2 = $m_s_Predef$();
-  var $x_1 = $m_sc_StringOps$();
-  var this$2 = $n(this.Lokay_serverless_cloud_Request__f_url);
-  var beginIndex = ((1 + x21) | 0);
-  var length = this$2.length;
-  if (((beginIndex >>> 0) > (length >>> 0))) {
-    $charAt(this$2, beginIndex);
-  }
-  var x = $as_T(this$2.substring(beginIndex));
-  var this$6 = $n($x_2.wrapRefArray__AO__scm_ArraySeq$ofRef($x_1.split$extension__T__C__AT(x, 38)));
-  var this$11 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$6));
-  var f = ((_$2) => {
-    var _$2$1 = $as_T(_$2);
-    var this$10 = $n(_$2$1);
-    return (!(this$10 === ""));
-  });
-  var l = this$11;
-  block: {
-    var result;
-    while (true) {
-      if ($n(l).isEmpty__Z()) {
-        var result = $m_sci_Nil$();
-        break;
-      } else {
-        var h = $n(l).head__O();
-        var t = $as_sci_List($n(l).tail__O());
-        if ((!$uZ(f(h)))) {
-          l = t;
-          continue;
-        }
-        var start = l;
-        var remaining = t;
-        while (true) {
-          if ($n(remaining).isEmpty__Z()) {
-            var result = start;
-            break block;
-          } else {
-            var x$1 = $n(remaining).head__O();
-            if ($uZ(f(x$1))) {
-              remaining = $as_sci_List($n(remaining).tail__O());
-              continue;
-            }
-            var firstMiss = remaining;
-            var newHead = new $c_sci_$colon$colon($n(start).head__O(), $m_sci_Nil$());
-            var toProcess = $as_sci_List($n(start).tail__O());
-            var currentLast = newHead;
-            while ((toProcess !== firstMiss)) {
-              var newElem = new $c_sci_$colon$colon($n(toProcess).head__O(), $m_sci_Nil$());
-              $n(currentLast).sci_$colon$colon__f_next = newElem;
-              currentLast = newElem;
-              toProcess = $as_sci_List($n(toProcess).tail__O());
-            }
-            var next = $as_sci_List($n(firstMiss).tail__O());
-            var nextToCopy = next;
-            while ((!$n(next).isEmpty__Z())) {
-              var head = $n(next).head__O();
-              if ($uZ(f(head))) {
-                next = $as_sci_List($n(next).tail__O());
-              } else {
-                while ((nextToCopy !== next)) {
-                  var newElem$2 = new $c_sci_$colon$colon($n(nextToCopy).head__O(), $m_sci_Nil$());
-                  $n(currentLast).sci_$colon$colon__f_next = newElem$2;
-                  currentLast = newElem$2;
-                  nextToCopy = $as_sci_List($n(nextToCopy).tail__O());
-                }
-                nextToCopy = $as_sci_List($n(next).tail__O());
-                next = $as_sci_List($n(next).tail__O());
-              }
-            }
-            if ((!$n(nextToCopy).isEmpty__Z())) {
-              $n(currentLast).sci_$colon$colon__f_next = nextToCopy;
-            }
-            var result = newHead;
-            break block;
-          }
-        }
-      }
-    }
-  }
-  var this$21 = $n(result);
-  var f$1 = ((kv) => {
-    var kv$1 = $as_T(kv);
-    var x15 = $f_T__split__T__I__AT($n(kv$1), "=", 2);
-    if ((x15 !== null)) {
-      if (($m_s_Array$UnapplySeqWrapper$().lengthCompare$extension__O__I__I(x15, 2) === 0)) {
-        var x19 = $n(x15).get(0);
-        var x20 = $n(x15).get(1);
-        var self = $m_Ljava_net_URLDecoder$().decode__T__T__T(x19, "UTF-8");
-        var y = $m_Ljava_net_URLDecoder$().decode__T__T__T(x20, "UTF-8");
-        return new $c_T2(self, y);
-      }
-      if (($m_s_Array$UnapplySeqWrapper$().lengthCompare$extension__O__I__I(x15, 1) === 0)) {
-        var x17 = $n(x15).get(0);
-        var self$1 = $m_Ljava_net_URLDecoder$().decode__T__T__T(x17, "UTF-8");
-        return new $c_T2(self$1, "");
-      }
-    }
-    throw new $c_s_MatchError(x15);
-  });
-  if ((this$21 === $m_sci_Nil$())) {
-    var this$23 = $m_sci_Nil$();
-  } else {
-    var x0 = this$21.head__O();
-    var h$1 = new $c_sci_$colon$colon(f$1(x0), $m_sci_Nil$());
-    var t$1 = h$1;
-    var rest = $as_sci_List(this$21.tail__O());
-    while ((rest !== $m_sci_Nil$())) {
-      var x0$1 = $n(rest).head__O();
-      var nx = new $c_sci_$colon$colon(f$1(x0$1), $m_sci_Nil$());
-      $n(t$1).sci_$colon$colon__f_next = nx;
-      t$1 = nx;
-      rest = $as_sci_List($n(rest).tail__O());
-    }
-    var this$23 = h$1;
-  }
-  return $m_sci_Map$().from__sc_IterableOnce__sci_Map(this$23);
-});
-function $as_Lokay_serverless_cloud_Request(obj) {
-  return (((obj instanceof $c_Lokay_serverless_cloud_Request) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Request"));
-}
-function $isArrayOf_Lokay_serverless_cloud_Request(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_Request)));
-}
-function $asArrayOf_Lokay_serverless_cloud_Request(obj, depth) {
-  return (($isArrayOf_Lokay_serverless_cloud_Request(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Request;", depth));
-}
-var $d_Lokay_serverless_cloud_Request = new $TypeData().initClass($c_Lokay_serverless_cloud_Request, "okay.serverless.cloud.Request", ({
-  Lokay_serverless_cloud_Request: 1,
-  s_Equals: 1,
-  s_Product: 1,
-  Ljava_io_Serializable: 1
-}));
-/** @constructor */
-function $c_Lokay_serverless_cloud_Response(status, headers, body) {
-  this.Lokay_serverless_cloud_Response__f_status = 0;
-  this.Lokay_serverless_cloud_Response__f_headers = null;
-  this.Lokay_serverless_cloud_Response__f_body = null;
-  this.Lokay_serverless_cloud_Response__f_status = status;
-  this.Lokay_serverless_cloud_Response__f_headers = headers;
-  this.Lokay_serverless_cloud_Response__f_body = body;
-}
-$c_Lokay_serverless_cloud_Response.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Response.prototype.constructor = $c_Lokay_serverless_cloud_Response;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Response() {
-}
-$h_Lokay_serverless_cloud_Response.prototype = $c_Lokay_serverless_cloud_Response.prototype;
-$c_Lokay_serverless_cloud_Response.prototype.productIterator__sc_Iterator = (function() {
-  return new $c_s_Product$$anon$1(this);
-});
-$c_Lokay_serverless_cloud_Response.prototype.hashCode__I = (function() {
-  var acc = (-889275714);
-  var hash = acc;
-  acc = $m_sr_Statics$().mix__I__I__I(hash, (-275679135));
-  var hash$1 = acc;
-  var data = this.Lokay_serverless_cloud_Response__f_status;
-  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
-  var hash$2 = acc;
-  var x = this.Lokay_serverless_cloud_Response__f_headers;
-  var data$1 = $m_sr_Statics$().anyHash__O__I(x);
-  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
-  var hash$3 = acc;
-  var x$1 = this.Lokay_serverless_cloud_Response__f_body;
-  var data$2 = $m_sr_Statics$().anyHash__O__I(x$1);
-  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
-  var hash$4 = acc;
-  return $m_sr_Statics$().finalizeHash__I__I__I(hash$4, 3);
-});
-$c_Lokay_serverless_cloud_Response.prototype.equals__O__Z = (function(x$0) {
-  if ((this === x$0)) {
-    return true;
-  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_Response)) {
-    var x$0$2 = $as_Lokay_serverless_cloud_Response(x$0);
-    if ((this.Lokay_serverless_cloud_Response__f_status === $n(x$0$2).Lokay_serverless_cloud_Response__f_status)) {
-      var x = this.Lokay_serverless_cloud_Response__f_headers;
-      var x$2 = $n(x$0$2).Lokay_serverless_cloud_Response__f_headers;
-      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
-    } else {
-      var $x_1 = false;
-    }
-    if ($x_1) {
-      var x$3 = this.Lokay_serverless_cloud_Response__f_body;
-      var x$4 = $n(x$0$2).Lokay_serverless_cloud_Response__f_body;
-      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-});
-$c_Lokay_serverless_cloud_Response.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
-});
-$c_Lokay_serverless_cloud_Response.prototype.productArity__I = (function() {
-  return 3;
-});
-$c_Lokay_serverless_cloud_Response.prototype.productPrefix__T = (function() {
-  return "Response";
-});
-$c_Lokay_serverless_cloud_Response.prototype.productElement__I__O = (function(n) {
-  switch (n) {
-    case 0: {
-      return this.Lokay_serverless_cloud_Response__f_status;
-      break;
-    }
-    case 1: {
-      return this.Lokay_serverless_cloud_Response__f_headers;
-      break;
-    }
-    case 2: {
-      return this.Lokay_serverless_cloud_Response__f_body;
-      break;
-    }
-    default: {
-      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-    }
-  }
-});
-$c_Lokay_serverless_cloud_Response.prototype.productElementName__I__T = (function(n) {
-  switch (n) {
-    case 0: {
-      return "status";
-      break;
-    }
-    case 1: {
-      return "headers";
-      break;
-    }
-    case 2: {
-      return "body";
-      break;
-    }
-    default: {
-      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-    }
-  }
-});
-$c_Lokay_serverless_cloud_Response.prototype.header__T__s_Option = (function(name) {
-  var this$1 = $n(this.Lokay_serverless_cloud_Response__f_headers);
-  var pf = new $c_Lokay_serverless_cloud_Response$$anon$2(name);
-  return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this$1, pf);
-});
-function $as_Lokay_serverless_cloud_Response(obj) {
-  return (((obj instanceof $c_Lokay_serverless_cloud_Response) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Response"));
-}
-function $isArrayOf_Lokay_serverless_cloud_Response(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_Response)));
-}
-function $asArrayOf_Lokay_serverless_cloud_Response(obj, depth) {
-  return (($isArrayOf_Lokay_serverless_cloud_Response(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Response;", depth));
-}
-var $d_Lokay_serverless_cloud_Response = new $TypeData().initClass($c_Lokay_serverless_cloud_Response, "okay.serverless.cloud.Response", ({
-  Lokay_serverless_cloud_Response: 1,
-  s_Equals: 1,
-  s_Product: 1,
-  Ljava_io_Serializable: 1
-}));
-/** @constructor */
 function $c_Lokay_serverless_cloud_Socket(id, tags) {
   this.Lokay_serverless_cloud_Socket__f_id = null;
   this.Lokay_serverless_cloud_Socket__f_tags = null;
@@ -46734,19 +47166,6 @@ $h_Ljava_io_FilterOutputStream.prototype = $c_Ljava_io_FilterOutputStream.protot
 $c_Ljava_io_FilterOutputStream.prototype.close__V = (function() {
   $n(this.Ljava_io_FilterOutputStream__f_out).close__V();
 });
-class $c_Ljava_io_UnsupportedEncodingException extends $c_Ljava_io_IOException {
-  constructor(s) {
-    super();
-    $ct_jl_Throwable__T__jl_Throwable__Z__Z__(this, s, null, true, true);
-  }
-}
-var $d_Ljava_io_UnsupportedEncodingException = new $TypeData().initClass($c_Ljava_io_UnsupportedEncodingException, "java.io.UnsupportedEncodingException", ({
-  Ljava_io_UnsupportedEncodingException: 1,
-  Ljava_io_IOException: 1,
-  jl_Exception: 1,
-  jl_Throwable: 1,
-  Ljava_io_Serializable: 1
-}));
 class $c_jl_ArithmeticException extends $c_jl_RuntimeException {
   constructor(s) {
     super();
@@ -49448,6 +49867,122 @@ var $d_Lokay_effects_json_Json$Value = new $TypeData().initClass($c_Lokay_effect
   s_Product: 1,
   Ljava_io_Serializable: 1
 }));
+function $as_Lokay_http_Fetch$Call(obj) {
+  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Fetch$Call"));
+}
+function $isArrayOf_Lokay_http_Fetch$Call(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Fetch$Call)));
+}
+function $asArrayOf_Lokay_http_Fetch$Call(obj, depth) {
+  return (($isArrayOf_Lokay_http_Fetch$Call(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Fetch$Call;", depth));
+}
+/** @constructor */
+function $c_Lokay_http_Fetch$Send(url, request, answer) {
+  this.Lokay_http_Fetch$Send__f_url = null;
+  this.Lokay_http_Fetch$Send__f_request = null;
+  this.Lokay_http_Fetch$Send__f_answer = null;
+  this.Lokay_http_Fetch$Send__f_url = url;
+  this.Lokay_http_Fetch$Send__f_request = request;
+  this.Lokay_http_Fetch$Send__f_answer = answer;
+}
+$c_Lokay_http_Fetch$Send.prototype = new $h_O();
+$c_Lokay_http_Fetch$Send.prototype.constructor = $c_Lokay_http_Fetch$Send;
+/** @constructor */
+function $h_Lokay_http_Fetch$Send() {
+}
+$h_Lokay_http_Fetch$Send.prototype = $c_Lokay_http_Fetch$Send.prototype;
+$c_Lokay_http_Fetch$Send.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_http_Fetch$Send.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1533325339), true);
+});
+$c_Lokay_http_Fetch$Send.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_http_Fetch$Send)) {
+    var x$0$2 = $as_Lokay_http_Fetch$Send(x$0);
+    if ((this.Lokay_http_Fetch$Send__f_url === $n(x$0$2).Lokay_http_Fetch$Send__f_url)) {
+      var x = this.Lokay_http_Fetch$Send__f_request;
+      var x$2 = $n(x$0$2).Lokay_http_Fetch$Send__f_request;
+      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$3 = this.Lokay_http_Fetch$Send__f_answer;
+      var x$4 = $n(x$0$2).Lokay_http_Fetch$Send__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_http_Fetch$Send.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_http_Fetch$Send.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_http_Fetch$Send.prototype.productPrefix__T = (function() {
+  return "Send";
+});
+$c_Lokay_http_Fetch$Send.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_http_Fetch$Send__f_url;
+      break;
+    }
+    case 1: {
+      return this.Lokay_http_Fetch$Send__f_request;
+      break;
+    }
+    case 2: {
+      return this.Lokay_http_Fetch$Send__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_http_Fetch$Send.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "url";
+      break;
+    }
+    case 1: {
+      return "request";
+      break;
+    }
+    case 2: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_http_Fetch$Send(obj) {
+  return (((obj instanceof $c_Lokay_http_Fetch$Send) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Fetch$Send"));
+}
+function $isArrayOf_Lokay_http_Fetch$Send(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_http_Fetch$Send)));
+}
+function $asArrayOf_Lokay_http_Fetch$Send(obj, depth) {
+  return (($isArrayOf_Lokay_http_Fetch$Send(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.http.Fetch$Send;", depth));
+}
+var $d_Lokay_http_Fetch$Send = new $TypeData().initClass($c_Lokay_http_Fetch$Send, "okay.http.Fetch$Send", ({
+  Lokay_http_Fetch$Send: 1,
+  Lokay_http_Fetch: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 /** @constructor */
 function $c_Lokay_scala3_Crossed() {
 }
@@ -49950,27 +50485,6 @@ function $asArrayOf_Lokay_serverless_cloud_Cache(obj, depth) {
   return (($isArrayOf_Lokay_serverless_cloud_Cache(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Cache;", depth));
 }
 /** @constructor */
-function $c_Lokay_serverless_cloud_Fetch() {
-}
-$c_Lokay_serverless_cloud_Fetch.prototype = new $h_O();
-$c_Lokay_serverless_cloud_Fetch.prototype.constructor = $c_Lokay_serverless_cloud_Fetch;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Fetch() {
-}
-$h_Lokay_serverless_cloud_Fetch.prototype = $c_Lokay_serverless_cloud_Fetch.prototype;
-$c_Lokay_serverless_cloud_Fetch.prototype.productIterator__sc_Iterator = (function() {
-  return new $c_s_Product$$anon$1(this);
-});
-function $as_Lokay_serverless_cloud_Fetch(obj) {
-  return (((obj instanceof $c_Lokay_serverless_cloud_Fetch) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Fetch"));
-}
-function $isArrayOf_Lokay_serverless_cloud_Fetch(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_Fetch)));
-}
-function $asArrayOf_Lokay_serverless_cloud_Fetch(obj, depth) {
-  return (($isArrayOf_Lokay_serverless_cloud_Fetch(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Fetch;", depth));
-}
-/** @constructor */
 function $c_Lokay_serverless_cloud_FlowState$$anon$1() {
 }
 $c_Lokay_serverless_cloud_FlowState$$anon$1.prototype = new $h_sr_AbstractPartialFunction();
@@ -50048,6 +50562,104 @@ $c_Lokay_serverless_cloud_FlowState$$anon$2.prototype.applyOrElse__O__F1__O = (f
 });
 var $d_Lokay_serverless_cloud_FlowState$$anon$2 = new $TypeData().initClass($c_Lokay_serverless_cloud_FlowState$$anon$2, "okay.serverless.cloud.FlowState$$anon$2", ({
   Lokay_serverless_cloud_FlowState$$anon$2: 1,
+  sr_AbstractPartialFunction: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_serverless_cloud_Http$package$$anon$1(name$2) {
+  this.Lokay_serverless_cloud_Http$package$$anon$1__f_name$1 = null;
+  this.Lokay_serverless_cloud_Http$package$$anon$1__f_name$1 = name$2;
+}
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype.constructor = $c_Lokay_serverless_cloud_Http$package$$anon$1;
+/** @constructor */
+function $h_Lokay_serverless_cloud_Http$package$$anon$1() {
+}
+$h_Lokay_serverless_cloud_Http$package$$anon$1.prototype = $c_Lokay_serverless_cloud_Http$package$$anon$1.prototype;
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype.isDefinedAt__T2__Z = (function(x) {
+  if ((x !== null)) {
+    var k = $as_T($n(x)._1__O());
+    $as_T($n(x)._2__O());
+    var this$1 = $n(k);
+    var anotherString = this.Lokay_serverless_cloud_Http$package$$anon$1__f_name$1;
+    _return: {
+      var len = this$1.length;
+      if ((anotherString === null)) {
+        var $x_2 = true;
+      } else {
+        var this$2 = $n(anotherString);
+        var $x_2 = (this$2.length !== len);
+      }
+      if ((!$x_2)) {
+        var i = 0;
+        while ((i !== len)) {
+          var thisCP = $f_T__codePointAt__I__I(this$1, i);
+          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
+          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
+          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
+            var $x_1 = false;
+            break _return;
+          }
+          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
+        }
+        var $x_1 = true;
+      } else {
+        var $x_1 = false;
+      }
+    }
+    if ($x_1) {
+      return true;
+    }
+  }
+  return false;
+});
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype.applyOrElse__T2__F1__O = (function(x, default$1) {
+  if ((x !== null)) {
+    var k = $as_T($n(x)._1__O());
+    var v = $as_T($n(x)._2__O());
+    var this$1 = $n(k);
+    var anotherString = this.Lokay_serverless_cloud_Http$package$$anon$1__f_name$1;
+    _return: {
+      var len = this$1.length;
+      if ((anotherString === null)) {
+        var $x_2 = true;
+      } else {
+        var this$2 = $n(anotherString);
+        var $x_2 = (this$2.length !== len);
+      }
+      if ((!$x_2)) {
+        var i = 0;
+        while ((i !== len)) {
+          var thisCP = $f_T__codePointAt__I__I(this$1, i);
+          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
+          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
+          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
+            var $x_1 = false;
+            break _return;
+          }
+          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
+        }
+        var $x_1 = true;
+      } else {
+        var $x_1 = false;
+      }
+    }
+    if ($x_1) {
+      return v;
+    }
+  }
+  return $n(default$1).apply__O__O(x);
+});
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__T2__Z($as_T2(x));
+});
+$c_Lokay_serverless_cloud_Http$package$$anon$1.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
+  return this.applyOrElse__T2__F1__O($as_T2(x), default$1);
+});
+var $d_Lokay_serverless_cloud_Http$package$$anon$1 = new $TypeData().initClass($c_Lokay_serverless_cloud_Http$package$$anon$1, "okay.serverless.cloud.Http$package$$anon$1", ({
+  Lokay_serverless_cloud_Http$package$$anon$1: 1,
   sr_AbstractPartialFunction: 1,
   F1: 1,
   s_PartialFunction: 1,
@@ -50190,9 +50802,9 @@ function $h_Lokay_serverless_cloud_MemoryCloud$$anon$16() {
 $h_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype = $c_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype;
 $c_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype.isDefinedAt__T2__Z = (function(x) {
   if ((x !== null)) {
-    var x162 = $as_T2($n(x)._1__O());
-    if ((x162 !== null)) {
-      var i = $as_T($n(x162)._1__O());
+    var x171 = $as_T2($n(x)._1__O());
+    if ((x171 !== null)) {
+      var i = $as_T($n(x171)._1__O());
       var v = $as_Lokay_serverless_cloud_Embedding($n(x)._2__O());
       if (((i === this.Lokay_serverless_cloud_MemoryCloud$$anon$16__f_index$3) && $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$16__f_filter$1).forall__F1__Z(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
         var x$1$1 = $as_T2(x$1);
@@ -50208,9 +50820,9 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype.isDefinedAt__T2__Z = (f
 });
 $c_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype.applyOrElse__T2__F1__O = (function(x, default$1) {
   if ((x !== null)) {
-    var x167 = $as_T2($n(x)._1__O());
-    if ((x167 !== null)) {
-      var i = $as_T($n(x167)._1__O());
+    var x176 = $as_T2($n(x)._1__O());
+    if ((x176 !== null)) {
+      var i = $as_T($n(x176)._1__O());
       var v = $as_Lokay_serverless_cloud_Embedding($n(x)._2__O());
       if (((i === this.Lokay_serverless_cloud_MemoryCloud$$anon$16__f_index$3) && $n(this.Lokay_serverless_cloud_MemoryCloud$$anon$16__f_filter$1).forall__F1__Z(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
         var x$1$1 = $as_T2(x$1);
@@ -50224,9 +50836,9 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$16.prototype.applyOrElse__T2__F1__O 
         var this$2 = $n($as_sci_List($f_sc_StrictOptimizedIterableOps__zip__sc_IterableOnce__O(this$1, that)));
         var f = ((x$1$2) => {
           var x$1$3 = $as_T2(x$1$2);
-          var _$13 = $uD($n(x$1$3)._1__O());
-          var _$14 = $uD($n(x$1$3)._2__O());
-          return (_$13 * _$14);
+          var _$14 = $uD($n(x$1$3)._1__O());
+          var _$15 = $uD($n(x$1$3)._2__O());
+          return (_$14 * _$15);
         });
         if ((this$2 === $m_sci_Nil$())) {
           var this$3 = $m_sci_Nil$();
@@ -50681,7 +51293,7 @@ function $h_Lokay_serverless_cloud_MemoryCloud$$anon$9() {
 $h_Lokay_serverless_cloud_MemoryCloud$$anon$9.prototype = $c_Lokay_serverless_cloud_MemoryCloud$$anon$9.prototype;
 $c_Lokay_serverless_cloud_MemoryCloud$$anon$9.prototype.isDefinedAt__T2__Z = (function(x) {
   if ((x !== null)) {
-    $as_Lokay_serverless_cloud_Response($n(x)._1__O());
+    $as_Lokay_http_Response($n(x)._1__O());
     var $x_1 = $uJ($n(x)._2__O());
     var exp_$_lo = $x_1.l;
     var exp_$_hi = $x_1.h;
@@ -50696,7 +51308,7 @@ $c_Lokay_serverless_cloud_MemoryCloud$$anon$9.prototype.isDefinedAt__T2__Z = (fu
 });
 $c_Lokay_serverless_cloud_MemoryCloud$$anon$9.prototype.applyOrElse__T2__F1__O = (function(x, default$1) {
   if ((x !== null)) {
-    var r = $as_Lokay_serverless_cloud_Response($n(x)._1__O());
+    var r = $as_Lokay_http_Response($n(x)._1__O());
     var $x_1 = $uJ($n(x)._2__O());
     var exp_$_lo = $x_1.l;
     var exp_$_hi = $x_1.h;
@@ -50764,202 +51376,6 @@ function $isArrayOf_Lokay_serverless_cloud_Queues(obj, depth) {
 function $asArrayOf_Lokay_serverless_cloud_Queues(obj, depth) {
   return (($isArrayOf_Lokay_serverless_cloud_Queues(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Queues;", depth));
 }
-/** @constructor */
-function $c_Lokay_serverless_cloud_Request$$anon$1(name$3) {
-  this.Lokay_serverless_cloud_Request$$anon$1__f_name$1 = null;
-  this.Lokay_serverless_cloud_Request$$anon$1__f_name$1 = name$3;
-}
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype = new $h_sr_AbstractPartialFunction();
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype.constructor = $c_Lokay_serverless_cloud_Request$$anon$1;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Request$$anon$1() {
-}
-$h_Lokay_serverless_cloud_Request$$anon$1.prototype = $c_Lokay_serverless_cloud_Request$$anon$1.prototype;
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype.isDefinedAt__T2__Z = (function(x) {
-  if ((x !== null)) {
-    var k = $as_T($n(x)._1__O());
-    $as_T($n(x)._2__O());
-    var this$1 = $n(k);
-    var anotherString = this.Lokay_serverless_cloud_Request$$anon$1__f_name$1;
-    _return: {
-      var len = this$1.length;
-      if ((anotherString === null)) {
-        var $x_2 = true;
-      } else {
-        var this$2 = $n(anotherString);
-        var $x_2 = (this$2.length !== len);
-      }
-      if ((!$x_2)) {
-        var i = 0;
-        while ((i !== len)) {
-          var thisCP = $f_T__codePointAt__I__I(this$1, i);
-          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
-          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
-          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
-            var $x_1 = false;
-            break _return;
-          }
-          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
-        }
-        var $x_1 = true;
-      } else {
-        var $x_1 = false;
-      }
-    }
-    if ($x_1) {
-      return true;
-    }
-  }
-  return false;
-});
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype.applyOrElse__T2__F1__O = (function(x, default$1) {
-  if ((x !== null)) {
-    var k = $as_T($n(x)._1__O());
-    var v = $as_T($n(x)._2__O());
-    var this$1 = $n(k);
-    var anotherString = this.Lokay_serverless_cloud_Request$$anon$1__f_name$1;
-    _return: {
-      var len = this$1.length;
-      if ((anotherString === null)) {
-        var $x_2 = true;
-      } else {
-        var this$2 = $n(anotherString);
-        var $x_2 = (this$2.length !== len);
-      }
-      if ((!$x_2)) {
-        var i = 0;
-        while ((i !== len)) {
-          var thisCP = $f_T__codePointAt__I__I(this$1, i);
-          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
-          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
-          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
-            var $x_1 = false;
-            break _return;
-          }
-          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
-        }
-        var $x_1 = true;
-      } else {
-        var $x_1 = false;
-      }
-    }
-    if ($x_1) {
-      return v;
-    }
-  }
-  return $n(default$1).apply__O__O(x);
-});
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype.isDefinedAt__O__Z = (function(x) {
-  return this.isDefinedAt__T2__Z($as_T2(x));
-});
-$c_Lokay_serverless_cloud_Request$$anon$1.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
-  return this.applyOrElse__T2__F1__O($as_T2(x), default$1);
-});
-var $d_Lokay_serverless_cloud_Request$$anon$1 = new $TypeData().initClass($c_Lokay_serverless_cloud_Request$$anon$1, "okay.serverless.cloud.Request$$anon$1", ({
-  Lokay_serverless_cloud_Request$$anon$1: 1,
-  sr_AbstractPartialFunction: 1,
-  F1: 1,
-  s_PartialFunction: 1,
-  Ljava_io_Serializable: 1
-}));
-/** @constructor */
-function $c_Lokay_serverless_cloud_Response$$anon$2(name$4) {
-  this.Lokay_serverless_cloud_Response$$anon$2__f_name$2 = null;
-  this.Lokay_serverless_cloud_Response$$anon$2__f_name$2 = name$4;
-}
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype = new $h_sr_AbstractPartialFunction();
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype.constructor = $c_Lokay_serverless_cloud_Response$$anon$2;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Response$$anon$2() {
-}
-$h_Lokay_serverless_cloud_Response$$anon$2.prototype = $c_Lokay_serverless_cloud_Response$$anon$2.prototype;
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype.isDefinedAt__T2__Z = (function(x) {
-  if ((x !== null)) {
-    var k = $as_T($n(x)._1__O());
-    $as_T($n(x)._2__O());
-    var this$1 = $n(k);
-    var anotherString = this.Lokay_serverless_cloud_Response$$anon$2__f_name$2;
-    _return: {
-      var len = this$1.length;
-      if ((anotherString === null)) {
-        var $x_2 = true;
-      } else {
-        var this$2 = $n(anotherString);
-        var $x_2 = (this$2.length !== len);
-      }
-      if ((!$x_2)) {
-        var i = 0;
-        while ((i !== len)) {
-          var thisCP = $f_T__codePointAt__I__I(this$1, i);
-          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
-          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
-          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
-            var $x_1 = false;
-            break _return;
-          }
-          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
-        }
-        var $x_1 = true;
-      } else {
-        var $x_1 = false;
-      }
-    }
-    if ($x_1) {
-      return true;
-    }
-  }
-  return false;
-});
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype.applyOrElse__T2__F1__O = (function(x, default$1) {
-  if ((x !== null)) {
-    var k = $as_T($n(x)._1__O());
-    var v = $as_T($n(x)._2__O());
-    var this$1 = $n(k);
-    var anotherString = this.Lokay_serverless_cloud_Response$$anon$2__f_name$2;
-    _return: {
-      var len = this$1.length;
-      if ((anotherString === null)) {
-        var $x_2 = true;
-      } else {
-        var this$2 = $n(anotherString);
-        var $x_2 = (this$2.length !== len);
-      }
-      if ((!$x_2)) {
-        var i = 0;
-        while ((i !== len)) {
-          var thisCP = $f_T__codePointAt__I__I(this$1, i);
-          var $x_3 = $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(thisCP));
-          var cp = $f_T__codePointAt__I__I($n(anotherString), i);
-          if (($x_3 !== $m_jl_Character$().toLowerCase__I__I($m_jl_Character$().toUpperCase__I__I(cp)))) {
-            var $x_1 = false;
-            break _return;
-          }
-          i = ((i + ((thisCP >= 65536) ? 2 : 1)) | 0);
-        }
-        var $x_1 = true;
-      } else {
-        var $x_1 = false;
-      }
-    }
-    if ($x_1) {
-      return v;
-    }
-  }
-  return $n(default$1).apply__O__O(x);
-});
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype.isDefinedAt__O__Z = (function(x) {
-  return this.isDefinedAt__T2__Z($as_T2(x));
-});
-$c_Lokay_serverless_cloud_Response$$anon$2.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
-  return this.applyOrElse__T2__F1__O($as_T2(x), default$1);
-});
-var $d_Lokay_serverless_cloud_Response$$anon$2 = new $TypeData().initClass($c_Lokay_serverless_cloud_Response$$anon$2, "okay.serverless.cloud.Response$$anon$2", ({
-  Lokay_serverless_cloud_Response$$anon$2: 1,
-  sr_AbstractPartialFunction: 1,
-  F1: 1,
-  s_PartialFunction: 1,
-  Ljava_io_Serializable: 1
-}));
 /** @constructor */
 function $c_Lokay_serverless_cloud_Services() {
 }
@@ -61790,70 +62206,6 @@ var $d_Lokay_serverless_cloud_Cache$Put = new $TypeData().initClass($c_Lokay_ser
   Ljava_io_Serializable: 1,
   s_reflect_Enum: 1
 }));
-/** @constructor */
-function $c_Lokay_serverless_cloud_Fetch$Call(request) {
-  this.Lokay_serverless_cloud_Fetch$Call__f_request = null;
-  this.Lokay_serverless_cloud_Fetch$Call__f_request = request;
-}
-$c_Lokay_serverless_cloud_Fetch$Call.prototype = new $h_Lokay_serverless_cloud_Fetch();
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.constructor = $c_Lokay_serverless_cloud_Fetch$Call;
-/** @constructor */
-function $h_Lokay_serverless_cloud_Fetch$Call() {
-}
-$h_Lokay_serverless_cloud_Fetch$Call.prototype = $c_Lokay_serverless_cloud_Fetch$Call.prototype;
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.hashCode__I = (function() {
-  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1451414441), true);
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.equals__O__Z = (function(x$0) {
-  if ((this === x$0)) {
-    return true;
-  } else if ((x$0 instanceof $c_Lokay_serverless_cloud_Fetch$Call)) {
-    var x$0$2 = $as_Lokay_serverless_cloud_Fetch$Call(x$0);
-    var x = this.Lokay_serverless_cloud_Fetch$Call__f_request;
-    var x$2 = $n(x$0$2).Lokay_serverless_cloud_Fetch$Call__f_request;
-    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
-  } else {
-    return false;
-  }
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.toString__T = (function() {
-  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.productArity__I = (function() {
-  return 1;
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.productPrefix__T = (function() {
-  return "Call";
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.productElement__I__O = (function(n) {
-  if ((n === 0)) {
-    return this.Lokay_serverless_cloud_Fetch$Call__f_request;
-  }
-  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-});
-$c_Lokay_serverless_cloud_Fetch$Call.prototype.productElementName__I__T = (function(n) {
-  if ((n === 0)) {
-    return "request";
-  }
-  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
-});
-function $as_Lokay_serverless_cloud_Fetch$Call(obj) {
-  return (((obj instanceof $c_Lokay_serverless_cloud_Fetch$Call) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Fetch$Call"));
-}
-function $isArrayOf_Lokay_serverless_cloud_Fetch$Call(obj, depth) {
-  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_serverless_cloud_Fetch$Call)));
-}
-function $asArrayOf_Lokay_serverless_cloud_Fetch$Call(obj, depth) {
-  return (($isArrayOf_Lokay_serverless_cloud_Fetch$Call(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.serverless.cloud.Fetch$Call;", depth));
-}
-var $d_Lokay_serverless_cloud_Fetch$Call = new $TypeData().initClass($c_Lokay_serverless_cloud_Fetch$Call, "okay.serverless.cloud.Fetch$Call", ({
-  Lokay_serverless_cloud_Fetch$Call: 1,
-  Lokay_serverless_cloud_Fetch: 1,
-  s_Equals: 1,
-  s_Product: 1,
-  Ljava_io_Serializable: 1,
-  s_reflect_Enum: 1
-}));
 function $as_Lokay_serverless_cloud_Kv$Delete(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.serverless.cloud.Kv$Delete"));
 }
@@ -72669,7 +73021,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     var c$1 = this.cloud__Lokay_serverless_cloud_MemoryCloud();
     var $x_30 = $n($n(c$1).Lokay_serverless_cloud_MemoryCloud__f_platform);
     var $x_21 = $m_Lokay_serverless_cloud_Blobs$();
-    var $x_20 = $m_Lokay_serverless_cloud_Bytes$().of__T__Lokay_serverless_cloud_Bytes("hello, world");
+    var $x_20 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Bytes).of__T__Lokay_http_Bytes("hello, world");
     var $x_19 = new $c_s_Some("text/plain");
     var $x_18 = $m_sci_Map$EmptyMap$();
     var at$98 = new $c_Lokay_scala3_Place$Last();
@@ -72685,7 +73037,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     var at$108 = new $c_Lokay_scala3_Place$Init(at$107);
     var at$109 = new $c_Lokay_scala3_Place$Init(at$108);
     var at$110 = new $c_Lokay_scala3_Place$Init(at$109);
-    var p$11 = $x_21.put__T__T__Lokay_serverless_cloud_Bytes__s_Option__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("uploads", "a/one.txt", $x_20, $x_19, $x_18, at$110);
+    var p$11 = $x_21.put__T__T__Lokay_http_Bytes__s_Option__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("uploads", "a/one.txt", $x_20, $x_19, $x_18, at$110);
     var f$13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((info) => {
       var info$1 = $as_Lokay_serverless_cloud_BlobInfo(info);
       var $x_23 = $m_Lokay_serverless_cloud_Blobs$();
@@ -72784,26 +73136,27 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
                 var compare$4 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                 var diffOptions$4 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, $bL(obtained$3_$_lo, obtained$3_$_hi), $bL(12, 0), clue$4, loc$5, compare$4, diffOptions$4);
-                var this$412 = $n(part$1);
+                var this$413 = $n(part$1);
                 var f$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1) => {
                   var _$1$1 = $as_T2(_$1);
-                  var this$411 = $n($as_Lokay_serverless_cloud_Bytes($n(_$1$1)._2__O()));
-                  var bytes = this$411.Lokay_serverless_cloud_Bytes__f_a;
-                  return $m_jl_String$().new__AB__T__T(bytes, "UTF-8");
+                  var this$411 = $n($as_Lokay_http_Bytes($n(_$1$1)._2__O()));
+                  var bytes = this$411.Lokay_http_Bytes__f_a;
+                  var charset = $m_Ljava_nio_charset_UTF\uff3f8$();
+                  return $m_jl_String$().new__AB__Ljava_nio_charset_Charset__T(bytes, charset);
                 }));
-                var obtained$4 = (this$412.isEmpty__Z() ? $m_s_None$() : new $c_s_Some(f$6.apply__O__O(this$412.get__O())));
+                var obtained$4 = (this$413.isEmpty__Z() ? $m_s_None$() : new $c_s_Some(f$6.apply__O__O(this$413.get__O())));
                 var expected$4 = new $c_s_Some("world");
                 var clue$5 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                 var loc$6 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 48);
                 var compare$5 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                 var diffOptions$5 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$4, expected$4, clue$5, loc$6, compare$5, diffOptions$5);
-                var this$416 = $n(head$1);
+                var this$417 = $n(head$1);
                 var f$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
                   var _$2$1 = $as_Lokay_serverless_cloud_BlobInfo(_$2);
                   return $n(_$2$1).Lokay_serverless_cloud_BlobInfo__f_contentType;
                 }));
-                var obtained$5 = (this$416.isEmpty__Z() ? $m_s_None$() : $as_s_Option(f$7.apply__O__O(this$416.get__O())));
+                var obtained$5 = (this$417.isEmpty__Z() ? $m_s_None$() : $as_s_Option(f$7.apply__O__O(this$417.get__O())));
                 var expected$5 = new $c_s_Some("text/plain");
                 var clue$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                 var loc$7 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 49);
@@ -72930,24 +73283,24 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
                 var compare$9 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                 var diffOptions$9 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$7, expected$8, clue$9, loc$11, compare$9, diffOptions$9);
-                var this$534 = $n($n(c$2).Lokay_serverless_cloud_MemoryCloud__f_sent);
+                var this$535 = $n($n(c$2).Lokay_serverless_cloud_MemoryCloud__f_sent);
                 var f$14 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$4) => {
                   var _$4$1 = $as_T2(_$4);
                   return $n($as_Lokay_serverless_cloud_Mail($n(_$4$1)._2__O())).Lokay_serverless_cloud_Mail__f_to;
                 }));
-                var obtained$8 = $n($as_scm_ListBuffer($f_sc_StrictOptimizedIterableOps__map__F1__O(this$534, f$14))).toList__sci_List();
+                var obtained$8 = $n($as_scm_ListBuffer($f_sc_StrictOptimizedIterableOps__map__F1__O(this$535, f$14))).toList__sci_List();
                 var expected$9 = new $c_sci_$colon$colon("ann@x", new $c_sci_$colon$colon("flaky", new $c_sci_$colon$colon("later@x", $m_sci_Nil$())));
                 var clue$10 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                 var loc$12 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 72);
                 var compare$10 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                 var diffOptions$10 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$8, expected$9, clue$10, loc$12, compare$10, diffOptions$10);
-                var this$537 = $n($n(c$2).Lokay_serverless_cloud_MemoryCloud__f_dead);
+                var this$538 = $n($n(c$2).Lokay_serverless_cloud_MemoryCloud__f_dead);
                 var f$15 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$5) => {
                   var _$5$1 = $as_T2(_$5);
                   return $n($as_Lokay_serverless_cloud_Message($n(_$5$1)._2__O())).Lokay_serverless_cloud_Message__f_body;
                 }));
-                var obtained$9 = $n($as_scm_ListBuffer($f_sc_StrictOptimizedIterableOps__map__F1__O(this$537, f$15))).toList__sci_List();
+                var obtained$9 = $n($as_scm_ListBuffer($f_sc_StrictOptimizedIterableOps__map__F1__O(this$538, f$15))).toList__sci_List();
                 var expected$10 = new $c_sci_$colon$colon("broken", $m_sci_Nil$());
                 var clue$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                 var loc$13 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 73);
@@ -72970,33 +73323,31 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
   }));
   var loc$15 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 75);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "queues: sent with a delay; delivered; a retry later; failing ones dead after the attempts", body$2, loc$15);
-  var body$5 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+  var body$3 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c$3 = this.cloud__Lokay_serverless_cloud_MemoryCloud();
     var calls = new $c_sr_IntRef(0);
-    $n(c$3).Lokay_serverless_cloud_MemoryCloud__f_internet = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r) => {
-      var r$1 = $as_Lokay_serverless_cloud_Request(r);
+    $n(c$3).Lokay_serverless_cloud_MemoryCloud__f_internet = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((_$6, r) => {
+      $as_T(_$6);
+      var r$1 = $as_Lokay_http_Request(r);
       calls.sr_IntRef__f_elem = ((1 + calls.sr_IntRef__f_elem) | 0);
-      return $m_Lokay_serverless_cloud_Response$().text__T__I__Lokay_serverless_cloud_Response(("price of " + $n(r$1).path__T()), ($m_Lokay_serverless_cloud_Response$(), 200));
+      return $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response(("price of " + $n(r$1).Lokay_http_Request__f_path), ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
     }));
     $n($n(c$3).Lokay_serverless_cloud_MemoryCloud__f_vars).update__O__O__V("CURRENCY", "EUR");
     $n($n(c$3).Lokay_serverless_cloud_MemoryCloud__f_secrets).update__O__O__V("KEY", "k");
     $n($n(c$3).Lokay_serverless_cloud_MemoryCloud__f_limitsConfig).update__O__O__V("api", new $c_T2(2, $bL(60, 0)));
-    $n(c$3).Lokay_serverless_cloud_MemoryCloud__f_model = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((_$6, in$1) => {
-      $as_T(_$6);
+    $n(c$3).Lokay_serverless_cloud_MemoryCloud__f_model = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((_$7, in$1) => {
+      $as_T(_$7);
       var in$2 = $as_Lokay_effects_json_Json(in$1);
       var fields = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("echo", in$2)]));
       $m_Lokay_effects_json_Json$Obj$();
-      var this$547 = $n(fields);
-      var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$547);
+      var this$548 = $n(fields);
+      var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$548);
       return new $c_Lokay_effects_json_Json$Obj(fields$1);
     }));
-    var $x_58 = $n($n(c$3).Lokay_serverless_cloud_MemoryCloud__f_platform);
-    var $x_42 = $m_Lokay_serverless_cloud_Cache$();
+    var $x_56 = $n($n(c$3).Lokay_serverless_cloud_MemoryCloud__f_platform);
+    var $x_41 = $m_Lokay_serverless_cloud_Cache$();
     var $x_39 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
-      var $x_41 = $m_Lokay_serverless_cloud_Fetch$();
-      var headers = $m_sci_Map$EmptyMap$();
-      var body$3 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-      var $x_40 = new $c_Lokay_serverless_cloud_Request("GET", "https://p/x", headers, body$3);
+      var $x_40 = $m_Lokay_serverless_cloud_Http$package$Fetch$();
       var at$220 = new $c_Lokay_scala3_Place$Last();
       var at$221 = new $c_Lokay_scala3_Place$Init(at$220);
       var at$222 = new $c_Lokay_scala3_Place$Init(at$221);
@@ -73007,7 +73358,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
       var at$227 = new $c_Lokay_scala3_Place$Init(at$226);
       var at$228 = new $c_Lokay_scala3_Place$Init(at$227);
       var at$229 = new $c_Lokay_scala3_Place$Init(at$228);
-      return $x_41.apply__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog($x_40, at$229);
+      return $x_40.get__T__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", at$229);
     }));
     var at$230 = new $c_Lokay_scala3_Place$Last();
     var at$231 = new $c_Lokay_scala3_Place$Init(at$230);
@@ -73018,15 +73369,12 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     var at$236 = new $c_Lokay_scala3_Place$Init(at$235);
     var at$237 = new $c_Lokay_scala3_Place$Init(at$236);
     var at$238 = new $c_Lokay_scala3_Place$Init(at$237);
-    var p$23 = $x_42.through__T__J__F0__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", 60, 0, $x_39, at$238);
+    var p$23 = $x_41.through__T__J__F0__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", 60, 0, $x_39, at$238);
     var f$27 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a) => {
-      var a$1 = $as_Lokay_serverless_cloud_Response(a);
-      var $x_46 = $m_Lokay_serverless_cloud_Cache$();
-      var $x_43 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
-        var $x_45 = $m_Lokay_serverless_cloud_Fetch$();
-        var headers$1 = $m_sci_Map$EmptyMap$();
-        var body$4 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-        var $x_44 = new $c_Lokay_serverless_cloud_Request("GET", "https://p/x", headers$1, body$4);
+      var a$1 = $as_Lokay_http_Response(a);
+      var $x_44 = $m_Lokay_serverless_cloud_Cache$();
+      var $x_42 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+        var $x_43 = $m_Lokay_serverless_cloud_Http$package$Fetch$();
         var at$239 = new $c_Lokay_scala3_Place$Last();
         var at$240 = new $c_Lokay_scala3_Place$Init(at$239);
         var at$241 = new $c_Lokay_scala3_Place$Init(at$240);
@@ -73037,7 +73385,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
         var at$246 = new $c_Lokay_scala3_Place$Init(at$245);
         var at$247 = new $c_Lokay_scala3_Place$Init(at$246);
         var at$248 = new $c_Lokay_scala3_Place$Init(at$247);
-        return $x_45.apply__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog($x_44, at$248);
+        return $x_43.get__T__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", at$248);
       }));
       var at$249 = new $c_Lokay_scala3_Place$Last();
       var at$250 = new $c_Lokay_scala3_Place$Init(at$249);
@@ -73048,10 +73396,10 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
       var at$255 = new $c_Lokay_scala3_Place$Init(at$254);
       var at$256 = new $c_Lokay_scala3_Place$Init(at$255);
       var at$257 = new $c_Lokay_scala3_Place$Init(at$256);
-      var p$22 = $x_46.through__T__J__F0__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", 60, 0, $x_43, at$257);
+      var p$22 = $x_44.through__T__J__F0__Lokay_scala3_Place__Lokay_scala3_Prog("https://p/x", 60, 0, $x_42, at$257);
       var f$26 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((b) => {
-        var b$1 = $as_Lokay_serverless_cloud_Response(b);
-        var $x_47 = $m_Lokay_scala3_std_Env$();
+        var b$1 = $as_Lokay_http_Response(b);
+        var $x_45 = $m_Lokay_scala3_std_Env$();
         var at$258 = new $c_Lokay_scala3_Place$Last();
         var at$259 = new $c_Lokay_scala3_Place$Init(at$258);
         var at$260 = new $c_Lokay_scala3_Place$Init(at$259);
@@ -73060,10 +73408,10 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
         var at$263 = new $c_Lokay_scala3_Place$Init(at$262);
         var at$264 = new $c_Lokay_scala3_Place$Init(at$263);
         var at$265 = new $c_Lokay_scala3_Place$Init(at$264);
-        var p$21 = $x_47.variable__T__Lokay_scala3_Place__Lokay_scala3_Prog("CURRENCY", at$265);
+        var p$21 = $x_45.variable__T__Lokay_scala3_Place__Lokay_scala3_Prog("CURRENCY", at$265);
         var f$25 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((cur) => {
           var cur$1 = $as_s_Option(cur);
-          var $x_48 = $m_Lokay_scala3_std_Env$();
+          var $x_46 = $m_Lokay_scala3_std_Env$();
           var at$266 = new $c_Lokay_scala3_Place$Last();
           var at$267 = new $c_Lokay_scala3_Place$Init(at$266);
           var at$268 = new $c_Lokay_scala3_Place$Init(at$267);
@@ -73072,47 +73420,47 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
           var at$271 = new $c_Lokay_scala3_Place$Init(at$270);
           var at$272 = new $c_Lokay_scala3_Place$Init(at$271);
           var at$273 = new $c_Lokay_scala3_Place$Init(at$272);
-          var p$20 = $x_48.secret__T__Lokay_scala3_Place__Lokay_scala3_Prog("KEY", at$273);
+          var p$20 = $x_46.secret__T__Lokay_scala3_Place__Lokay_scala3_Prog("KEY", at$273);
           var f$24 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((key) => {
             var key$1 = $as_s_Option(key);
-            var $x_49 = $m_Lokay_serverless_cloud_Limits$();
+            var $x_47 = $m_Lokay_serverless_cloud_Limits$();
             var at$274 = new $c_Lokay_scala3_Place$Last();
             var at$275 = new $c_Lokay_scala3_Place$Init(at$274);
             var at$276 = new $c_Lokay_scala3_Place$Init(at$275);
             var at$277 = new $c_Lokay_scala3_Place$Init(at$276);
             var at$278 = new $c_Lokay_scala3_Place$Init(at$277);
             var at$279 = new $c_Lokay_scala3_Place$Init(at$278);
-            var p$15 = $x_49.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$279);
+            var p$15 = $x_47.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$279);
             var f$19 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a$2) => {
               var a$3 = $uZ(a$2);
-              var $x_50 = $m_Lokay_serverless_cloud_Limits$();
+              var $x_48 = $m_Lokay_serverless_cloud_Limits$();
               var at$280 = new $c_Lokay_scala3_Place$Last();
               var at$281 = new $c_Lokay_scala3_Place$Init(at$280);
               var at$282 = new $c_Lokay_scala3_Place$Init(at$281);
               var at$283 = new $c_Lokay_scala3_Place$Init(at$282);
               var at$284 = new $c_Lokay_scala3_Place$Init(at$283);
               var at$285 = new $c_Lokay_scala3_Place$Init(at$284);
-              var p$14 = $x_50.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$285);
+              var p$14 = $x_48.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$285);
               var f$18 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((b$2) => {
                 var b$3 = $uZ(b$2);
-                var $x_51 = $m_Lokay_serverless_cloud_Limits$();
+                var $x_49 = $m_Lokay_serverless_cloud_Limits$();
                 var at$286 = new $c_Lokay_scala3_Place$Last();
                 var at$287 = new $c_Lokay_scala3_Place$Init(at$286);
                 var at$288 = new $c_Lokay_scala3_Place$Init(at$287);
                 var at$289 = new $c_Lokay_scala3_Place$Init(at$288);
                 var at$290 = new $c_Lokay_scala3_Place$Init(at$289);
                 var at$291 = new $c_Lokay_scala3_Place$Init(at$290);
-                var p$13 = $x_51.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$291);
+                var p$13 = $x_49.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "ann", at$291);
                 var f$17 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((c$4) => {
                   var c$5 = $uZ(c$4);
-                  var $x_52 = $m_Lokay_serverless_cloud_Limits$();
+                  var $x_50 = $m_Lokay_serverless_cloud_Limits$();
                   var at$292 = new $c_Lokay_scala3_Place$Last();
                   var at$293 = new $c_Lokay_scala3_Place$Init(at$292);
                   var at$294 = new $c_Lokay_scala3_Place$Init(at$293);
                   var at$295 = new $c_Lokay_scala3_Place$Init(at$294);
                   var at$296 = new $c_Lokay_scala3_Place$Init(at$295);
                   var at$297 = new $c_Lokay_scala3_Place$Init(at$296);
-                  var p$12 = $x_52.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "bob", at$297);
+                  var p$12 = $x_50.take__T__T__Lokay_scala3_Place__Lokay_scala3_Prog("api", "bob", at$297);
                   var f$16 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((d) => {
                     var d$1 = $uZ(d);
                     return new $c_sci_$colon$colon(a$3, new $c_sci_$colon$colon(b$3, new $c_sci_$colon$colon(c$5, new $c_sci_$colon$colon(d$1, $m_sci_Nil$()))));
@@ -73126,28 +73474,28 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
             var p$19 = new $c_Lokay_scala3_Prog$FlatMap(p$15, f$19);
             var f$23 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((l) => {
               var l$1 = $as_sci_List(l);
-              var $x_54 = $m_Lokay_serverless_cloud_Ai$();
-              var $x_53 = new $c_Lokay_effects_json_Json$Str("hi");
+              var $x_52 = $m_Lokay_serverless_cloud_Ai$();
+              var $x_51 = new $c_Lokay_effects_json_Json$Str("hi");
               var at$298 = new $c_Lokay_scala3_Place$Last();
               var at$299 = new $c_Lokay_scala3_Place$Init(at$298);
               var at$300 = new $c_Lokay_scala3_Place$Init(at$299);
               var at$301 = new $c_Lokay_scala3_Place$Init(at$300);
               var at$302 = new $c_Lokay_scala3_Place$Init(at$301);
-              var p$18 = $x_54.run__T__Lokay_effects_json_Json__Lokay_scala3_Place__Lokay_scala3_Prog("m", $x_53, at$302);
+              var p$18 = $x_52.run__T__Lokay_effects_json_Json__Lokay_scala3_Place__Lokay_scala3_Prog("m", $x_51, at$302);
               var f$22 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((out) => {
                 var out$1 = $as_Lokay_effects_json_Json(out);
-                var $x_56 = $m_Lokay_serverless_cloud_Analytics$();
+                var $x_54 = $m_Lokay_serverless_cloud_Analytics$();
                 var indexes = new $c_sci_$colon$colon("ann", $m_sci_Nil$());
                 var blobs = new $c_sci_$colon$colon("/x", $m_sci_Nil$());
                 var doubles = new $c_sci_$colon$colon(1.0, $m_sci_Nil$());
-                var $x_55 = new $c_Lokay_serverless_cloud_DataPoint(indexes, blobs, doubles);
+                var $x_53 = new $c_Lokay_serverless_cloud_DataPoint(indexes, blobs, doubles);
                 var at$303 = new $c_Lokay_scala3_Place$Last();
                 var at$304 = new $c_Lokay_scala3_Place$Init(at$303);
                 var at$305 = new $c_Lokay_scala3_Place$Init(at$304);
-                var p$17 = $x_56.write__T__Lokay_serverless_cloud_DataPoint__Lokay_scala3_Place__Lokay_scala3_Prog("views", $x_55, at$305);
+                var p$17 = $x_54.write__T__Lokay_serverless_cloud_DataPoint__Lokay_scala3_Place__Lokay_scala3_Prog("views", $x_53, at$305);
                 var f$21 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$12) => {
                   $as_jl_Void(x$1$12);
-                  var this$786 = $m_Lokay_scala3_std_Log$();
+                  var this$777 = $m_Lokay_scala3_std_Log$();
                   var at$306 = new $c_Lokay_scala3_Place$Last();
                   var at$307 = new $c_Lokay_scala3_Place$Init(at$306);
                   var at$308 = new $c_Lokay_scala3_Place$Init(at$307);
@@ -73164,17 +73512,11 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
                   var at$319 = new $c_Lokay_scala3_Place$Init(at$318);
                   var at$320 = new $c_Lokay_scala3_Place$Init(at$319);
                   var at$321 = new $c_Lokay_scala3_Place$Init(at$320);
-                  var p$16 = this$786.log__Lokay_scala3_std_Level__T__Lokay_scala3_Place__Lokay_scala3_Prog($s_Lokay_scala3_std_Level$__Info__Lokay_scala3_std_Level(), "done", at$321);
+                  var p$16 = this$777.log__Lokay_scala3_std_Level__T__Lokay_scala3_Place__Lokay_scala3_Prog($s_Lokay_scala3_std_Level$__Info__Lokay_scala3_std_Level(), "done", at$321);
                   var f$20 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2$3) => {
                     $as_jl_Void(x$1$2$3);
-                    var this$787 = $n(a$1);
-                    var this$788 = $n(this$787.Lokay_serverless_cloud_Response__f_body);
-                    var bytes$1 = this$788.Lokay_serverless_cloud_Bytes__f_a;
-                    var _1 = $m_jl_String$().new__AB__T__T(bytes$1, "UTF-8");
-                    var this$789 = $n(b$1);
-                    var this$790 = $n(this$789.Lokay_serverless_cloud_Response__f_body);
-                    var bytes$2 = this$790.Lokay_serverless_cloud_Bytes__f_a;
-                    var _2 = $m_jl_String$().new__AB__T__T(bytes$2, "UTF-8");
+                    var _1 = $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(a$1);
+                    var _2 = $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(b$1);
                     var _3 = calls.sr_IntRef__f_elem;
                     var obtained$11 = new $c_T3(_1, _2, _3);
                     var expected$11 = new $c_T3("price of /x", "price of /x", 1);
@@ -73198,12 +73540,12 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
                     var compare$15 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                     var diffOptions$15 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                     $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, l$1, expected$13, clue$15, loc$18, compare$15, diffOptions$15);
-                    var $x_57 = $m_sr_ScalaRunTime$();
+                    var $x_55 = $m_sr_ScalaRunTime$();
                     var y = new $c_Lokay_effects_json_Json$Str("hi");
-                    var fields$2 = $x_57.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("echo", y)]));
+                    var fields$2 = $x_55.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("echo", y)]));
                     $m_Lokay_effects_json_Json$Obj$();
-                    var this$807 = $n(fields$2);
-                    var fields$3 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$807);
+                    var this$794 = $n(fields$2);
+                    var fields$3 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$794);
                     var expected$14 = new $c_Lokay_effects_json_Json$Obj(fields$3);
                     var clue$16 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                     var loc$19 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 99);
@@ -73244,60 +73586,60 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
       }));
       return new $c_Lokay_scala3_Prog$FlatMap(p$22, f$26);
     }));
-    return $x_58.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_scala3_Prog$FlatMap(p$23, f$27), this.given_ExecutionContext__s_concurrent_ExecutionContext());
+    return $x_56.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_scala3_Prog$FlatMap(p$23, f$27), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$22 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 102);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "fetch through the cache; env; rate limits; a model; analytics; logs", body$5, loc$22);
-  var body$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "fetch through the cache; env; rate limits; a model; analytics; logs", body$3, loc$22);
+  var body$4 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c$6 = this.cloud__Lokay_serverless_cloud_MemoryCloud();
-    var $x_70 = $n($n(c$6).Lokay_serverless_cloud_MemoryCloud__f_platform);
-    var $x_63 = $m_Lokay_serverless_cloud_Vectors$();
-    var $x_62 = $m_sr_ScalaRunTime$();
+    var $x_68 = $n($n(c$6).Lokay_serverless_cloud_MemoryCloud__f_platform);
+    var $x_61 = $m_Lokay_serverless_cloud_Vectors$();
+    var $x_60 = $m_sr_ScalaRunTime$();
     var values = new $c_sci_$colon$colon(1.0, new $c_sci_$colon$colon(0.0, $m_sci_Nil$()));
     var metadata$1 = $m_sci_Map$EmptyMap$();
-    var $x_61 = new $c_Lokay_serverless_cloud_Embedding("a", values, metadata$1);
+    var $x_59 = new $c_Lokay_serverless_cloud_Embedding("a", values, metadata$1);
     var values$1 = new $c_sci_$colon$colon(0.9, new $c_sci_$colon$colon(0.1, $m_sci_Nil$()));
-    var this$841 = $m_sci_Map$();
+    var this$828 = $m_sci_Map$();
     var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("lang", "en")]));
-    var metadata$2 = this$841.from__sc_IterableOnce__sci_Map(elems);
-    var $x_60 = new $c_Lokay_serverless_cloud_Embedding("b", values$1, metadata$2);
+    var metadata$2 = this$828.from__sc_IterableOnce__sci_Map(elems);
+    var $x_58 = new $c_Lokay_serverless_cloud_Embedding("b", values$1, metadata$2);
     var values$2 = new $c_sci_$colon$colon(0.0, new $c_sci_$colon$colon(1.0, $m_sci_Nil$()));
-    var this$845 = $m_sci_Map$();
+    var this$832 = $m_sci_Map$();
     var elems$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("lang", "en")]));
-    var metadata$3 = this$845.from__sc_IterableOnce__sci_Map(elems$1);
-    var $x_59 = $x_62.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_serverless_cloud_Embedding.getArrayOf().constr)([$x_61, $x_60, new $c_Lokay_serverless_cloud_Embedding("c", values$2, metadata$3)]));
+    var metadata$3 = this$832.from__sc_IterableOnce__sci_Map(elems$1);
+    var $x_57 = $x_60.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_serverless_cloud_Embedding.getArrayOf().constr)([$x_59, $x_58, new $c_Lokay_serverless_cloud_Embedding("c", values$2, metadata$3)]));
     var at$322 = new $c_Lokay_scala3_Place$Last();
     var at$323 = new $c_Lokay_scala3_Place$Init(at$322);
     var at$324 = new $c_Lokay_scala3_Place$Init(at$323);
     var at$325 = new $c_Lokay_scala3_Place$Init(at$324);
-    var p$26 = $x_63.upsert__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_59, at$325);
+    var p$26 = $x_61.upsert__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_57, at$325);
     var f$30 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$15) => {
       $as_jl_Void(x$1$15);
-      var $x_66 = $m_Lokay_serverless_cloud_Vectors$();
-      var $x_65 = new $c_sci_$colon$colon(1.0, new $c_sci_$colon$colon(0.0, $m_sci_Nil$()));
-      var $x_64 = $m_sci_Map$EmptyMap$();
+      var $x_64 = $m_Lokay_serverless_cloud_Vectors$();
+      var $x_63 = new $c_sci_$colon$colon(1.0, new $c_sci_$colon$colon(0.0, $m_sci_Nil$()));
+      var $x_62 = $m_sci_Map$EmptyMap$();
       var at$326 = new $c_Lokay_scala3_Place$Last();
       var at$327 = new $c_Lokay_scala3_Place$Init(at$326);
       var at$328 = new $c_Lokay_scala3_Place$Init(at$327);
       var at$329 = new $c_Lokay_scala3_Place$Init(at$328);
-      var p$25 = $x_66.query__T__sci_List__I__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_65, 2, $x_64, at$329);
+      var p$25 = $x_64.query__T__sci_List__I__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_63, 2, $x_62, at$329);
       var f$29 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((all) => {
         var all$1 = $as_sci_List(all);
-        var $x_69 = $m_Lokay_serverless_cloud_Vectors$();
-        var $x_68 = new $c_sci_$colon$colon(1.0, new $c_sci_$colon$colon(0.0, $m_sci_Nil$()));
-        var this$869 = $m_sci_Map$();
+        var $x_67 = $m_Lokay_serverless_cloud_Vectors$();
+        var $x_66 = new $c_sci_$colon$colon(1.0, new $c_sci_$colon$colon(0.0, $m_sci_Nil$()));
+        var this$856 = $m_sci_Map$();
         var elems$2 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("lang", "en")]));
-        var $x_67 = this$869.from__sc_IterableOnce__sci_Map(elems$2);
+        var $x_65 = this$856.from__sc_IterableOnce__sci_Map(elems$2);
         var at$330 = new $c_Lokay_scala3_Place$Last();
         var at$331 = new $c_Lokay_scala3_Place$Init(at$330);
         var at$332 = new $c_Lokay_scala3_Place$Init(at$331);
         var at$333 = new $c_Lokay_scala3_Place$Init(at$332);
-        var p$24 = $x_69.query__T__sci_List__I__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_68, 1, $x_67, at$333);
+        var p$24 = $x_67.query__T__sci_List__I__sci_Map__Lokay_scala3_Place__Lokay_scala3_Prog("docs", $x_66, 1, $x_65, at$333);
         var f$28 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((en) => {
           var en$1 = $as_sci_List(en);
-          var obtained$15 = $n(all$1).map__F1__sci_List(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$7) => {
-            var _$7$1 = $as_Lokay_serverless_cloud_Nearest(_$7);
-            return $n(_$7$1).Lokay_serverless_cloud_Nearest__f_id;
+          var obtained$15 = $n(all$1).map__F1__sci_List(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$8) => {
+            var _$8$1 = $as_Lokay_serverless_cloud_Nearest(_$8);
+            return $n(_$8$1).Lokay_serverless_cloud_Nearest__f_id;
           })));
           var expected$17 = new $c_sci_$colon$colon("a", new $c_sci_$colon$colon("b", $m_sci_Nil$()));
           var clue$19 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73305,9 +73647,9 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
           var compare$19 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
           var diffOptions$19 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
           $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$15, expected$17, clue$19, loc$23, compare$19, diffOptions$19);
-          var obtained$16 = $n(en$1).map__F1__sci_List(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$8) => {
-            var _$8$1 = $as_Lokay_serverless_cloud_Nearest(_$8);
-            return $n(_$8$1).Lokay_serverless_cloud_Nearest__f_id;
+          var obtained$16 = $n(en$1).map__F1__sci_List(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$9) => {
+            var _$9$1 = $as_Lokay_serverless_cloud_Nearest(_$9);
+            return $n(_$9$1).Lokay_serverless_cloud_Nearest__f_id;
           })));
           var expected$18 = new $c_sci_$colon$colon("b", $m_sci_Nil$());
           var clue$20 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73320,35 +73662,72 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
       }));
       return new $c_Lokay_scala3_Prog$FlatMap(p$25, f$29);
     }));
-    return $x_70.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_scala3_Prog$FlatMap(p$26, f$30), this.given_ExecutionContext__s_concurrent_ExecutionContext());
+    return $x_68.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_Lokay_scala3_Prog$FlatMap(p$26, f$30), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$25 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 114);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "vectors: the nearest, filtered", body$6, loc$25);
-  var body$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "vectors: the nearest, filtered", body$4, loc$25);
+  var body$8 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c$7 = this.cloud__Lokay_serverless_cloud_MemoryCloud();
     $n($n(c$7).Lokay_serverless_cloud_MemoryCloud__f_actors).update__O__O__V("rooms", this.Room__Lokay_serverless_cloud_CloudSuite$Room$());
-    var this$891 = $m_sci_Map$();
-    var elems$3 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("upgrade", "websocket")]));
-    var ws = this$891.from__sc_IterableOnce__sci_Map(elems$3);
-    var body$7 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-    return $n($n(c$7).connect__T__T__Lokay_serverless_cloud_Request__s_concurrent_Future("rooms", "lobby", new $c_Lokay_serverless_cloud_Request("GET", "https://x/?who=ann", ws, body$7))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ann) => {
+    var this$878 = $m_sci_Map$();
+    var $x_69 = $m_sr_ScalaRunTime$();
+    var y$2 = new $c_sci_$colon$colon("websocket", $m_sci_Nil$());
+    var elems$3 = $x_69.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("upgrade", y$2)]));
+    var ws = this$878.from__sc_IterableOnce__sci_Map(elems$3);
+    var this$879 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+    var \u03b44$ = this$879.apply__T__T__Lokay_http_Request("GET", "/?who=ann");
+    $n(\u03b44$);
+    var this$880 = $n(\u03b44$);
+    var method = this$880.Lokay_http_Request__f_method;
+    var this$881 = $n(\u03b44$);
+    var path = this$881.Lokay_http_Request__f_path;
+    var this$882 = $n(\u03b44$);
+    var query = this$882.Lokay_http_Request__f_query;
+    var this$883 = $n(\u03b44$);
+    var body$5 = this$883.Lokay_http_Request__f_body;
+    var this$884 = $n(\u03b44$);
+    var bytes$1 = this$884.Lokay_http_Request__f_bytes;
+    return $n($n(c$7).connect__T__T__Lokay_http_Request__s_concurrent_Future("rooms", "lobby", new $c_Lokay_http_Request(method, path, query, ws, body$5, bytes$1))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ann) => {
       var ann$1 = $as_Lokay_serverless_cloud_MemoryCloud$MemorySocket(ann);
-      var body$8 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-      return $n($n(c$7).connect__T__T__Lokay_serverless_cloud_Request__s_concurrent_Future("rooms", "lobby", new $c_Lokay_serverless_cloud_Request("GET", "https://x/?who=bob", ws, body$8))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((bob) => {
+      var this$886 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+      var \u03b45$ = this$886.apply__T__T__Lokay_http_Request("GET", "/?who=bob");
+      $n(\u03b45$);
+      var this$887 = $n(\u03b45$);
+      var method$1 = this$887.Lokay_http_Request__f_method;
+      var this$888 = $n(\u03b45$);
+      var path$1 = this$888.Lokay_http_Request__f_path;
+      var this$889 = $n(\u03b45$);
+      var query$1 = this$889.Lokay_http_Request__f_query;
+      var this$890 = $n(\u03b45$);
+      var body$6 = this$890.Lokay_http_Request__f_body;
+      var this$891 = $n(\u03b45$);
+      var bytes$2 = this$891.Lokay_http_Request__f_bytes;
+      return $n($n(c$7).connect__T__T__Lokay_http_Request__s_concurrent_Future("rooms", "lobby", new $c_Lokay_http_Request(method$1, path$1, query$1, ws, body$6, bytes$2))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((bob) => {
         var bob$1 = $as_Lokay_serverless_cloud_MemoryCloud$MemorySocket(bob);
-        var body$9 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-        return $n($n(c$7).connect__T__T__Lokay_serverless_cloud_Request__s_concurrent_Future("rooms", "other", new $c_Lokay_serverless_cloud_Request("GET", "https://x/?who=cy", ws, body$9))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((other) => {
+        var this$893 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+        var \u03b46$ = this$893.apply__T__T__Lokay_http_Request("GET", "/?who=cy");
+        $n(\u03b46$);
+        var this$894 = $n(\u03b46$);
+        var method$2 = this$894.Lokay_http_Request__f_method;
+        var this$895 = $n(\u03b46$);
+        var path$2 = this$895.Lokay_http_Request__f_path;
+        var this$896 = $n(\u03b46$);
+        var query$2 = this$896.Lokay_http_Request__f_query;
+        var this$897 = $n(\u03b46$);
+        var body$7 = this$897.Lokay_http_Request__f_body;
+        var this$898 = $n(\u03b46$);
+        var bytes$3 = this$898.Lokay_http_Request__f_bytes;
+        return $n($n(c$7).connect__T__T__Lokay_http_Request__s_concurrent_Future("rooms", "other", new $c_Lokay_http_Request(method$2, path$2, query$2, ws, body$7, bytes$3))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((other) => {
           var other$1 = $as_Lokay_serverless_cloud_MemoryCloud$MemorySocket(other);
           return $n($n(ann$1).send__T__s_concurrent_Future("hello")).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$17) => {
             $as_jl_Void(x$1$17);
-            var $x_73 = $n(c$7).Lokay_serverless_cloud_MemoryCloud__f_platform;
-            var $x_72 = $m_Lokay_serverless_cloud_Objects$();
-            var headers$2 = $m_sci_Map$EmptyMap$();
-            var body$10 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-            var $x_71 = new $c_Lokay_serverless_cloud_Request("GET", "https://x/", headers$2, body$10);
+            var $x_72 = $n(c$7).Lokay_serverless_cloud_MemoryCloud__f_platform;
+            var $x_71 = $m_Lokay_serverless_cloud_Objects$();
+            var this$900 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+            var $x_70 = this$900.apply__T__T__Lokay_http_Request("GET", "/");
             var at$334 = new $c_Lokay_scala3_Place$Last();
-            return $n($n($n($x_73).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_72.call__T__T__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog("rooms", "lobby", $x_71, at$334), this.given_ExecutionContext__s_concurrent_ExecutionContext())).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((history) => {
-              var history$1 = $as_Lokay_serverless_cloud_Response(history);
+            return $n($n($n($x_72).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_71.call__T__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog("rooms", "lobby", $x_70, at$334), this.given_ExecutionContext__s_concurrent_ExecutionContext())).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((history) => {
+              var history$1 = $as_Lokay_http_Response(history);
               var x$3_$_lo = this.Lokay_serverless_cloud_CloudSuite__f_time_$lo;
               var x$3_$_hi = this.Lokay_serverless_cloud_CloudSuite__f_time_$hi;
               var lo$2 = ((1000 + x$3_$_lo) | 0);
@@ -73360,7 +73739,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
             })), this.given_ExecutionContext__s_concurrent_ExecutionContext())).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2$4) => {
               var x$1$19 = $as_T2(x$1$2$4);
               if ((x$1$19 !== null)) {
-                var history$2 = $as_Lokay_serverless_cloud_Response($n(x$1$19)._1__O());
+                var history$2 = $as_Lokay_http_Response($n(x$1$19)._1__O());
                 return $n($n(c$7).fireAlarms__s_concurrent_Future()).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((v1$1) => {
                   var fired = $uI(v1$1);
                   var obtained$17 = $n($n(bob$1).Lokay_serverless_cloud_MemoryCloud$MemorySocket__f_received).toList__sci_List();
@@ -73377,10 +73756,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
                   var compare$22 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                   var diffOptions$22 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                   $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$18, expected$20, clue$22, loc$27, compare$22, diffOptions$22);
-                  var this$912 = $n(history$2);
-                  var this$913 = $n(this$912.Lokay_serverless_cloud_Response__f_body);
-                  var bytes$3 = this$913.Lokay_serverless_cloud_Bytes__f_a;
-                  var obtained$19 = $m_jl_String$().new__AB__T__T(bytes$3, "UTF-8");
+                  var obtained$19 = $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(history$2);
                   var clue$23 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                   var loc$28 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 146);
                   var compare$23 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
@@ -73407,20 +73783,16 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     })), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$31 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 149);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "objects: one a name; sockets accepted, a message broadcast and kept; an alarm; the state durable", body$11, loc$31);
-  var body$13 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "objects: one a name; sockets accepted, a message broadcast and kept; an alarm; the state durable", body$8, loc$31);
+  var body$9 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c$8 = this.cloud__Lokay_serverless_cloud_MemoryCloud();
     $n($n(c$8).Lokay_serverless_cloud_MemoryCloud__f_apps).update__O__O__V("back", this.Back__Lokay_serverless_cloud_CloudSuite$Back$());
-    var $x_75 = $n(c$8).Lokay_serverless_cloud_MemoryCloud__f_platform;
-    var $x_74 = this.Front__Lokay_serverless_cloud_CloudSuite$Front$();
-    var headers$3 = $m_sci_Map$EmptyMap$();
-    var body$12 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-    return $n($n($x_75).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($n($x_74).fetch__Lokay_serverless_cloud_Request__Lokay_scala3_Prog(new $c_Lokay_serverless_cloud_Request("GET", "https://front/", headers$3, body$12)), this.given_ExecutionContext__s_concurrent_ExecutionContext())).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$2) => {
-      var r$3 = $as_Lokay_serverless_cloud_Response(r$2);
-      var this$925 = $n(r$3);
-      var this$926 = $n(this$925.Lokay_serverless_cloud_Response__f_body);
-      var bytes$4 = this$926.Lokay_serverless_cloud_Bytes__f_a;
-      var obtained$21 = $m_jl_String$().new__AB__T__T(bytes$4, "UTF-8");
+    var $x_74 = $n(c$8).Lokay_serverless_cloud_MemoryCloud__f_platform;
+    var $x_73 = this.Front__Lokay_serverless_cloud_CloudSuite$Front$();
+    var this$916 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+    return $n($n($x_74).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($n($x_73).fetch__Lokay_http_Request__Lokay_scala3_Prog(this$916.apply__T__T__Lokay_http_Request("GET", "/")), this.given_ExecutionContext__s_concurrent_ExecutionContext())).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$2) => {
+      var r$3 = $as_Lokay_http_Response(r$2);
+      var obtained$21 = $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(r$3);
       var clue$26 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
       var loc$32 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 160);
       var compare$26 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
@@ -73429,11 +73801,11 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     })), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$33 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 161);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "services: one app calling another by name", body$13, loc$33);
-  var body$14 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
-    var $x_78 = $n(this.c0__Lokay_serverless_cloud_MemoryCloud()).Lokay_serverless_cloud_MemoryCloud__f_platform;
-    var $x_77 = $m_Lokay_serverless_cloud_Sql$();
-    var $x_76 = $m_sr_ScalaRunTime$().genericWrapArray__O__sci_ArraySeq(new $ac_O([]));
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "services: one app calling another by name", body$9, loc$33);
+  var body$10 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+    var $x_77 = $n(this.c0__Lokay_serverless_cloud_MemoryCloud()).Lokay_serverless_cloud_MemoryCloud__f_platform;
+    var $x_76 = $m_Lokay_serverless_cloud_Sql$();
+    var $x_75 = $m_sr_ScalaRunTime$().genericWrapArray__O__sci_ArraySeq(new $ac_O([]));
     var at$335 = new $c_Lokay_scala3_Place$Last();
     var at$336 = new $c_Lokay_scala3_Place$Init(at$335);
     var at$337 = new $c_Lokay_scala3_Place$Init(at$336);
@@ -73446,11 +73818,11 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     var at$344 = new $c_Lokay_scala3_Place$Init(at$343);
     var at$345 = new $c_Lokay_scala3_Place$Init(at$344);
     var at$346 = new $c_Lokay_scala3_Place$Init(at$345);
-    return $n($n($n($x_78).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_77.query__T__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog("main", "select 1", $x_76, at$346), this.given_ExecutionContext__s_concurrent_ExecutionContext())).failed__s_concurrent_Future()).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$2) => {
+    return $n($n($n($x_77).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_76.query__T__T__sci_Seq__Lokay_scala3_Place__Lokay_scala3_Prog("main", "select 1", $x_75, at$346), this.given_ExecutionContext__s_concurrent_ExecutionContext())).failed__s_concurrent_Future()).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$2) => {
       var e$3 = $as_jl_Throwable(e$2);
       var cond = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
-        var this$954 = $n($n(e$3).getMessage__T());
-        return $uZ(this$954.startsWith("no SQL here"));
+        var this$944 = $n($n(e$3).getMessage__T());
+        return $uZ(this$944.startsWith("no SQL here"));
       }));
       var clue$27 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $n(e$3).getMessage__T()));
       var loc$34 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 165);
@@ -73458,7 +73830,7 @@ function $c_Lokay_serverless_cloud_CloudSuite() {
     })), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$35 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/CloudSuite.scala", 166);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a port the cloud lacks: the program fails, naming it", body$14, loc$35);
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "a port the cloud lacks: the program fails, naming it", body$10, loc$35);
 }
 $c_Lokay_serverless_cloud_CloudSuite.prototype = new $h_Lmunit_FunSuite();
 $c_Lokay_serverless_cloud_CloudSuite.prototype.constructor = $c_Lokay_serverless_cloud_CloudSuite;
@@ -73525,11 +73897,11 @@ var $d_Lokay_serverless_cloud_CloudSuite = new $TypeData().initClass($c_Lokay_se
   Lmunit_ValueTransforms: 1,
   Lmunit_BaseFunSuite: 1
 }));
-function $p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future($thiz, c$1, r) {
+function $p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future($thiz, c$1, r) {
   var $x_2 = $n($n(c$1).Lokay_serverless_cloud_MemoryCloud__f_platform);
   var $x_1 = $m_Lokay_serverless_cloud_Objects$();
   var at = new $c_Lokay_scala3_Place$Last();
-  return $x_2.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_1.call__T__T__Lokay_serverless_cloud_Request__Lokay_scala3_Place__Lokay_scala3_Prog("orders", "o-1", r, at), $thiz.given_ExecutionContext__s_concurrent_ExecutionContext());
+  return $x_2.future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_1.call__T__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog("orders", "o-1", r, at), $thiz.given_ExecutionContext__s_concurrent_ExecutionContext());
 }
 function $sct_Lokay_serverless_cloud_WorkflowSuite__stinit__() {
   $m_sjs_reflect_Reflect$().registerInstantiatableClass__T__jl_Class__sjs_js_Array__V("okay.serverless.cloud.WorkflowSuite", $d_Lokay_serverless_cloud_WorkflowSuite.getClassOf(), [[[], (() => new $c_Lokay_serverless_cloud_WorkflowSuite())]]);
@@ -73647,11 +74019,11 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
   var evidence$1 = this.given_Codec_Order__Lokay_serverless_Codec();
   var this$42 = $n(stages);
   this.Lokay_serverless_cloud_WorkflowSuite__f_order = new $c_Lokay_serverless_cloud_Workflow($m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$42), start, evidence$1);
-  var body$3 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+  var body = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c = new $c_Lokay_serverless_cloud_MemoryCloud(new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $bL(this.Lokay_serverless_cloud_WorkflowSuite__f_time_$lo, this.Lokay_serverless_cloud_WorkflowSuite__f_time_$hi))), this.given_ExecutionContext__s_concurrent_ExecutionContext());
     $n(c.Lokay_serverless_cloud_MemoryCloud__f_actors).update__O__O__V("orders", this.Lokay_serverless_cloud_WorkflowSuite__f_order);
-    return $n($n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, $m_Lokay_serverless_cloud_Request$().post__T__T__sci_Map__Lokay_serverless_cloud_Request("https://w/start", "{\"id\":\"o-1\",\"total\":250}", $m_sci_Map$EmptyMap$()))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((started) => {
-      var started$1 = $as_Lokay_serverless_cloud_Response(started);
+    return $n($n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request).post__T__T__T__Lokay_http_Request("/start", "{\"id\":\"o-1\",\"total\":250}", ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request), "application/json")))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((started) => {
+      var started$1 = $as_Lokay_http_Response(started);
       var x_$_lo = this.Lokay_serverless_cloud_WorkflowSuite__f_time_$lo;
       var x_$_hi = this.Lokay_serverless_cloud_WorkflowSuite__f_time_$hi;
       var lo = ((1000 + x_$_lo) | 0);
@@ -73663,13 +74035,12 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
     })), this.given_ExecutionContext__s_concurrent_ExecutionContext())).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
       var x$1$1 = $as_T2(x$1);
       if ((x$1$1 !== null)) {
-        var started$2 = $as_Lokay_serverless_cloud_Response($n(x$1$1)._1__O());
+        var started$2 = $as_Lokay_http_Response($n(x$1$1)._1__O());
         return $n(c.fireAlarms__s_concurrent_Future()).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2) => {
           $uI(x$1$2);
-          var headers = $m_sci_Map$EmptyMap$();
-          var body = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-          return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, new $c_Lokay_serverless_cloud_Request("GET", "https://w/", headers, body))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((afterTwo) => {
-            var afterTwo$1 = $as_Lokay_serverless_cloud_Response(afterTwo);
+          var this$45 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+          return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, this$45.apply__T__T__Lokay_http_Request("GET", "/"))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((afterTwo) => {
+            var afterTwo$1 = $as_Lokay_http_Response(afterTwo);
             return $n($n(c.fireAlarms__s_concurrent_Future()).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((early) => {
               var early$1 = $uI(early);
               var x$2_$_lo = this.Lokay_serverless_cloud_WorkflowSuite__f_time_$lo;
@@ -73686,12 +74057,11 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                 var early$2 = $uI($n(x$1$5)._1__O());
                 return $n(c.fireAlarms__s_concurrent_Future()).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2$1) => {
                   $uI(x$1$2$1);
-                  var headers$1 = $m_sci_Map$EmptyMap$();
-                  var body$1 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-                  return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, new $c_Lokay_serverless_cloud_Request("GET", "https://w/", headers$1, body$1))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((asleep) => {
-                    var asleep$1 = $as_Lokay_serverless_cloud_Response(asleep);
-                    return $n($n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, $m_Lokay_serverless_cloud_Request$().post__T__T__sci_Map__Lokay_serverless_cloud_Request("https://w/event/approved", "{\"by\":\"bob\"}", $m_sci_Map$EmptyMap$()))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((tooEarly) => {
-                      var tooEarly$1 = $as_Lokay_serverless_cloud_Response(tooEarly);
+                  var this$48 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+                  return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, this$48.apply__T__T__Lokay_http_Request("GET", "/"))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((asleep) => {
+                    var asleep$1 = $as_Lokay_http_Response(asleep);
+                    return $n($n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request).post__T__T__T__Lokay_http_Request("/event/approved", "{\"by\":\"bob\"}", ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request), "application/json")))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((tooEarly) => {
+                      var tooEarly$1 = $as_Lokay_http_Response(tooEarly);
                       var x$3_$_lo = this.Lokay_serverless_cloud_WorkflowSuite__f_time_$lo;
                       var x$3_$_hi = this.Lokay_serverless_cloud_WorkflowSuite__f_time_$hi;
                       var lo$2 = ((86400000 + x$3_$_lo) | 0);
@@ -73703,18 +74073,17 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                     })), this.given_ExecutionContext__s_concurrent_ExecutionContext())).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$7) => {
                       var x$1$8 = $as_T2(x$1$7);
                       if ((x$1$8 !== null)) {
-                        var tooEarly$2 = $as_Lokay_serverless_cloud_Response($n(x$1$8)._1__O());
+                        var tooEarly$2 = $as_Lokay_http_Response($n(x$1$8)._1__O());
                         return $n(c.fireAlarms__s_concurrent_Future()).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2$2) => {
                           $uI(x$1$2$2);
-                          var headers$2 = $m_sci_Map$EmptyMap$();
-                          var body$2 = $m_Lokay_serverless_cloud_Bytes$().Lokay_serverless_cloud_Bytes$__f_empty;
-                          return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, new $c_Lokay_serverless_cloud_Request("GET", "https://w/", headers$2, body$2))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((waiting) => {
-                            var waiting$1 = $as_Lokay_serverless_cloud_Response(waiting);
-                            return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, $m_Lokay_serverless_cloud_Request$().post__T__T__sci_Map__Lokay_serverless_cloud_Request("https://w/event/approved", "{\"by\":\"bob\"}", $m_sci_Map$EmptyMap$()))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((done) => {
-                              var done$1 = $as_Lokay_serverless_cloud_Response(done);
-                              return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_serverless_cloud_Request__s_concurrent_Future(this, c, $m_Lokay_serverless_cloud_Request$().post__T__T__sci_Map__Lokay_serverless_cloud_Request("https://w/start", "{}", $m_sci_Map$EmptyMap$()))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((again) => {
-                                var again$1 = $as_Lokay_serverless_cloud_Response(again);
-                                var obtained = this.field__Lokay_serverless_cloud_Response__T__s_Option(started$2, "status");
+                          var this$51 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+                          return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, this$51.apply__T__T__Lokay_http_Request("GET", "/"))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((waiting) => {
+                            var waiting$1 = $as_Lokay_http_Response(waiting);
+                            return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request).post__T__T__T__Lokay_http_Request("/event/approved", "{\"by\":\"bob\"}", ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request), "application/json")))).flatMap__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((done) => {
+                              var done$1 = $as_Lokay_http_Response(done);
+                              return $n($p_Lokay_serverless_cloud_WorkflowSuite__call$1__Lokay_serverless_cloud_MemoryCloud__Lokay_http_Request__s_concurrent_Future(this, c, $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request).post__T__T__T__Lokay_http_Request("/start", "{}", ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request), "application/json")))).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((again) => {
+                                var again$1 = $as_Lokay_http_Response(again);
+                                var obtained = this.field__Lokay_http_Response__T__s_Option(started$2, "status");
                                 var value = new $c_Lokay_effects_json_Json$Str("retrying");
                                 var expected = new $c_s_Some(value);
                                 var clue = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73722,7 +74091,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained, expected, clue, loc, compare, diffOptions);
-                                var obtained$1 = this.field__Lokay_serverless_cloud_Response__T__s_Option(afterTwo$1, "error");
+                                var obtained$1 = this.field__Lokay_http_Response__T__s_Option(afterTwo$1, "error");
                                 var value$1 = new $c_Lokay_effects_json_Json$Str("the bank is down");
                                 var expected$1 = new $c_s_Some(value$1);
                                 var clue$1 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73741,7 +74110,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$3 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$3 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$2, 3, clue$3, loc$3, compare$3, diffOptions$3);
-                                var obtained$3 = this.field__Lokay_serverless_cloud_Response__T__s_Option(asleep$1, "status");
+                                var obtained$3 = this.field__Lokay_http_Response__T__s_Option(asleep$1, "status");
                                 var value$2 = new $c_Lokay_effects_json_Json$Str("sleeping");
                                 var expected$2 = new $c_s_Some(value$2);
                                 var clue$4 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73749,7 +74118,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$4 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$4 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$3, expected$2, clue$4, loc$4, compare$4, diffOptions$4);
-                                var obtained$4 = this.field__Lokay_serverless_cloud_Response__T__s_Option(asleep$1, "at");
+                                var obtained$4 = this.field__Lokay_http_Response__T__s_Option(asleep$1, "at");
                                 var value$3 = new $c_Lokay_effects_json_Json$Str("cool-off");
                                 var expected$3 = new $c_s_Some(value$3);
                                 var clue$5 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73757,13 +74126,13 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$5 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$5 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$4, expected$3, clue$5, loc$5, compare$5, diffOptions$5);
-                                var obtained$5 = $n(tooEarly$2).Lokay_serverless_cloud_Response__f_status;
+                                var obtained$5 = $n(tooEarly$2).Lokay_http_Response__f_status;
                                 var clue$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                                 var loc$6 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala", 64);
                                 var compare$6 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$6 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$5, 409, clue$6, loc$6, compare$6, diffOptions$6);
-                                var obtained$6 = this.field__Lokay_serverless_cloud_Response__T__s_Option(waiting$1, "status");
+                                var obtained$6 = this.field__Lokay_http_Response__T__s_Option(waiting$1, "status");
                                 var value$4 = new $c_Lokay_effects_json_Json$Str("waiting:approved");
                                 var expected$4 = new $c_s_Some(value$4);
                                 var clue$7 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73771,7 +74140,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$7 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$7 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$6, expected$4, clue$7, loc$7, compare$7, diffOptions$7);
-                                var obtained$7 = this.field__Lokay_serverless_cloud_Response__T__s_Option(done$1, "status");
+                                var obtained$7 = this.field__Lokay_http_Response__T__s_Option(done$1, "status");
                                 var value$5 = new $c_Lokay_effects_json_Json$Str("done");
                                 var expected$5 = new $c_s_Some(value$5);
                                 var clue$8 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
@@ -73779,11 +74148,11 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$8 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$8 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$7, expected$5, clue$8, loc$8, compare$8, diffOptions$8);
-                                var this$102 = $n(this.field__Lokay_serverless_cloud_Response__T__s_Option(done$1, "state"));
-                                if (this$102.isEmpty__Z()) {
+                                var this$82 = $n(this.field__Lokay_http_Response__T__s_Option(done$1, "state"));
+                                if (this$82.isEmpty__Z()) {
                                   var obtained$8 = $m_s_None$();
                                 } else {
-                                  var x0 = this$102.get__O();
+                                  var x0 = this$82.get__O();
                                   var _$3 = $as_Lokay_effects_json_Json(x0);
                                   var obtained$8 = $m_Lokay_serverless_Codec$package$().field__Lokay_effects_json_Json__T__s_Option(_$3, "approvedBy");
                                 }
@@ -73794,9 +74163,9 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$9 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$9 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$8, expected$6, clue$9, loc$9, compare$9, diffOptions$9);
-                                var this$107 = $n(c.Lokay_serverless_cloud_MemoryCloud__f_sent);
+                                var this$87 = $n(c.Lokay_serverless_cloud_MemoryCloud__f_sent);
                                 var b = $ct_scm_GrowableBuilder__scm_Growable__(new $c_scm_GrowableBuilder(), new $c_scm_ListBuffer());
-                                var it = this$107.iterator__sc_Iterator();
+                                var it = this$87.iterator__sc_Iterator();
                                 while ($n(it).hasNext__Z()) {
                                   var x0$1 = $n(it).next__O();
                                   var _$4 = $as_T2(x0$1);
@@ -73810,7 +74179,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
                                 var compare$10 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
                                 var diffOptions$10 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
                                 $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$9, expected$7, clue$10, loc$10, compare$10, diffOptions$10);
-                                var obtained$10 = $n(again$1).Lokay_serverless_cloud_Response__f_status;
+                                var obtained$10 = $n(again$1).Lokay_http_Response__f_status;
                                 var clue$11 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
                                 var loc$11 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala", 69);
                                 var compare$11 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
@@ -73835,7 +74204,7 @@ function $c_Lokay_serverless_cloud_WorkflowSuite() {
     })), this.given_ExecutionContext__s_concurrent_ExecutionContext());
   }));
   var loc$12 = new $c_Lmunit_Location("core/src/test/scala/okay/serverless/cloud/WorkflowSuite.scala", 70);
-  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "retries by alarm with backoff; a day's sleep; an event; done \u2014 each stage committed, nothing replayed", body$3, loc$12);
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "retries by alarm with backoff; a day's sleep; an event; done \u2014 each stage committed, nothing replayed", body, loc$12);
 }
 $c_Lokay_serverless_cloud_WorkflowSuite.prototype = new $h_Lmunit_FunSuite();
 $c_Lokay_serverless_cloud_WorkflowSuite.prototype.constructor = $c_Lokay_serverless_cloud_WorkflowSuite;
@@ -73918,16 +74287,12 @@ $c_Lokay_serverless_cloud_WorkflowSuite.prototype.given_Codec_Order__Lokay_serve
   }
   return this.Lokay_serverless_cloud_WorkflowSuite__f_given_Codec_Order$lzy1;
 });
-$c_Lokay_serverless_cloud_WorkflowSuite.prototype.field__Lokay_serverless_cloud_Response__T__s_Option = (function(r, name) {
-  var $x_1 = $m_Lokay_effects_json_Descent$();
-  var this$1 = $n(r);
-  var this$2 = $n(this$1.Lokay_serverless_cloud_Response__f_body);
-  var bytes = this$2.Lokay_serverless_cloud_Bytes__f_a;
-  var this$3 = $n($n($x_1.parse__T__I__s_util_Either($m_jl_String$().new__AB__T__T(bytes, "UTF-8"), 1000)).toOption__s_Option());
-  if (this$3.isEmpty__Z()) {
+$c_Lokay_serverless_cloud_WorkflowSuite.prototype.field__Lokay_http_Response__T__s_Option = (function(r, name) {
+  var this$1 = $n($n($m_Lokay_effects_json_Descent$().parse__T__I__s_util_Either($m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(r), 1000)).toOption__s_Option());
+  if (this$1.isEmpty__Z()) {
     return $m_s_None$();
   } else {
-    var x0 = this$3.get__O();
+    var x0 = this$1.get__O();
     var _$2 = $as_Lokay_effects_json_Json(x0);
     return $m_Lokay_serverless_Codec$package$().field__Lokay_effects_json_Json__T__s_Option(_$2, name);
   }
@@ -78794,6 +79159,9 @@ $c_sci_HashMap.prototype.constructor = $c_sci_HashMap;
 function $h_sci_HashMap() {
 }
 $h_sci_HashMap.prototype = $c_sci_HashMap.prototype;
+$c_sci_HashMap.prototype.map__F1__sc_IterableOps = (function(f) {
+  return $f_sc_StrictOptimizedMapOps__map__F1__sc_IterableOps(this, f);
+});
 $c_sci_HashMap.prototype.filter__F1__O = (function(pred) {
   return this.filterImpl__F1__Z__sci_HashMap(pred, false);
 });

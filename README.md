@@ -41,15 +41,18 @@ retried, sleeps, events — run by an object without replay.
 ```scala
 object Shop extends App:
   override def fetch(r: Request): Response ! Cloud = r.path match
-    case "/cached" => Cache.through[Cloud](r.url, 60)(Fetch[Cloud](Request.get("https://prices.example/today")))
-    case "/upload" => Blobs.put[Cloud]("BUCKET", r.query("name"), r.body).map(i => Response.text(i.etag))
-    case "/job" => Queues.send[Cloud]("JOBS", r.body.text).as(Response.text("queued"))
-    case _ => pure(Response.notFound)
+    case "/today" => Cache.through[Cloud]("https://shop.example/today", 60)(
+        Fetch.get[Cloud]("https://prices.example/today"))
+    case "/upload" => Blobs.put[Cloud]("BUCKET", r.param("name").getOrElse("file"), r.content)
+        .map(i => Response.text(i.etag))
+    case "/job" => Queues.send[Cloud]("JOBS", r.text).as(Response.text("queued"))
+    case _ => pure(Response.notFound())
   override def queue(q: String, m: Message): Settle ! Cloud =
     Sql.run[Cloud]("DB", "insert into jobs (body) values (?)", m.body).as(Settle.Ack)
 ```
 
-The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
+HTTP is [okay-http](https://github.com/okay-effects/okay-http)'s model — a body text, or bytes when it is not
+UTF-8. The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
 (`Lambda`: what DynamoDB carries so far). The design and the map of each effect to each cloud:
 [specs/cloud.md](specs/cloud.md).
 

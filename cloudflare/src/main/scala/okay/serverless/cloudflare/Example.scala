@@ -48,7 +48,7 @@ object Example:
       case Left(why) => Response.json(Json.obj("refused" -> Json.Str(why)))
 
     def fetch(name: String, request: Request): Response ! InActor =
-      Descent.parse(request.body.text) match
+      Descent.parse(request.text) match
         case Left(e) => pure(answer(Left(s"not JSON: ${e.message}")))
         case Right(e) => Fail.run[String, A, InActor, Account](event(name, e)).map(answer)
 
@@ -59,7 +59,7 @@ object Example:
   object Rooms extends Actor:
     def fetch(name: String, request: Request): Response ! InActor =
       if request.header("upgrade").exists(_.equalsIgnoreCase("websocket")) then
-        Sockets.accept[InActor](request, request.query.getOrElse("who", "guest"))
+        Sockets.accept[InActor](request, request.param("who").getOrElse("guest"))
       else Durable.step[ActorStep, InActor, List[String]](name)(Durable.get[List[String], ActorStep]("history")
         .map(_.getOrElse(Nil))).map(h => Response.text(h.mkString("\n")))
     override def message(name: String, socket: Socket, text: String): Unit ! InActor =
@@ -86,29 +86,29 @@ object Example:
       case List("", "order", id, _*) => Some(("ORDERS", id))
       case _ => None
 
-    def q(r: Request, k: String): String = r.query.getOrElse(k, "")
+    def q(r: Request, k: String): String = r.param(k).getOrElse("")
 
     override def fetch(r: Request): Response ! Cloud = r.path match
-      case "/" => Objects.call[Cloud]("ACCOUNTS", r.query.getOrElse("account", "main"), r)
+      case "/" => Objects.call[Cloud]("ACCOUNTS", r.param("account").getOrElse("main"), r)
       case "/kv" =>
-        if r.method == "POST" then Kv.put[Cloud]("KV", q(r, "key"), r.body.text).as(Response.text("ok"))
+        if r.method == "POST" then Kv.put[Cloud]("KV", q(r, "key"), r.text).as(Response.text("ok"))
         else Kv.get[Cloud]("KV", q(r, "key")).map(v => Response.text(v.getOrElse("(none)")))
       case "/kv/list" => Kv.list[Cloud]("KV", q(r, "prefix")).map(p => Response.text(p.items.mkString(",")))
       case "/blob" =>
-        if r.method == "PUT" then Blobs.put[Cloud]("BUCKET", q(r, "key"), r.body, r.header("content-type"))
+        if r.method == "PUT" then Blobs.put[Cloud]("BUCKET", q(r, "key"), r.content, r.header("content-type"))
           .map(i => Response.text(s"${i.size}"))
         else
-          val range = r.query.get("range").map(_.split('-')).collect { case Array(a, b) => (a.toLong, b.toLong) }
+          val range = r.param("range").map(_.split('-')).collect { case Array(a, b) => (a.toLong, b.toLong) }
           Blobs.get[Cloud]("BUCKET", q(r, "key"), range).map {
-            case Some((info, b)) => Response(200, info.contentType.map("content-type" -> _).toMap, b)
-            case None => Response.notFound
+            case Some((info, b)) => Response.binary(b, info.contentType.getOrElse("application/octet-stream"))
+            case None => Response.notFound()
           }
       case "/sql" =>
         def text(v: SqlValue) = v match
           case SqlValue.Text(t) => t
           case other => other.toString
         Sql.run[Cloud]("DB", "create table if not exists notes (id integer primary key, text text not null)")
-          .andThen(Sql.run[Cloud]("DB", "insert into notes (text) values (?)", r.body.text)).flatMap(c =>
+          .andThen(Sql.run[Cloud]("DB", "insert into notes (text) values (?)", r.text)).flatMap(c =>
             Sql.query[Cloud]("DB", "select id, text from notes order by id")
               .map(rows => Response.text(s"${c.changes} " + rows.map(row => text(row("text"))).mkString(","))))
       case "/queue" => Queues.send[Cloud]("JOBS", q(r, "body")).as(Response.text("queued"))
@@ -119,12 +119,12 @@ object Example:
           .map(k => Response.text(s"${g.getOrElse("?")} key:${k.isDefined}")))
       case "/analytics" => Analytics.write[Cloud]("VIEWS", DataPoint(List("ann"), List(r.path), List(1)))
           .as(Response.text("written"))
-      case "/service" => Services.call[Cloud]("SELF", Request.get("https://self/hello"))
+      case "/service" => Services.call[Cloud]("SELF", Request.get("/hello"))
           .map(s => Response.text(s"via service: ${s.text}"))
       case "/hello" => pure(Response.text("hello"))
       case "/mail" => Mails.send[Cloud]("MAIL", Mail("shop@okay.example", "ann@okay.example", "hi", "hello"))
           .as(Response.text("sent"))
-      case _ => pure(Response.notFound)
+      case _ => pure(Response.notFound())
 
     override def queue(queue: String, m: Message): Settle ! Cloud =
       Kv.put[Cloud]("KV", s"job:${m.body}", s"done after ${m.attempts}").andThen(Log.info[Cloud](s"job ${m.body}"))

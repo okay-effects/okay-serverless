@@ -90,7 +90,7 @@ final class Workflow[S](stages: Vector[Stage[S]], start: Json => S)(using codec:
     case Stage.Wait(n, _, _) => n
 
   def fetch(name: String, request: Request): Response ! InActor =
-    def body = Descent.parse(request.body.text).getOrElse(Json.Null)
+    def body = Descent.parse(request.text).getOrElse(Json.Null)
     val segments = request.path.split('/').toList.filter(_.nonEmpty)
     (request.method, segments.reverse) match
       case ("POST", "start" :: _) =>
@@ -110,7 +110,7 @@ final class Workflow[S](stages: Vector[Stage[S]], start: Json => S)(using codec:
           case _ => pure(Response.text(s"not waiting for $event", 409))
         }
       case ("GET", _) => load(name).map(status)
-      case _ => pure(Response.notFound)
+      case _ => pure(Response.notFound())
 
   /** a sleep over, a retry due: on */
   override def alarm(name: String): Unit ! InActor =

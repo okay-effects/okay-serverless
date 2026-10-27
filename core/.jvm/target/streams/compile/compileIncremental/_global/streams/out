@@ -1,6 +1,68 @@
 [debug] [zinc] IncrementalCompile -----------
 [debug] IncrementalCompile.incrementalCompile
-[debug] previous = Stamps for: 240 products, 9 sources, 5 libraries
+[debug] previous = Stamps for: 232 products, 9 sources, 6 libraries
 [debug] current source = Set(${BASE}/core/src/main/scala/okay/serverless/cloud/Flow.scala, ${BASE}/core/src/main/scala/okay/serverless/Durable.scala, ${BASE}/core/src/main/scala/okay/serverless/cloud/MemoryCloud.scala, ${BASE}/core/.jvm/src/main/scala/okay/serverless/cloud/SqliteSql.scala, ${BASE}/core/src/main/scala/okay/serverless/cloud/Effects.scala, ${BASE}/core/src/main/scala/okay/serverless/Memory.scala, ${BASE}/core/src/main/scala/okay/serverless/cloud/Platform.scala, ${BASE}/core/src/main/scala/okay/serverless/Codec.scala, ${BASE}/core/src/main/scala/okay/serverless/cloud/Http.scala)
-[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
-[debug] No changes
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/core/src/main/scala/okay/serverless/cloud/Http.scala), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] 
+[debug] Initial source changes:
+[debug] 	removed: Set()
+[debug] 	added: Set()
+[debug] 	modified: Set(${BASE}/core/src/main/scala/okay/serverless/cloud/Http.scala)
+[debug] Invalidated products: Set()
+[debug] External API changes: API Changes: Set()
+[debug] Modified binary dependencies: Set()
+[debug] Initial directly invalidated classes: Set(okay.serverless.cloud.Http$package$.Fetch, okay.serverless.cloud.Http$package)
+[debug] Sources indirectly invalidated by:
+[debug] 	product: Set()
+[debug] 	binary dep: Set()
+[debug] 	external source: Set()
+[debug] All initially invalidated classes: Set(okay.serverless.cloud.Http$package$.Fetch, okay.serverless.cloud.Http$package)
+[debug] All initially invalidated sources:Set(${BASE}/core/src/main/scala/okay/serverless/cloud/Http.scala)
+[debug] Initial set of included nodes: okay.serverless.cloud.Http$package$.Fetch, okay.serverless.cloud.Http$package
+[debug] compilation cycle 1
+[info] compiling 1 Scala source to /Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes ...
+[debug] Returning already retrieved and compiled bridge: /Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-sbt-bridge/3.3.8/scala3-sbt-bridge-3.3.8.jar.
+[debug] [zinc] Running cached compiler 2be44751 for Scala Compiler version 3.3.8
+[debug] [zinc] The Scala compiler is invoked with:
+[debug] 	-deprecation
+[debug] 	-feature
+[debug] 	-Wunused:imports,privates,locals
+[debug] 	-classpath
+[debug] 	/Users/sergiy/work/my/okay-serverless/core/.jvm/target/scala-3.3.8/classes:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala3-library_3/3.3.8/scala3-library_3-3.3.8.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-scala/maven/io/github/okay-effects/okay-scala_3/0.1.1/okay-scala_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-json_3/0.1.1/okay-effects-json_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-http/maven/io/github/okay-effects/okay-http_3/0.1.1/okay-http_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.53.1.0/sqlite-jdbc-3.53.1.0.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.18/scala-library-2.13.18.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects_3/0.1.1/okay-effects_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-machine_3/0.1.1/okay-effects-machine_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-parsing_3/0.1.1/okay-effects-parsing_3-0.1.1.jar:/Users/sergiy/Library/Caches/Coursier/v1/https/okay-effects.github.io/okay-simple/maven/io/github/okay-effects/okay-effects-stream_3/0.1.1/okay-effects-stream_3-0.1.1.jar
+[debug] Scala compilation took 1.108943 s
+[info] done compiling
+[debug] New invalidations:
+[debug] Initial set of included nodes: 
+[debug] Previously invalidated, but (transitively) depend on new invalidations:
+[debug] Final step, transitive dependencies:
+[debug] 	Set()
+[debug] Initial set of included nodes: okay.serverless.cloud.Http$package$.Fetch, okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.SqlValue by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.SqliteSql by okay.serverless.cloud.SqlValue
+[debug] Including okay.serverless.cloud.Workflow by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Cache$.Match by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.MemoryCloud by okay.serverless.cloud.Cache$.Match
+[debug] Including okay.serverless.cloud.Sql by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.MemoryCloud.MemorySocket by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.Platform by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.MemoryCloud.Instance by okay.serverless.cloud.Platform
+[debug] Including okay.serverless.cloud.Actor by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.Platform$package by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.Stage$.Do by okay.serverless.cloud.Platform$package
+[debug] Including okay.serverless.cloud.Hosting by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.App by okay.serverless.cloud.Sql
+[debug] Including okay.serverless.cloud.Cache$.Put by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Blobs$.Put by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Sockets$.Accept by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Sockets by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Objects by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Services by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Blobs by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Objects$.Call by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.SqlValue$.Blob by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Statement by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Services$.Call by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Blobs$.Get by okay.serverless.cloud.Http$package
+[debug] Including okay.serverless.cloud.Cache by okay.serverless.cloud.Http$package
+[debug] Invalidated macros due to upstream dependencies change: Set()
+[debug] No classes were invalidated.

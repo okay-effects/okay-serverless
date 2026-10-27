@@ -82,11 +82,13 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
 
   def pending: Int = synchronized(queued.size)
 
-  // ---- HTTP out: answered by `internet`
-  @volatile var internet: Request => Response = _ => Response.text("no internet in memory", 502)
+  // ---- HTTP out: answered by `internet`, given the URL and the request
+  @volatile var internet: (String, Request) => Response = (_, _) => Response.text("no internet in memory", 502)
   val fetch: Port[Fetch] = new Port[Fetch]:
     def apply[X](op: Fetch[X]): Future[X] = op match
-      case Fetch.Call(r) => now(internet(r))
+      case okay.http.Fetch.Send(base, r, answer) => now(answer(internet(okay.http.Fetch.target(base, r), r)))
+      case okay.http.Fetch.Call(m, url, h, body, answer) =>
+        now(answer(internet(url, okay.http.Fetch.request(m, url, h, body))))
 
   // ---- cache
   private val cached = mutable.Map.empty[String, (Response, Long)]
@@ -205,7 +207,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   /** a socket opened to an object: its request answered by the actor's `Sockets.accept` */
   def connect(ns: String, name: String, request: Request): Future[MemorySocket] =
     objects(Objects.Call(ns, name, request)).map { r =>
-      val id = r.header("okay-socket").getOrElse(throw IllegalStateException(s"not accepted: ${r.status}"))
+      val id = r.headerOf("okay-socket").getOrElse(throw IllegalStateException(s"not accepted: ${r.status}"))
       instance(ns, name).pipe(i => i.synchronized(i.sockets(id)._2))
     }
 
