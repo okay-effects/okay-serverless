@@ -227,17 +227,25 @@ object Mails:
 /** A REQUEST TO AN OBJECT — an actor of a namespace, by its name, one in the world: Durable Objects */
 enum Objects[X]:
   case Call(namespace: String, name: String, request: Request) extends Objects[Response]
+  /** a name never given before, not to be guessed: an object of its own — a session, an upload */
+  case Unique(namespace: String) extends Objects[String]
 
 object Objects:
   def call[R[_]](namespace: String, name: String, request: Request)(using In[Objects, R]): Response ! R =
     perform[Objects](Call(namespace, name, request))
+  def unique[R[_]](namespace: String)(using In[Objects, R]): String ! R = perform[Objects](Unique(namespace))
 
 /** an open connection to an actor: its id and its tags */
 final case class Socket(id: String, tags: List[String])
 
-/** WEBSOCKETS, in an actor: accepted from a request (the answer to give it), sent to, closed, found by tag */
+/** WEBSOCKETS AND EVENT STREAMS, in an actor: a WebSocket accepted from a request, or an event stream (server-sent
+ * events) answering it — the response to give it either way; sent to (a stream an event a text), closed, the open
+ * WebSockets found by tag; and work after the answer (`later`): its program run by the host once the response has
+ * gone, the object kept while it runs */
 enum Sockets[X]:
   case Accept(request: Request, tags: List[String]) extends Sockets[Response]
+  case Stream(request: Request, tags: List[String]) extends Sockets[Response]
+  case Later(work: Unit ! InActor) extends Sockets[Unit]
   case Send(socket: Socket, text: String) extends Sockets[Unit]
   case Close(socket: Socket, code: Int, reason: String) extends Sockets[Unit]
   case Open(tag: Option[String]) extends Sockets[List[Socket]]
@@ -245,6 +253,15 @@ enum Sockets[X]:
 object Sockets:
   def accept[R[_]](request: Request, tags: String*)(using In[Sockets, R]): Response ! R =
     perform[Sockets](Accept(request, tags.toList))
+  /** an event stream (`text/event-stream`) as the response: its socket's sends its events, its closing its end */
+  def stream[R[_]](request: Request, tags: String*)(using In[Sockets, R]): Response ! R =
+    perform[Sockets](Stream(request, tags.toList))
+  /** `work` once the response has gone: what a stream says after it was opened */
+  def later[R[_]](work: Unit ! InActor)(using In[Sockets, R]): Unit ! R = perform[Sockets](Later(work))
+  /** the socket of a response `accept` or `stream` gave */
+  def of(response: Response): Option[Socket] =
+    response.headerOf("okay-socket").map(id => Socket(id, response.headerOf("okay-socket-tags").toList
+      .flatMap(_.split(',').filter(_.nonEmpty))))
   def send[R[_]](socket: Socket, text: String)(using In[Sockets, R]): Unit ! R = perform[Sockets](Send(socket, text))
   def close[R[_]](socket: Socket, code: Int = 1000, reason: String = "")(using In[Sockets, R]): Unit ! R =
     perform[Sockets](Close(socket, code, reason))

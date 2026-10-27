@@ -73,6 +73,10 @@ class_name = "Shop"
 name = "REGISTRIES"
 class_name = "Registry"
 
+[[durable_objects.bindings]]
+name = "TICKERS"
+class_name = "Ticker"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Account"]
@@ -88,3 +92,7 @@ new_sqlite_classes = ["Shop"]
 [[migrations]]
 tag = "v4"
 new_sqlite_classes = ["Registry"]
+
+[[migrations]]
+tag = "v5"
+new_sqlite_classes = ["Ticker"]

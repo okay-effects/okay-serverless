@@ -16,7 +16,9 @@ import scala.scalajs.js.JSConverters.*
  *    table's TTL attribute; an expired item read as gone, as DynamoDB deletes it late);
  *  - `Limits`: a window's count an item `limit/<name>`, `<key>/<window>`, taken by a conditional `ADD`: atomic among
  *    all instances; `limits` the limit and the period (seconds) by name;
- *  - `Objects`: an actor in this process, its state a space `obj/<namespace>/<name>` (`DynamoStorage`: steps
+ *  - `Objects`: an actor in this process (work after an answer, `Sockets.later`, not kept: a Lambda is frozen when
+ *    it has answered — a queue's message is the way), its state a space `obj/<namespace>/<name>`
+ *    (`DynamoStorage`: steps
  *    conditioned, so instances at once stay right); its alarm given to `schedule` (EventBridge Scheduler's, the
  *    caller's) and come back as an `okayAlarm` event;
  *  - `Env` the process's, `Fetch` Node's, `Log` the console (CloudWatch Logs), `Analytics` CloudWatch's embedded
@@ -125,6 +127,7 @@ final class AwsPorts(client: js.Dynamic, table: String, limits: Map[String, (Int
   val objects: Port[Objects] = new Port[Objects]:
     def apply[X](op: Objects[X]): Future[X] = op match
       case Objects.Call(ns, name, r) => Async.toFuture(hosting(ns, name).run(platform)(actor(ns).fetch(name, r)))
+      case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String])
 
   lazy val platform: Platform = Platform(kv = kv, limits = limitsPort, env = env, fetch = WebJs.fetch,
     analytics = analytics, objects = objects, sql = sql, log = (l, m) => log(s"[$l] $m"))
@@ -156,10 +159,13 @@ final class Lambda(app: App, ports: AwsPorts)(using ExecutionContext):
     else Bytes.of(raw)
     val r = Request(e.requestContext.http.method.asInstanceOf[String], s"${e.rawPath}$query")
       .copy(headers = headers.map((k, v) => k.toLowerCase -> List(v))).withContent(body)
-    val answer = app.objectFor(r) match
-      case Some((ns, name)) => Async.toFuture(ports.hosting(ns, name).run(ports.platform)(ports.actor(ns).fetch(name,
-          r)))
-      case None => ports.platform.future(app.fetch(r))
+    val answer = ports.platform.future(app.admit(r)).flatMap {
+      case Left(refused) => Future.successful(refused)
+      case Right(admitted) => app.objectFor(admitted) match
+        case Some((ns, name)) => Async.toFuture(ports.hosting(ns, name).run(ports.platform)(ports.actor(ns).fetch(name,
+            admitted)))
+        case None => ports.platform.future(app.fetch(admitted))
+    }
     answer.map(res => obj(statusCode = res.status, headers = res.headers.toJSDictionary,
       body = g.Buffer.from(WebJs.uint8(res.content)).applyDynamic("toString")("base64"), isBase64Encoded = true))
 

@@ -42,7 +42,10 @@ constructors (`Response(status, headers, body)`, `Request` of five) — code com
 - `wrangler dev`: REST (description, create with a D1 key, find), MCP (initialize, tools, a call) on D1; REST of a
   shop's own store in its object (a request one step).
 
-## Not yet
+## Sessions, and who calls
 
-Sessions for MCP (`Mcp-Session-Id`, server-sent events, elicitation): stateless here. Authentication: the app's, in
-front of the face. okay-faces' interactive faces (forms, a dialogue as tools) over the same bridge.
+A described effect's MCP is stateless here: a tool is an operation, nothing kept between calls. A DIALOGUE — a program
+that offers actions, asks for consent by elicitation, goes on across calls — has sessions, event streams and its
+continuation parked between requests in okay-faces itself (`McpFace.http`, on Cloudflare `Door.mcp`, each session a
+Durable Object); it is not written again here. Who may call either: `Auth.guarded` in front of the app (specs/cloud.md,
+"Admission").

@@ -178,16 +178,26 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
         val n = binding(ns)
         await(n.get(n.idFromName(name)).fetch(toRequest(s"https://$ns",
           r.copy(headers = r.headers + ("okay-object-name" -> List(name))))))
-          .flatMap(response))
+          .flatMap(response)
+      case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String]))
 
   val platform: Platform = Platform(kv = kv, blobs = blobs, sql = sql, queues = queues, fetch = fetch, cache = cache,
     env = envPort, services = services, limits = limits, ai = aiPort, vectors = vectors, analytics = analytics,
     mails = mails, objects = objects, log = (l, m) => g.console.log(s"[$l] $m"), now = () => js.Date.now().toLong)
 
-/** AN OBJECT'S SOCKETS on Cloudflare: the hibernation API — each socket tagged by its id, its tags its attachment */
+/** AN OBJECT'S SOCKETS on Cloudflare: WebSockets by the hibernation API — each tagged by its id, its tags its
+ * attachment; event streams by a `TransformStream`, the response its readable side, each send an event */
 final class ObjectSockets(ctx: js.Dynamic) extends Port[Sockets]:
   /** the client ends of sockets just accepted, until their 101 leaves */
   val accepted: scala.collection.mutable.Map[String, js.Dynamic] = scala.collection.mutable.Map.empty
+  /** the readable sides of streams just opened, until their response leaves */
+  val streamed: scala.collection.mutable.Map[String, js.Dynamic] = scala.collection.mutable.Map.empty
+  /** the open streams' writers */
+  private val writers = scala.collection.mutable.Map.empty[String, js.Dynamic]
+  private lazy val encoder = js.Dynamic.newInstance(g.TextEncoder)()
+  /** an event of server-sent events: each line of `text` a `data:` line */
+  private def event(text: String): js.Dynamic =
+    encoder.encode(text.split("\n", -1).map("data: " + _).mkString("", "\n", "\n\n"))
   private def socket(ws: js.Dynamic): Socket =
     val a = ws.deserializeAttachment()
     Socket(a.id.asInstanceOf[String], a.tags.asInstanceOf[js.Array[String]].toList)
@@ -204,8 +214,19 @@ final class ObjectSockets(ctx: js.Dynamic) extends Port[Sockets]:
       server.serializeAttachment(obj(id = id, tags = tags.toJSArray))
       accepted(id) = client
       Response(101, Map("okay-socket" -> id))
-    case Sockets.Send(s, text) => find(s).foreach(_.send(text))
-    case Sockets.Close(s, code, reason) => find(s).foreach(_.close(code, reason))
+    case Sockets.Stream(_, tags) =>
+      val id = g.crypto.randomUUID().asInstanceOf[String]
+      val pipe = js.Dynamic.newInstance(g.TransformStream)()
+      writers(id) = pipe.writable.getWriter()
+      streamed(id) = pipe.readable
+      Response(200, Map("okay-socket" -> id, "okay-socket-tags" -> tags.mkString(","), "okay-stream" -> "events"))
+    case Sockets.Send(s, text) => writers.get(s.id) match
+        case Some(w) => w.write(event(text)); ()
+        case None => find(s).foreach(_.send(text))
+    case Sockets.Close(s, code, reason) => writers.remove(s.id) match
+        case Some(w) => w.close(); ()
+        case None => find(s).foreach(_.close(code, reason))
+    case Sockets.Later(_) => throw IllegalStateException("later is the host's")
     case Sockets.Open(tag) => ctx.getWebSockets(tag.orUndefined).asInstanceOf[js.Array[js.Dynamic]].toList.map(socket)))
 
 /**
@@ -221,15 +242,20 @@ final class Worker(app: App, actors: Map[String, Actor]):
     val url = js.Dynamic.newInstance(g.URL)(request.url)
     val head = Request(request.method.asInstanceOf[String], url.pathname.toString + url.search.toString)
       .copy(headers = headers(request.headers).map((k, v) => k.toLowerCase -> List(v)))
-    app.objectFor(head) match
-      case Some((ns, name)) => // to the object as it is: its body, its upgrade
-        val h = js.Dynamic.newInstance(g.Headers)(request.headers)
-        h.set("okay-object-name", name)
-        val n = env.selectDynamic(ns)
-        n.get(n.idFromName(name)).fetch(js.Dynamic.newInstance(g.Request)(request, obj(headers = h)))
-          .asInstanceOf[js.Promise[js.Dynamic]]
-      case None =>
-        WebJs.request(request).flatMap(r => ports(env).platform.future(app.fetch(r))).map(toResponse).toJSPromise
+    // admitted first (`App.admit`): the admitted request's headers are the request's from then on
+    ports(env).platform.future(app.admit(head)).flatMap {
+      case Left(refused) => Future.successful(toResponse(refused))
+      case Right(admitted) => app.objectFor(admitted) match
+        case Some((ns, name)) => // to the object as it is: its body, its upgrade, its stream
+          val h = js.Dynamic.newInstance(g.Headers)()
+          admitted.headers.foreach((k, vs) => h.set(k, vs.mkString(", ")))
+          h.set("okay-object-name", name)
+          val n = env.selectDynamic(ns)
+          await(n.get(n.idFromName(name)).fetch(js.Dynamic.newInstance(g.Request)(request, obj(headers = h))))
+        case None =>
+          WebJs.request(request).flatMap(r => ports(env).platform.future(app.fetch(r.copy(headers = admitted.headers))))
+            .map(toResponse)
+    }.toJSPromise
 
   @scala.scalajs.js.annotation.JSExport
   def scheduled(event: js.Dynamic, env: js.Dynamic, ctx: js.Dynamic): js.Promise[Unit] =
@@ -263,6 +289,8 @@ final class Worker(app: App, actors: Map[String, Actor]):
     new Hosting:
       val storage: Port[Storage] = st.port
       val sockets: Port[Sockets] = so
+      /** the object kept while it runs: the Workers runtime's `waitUntil` */
+      override def keep(work: Future[Unit]): Unit = { ctx.waitUntil(work.toJSPromise); () }
   private def actor(ns: String) = actors.getOrElse(ns, throw java.util.NoSuchElementException(s"no actor for $ns"))
   /** the object's name: told by the first request (`okay-object-name`), kept for its alarms and sockets */
   private def name(ctx: js.Dynamic, told: Option[String]): String =
@@ -283,9 +311,15 @@ final class Worker(app: App, actors: Map[String, Actor]):
     WebJs.request(request).flatMap { r =>
       val n = name(ctx, r.header("okay-object-name"))
       run(ctx, env)(actor(ns).fetch(n, r.copy(headers = r.headers - "okay-object-name"))).map { res =>
-        res.headerOf("okay-socket").flatMap(host(ctx)._2.accepted.remove) match
-          case Some(client) => js.Dynamic.newInstance(g.Response)(null, obj(status = 101, webSocket = client))
-          case None => toResponse(res)
+        val sockets = host(ctx)._2
+        val id = res.headerOf("okay-socket")
+        (id.flatMap(sockets.accepted.remove), id.flatMap(sockets.streamed.remove)) match
+          case (Some(client), _) => js.Dynamic.newInstance(g.Response)(null, obj(status = 101, webSocket = client))
+          case (_, Some(readable)) =>
+            val hs = res.headers.filterNot((k, _) => k.toLowerCase.startsWith("okay-socket") || k == "okay-stream") ++
+              Map("content-type" -> "text/event-stream", "cache-control" -> "no-cache")
+            js.Dynamic.newInstance(g.Response)(readable, obj(status = res.status, headers = hs.toJSDictionary))
+          case _ => toResponse(res)
       }
     }.toJSPromise
 

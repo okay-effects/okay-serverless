@@ -170,3 +170,28 @@ class CloudSuite extends munit.FunSuite:
     assertEquals(Sql.numbered("select * from t where a = ? and b = '?' and \"c?\" = ? -- why?\nand d = ?"),
       "select * from t where a = $1 and b = '?' and \"c?\" = $2 -- why?\nand d = $3")
   }
+
+  /** a ticker: an object answering with an event stream, its events sent after the answer */
+  object Ticker extends Actor:
+    def fetch(name: String, request: Request): Response ! InActor =
+      val n = request.param("n").fold(3)(_.toInt)
+      Sockets.stream[InActor](request).flatMap { response =>
+        val s = Sockets.of(response).get
+        Sockets.later[InActor]((1 to n).foldLeft(pure[Unit, InActor](()))((p, i) =>
+          p.andThen(Sockets.send[InActor](s, s"tick $i"))).andThen(Sockets.close[InActor](s))).as(response)
+      }
+
+  test("an event stream from an object: the answer first, its events after; names of their own, never twice") {
+    val c = cloud()
+    c.actors("TICKS") = Ticker
+    for
+      response <- c.platform.future(Objects.call[Cloud]("TICKS", "t", Request.get("/?n=3")))
+      socket = c.socketOf("TICKS", "t", response)
+      _ <- socket.ended.future
+      names <- c.platform.future(Objects.unique[Cloud]("TICKS").flatMap(a => Objects.unique[Cloud]("TICKS")
+        .map(b => (a, b))))
+    yield
+      assertEquals(response.headerOf("content-type"), Some("text/event-stream"))
+      assertEquals(socket.received.toList, List("tick 1", "tick 2", "tick 3"))
+      assert(names._1 != names._2, names.toString)
+  }

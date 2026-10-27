@@ -4,7 +4,26 @@ import sbtcrossproject.CrossPlugin.autoImport.{crossProject, CrossType}
 
 ThisBuild / scalaVersion := "3.3.8"
 ThisBuild / organization := "io.github.okay-effects"
+ThisBuild / organizationName := "okay-effects"
+ThisBuild / homepage := Some(url("https://github.com/okay-effects/okay-serverless"))
+ThisBuild / scmInfo := Some(ScmInfo(url("https://github.com/okay-effects/okay-serverless"),
+  "scm:git:https://github.com/okay-effects/okay-serverless.git"))
+ThisBuild / developers := List(Developer("sergey-scherbina", "Sergiy Shcherbyna", "sergey.scherbina@gmail.com",
+  url("https://github.com/sergey-scherbina")))
+ThisBuild / startYear := Some(2026)
+ThisBuild / licenses := List("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.txt"))
+ThisBuild / versionScheme := Some("early-semver")
 ThisBuild / version := "0.1.0-SNAPSHOT"
+
+/** RELEASES, ON GITHUB PAGES: `sbt publishPages` writes every published module as a Maven repository into
+ * `target/pages-maven/`; it goes to the `gh-pages` branch under `maven/`, served at
+ * https://okay-effects.github.io/okay-serverless/maven (RELEASING.md) */
+val pagesRepository = settingKey[File]("the Maven repository a release is written to, for GitHub Pages")
+ThisBuild / pagesRepository := (ThisBuild / baseDirectory).value / "target" / "pages-maven"
+ThisBuild / publishTo := Some(MavenCache("pages", (ThisBuild / pagesRepository).value))
+/** no API documentation jars: the sources jars are published, which IDEs read for the documentation */
+ThisBuild / Compile / packageDoc / publishArtifact := false
+addCommandAlias("publishPages", "; +publish")
 ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature", "-Wunused:imports,privates,locals")
 ThisBuild / resolvers ++= Seq("okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
   "okay-proof" at "https://okay-effects.github.io/okay-proof/maven",
@@ -67,16 +86,21 @@ lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
 
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
-lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin)
-  .dependsOn(core.js, store.js, faces.js)
-  .settings(name := "okay-serverless-cloudflare",
+lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
+  .settings(name := "okay-serverless-cloudflare")
+
+/** the example Worker (not published): every binding, objects, workflows, okay-store's data, okay-faces' REST and
+ * MCP, a token in front */
+lazy val cloudflareApp = (project in file("cloudflare/app")).enablePlugins(ScalaJSPlugin)
+  .dependsOn(cloudflare, store.js, faces.js)
+  .settings(name := "okay-serverless-cloudflare-example", publish / skip := true,
     scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
 
 /** the example Worker's Scala, linked into cloudflare/example/okay.js */
 val cloudflareExample = taskKey[File]("the example Worker's code, linked")
 cloudflareExample := {
-  val out = (cloudflare / Compile / fastLinkJS / scalaJSLinkerOutputDirectory).value
-  val _ = (cloudflare / Compile / fastLinkJS).value
+  val out = (cloudflareApp / Compile / fastLinkJS / scalaJSLinkerOutputDirectory).value
+  val _ = (cloudflareApp / Compile / fastLinkJS).value
   val to = baseDirectory.value / "cloudflare" / "example" / "okay.js"
   IO.copyFile(out / "main.js", to)
   to
@@ -85,5 +109,5 @@ cloudflareExample := {
 lazy val root = (project in file("."))
   .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
     policy.jvm, policy.js,
-    aws, cloudflare)
+    aws, cloudflare, cloudflareApp)
   .settings(publish / skip := true)

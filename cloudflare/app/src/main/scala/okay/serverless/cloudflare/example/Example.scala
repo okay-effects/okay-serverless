@@ -1,9 +1,10 @@
-package okay.serverless.cloudflare
+package okay.serverless.cloudflare.example
 
 import okay.effects.json.{Descent, Json}
 import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
+import okay.serverless.cloudflare.Worker
 import okay.effects.shape.Shape
 import okay.effects.cek.OnCek
 import okay.serverless.faces.Faces
@@ -141,12 +142,24 @@ object Example:
         StoreOn.durable[SD, ActorStep, String](Journal[SD, String](() => js.Dynamic.global.crypto.randomUUID()
           .asInstanceOf[String], () => t)(records)))).map(Response.text(_))
 
+  /** A TICKER: an object answering with an event stream (server-sent events), its events sent after the answer */
+  object Tickers extends Actor:
+    def fetch(name: String, r: Request): Response ! InActor =
+      val n = r.param("n").fold(3)(_.toInt)
+      Sockets.stream[InActor](r).flatMap { response =>
+        val s = Sockets.of(response).getOrElse(throw IllegalStateException("no stream"))
+        Sockets.later[InActor]((1 to n).foldLeft(pure[Unit, InActor](()))((p, i) =>
+          p.andThen(Async.sleep[InActor](50)).andThen(Sockets.send[InActor](s, s"tick $i of ${Auth.caller(r)
+            .getOrElse("?")}"))).andThen(Sockets.close[InActor](s))).as(response)
+      }
+
   /** THE APP: a route an effect */
   object Shop extends App:
     override def objectFor(r: Request): Option[(String, String)] = r.path.split('/').toList match
       case List("", "room", name) => Some(("ROOMS", name))
       case List("", "order", id, _*) => Some(("ORDERS", id))
       case List("", "shop", name, _*) => Some(("SHOPS", name))
+      case List("", "private", "ticks", name) => Some(("TICKERS", name))
       case _ => None
 
     def q(r: Request, k: String): String = r.param(k).getOrElse("")
@@ -198,6 +211,7 @@ object Example:
       case "/service" => Services.call[Cloud]("SELF", Request.get("/hello"))
           .map(s => Response.text(s"via service: ${s.text}"))
       case "/hello" => pure(Response.text("hello"))
+      case "/private/whoami" => pure(Response.text(Auth.caller(r).getOrElse("nobody")))
       case "/mail" => Mails.send[Cloud]("MAIL", Mail("shop@okay.example", "ann@okay.example", "hi", "hello"))
           .as(Response.text("sent"))
       case _ => pure(Response.notFound())
@@ -208,6 +222,9 @@ object Example:
 
     override def scheduled(e: Scheduled): Unit ! Cloud = Kv.put[Cloud]("KV", "cron", e.cron)
 
+  /** the app behind a token on `/private/…` (the secret `API_KEY`), the rest open */
+  val Guarded: App = Auth.guarded(Shop, Auth.secret("API_KEY"), open = p => !p.startsWith("/private/"))
+
   @JSExportTopLevel("worker")
-  val worker: Worker = Worker(Shop, Map("ACCOUNTS" -> Accounts, "ROOMS" -> Rooms, "ORDERS" -> Orders,
-    "SHOPS" -> Shops, "REGISTRIES" -> Registries))
+  val worker: Worker = Worker(Guarded, Map("TICKERS" -> Tickers, "ACCOUNTS" -> Accounts, "ROOMS" -> Rooms,
+    "ORDERS" -> Orders, "SHOPS" -> Shops, "REGISTRIES" -> Registries))

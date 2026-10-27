@@ -52,7 +52,8 @@ object Shop extends App:
 ```
 
 HTTP is [okay-http](https://github.com/okay-effects/okay-http)'s model — a body text, or bytes when it is not
-UTF-8. The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
+UTF-8. Every request is admitted first (`App.admit`): `Auth.guarded` puts an app behind bearer tokens. The same
+program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
 (`Lambda`: what DynamoDB carries so far). The design and the map of each effect to each cloud:
 [specs/cloud.md](specs/cloud.md).
 
@@ -82,6 +83,22 @@ declare a type, map it, and it has an API and tools for agents, its data in D1, 
 The twin on [okay-simple](https://github.com/okay-effects/okay-simple), module `simple` (Scala 2.13 and 3, one
 source): the same words, step, machine and `once`, and the same stored format, so state written by one is read by
 the other.
+
+## Release
+
+0.1.0, a Maven repository on GitHub Pages ([RELEASING.md](RELEASING.md)):
+
+```scala-sbt
+resolvers ++= Seq("okay-serverless" at "https://okay-effects.github.io/okay-serverless/maven",
+  "okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
+  "okay-simple" at "https://okay-effects.github.io/okay-simple/maven",
+  "okay-http" at "https://okay-effects.github.io/okay-http/maven")
+libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.1.0"   // or -aws, or the core
+```
+
+Modules: `okay-serverless` (the effect, the cloud's effects, memory; JVM and Scala.js), `-cloudflare` and `-aws`
+(Scala.js), `-store` (okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state),
+`-simple` (the twin on okay-simple, Scala 2.13 and 3).
 
 ## Build
 

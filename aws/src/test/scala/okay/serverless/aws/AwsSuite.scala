@@ -197,6 +197,23 @@ class AwsSuite extends munit.FunSuite:
       assert(text(tools).contains("\"structuredContent\":1"), text(tools))
   }
 
+  test("A LAMBDA BEHIND A TOKEN: admitted first, to the app and to an object; the caller passed on") {
+    g.process.env.OKAY_TEST_TOKEN = "tok"
+    val guarded = Lambda(Auth.guarded(Shop, Auth.secret("OKAY_TEST_TOKEN")), ports)
+    def withToken(e: js.Dynamic, t: String) = { e.headers.authorization = s"Bearer $t"; e }
+    for
+      _ <- ready
+      none <- guarded.handle(httpEvent("POST", "/kv", "x"))
+      wrong <- guarded.handle(withToken(httpEvent("POST", "/kv", "x"), "nope"))
+      fine <- guarded.handle(withToken(httpEvent("POST", "/kv", "admitted"), "tok"))
+      toObject <- guarded.handle(httpEvent("POST", s"/count/c$unique"))
+    yield
+      assertEquals(none.asInstanceOf[js.Dynamic].statusCode.asInstanceOf[Int], 401)
+      assertEquals(wrong.asInstanceOf[js.Dynamic].statusCode.asInstanceOf[Int], 401)
+      assertEquals(text(fine), "admitted")
+      assertEquals(toObject.asInstanceOf[js.Dynamic].statusCode.asInstanceOf[Int], 401)
+  }
+
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {
     def record(id: String, body: String) = obj(messageId = id, body = body, eventSource = "aws:sqs",
       eventSourceARN = "arn:aws:sqs:eu-west-1:1:jobs", attributes = obj(ApproximateReceiveCount = "1",

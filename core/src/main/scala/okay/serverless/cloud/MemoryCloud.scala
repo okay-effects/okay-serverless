@@ -162,6 +162,8 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
     val memory = Memory()
     var queue: Future[Any] = Future.unit
     val sockets = mutable.LinkedHashMap.empty[String, (Socket, MemorySocket)]
+    /** every socket's client end, open or closed: a test finds it after the fact too */
+    val ends = mutable.Map.empty[String, MemorySocket]
     def actor: Actor = actors.getOrElse(ns, throw java.util.NoSuchElementException(s"no actor class $ns"))
     def one[A](p: A ! InActor): Future[A] =
       val promise = Promise[A]()
@@ -178,23 +180,43 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
           case Storage.Commit(r, w, a) => memory.commit(r, w, a))
       val sockets: Port[Sockets] = new Port[Sockets]:
         def apply[X](op: Sockets[X]): Future[X] = now[X](Instance.this.synchronized[X](op match
-          case Sockets.Accept(_, tags) =>
-            ids += 1
-            val s = Socket(s"s$ids", tags)
-            Instance.this.sockets(s.id) = (s, MemorySocket(s, Instance.this))
-            Response(101, Map("okay-socket" -> s.id))
+          case Sockets.Accept(_, tags) => opened(tags, stream = false)
+          case Sockets.Stream(_, tags) => opened(tags, stream = true)
           case Sockets.Send(s, text) => Instance.this.sockets.get(s.id).foreach(_._2.received += text)
-          case Sockets.Close(s, code, _) => Instance.this.sockets.remove(s.id).foreach(_._2.closedWith = Some(code))
-          case Sockets.Open(tag) =>
-            Instance.this.sockets.values.map(_._1).filter(s => tag.forall(s.tags.contains)).toList))
+          case Sockets.Close(s, code, _) => Instance.this.sockets.remove(s.id).foreach { (_, m) =>
+              m.closedWith = Some(code)
+              m.ended.trySuccess(())
+            }
+          case Sockets.Open(tag) => Instance.this.sockets.values.collect {
+              case (s, m) if !m.stream && tag.forall(s.tags.contains) => s
+            }.toList
+          case Sockets.Later(_) => throw IllegalStateException("later is the host's")))
+      private def opened(tags: List[String], stream: Boolean): Response =
+        ids += 1
+        val s = Socket(s"s$ids", tags)
+        val end = MemorySocket(s, Instance.this, stream)
+        Instance.this.sockets(s.id) = (s, end)
+        Instance.this.ends(s.id) = end
+        if stream then Response(200, Map("okay-socket" -> s.id, "content-type" -> "text/event-stream"))
+        else Response(101, Map("okay-socket" -> s.id))
+      override def keep(work: Future[Unit]): Unit = MemoryCloud.this.synchronized(working += work)
   private val instances = mutable.Map.empty[(String, String), Instance]
   private def instance(ns: String, name: String): Instance = synchronized(instances.getOrElseUpdate((ns, name),
     Instance(ns, name)))
 
-  /** a client's end of a socket: what it was sent; what it sends, to the actor */
-  final class MemorySocket private[MemoryCloud] (val socket: Socket, private val at: Instance):
+  /** work after answers, started (`Sockets.later`) */
+  private val working = mutable.ListBuffer.empty[Future[Unit]]
+  /** every work started after an answer, done */
+  def settled(): Future[Unit] =
+    val all = synchronized(working.toList)
+    Future.sequence(all).flatMap(_ => if synchronized(working.size) > all.size then settled() else Future.unit)
+
+  /** a client's end of a socket — a WebSocket's, or an event stream's (`stream`): what it was sent; what it sends,
+   * to the actor; `ended` when the actor closed it */
+  final class MemorySocket private[MemoryCloud] (val socket: Socket, private val at: Instance, val stream: Boolean):
     val received: mutable.ListBuffer[String] = mutable.ListBuffer.empty
     @volatile var closedWith: Option[Int] = None
+    val ended: Promise[Unit] = Promise()
     def send(text: String): Future[Unit] = at.one(at.actor.message(at.name, socket, text))
     def close(): Future[Unit] =
       at.synchronized(at.sockets.remove(socket.id))
@@ -203,12 +225,28 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   val objects: Port[Objects] = new Port[Objects]:
     def apply[X](op: Objects[X]): Future[X] = op match
       case Objects.Call(ns, name, r) => instance(ns, name).pipe(i => i.one(i.actor.fetch(name, r)))
+      case Objects.Unique(ns) => now(synchronized { ids += 1; s"${ns.toLowerCase}-$ids-${clock()}" })
 
   /** a socket opened to an object: its request answered by the actor's `Sockets.accept` */
   def connect(ns: String, name: String, request: Request): Future[MemorySocket] =
     objects(Objects.Call(ns, name, request)).map { r =>
       val id = r.headerOf("okay-socket").getOrElse(throw IllegalStateException(s"not accepted: ${r.status}"))
-      instance(ns, name).pipe(i => i.synchronized(i.sockets(id)._2))
+      instance(ns, name).pipe(i => i.synchronized(i.ends(id)))
+    }
+
+  /** the socket of a response an object gave (`accept`, `stream`): its client's end */
+  def socketOf(ns: String, name: String, response: Response): MemorySocket =
+    val id = response.headerOf("okay-socket").getOrElse(throw IllegalStateException(s"no socket: ${response.status}"))
+    instance(ns, name).pipe(i => i.synchronized(i.ends(id)))
+
+  /** A REQUEST TO AN APP, as a platform serves it: admitted (`App.admit`), then to its object as it is
+   * (`objectFor`) or to `fetch` */
+  def serve(app: App)(request: Request): Future[Response] =
+    platform.future(app.admit(request)).flatMap {
+      case Left(refused) => Future.successful(refused)
+      case Right(r) => app.objectFor(r) match
+        case Some((ns, name)) => objects(Objects.Call(ns, name, r))
+        case None => platform.future(app.fetch(r))
     }
 
   /** an object's storage, as committed */

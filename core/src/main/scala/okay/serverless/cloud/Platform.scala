@@ -60,6 +60,9 @@ final case class Scheduled(cron: String, time: Long)
 
 /** A WORKER: its entry points, each a program of the cloud */
 trait App:
+  /** ADMISSION, before anything — `fetch` or an object: the request let in (possibly said more of: its caller), or
+   * the answer that refuses it. `Auth.guarded` is one */
+  def admit(request: Request): Either[Response, Request] ! Cloud = pure(Right(request))
   /** a request that goes to an object as it is — a WebSocket's, a stream's: its namespace and name */
   def objectFor(request: Request): Option[(String, String)] = None
   def fetch(request: Request): Response ! Cloud = pure(Response.notFound())
@@ -80,5 +83,14 @@ trait Actor:
 trait Hosting:
   def storage: Port[Storage]
   def sockets: Port[Sockets]
+  /** work after the answer, running: the host keeps the object while it does (a Worker's `waitUntil`) */
+  def keep(work: Future[Unit]): Unit = ()
   def run[A](platform: Platform)(p: A ! InActor): A ! Async =
-    platform.run(Port.handle(sockets)(Port.handle(storage)(p)))
+    platform.run(socketsOn(platform)(Port.handle(storage)(p)))
+  /** the sockets by the port, but `later`'s work the host's: started on the same platform, kept */
+  private def socketsOn[A](platform: Platform)(p: A ! (Cloud + Sockets)): A ! Cloud =
+    handle(p, Handler.general[Sockets, Cloud, A, A](pure)([X] => (op: Sockets[X], k: X => A ! Cloud) => op match
+      case Sockets.Later(work) =>
+        keep(Async.toFuture(run(platform)(work))(using Async.defaultContext))
+        k(())
+      case other => Async.fromFuture[X, Cloud](sockets(other)).flatMap(k)))

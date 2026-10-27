@@ -1,6 +1,6 @@
 # okay-serverless — a cloud as effects (spec, 2026-10-26)
 
-Status 2026-10-26, built:
+Status 2026-10-27: RELEASED 0.1.0 (RELEASING.md). Built:
 - the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`), SQL on SQLite on the JVM (`SqliteSql`);
 - Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
 - AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Sql` on Postgres (RDS Proxy); `Env`, `Fetch`, `Log`,
@@ -79,6 +79,25 @@ Actor: fetch(Request): Response · alarm · message(Socket, text) · closed(Sock
 Cloudflare calls them from `export default { fetch, scheduled, queue, email }` and the Durable Object class; AWS from
 the Lambda's events (API Gateway, EventBridge, SQS, SES); memory from a test. An actor's state is `Durable`'s: steps,
 machines, alarms — on Cloudflare the object's SQLite, on AWS a DynamoDB space `namespace/name`, run in any instance.
+
+## Admission, tokens
+
+`App.admit(request)`: before anything — `fetch` or an object's request as it is — a request let in (possibly said
+more of) or the answer that refuses it; Workers, Lambdas and the memory cloud (`MemoryCloud.serve`) admit every request
+first. `Auth.guarded(app, who, open)`: a bearer token taken to its caller by `who` — the environment's secret
+(`Auth.secret`), tokens kept in KV (`Auth.kv`), any check — without one, or one not known, a 401 (`WWW-Authenticate:
+Bearer`); known, the request goes on with its caller in `okay-caller`, one sent from outside under that name always
+dropped; `open` paths let in as they are. Compared in constant time. Checked in memory, on a Lambda, on `wrangler dev`
+(a private route; an object's stream behind the token).
+
+## Event streams, work after the answer, names of their own
+
+In an object, `Sockets.stream(request)` answers with an event stream (server-sent events) — its socket's sends its
+events, its closing its end — and `Sockets.later(work)` runs `work` once the answer has gone, the object kept while it
+runs: on Cloudflare a `TransformStream` and the runtime's `waitUntil`; in memory a future the test can wait for
+(`settled`). On a Lambda, work after an answer is not kept (the runtime freezes): a queue's message is the way.
+`Objects.unique(namespace)`: a name never given before, not to be guessed — an object of its own (a session, an
+upload).
 
 ## Workflows, without replay
 

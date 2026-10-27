@@ -68,6 +68,15 @@ expect "$(mcp '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"s
   '"structuredContent"' "MCP: a tool called, the same D1"
 expect "$(curl -s -XPOST "$P/shop/odesa/api/sales/save" -d '{"id":"s1","item":"map","qty":1}'; \
   curl -s "$P/shop/odesa/api/sales/load?key=s1")" '"item":"map"' "REST of a shop's own store, in its object"
+expect "$(curl -s -o /dev/null -w '%{http_code}' "$P/private/whoami")" "401" "a private route, no token: 401"
+expect "$(curl -s -H 'authorization: Bearer nope' -o /dev/null -w '%{http_code}' "$P/private/whoami")" "401" \
+  "a private route, a wrong token: 401"
+expect "$(curl -s -H 'authorization: Bearer local-secret' -H 'okay-caller: admin' "$P/private/whoami")" "owner" \
+  "a private route, the secret's token: its caller (one sent from outside dropped)"
+expect "$(curl -s -o /dev/null -w '%{http_code}' "$P/private/ticks/t1?n=3")" "401" "an object's stream, no token: 401"
+expect "$(curl -s -N -H 'authorization: Bearer local-secret' "$P/private/ticks/t1?n=3" | tr '\n' '|')" \
+  'data: tick 1 of owner||data: tick 2 of owner||data: tick 3 of owner||' \
+  "an object's event stream: its events after the answer, the caller admitted"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")
