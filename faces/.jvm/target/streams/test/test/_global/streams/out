@@ -1,0 +1,7 @@
+[debug] Running TaskDef(okay.serverless.faces.SqlFacesSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
+[debug] Running TaskDef(okay.serverless.faces.FacesSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
+[debug] Summary for munit not available.
+[info] Passed: Total 3, Failed 0, Errors 0, Passed 3
+[debug] Passed tests:
+[debug] 	okay.serverless.faces.FacesSuite
+[debug] 	okay.serverless.faces.SqlFacesSuite

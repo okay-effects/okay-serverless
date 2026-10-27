@@ -5,6 +5,8 @@ import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
 import okay.effects.shape.Shape
+import okay.effects.cek.OnCek
+import okay.serverless.faces.Faces
 import okay.serverless.store.{Journal, Repo, StoreOn}
 import okay.serverless.{Codec, Durable, field}
 import okay.store.{Data, Dialect, Mapping}
@@ -100,10 +102,23 @@ object Example:
 
   type SD[X] = (ActorStep + Data)[X]
   type AS[X] = (SD + Sales)[X]
-  /** A SHOP: an object, its sales in its own state, a request one transaction */
+  /** THE TYPE SERVED: okay-faces' REST resources and MCP tools of `sales`, from its description alone */
+  val salesRest = Faces.rest(Mapping.describe(sales), "/api/sales")
+  val salesMcp = Faces.mcp(Mapping.describe(sales), "shop")
+  /** the face's program in the cloud's row, the type on D1 */
+  def served(face: Request => OkayCek[Response], r: Request): Response ! Cloud =
+    StoreOn.sql[CD, Cloud, Response]("DB", Dialect.sqlite)(StoreOn.data[Sale, CS, CD, Response](sales)(
+      OnCek.into[CS](face(r))))
+  type OkayCek[A] = OnCek.![A, Faces.Only[Repo.Of[Sale]]]
+
+  /** A SHOP: an object, its sales in its own state, a request one transaction; `/shop/<name>/api/sales/…` its REST */
   object Shops extends Actor:
     def fetch(name: String, r: Request): Response ! InActor =
-      Durable.step[ActorStep, InActor, String](name)(StoreOn.durable[SD, ActorStep, String](
+      if r.path.startsWith(s"/shop/$name/api/sales") then
+        Durable.step[ActorStep, InActor, Response](name)(StoreOn.durable[SD, ActorStep, Response](
+          StoreOn.data[Sale, AS, SD, Response](sales)(OnCek.into[AS](
+            Faces.rest(Mapping.describe(sales), s"/shop/$name/api/sales")(r)))))
+      else Durable.step[ActorStep, InActor, String](name)(StoreOn.durable[SD, ActorStep, String](
         StoreOn.data[Sale, AS, SD, String](sales)(selling[AS](r.param("item").getOrElse("?"),
           r.param("qty").map(_.toInt).getOrElse(1))))).map(Response.text(_))
 
@@ -131,6 +146,7 @@ object Example:
     override def objectFor(r: Request): Option[(String, String)] = r.path.split('/').toList match
       case List("", "room", name) => Some(("ROOMS", name))
       case List("", "order", id, _*) => Some(("ORDERS", id))
+      case List("", "shop", name, _*) => Some(("SHOPS", name))
       case _ => None
 
     def q(r: Request, k: String): String = r.param(k).getOrElse("")
@@ -165,6 +181,8 @@ object Example:
           Statement.of("insert into notes (text) values (?)", r.text)).andThen(
           Sql.query[Cloud]("PG", "select id, text, ok from notes where text <> ? order by id", "?")).map(rows =>
           Response.text(rows.map(row => s"${row("id")}:${row("text")}:${row("ok")}").mkString(",")))
+      case "/mcp" => served(salesMcp, r)
+      case p if p == "/api/sales" || p.startsWith("/api/sales/") => served(salesRest, r)
       case "/store/d1" => sold(r, "DB", Dialect.sqlite)
       case "/store/pg" => sold(r, "PG", Dialect.postgres)
       case "/store/shop" => Objects.call[Cloud]("SHOPS", r.param("shop").getOrElse("main"), r)

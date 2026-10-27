@@ -1,27 +1,27 @@
 [info] Fast optimizing /Users/sergiy/work/my/okay-serverless/store/.js/target/scala-3.3.8/okay-serverless-store-test-fastopt
-[debug] Linker: Compute reachability: 266722 us
-[debug] Linker: Assemble LinkedClasses: 26382 us
-[debug] Linker: 307995 us
-[debug] Desugarer: Desugar: 15202 us
-[debug] Desugarer: 15350 us
+[debug] Linker: Compute reachability: 90984 us
+[debug] Linker: Assemble LinkedClasses: 23749 us
+[debug] Linker: 130665 us
+[debug] Desugarer: Desugar: 2354 us
+[debug] Desugarer: 2384 us
 [debug] Optimizer: Batch mode: true
-[debug] Optimizer: Incremental part: 46713 us
-[debug] Optimizer: Elidable constructors: 3081 us
-[debug] Optimizer: Optimizing 15961 methods.
-[debug] Optimizer: Optimizer part: 417258 us
-[debug] Optimizer: 472886 us
-[debug] Refiner: Compute reachability: 72841 us
-[debug] Refiner: Assemble LinkedClasses: 11718 us
-[debug] Refiner: 85358 us
-[debug] Module Splitter: Calculate Dependency Info: 848 us
-[debug] Module Splitter: Analyze Modules: 301 us
-[debug] Module Splitter: Assemble Modules: 2361 us
-[debug] Module Splitter: 3943 us
-[debug] Emitter: Generate Classes: 509365 us
-[debug] Emitter: Write trees: 15869 us
+[debug] Optimizer: Incremental part: 34374 us
+[debug] Optimizer: Elidable constructors: 869 us
+[debug] Optimizer: Optimizing 15962 methods.
+[debug] Optimizer: Optimizer part: 172629 us
+[debug] Optimizer: 212955 us
+[debug] Refiner: Compute reachability: 31127 us
+[debug] Refiner: Assemble LinkedClasses: 8948 us
+[debug] Refiner: 40461 us
+[debug] Module Splitter: Calculate Dependency Info: 276 us
+[debug] Module Splitter: Analyze Modules: 55 us
+[debug] Module Splitter: Assemble Modules: 1051 us
+[debug] Module Splitter: 1443 us
+[debug] Emitter: Generate Classes: 282339 us
+[debug] Emitter: Write trees: 2262 us
 [debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1612
 [debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 7516
 [debug] Emitter: Pre prints: 11026
-[debug] Emitter: 542278 us
-[debug] BasicBackend: Write result: 63318 us
+[debug] Emitter: 293070 us
+[debug] BasicBackend: Write result: 19493 us
 [debug] BasicBackend: total modules: 1; re-written: 1

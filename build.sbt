@@ -10,7 +10,9 @@ ThisBuild / resolvers ++= Seq("okay-scala" at "https://okay-effects.github.io/ok
   "okay-proof" at "https://okay-effects.github.io/okay-proof/maven",
   "okay-effects" at "https://okay-effects.github.io/okay-simple/maven",
   "okay-http" at "https://okay-effects.github.io/okay-http/maven",
-  "okay-store" at "https://okay-effects.github.io/okay-store/maven")
+  "okay-store" at "https://okay-effects.github.io/okay-store/maven",
+  "okay-faces" at "https://okay-effects.github.io/okay-faces/maven",
+  "okay-mcp" at "https://okay-effects.github.io/okay-mcp/maven")
 
 val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
 
@@ -40,6 +42,13 @@ lazy val store = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure)
     "io.github.okay-effects" %%% "okay-store" % "0.1.0", "io.github.okay-effects" %%% "okay-effects-cek" % "0.1.1",
     munit.value))
 
+/** A DESCRIBED EFFECT SERVED FROM THE CLOUD: okay-faces' REST resources and MCP tools of it, put into a cloud program
+ * by okay-simple's bridge; a mapped type's operations then on the cloud's store (specs/faces.md) */
+lazy val faces = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("faces")).dependsOn(store)
+  .settings(name := "okay-serverless-faces", libraryDependencies ++= Seq(
+    "io.github.okay-effects" %%% "okay-faces-rest" % "0.1.0", "io.github.okay-effects" %%% "okay-faces-mcp" % "0.1.0",
+    munit.value))
+
 /** A POLICY'S STATE, DURABLE: okay-policy's `States` kept by `Durable` — a decision and its changes one step, one
  * transaction; decided again if the state changed meanwhile */
 lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("policy")).dependsOn(core)
@@ -49,7 +58,8 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
 /** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
  * is a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests
  * run on DynamoDB Local: `aws/test.sh` */
-lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(core.js, store.js % "test->test")
+lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
+  .dependsOn(core.js, store.js % "test->test", faces.js % "test->compile")
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
     Test / jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(org.scalajs.jsenv.nodejs.NodeJSEnv.Config()
       .withEnv(Map("NODE_PATH" -> ((ThisBuild / baseDirectory).value / "aws" / "node_modules").getPath) ++
@@ -57,7 +67,8 @@ lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(c
 
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
-lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js, store.js)
+lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin)
+  .dependsOn(core.js, store.js, faces.js)
   .settings(name := "okay-serverless-cloudflare",
     scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
 
@@ -72,6 +83,7 @@ cloudflareExample := {
 }
 
 lazy val root = (project in file("."))
-  .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, policy.jvm, policy.js,
+  .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
+    policy.jvm, policy.js,
     aws, cloudflare)
   .settings(publish / skip := true)

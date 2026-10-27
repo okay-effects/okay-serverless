@@ -1,0 +1,15 @@
+[debug] Packaging /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/okay-serverless-faces_3-0.1.0-SNAPSHOT.jar ...
+[debug] Input file mappings:
+[debug] 	okay
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay
+[debug] 	okay/serverless
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay/serverless
+[debug] 	okay/serverless/faces
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay/serverless/faces
+[debug] 	okay/serverless/faces/Faces.tasty
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay/serverless/faces/Faces.tasty
+[debug] 	okay/serverless/faces/Faces.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay/serverless/faces/Faces.class
+[debug] 	okay/serverless/faces/Faces$.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/faces/.jvm/target/scala-3.3.8/classes/okay/serverless/faces/Faces$.class
+[debug] Done packaging.

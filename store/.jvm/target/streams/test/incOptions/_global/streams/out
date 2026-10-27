@@ -1,2 +1,29 @@
 [debug] Created transactional ClassFileManager with tempDir = /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/test-classes.bak
+[debug] About to delete class files:
+[debug] 	StoreSuite$Registry$.class
+[debug] 	StoreSuite.class
+[debug] 	StoreSuite$Shops$.class
+[debug] 	SqlStoreSuite.class
+[debug] 	StoreSuite$Registry$.tasty
+[debug] 	StoreSuite.tasty
+[debug] 	StoreSuite$Shops$.tasty
+[debug] 	SqlStoreSuite.tasty
+[debug] We backup class files:
+[debug] 	StoreSuite$Registry$.class
+[debug] 	StoreSuite.class
+[debug] 	StoreSuite$Shops$.class
+[debug] 	SqlStoreSuite.class
+[debug] 	StoreSuite$Registry$.tasty
+[debug] 	StoreSuite.tasty
+[debug] 	StoreSuite$Shops$.tasty
+[debug] 	SqlStoreSuite.tasty
+[debug] Registering generated classes:
+[debug] 	StoreSuite$Shops$.class
+[debug] 	StoreSuite.class
+[debug] 	StoreSuite$Registry$.class
+[debug] 	SqlStoreSuite.class
+[debug] 	StoreSuite$Shops$.tasty
+[debug] 	StoreSuite.tasty
+[debug] 	StoreSuite$Registry$.tasty
+[debug] 	SqlStoreSuite.tasty
 [debug] Removing the temporary directory used for backing up class files: /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/test-classes.bak

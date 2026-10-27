@@ -16,6 +16,8 @@ first.
 - `store`: okay-store's `Data` and `Mapped` performed as they are (`Docs`, `Repo`), handled by `StoreOn.data`, `.sql`,
   `.kv`, `.durable` (specs/store.md). The SQL is okay-store's (`okay.store.SqlData`): a change of it is okay-store's.
   okay-simple code (okay-store's `Store`) joins a cloud program by `OnCek.into` (okay-effects-cek), never by a Future.
+- `faces`: okay-faces' REST and MCP of a described effect (`Faces.rest`, `Faces.mcp`), put into a cloud program by
+  `OnCek.into` (specs/faces.md). okay-faces and okay-mcp are the other session's: used by their releases, not changed.
 - `aws`: `DynamoStorage(client, table, space, schedule)` — a commit one conditional `TransactWriteItems`. Tests:
   `aws/test.sh` (DynamoDB Local in ~/.cache/dynamodb-local, `OKAY_DYNAMODB`; the suite is ignored without it).
 - `aws`: `AwsPorts` (KV, limits, objects on DynamoDB; env, fetch, log, analytics as EMF; SQL by

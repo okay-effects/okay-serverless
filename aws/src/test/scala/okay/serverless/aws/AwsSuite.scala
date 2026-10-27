@@ -169,6 +169,34 @@ class AwsSuite extends munit.FunSuite:
     yield assertEquals(got, JournalPrograms.reference)
   }
 
+  test("A LAMBDA SERVING A MAPPED TYPE: okay-faces' REST and MCP of it, the type on Postgres") {
+    assume(postgres.isDefined, "OKAY_POSTGRES")
+    import okay.effects.cek.OnCek
+    import okay.serverless.faces.Faces
+    import okay.serverless.store.{Repo, StoreOn, StorePrograms}
+    import StorePrograms.{Sale, sales}
+    type D[X] = (Cloud + okay.store.Data)[X]
+    type DS[X] = (D + Repo.Of[Sale])[X]
+    val rest = Faces.rest(okay.store.Mapping.describe(sales), "/api/sales")
+    val mcp = Faces.mcp(okay.store.Mapping.describe(sales), "shop")
+    object Api extends App:
+      override def fetch(r: Request): Response ! Cloud =
+        StoreOn.sql[D, Cloud, Response]("main", okay.store.Dialect.postgres)(StoreOn.data[Sale, DS, D, Response](
+          sales)(OnCek.into[DS](if r.path == "/mcp" then mcp(r) else rest(r))))
+    val db = s"faces$unique"
+    for
+      _ <- AwsPorts(client, table, sql = AwsPorts.postgres(_ => postgres)).platform
+        .future(Sql.run[Cloud]("main", s"create schema $db"))
+      api = Lambda(Api, AwsPorts(client, table,
+        sql = AwsPorts.postgres(_ => postgres.map(u => s"$u?options=-c%20search_path%3D$db"))))
+      created <- api.handle(httpEvent("POST", "/api/sales/create", """{"item":"tea","qty":3,"tags":["hot"]}"""))
+      tools <- api.handle(httpEvent("POST", "/mcp", """{"jsonrpc":"2.0","id":1,"method":"tools/call",""" +
+        """"params":{"name":"sales_count","arguments":{}}}"""))
+    yield
+      assert(text(created).contains("\"id\":\"000000000001\""), text(created))
+      assert(text(tools).contains("\"structuredContent\":1"), text(tools))
+  }
+
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {
     def record(id: String, body: String) = obj(messageId = id, body = body, eventSource = "aws:sqs",
       eventSourceARN = "arn:aws:sqs:eu-west-1:1:jobs", attributes = obj(ApproximateReceiveCount = "1",

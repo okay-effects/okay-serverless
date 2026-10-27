@@ -64,6 +64,13 @@ store of its own, a step one transaction): `Repo.save(sale)`, `Repo.find(sales.a
 the compiler. okay-store's journaled records too (`Journal`): its own handler, put into the cloud's row by okay-simple's
 bridge (`OnCek.into`), no Future between. [specs/store.md](specs/store.md).
 
+## A type served: REST and MCP
+
+[okay-faces](https://github.com/okay-effects/okay-faces) serves a described type as REST resources and MCP tools; here
+it answers a Worker's or a Lambda's requests (`Faces.rest`, `Faces.mcp`), the type's operations on the cloud's store —
+declare a type, map it, and it has an API and tools for agents, its data in D1, Postgres, KV or an object.
+[specs/faces.md](specs/faces.md).
+
 ## Platforms
 
 | | module | status |

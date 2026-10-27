@@ -38284,8 +38284,7 @@ $c_Lokay_http_Response$.prototype.text__T__I__Lokay_http_Response = (function(bo
   var this$3 = $m_sci_Map$();
   var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("Content-Type", "text/plain; charset=utf-8")]));
   var headers = this$3.from__sc_IterableOnce__sci_Map(elems);
-  var bytes = $m_s_None$();
-  return new $c_Lokay_http_Response(status, headers, body, bytes);
+  return new $c_Lokay_http_Response(status, headers, body, $m_s_None$());
 });
 var $d_Lokay_http_Response$ = new $TypeData().initClass($c_Lokay_http_Response$, "okay.http.Response$", ({
   Lokay_http_Response$: 1,

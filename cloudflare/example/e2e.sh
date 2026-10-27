@@ -54,6 +54,20 @@ expect "$(curl -s "$P/store/shop?shop=kyiv&item=tea&qty=2"; echo; curl -s "$P/st
 expect "$(curl -s "$P/store/registry?of=ua&number=AB1"; echo; curl -s "$P/store/registry?of=ua&number=AB2")" \
   $'2 events; KindDefined,RecordAdded\n4 events; KindDefined,KindRevised,RecordAdded' \
   "okay-store's journaled records in an object: okay-store's own handler, through the bridge"
+expect "$(curl -s "$P/api/sales" | head -c 40)" '{"data":{"name":"sales","operations"' \
+  "okay-faces' REST of a mapped type: its description"
+expect "$(curl -s -XPOST "$P/api/sales/create" -d '{"item":"kettle","qty":4}')" '"item":"kettle","qty":4' \
+  "REST: create, the key D1's"
+expect "$(curl -s -XPOST "$P/api/sales/find" -d '{"where":{"type":"greater","path":["qty"],"than":3}}')" \
+  '"item":"kettle"' "REST: find by a condition, on D1"
+mcp() { curl -s -XPOST "$P/mcp" -H 'content-type: application/json' -d "$1"; }
+expect "$(mcp '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}')" '"serverInfo":{"name":"shop"' \
+  "MCP over HTTP: initialize"
+expect "$(mcp '{"jsonrpc":"2.0","id":2,"method":"tools/list"}')" '"name":"sales_find"' "MCP: the type's tools"
+expect "$(mcp '{"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"sales_count","arguments":{}}}')" \
+  '"structuredContent"' "MCP: a tool called, the same D1"
+expect "$(curl -s -XPOST "$P/shop/odesa/api/sales/save" -d '{"id":"s1","item":"map","qty":1}'; \
+  curl -s "$P/shop/odesa/api/sales/load?key=s1")" '"item":"map"' "REST of a shop's own store, in its object"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")

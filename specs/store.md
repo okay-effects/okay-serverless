@@ -57,7 +57,4 @@ memory): the same answers in an object (memory), on SQLite, on Postgres; on `wra
 
 The same bridge serves any okay-simple code in an okay-scala program: okay-faces' faces, okay-http's handlers.
 
-## Not yet
-
-A type served as REST or MCP from its mapping (`Mapping.describe`) is okay-faces'; with the bridge it can run in a
-Worker or a Lambda the same way — a Worker that serves a mapped type from D1 or an object is the next step.
+A type served as REST or MCP from its mapping: specs/faces.md.
