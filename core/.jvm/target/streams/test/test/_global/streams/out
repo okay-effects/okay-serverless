@@ -1,7 +1,7 @@
-[debug] Running TaskDef(okay.serverless.cloud.CloudSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
-[debug] Running TaskDef(okay.serverless.Scenarios, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
-[debug] Running TaskDef(okay.serverless.cloud.SqliteSqlSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
 [debug] Running TaskDef(okay.serverless.cloud.WorkflowSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
+[debug] Running TaskDef(okay.serverless.cloud.SqliteSqlSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
+[debug] Running TaskDef(okay.serverless.Scenarios, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
+[debug] Running TaskDef(okay.serverless.cloud.CloudSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
 [debug] Summary for munit not available.
 [info] Passed: Total 19, Failed 0, Errors 0, Passed 19
 [debug] Passed tests:

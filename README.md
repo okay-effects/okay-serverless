@@ -56,6 +56,13 @@ UTF-8. The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare
 (`Lambda`: what DynamoDB carries so far). The design and the map of each effect to each cloud:
 [specs/cloud.md](specs/cloud.md).
 
+## Data: okay-store
+
+[okay-store](https://github.com/okay-effects/okay-store)'s types in a store run here on the cloud's effects —
+`StoreOn.sql` (D1, Postgres through Hyperdrive or RDS Proxy, SQLite), `StoreOn.kv`, `StoreOn.durable` (an object a
+store of its own, a step one transaction): `Repo.save(sale)`, `Repo.find(sales.at(_.qty) > 2)`, the field checked by
+the compiler. [specs/store.md](specs/store.md).
+
 ## Platforms
 
 | | module | status |

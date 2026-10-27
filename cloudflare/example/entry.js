@@ -18,6 +18,7 @@ const objectClass = (ns) => class extends DurableObject {
 export const Account = objectClass("ACCOUNTS");
 export const Room = objectClass("ROOMS");
 export const Order = objectClass("ORDERS");
+export const Shop = objectClass("SHOPS");
 
 export default {
   fetch: (request, env, ctx) => worker.fetch(request, env, ctx),

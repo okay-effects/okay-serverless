@@ -9,7 +9,8 @@ ThisBuild / scalacOptions ++= Seq("-deprecation", "-feature", "-Wunused:imports,
 ThisBuild / resolvers ++= Seq("okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
   "okay-proof" at "https://okay-effects.github.io/okay-proof/maven",
   "okay-effects" at "https://okay-effects.github.io/okay-simple/maven",
-  "okay-http" at "https://okay-effects.github.io/okay-http/maven")
+  "okay-http" at "https://okay-effects.github.io/okay-http/maven",
+  "okay-store" at "https://okay-effects.github.io/okay-store/maven")
 
 val munit = Def.setting("org.scalameta" %%% "munit" % "1.2.3" % Test)
 
@@ -32,6 +33,12 @@ lazy val simple = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
       "io.github.okay-effects" %%% "okay-effects-machine" % "0.1.1" % Test,
       "io.github.okay-effects" %%% "okay-effects-free" % "0.1.1" % Test, munit.value))
 
+/** OKAY-STORE IN THE CLOUD: its `Data` and a type's repository (`Mapped`) on the cloud's SQL (D1, Postgres), KV and an
+ * object's `Durable` state (specs/store.md) */
+lazy val store = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("store")).dependsOn(core)
+  .settings(name := "okay-serverless-store", libraryDependencies ++= Seq(
+    "io.github.okay-effects" %%% "okay-store" % "0.1.0", munit.value))
+
 /** A POLICY'S STATE, DURABLE: okay-policy's `States` kept by `Durable` — a decision and its changes one step, one
  * transaction; decided again if the state changed meanwhile */
 lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("policy")).dependsOn(core)
@@ -41,7 +48,7 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
 /** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
  * is a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests
  * run on DynamoDB Local: `aws/test.sh` */
-lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
+lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(core.js, store.js % "test->test")
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
     Test / jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(org.scalajs.jsenv.nodejs.NodeJSEnv.Config()
       .withEnv(Map("NODE_PATH" -> ((ThisBuild / baseDirectory).value / "aws" / "node_modules").getPath) ++
@@ -49,7 +56,7 @@ lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin).dependsOn(c
 
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
-lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
+lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js, store.js)
   .settings(name := "okay-serverless-cloudflare",
     scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
 
@@ -63,6 +70,7 @@ cloudflareExample := {
   to
 }
 
-lazy val root = (project in file(".")).aggregate(core.jvm, core.js, simple.jvm, simple.js, policy.jvm, policy.js,
-  aws, cloudflare)
+lazy val root = (project in file("."))
+  .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, policy.jvm, policy.js,
+    aws, cloudflare)
   .settings(publish / skip := true)

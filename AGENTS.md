@@ -13,6 +13,8 @@ first.
 - A CLOUD AS EFFECTS (`okay.serverless.cloud`): each service an effect, each cloud a `Platform` of `Port`s; `App` and
   `Actor` the entry points; `Workflow` stages run by an object. A new cloud is a new set of ports, never a change of
   the effects. What is general goes to the family: JSON okay-simple's, `Env`/`Log`/`Clock` okay-scala's `std`.
+- `store`: okay-store's `Data` and `Mapped` performed as they are (`Docs`, `Repo`), handled by `StoreOn.data`, `.sql`,
+  `.kv`, `.durable` (specs/store.md). The SQL is okay-store's (`okay.store.SqlData`): a change of it is okay-store's.
 - `aws`: `DynamoStorage(client, table, space, schedule)` — a commit one conditional `TransactWriteItems`. Tests:
   `aws/test.sh` (DynamoDB Local in ~/.cache/dynamodb-local, `OKAY_DYNAMODB`; the suite is ignored without it).
 - `aws`: `AwsPorts` (KV, limits, objects on DynamoDB; env, fetch, log, analytics as EMF; SQL by

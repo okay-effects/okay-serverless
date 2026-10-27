@@ -1,0 +1,6 @@
+[debug] [zinc] IncrementalCompile -----------
+[debug] IncrementalCompile.incrementalCompile
+[debug] previous = Stamps for: 14 products, 3 sources, 8 libraries
+[debug] current source = Set(${BASE}/store/.jvm/src/test/scala/okay/serverless/store/SqlStoreSuite.scala, ${BASE}/store/src/test/scala/okay/serverless/store/StoreSuite.scala, ${BASE}/store/src/test/scala/okay/serverless/store/StorePrograms.scala)
+[debug] > initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(), unmodified = ...),Set(),Set(),API Changes: Set())
+[debug] No changes

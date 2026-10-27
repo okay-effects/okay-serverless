@@ -1,6 +1,6 @@
 package okay.serverless.cloud
 
-import java.sql.{Connection, DriverManager, PreparedStatement, ResultSet, Types}
+import java.sql.{Connection, PreparedStatement, ResultSet, Types}
 import scala.collection.mutable
 import scala.concurrent.Future
 
@@ -11,7 +11,8 @@ final class SqliteSql(dir: Option[java.io.File] = None) extends Port[Sql]:
   private def connection(db: String): Connection = synchronized(open.getOrElseUpdate(db, {
     val url = dir.fold(s"jdbc:sqlite:file:$db?mode=memory&cache=shared")(d =>
       s"jdbc:sqlite:${java.io.File(d, s"$db.sqlite")}")
-    DriverManager.getConnection(url)
+    // the driver itself, not `DriverManager`: under another class loader (sbt's) the service loader may miss it
+    org.sqlite.JDBC().connect(url, java.util.Properties())
   }))
 
   private def prepared(c: Connection, s: Statement): PreparedStatement =

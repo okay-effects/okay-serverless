@@ -1,0 +1,2 @@
+[debug] Created transactional ClassFileManager with tempDir = /Users/sergiy/work/my/okay-serverless/store/.js/target/scala-3.3.8/classes.bak
+[debug] Removing the temporary directory used for backing up class files: /Users/sergiy/work/my/okay-serverless/store/.js/target/scala-3.3.8/classes.bak

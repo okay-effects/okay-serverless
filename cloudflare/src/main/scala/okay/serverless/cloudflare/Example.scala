@@ -4,7 +4,10 @@ import okay.effects.json.{Descent, Json}
 import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
+import okay.effects.shape.Shape
+import okay.serverless.store.{Repo, StoreOn}
 import okay.serverless.{Codec, Durable, field}
+import okay.store.{Data, Dialect, Mapping}
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 
@@ -79,6 +82,29 @@ object Example:
     Stage.Do("mail", o => Mails.send[InActor + Fail % String]("MAIL", Mail("shop@okay.example", "ann@okay.example",
       "approved", Json.print(o))).as(o)))
 
+  /** A TYPE IN A STORE (okay-store): the same program on D1, on Postgres through Hyperdrive, in an object */
+  final case class Sale(id: String, item: String, qty: Int)
+  val sales: Mapping[Sale] = Mapping.keyed("sales", Shape.derived[Sale])(_.id)
+  type Sales[X] = Repo.Of[Sale][X]
+  def selling[R[_]](item: String, qty: Int)(using In[Sales, R]): String ! R =
+    Repo.create[Sale, R](k => Sale(k, item, qty)).flatMap(s =>
+      Repo.find[Sale, R](sales.at(_.qty) > 1, List(sales.at(_.qty).desc)).flatMap(big =>
+        Repo.count[Sale, R]().map(n => s"${s.id} of $n; big: ${big.map(_.item).mkString(",")}")))
+  type CD[X] = (Cloud + Data)[X]
+  type CS[X] = (CD + Sales)[X]
+  def sold(r: Request, db: String, dialect: Dialect): Response ! Cloud =
+    StoreOn.sql[CD, Cloud, String](db, dialect)(StoreOn.data[Sale, CS, CD, String](sales)(
+      selling[CS](r.param("item").getOrElse("?"), r.param("qty").map(_.toInt).getOrElse(1)))).map(Response.text(_))
+
+  type SD[X] = (ActorStep + Data)[X]
+  type AS[X] = (SD + Sales)[X]
+  /** A SHOP: an object, its sales in its own state, a request one transaction */
+  object Shops extends Actor:
+    def fetch(name: String, r: Request): Response ! InActor =
+      Durable.step[ActorStep, InActor, String](name)(StoreOn.durable[SD, ActorStep, String](
+        StoreOn.data[Sale, AS, SD, String](sales)(selling[AS](r.param("item").getOrElse("?"),
+          r.param("qty").map(_.toInt).getOrElse(1))))).map(Response.text(_))
+
   /** THE APP: a route an effect */
   object Shop extends App:
     override def objectFor(r: Request): Option[(String, String)] = r.path.split('/').toList match
@@ -118,6 +144,9 @@ object Example:
           Statement.of("insert into notes (text) values (?)", r.text)).andThen(
           Sql.query[Cloud]("PG", "select id, text, ok from notes where text <> ? order by id", "?")).map(rows =>
           Response.text(rows.map(row => s"${row("id")}:${row("text")}:${row("ok")}").mkString(",")))
+      case "/store/d1" => sold(r, "DB", Dialect.sqlite)
+      case "/store/pg" => sold(r, "PG", Dialect.postgres)
+      case "/store/shop" => Objects.call[Cloud]("SHOPS", r.param("shop").getOrElse("main"), r)
       case "/queue" => Queues.send[Cloud]("JOBS", q(r, "body")).as(Response.text("queued"))
       case "/cached" => Cache.through[Cloud]("https://okay.example/cached", 60)(
           Clock.now[Cloud].map(t => Response.text(s"made at $t")))
@@ -140,4 +169,5 @@ object Example:
     override def scheduled(e: Scheduled): Unit ! Cloud = Kv.put[Cloud]("KV", "cron", e.cron)
 
   @JSExportTopLevel("worker")
-  val worker: Worker = Worker(Shop, Map("ACCOUNTS" -> Accounts, "ROOMS" -> Rooms, "ORDERS" -> Orders))
+  val worker: Worker = Worker(Shop, Map("ACCOUNTS" -> Accounts, "ROOMS" -> Rooms, "ORDERS" -> Orders,
+    "SHOPS" -> Shops))

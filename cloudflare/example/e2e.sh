@@ -45,6 +45,12 @@ expect "$(curl -s -XPOST "$P/sql" -d first; curl -s -XPOST "$P/sql" -d second)" 
 expect "$(curl -s -XPOST "$P/pg" -d first; echo; curl -s -XPOST "$P/pg" -d second)" \
   $'Int(1):Text(first):Int(1)\nInt(1):Text(first):Int(1),Int(2):Text(second):Int(1)' \
   "Hyperdrive: Postgres, a batch and a query"
+expect "$(curl -s "$P/store/d1?item=tea&qty=3"; echo; curl -s "$P/store/d1?item=cup&qty=1")" \
+  $'000000000001 of 1; big: tea\n000000000002 of 2; big: tea' "okay-store on D1: a mapped type, keys from the store"
+expect "$(curl -s "$P/store/pg?item=tea&qty=3"; echo; curl -s "$P/store/pg?item=pot&qty=7")" \
+  $'000000000001 of 1; big: tea\n000000000002 of 2; big: pot,tea' "okay-store on Postgres through Hyperdrive"
+expect "$(curl -s "$P/store/shop?shop=kyiv&item=tea&qty=2"; echo; curl -s "$P/store/shop?shop=lviv&item=cup&qty=5")" \
+  $'000000000001 of 1; big: tea\n000000000001 of 1; big: cup' "okay-store in an object: a shop its own store"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")

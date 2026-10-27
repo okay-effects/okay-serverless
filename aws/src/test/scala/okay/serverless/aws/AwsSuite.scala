@@ -137,6 +137,23 @@ class AwsSuite extends munit.FunSuite:
       assertEquals(text(viaLambda), "Int(1) Text(hello)")
   }
 
+  test("OKAY-STORE ON POSTGRES (RDS Proxy's way): a mapped type's program, the same answers as everywhere") {
+    assume(postgres.isDefined, "OKAY_POSTGRES")
+    import okay.serverless.store.{StoreOn, StorePrograms}
+    import StorePrograms.*
+    type D[X] = (Cloud + okay.store.Data)[X]
+    type P[X] = (D + S)[X]
+    val db = s"store$unique"
+    val pg = AwsPorts(client, table, sql = AwsPorts.postgres(_ => postgres)).platform
+    for
+      _ <- pg.future(Sql.run[Cloud]("main", s"create schema $db"))
+      got <- AwsPorts(client, table,
+          sql = AwsPorts.postgres(_ => postgres.map(u => s"$u?options=-c%20search_path%3D$db")))
+        .platform.future(StoreOn.sql[D, Cloud, Product]("main", okay.store.Dialect.postgres)(
+          StoreOn.data[Sale, P, D, Product](sales)(program[P])))
+    yield assertEquals(got, expected)
+  }
+
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {
     def record(id: String, body: String) = obj(messageId = id, body = body, eventSource = "aws:sqs",
       eventSourceARN = "arn:aws:sqs:eu-west-1:1:jobs", attributes = obj(ApproximateReceiveCount = "1",
