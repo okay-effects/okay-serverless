@@ -1,5 +1,0 @@
-[debug] Running TaskDef(okay.serverless.cloud.CloudSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
-[debug] Summary for munit not available.
-[info] Passed: Total 9, Failed 0, Errors 0, Passed 9
-[debug] Passed tests:
-[debug] 	okay.serverless.cloud.CloudSuite

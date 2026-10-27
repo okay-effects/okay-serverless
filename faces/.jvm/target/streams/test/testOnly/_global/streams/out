@@ -1,6 +1,0 @@
-[debug] Running TaskDef(okay.serverless.faces.FacesSuite, CustomFingerprint{suite='munit.Suite'}, false, [SuiteSelector])
-[debug] Summary for munit not available.
-[error] Failed: Total 2, Failed 1, Errors 0, Passed 1
-[error] Failed tests:
-[error] 	okay.serverless.faces.FacesSuite
-[error] (facesJVM / Test / testOnly) sbt.TestsFailedException: Tests unsuccessful

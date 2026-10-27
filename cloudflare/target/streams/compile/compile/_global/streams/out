@@ -1,6 +1,0 @@
-[error] -- Error: /Users/sergiy/work/my/okay-serverless/cloudflare/src/main/scala/okay/serverless/cloudflare/ObjectStorage.scala:20:20 
-[error] 20 |    sql.exec(query, args*).toArray().asInstanceOf[js.Array[js.Dynamic]]
-[error]    |                    ^^^^^
-[error]    |Sequence argument type annotation `*` cannot be used here:
-[error]    |it is not the only argument to be passed to the corresponding repeated parameter scala.scalajs.js.Any*
-[error] one error found

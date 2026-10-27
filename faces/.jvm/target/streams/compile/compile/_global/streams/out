@@ -1,9 +1,0 @@
-[warn] -- [E198] Unused Symbol Warning: /Users/sergiy/work/my/okay-serverless/faces/src/main/scala/okay/serverless/faces/Faces.scala:5:26 
-[warn] 5 |import okay.effects.json.{Descent, Json}
-[warn]   |                          ^^^^^^^
-[warn]   |                          unused import
-[warn] -- [E198] Unused Symbol Warning: /Users/sergiy/work/my/okay-serverless/faces/src/main/scala/okay/serverless/faces/Faces.scala:5:35 
-[warn] 5 |import okay.effects.json.{Descent, Json}
-[warn]   |                                   ^^^^
-[warn]   |                                   unused import
-[warn] two warnings found

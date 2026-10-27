@@ -1,5 +1,0 @@
-[debug] Running TaskDef(okay.serverless.store.StoreSuite, org.scalajs.testing.common.Serializer$FingerprintSerializer$$anon$5@7e54fafe, false, [SuiteSelector])
-[debug] Summary for munit not available.
-[info] Passed: Total 3, Failed 0, Errors 0, Passed 3
-[debug] Passed tests:
-[debug] 	okay.serverless.store.StoreSuite

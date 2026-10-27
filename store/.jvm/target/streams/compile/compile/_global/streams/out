@@ -1,5 +1,0 @@
-[warn] -- [E198] Unused Symbol Warning: /Users/sergiy/work/my/okay-serverless/store/src/main/scala/okay/serverless/store/Store.scala:6:33 
-[warn] 6 |import okay.serverless.{Durable, field}
-[warn]   |                                 ^^^^^
-[warn]   |                                 unused import
-[warn] one warning found

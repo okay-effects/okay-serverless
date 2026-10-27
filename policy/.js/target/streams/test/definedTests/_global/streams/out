@@ -1,2 +1,0 @@
-[debug] Subclass fingerprints: List((munit.Suite,false,org.scalajs.testing.common.Serializer$FingerprintSerializer$$anon$5@25c056a8), (munit.Suite,true,org.scalajs.testing.common.Serializer$FingerprintSerializer$$anon$5@73e05cb2))
-[debug] Annotation fingerprints: List((org.junit.Test,false,org.scalajs.testing.common.Serializer$FingerprintSerializer$$anon$4@1e6a0462))
