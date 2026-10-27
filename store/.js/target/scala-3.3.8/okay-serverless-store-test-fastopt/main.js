@@ -9431,6 +9431,30 @@ function $m_Lmunit_package$() {
   }
   return $n_Lmunit_package$;
 }
+function $is_Lokay_effects_Effectful(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_effects_Effectful)));
+}
+function $as_Lokay_effects_Effectful(obj) {
+  return (($is_Lokay_effects_Effectful(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.Effectful"));
+}
+function $isArrayOf_Lokay_effects_Effectful(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_Effectful)));
+}
+function $asArrayOf_Lokay_effects_Effectful(obj, depth) {
+  return (($isArrayOf_Lokay_effects_Effectful(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.Effectful;", depth));
+}
+function $is_Lokay_effects_Void(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_effects_Void)));
+}
+function $as_Lokay_effects_Void(obj) {
+  return (($is_Lokay_effects_Void(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.Void"));
+}
+function $isArrayOf_Lokay_effects_Void(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_Void)));
+}
+function $asArrayOf_Lokay_effects_Void(obj, depth) {
+  return (($isArrayOf_Lokay_effects_Void(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.Void;", depth));
+}
 function $f_Lokay_effects_algebra_FreeAp__map__F1__Lokay_effects_algebra_FreeAp($thiz, f) {
   var f$1 = new $c_Lokay_effects_algebra_FreeAp$Pure(f);
   return new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, $thiz);
@@ -9514,6 +9538,177 @@ function $isArrayOf_Lokay_effects_algebra_Validated(obj, depth) {
 function $asArrayOf_Lokay_effects_algebra_Validated(obj, depth) {
   return (($isArrayOf_Lokay_effects_algebra_Validated(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.algebra.Validated;", depth));
 }
+function $p_Lokay_effects_cek_Spots$__proof__Lokay_effects_cek_OnCek$Spot$Last__Lokay_scala3_Taken($thiz, l) {
+  var x22 = $n(l).Lokay_effects_cek_OnCek$Spot$Last__f_proof;
+  if ((x22 === null)) {
+    var made = new $c_Lokay_scala3_Taken$Mine();
+    $n(l).Lokay_effects_cek_OnCek$Spot$Last__f_proof = made;
+    return made;
+  }
+  if ((x22 !== null)) {
+    return x22;
+  }
+  throw new $c_s_MatchError(x22);
+}
+function $p_Lokay_effects_cek_Spots$__proof__Lokay_effects_cek_OnCek$Spot$Only__Lokay_scala3_Taken($thiz, o) {
+  var x24 = $n(o).proof__Lokay_scala3_Taken();
+  if ((x24 === null)) {
+    var made = new $c_Lokay_scala3_Taken$Mine();
+    $n(o).proof_$eq__Lokay_scala3_Taken__V(made);
+    return made;
+  }
+  if ((x24 !== null)) {
+    return x24;
+  }
+  throw new $c_s_MatchError(x24);
+}
+/** @constructor */
+function $c_Lokay_effects_cek_Spots$() {
+  this.Lokay_effects_cek_Spots$__f_escape = null;
+  $n_Lokay_effects_cek_Spots$ = this;
+  this.Lokay_effects_cek_Spots$__f_escape = new $c_Lokay_effects_cek_Spots$$anon$1();
+}
+$c_Lokay_effects_cek_Spots$.prototype = new $h_O();
+$c_Lokay_effects_cek_Spots$.prototype.constructor = $c_Lokay_effects_cek_Spots$;
+/** @constructor */
+function $h_Lokay_effects_cek_Spots$() {
+}
+$h_Lokay_effects_cek_Spots$.prototype = $c_Lokay_effects_cek_Spots$.prototype;
+$c_Lokay_effects_cek_Spots$.prototype.take__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_Taken = (function(mine, at) {
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+    var l = $as_Lokay_effects_cek_OnCek$Spot$Last(mine);
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+      return $p_Lokay_effects_cek_Spots$__proof__Lokay_effects_cek_OnCek$Spot$Last__Lokay_scala3_Taken(this, l);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+      var i = $as_Lokay_effects_cek_OnCek$Spot$Init(at);
+      var at$1 = $n(i).Lokay_effects_cek_OnCek$Spot$Init__f_at;
+      return new $c_Lokay_scala3_Taken$Theirs(at$1);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      var at$2 = new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+      return new $c_Lokay_scala3_Taken$Theirs(at$2);
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if (false) {
+    var o = $as_Lokay_effects_cek_OnCek$Spot$Only(mine);
+    if (false) {
+      return $p_Lokay_effects_cek_Spots$__proof__Lokay_effects_cek_OnCek$Spot$Only__Lokay_scala3_Taken(this, o);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      var at$3 = new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+      return new $c_Lokay_scala3_Taken$Theirs(at$3);
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+    var i$2 = $as_Lokay_effects_cek_OnCek$Spot$Init(mine);
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+      var at$4 = new $c_Lokay_effects_cek_OnCek$Spot$Last(null);
+      return new $c_Lokay_scala3_Taken$Theirs(at$4);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+      var j = $as_Lokay_effects_cek_OnCek$Spot$Init(at);
+      var x10 = this.take__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_Taken($n(i$2).Lokay_effects_cek_OnCek$Spot$Init__f_at, $n(j).Lokay_effects_cek_OnCek$Spot$Init__f_at);
+      if ((x10 instanceof $c_Lokay_scala3_Taken$Mine)) {
+        return new $c_Lokay_scala3_Taken$Mine();
+      }
+      if ((x10 instanceof $c_Lokay_scala3_Taken$Theirs)) {
+        var t = $as_Lokay_scala3_Taken$Theirs(x10);
+        var x8 = $n(t).Lokay_scala3_Taken$Theirs__f_at;
+        if ((x8 instanceof $c_Lokay_effects_cek_OnCek$Spot)) {
+          var s = $as_Lokay_effects_cek_OnCek$Spot(x8);
+          var at$5 = new $c_Lokay_effects_cek_OnCek$Spot$Init(s);
+          return new $c_Lokay_scala3_Taken$Theirs(at$5);
+        }
+        throw new $c_s_MatchError(x8);
+      }
+      throw new $c_s_MatchError(x10);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      var at$6 = new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+      return new $c_Lokay_scala3_Taken$Theirs(at$6);
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+    return new $c_Lokay_scala3_Taken$Theirs(at);
+  }
+  throw new $c_s_MatchError(mine);
+});
+$c_Lokay_effects_cek_Spots$.prototype.outside__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_At = (function(mine, at) {
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+      return null;
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+      var i = $as_Lokay_effects_cek_OnCek$Spot$Init(at);
+      return $n(i).Lokay_effects_cek_OnCek$Spot$Init__f_at;
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if (false) {
+    if (false) {
+      return null;
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+    var i$2 = $as_Lokay_effects_cek_OnCek$Spot$Init(mine);
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+      return new $c_Lokay_effects_cek_OnCek$Spot$Last(null);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+      var j = $as_Lokay_effects_cek_OnCek$Spot$Init(at);
+      var x33 = this.outside__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_At($n(i$2).Lokay_effects_cek_OnCek$Spot$Init__f_at, $n(j).Lokay_effects_cek_OnCek$Spot$Init__f_at);
+      if ((x33 === null)) {
+        return null;
+      }
+      if ((x33 instanceof $c_Lokay_effects_cek_OnCek$Spot)) {
+        var q = $as_Lokay_effects_cek_OnCek$Spot(x33);
+        return new $c_Lokay_effects_cek_OnCek$Spot$Init(q);
+      }
+      throw new $c_s_MatchError(x33);
+    }
+    if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+      return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+    }
+    throw new $c_s_MatchError(at);
+  }
+  if ((mine instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+    return at;
+  }
+  throw new $c_s_MatchError(mine);
+});
+var $d_Lokay_effects_cek_Spots$ = new $TypeData().initClass($c_Lokay_effects_cek_Spots$, "okay.effects.cek.Spots$", ({
+  Lokay_effects_cek_Spots$: 1
+}));
+var $n_Lokay_effects_cek_Spots$;
+function $m_Lokay_effects_cek_Spots$() {
+  if ((!$n_Lokay_effects_cek_Spots$)) {
+    $n_Lokay_effects_cek_Spots$ = new $c_Lokay_effects_cek_Spots$();
+  }
+  return $n_Lokay_effects_cek_Spots$;
+}
+function $ct_Lokay_effects_describe_Describe__T__($thiz, name) {
+  return $thiz;
+}
+/** @constructor */
+function $c_Lokay_effects_describe_Describe() {
+}
+$c_Lokay_effects_describe_Describe.prototype = new $h_O();
+$c_Lokay_effects_describe_Describe.prototype.constructor = $c_Lokay_effects_describe_Describe;
+/** @constructor */
+function $h_Lokay_effects_describe_Describe() {
+}
+$h_Lokay_effects_describe_Describe.prototype = $c_Lokay_effects_describe_Describe.prototype;
 /** @constructor */
 function $c_Lokay_effects_json_Descent$() {
 }
@@ -9969,6 +10164,21 @@ function $isArrayOf_Lokay_effects_json_Json$Todo(obj, depth) {
 function $asArrayOf_Lokay_effects_json_Json$Todo(obj, depth) {
   return (($isArrayOf_Lokay_effects_json_Json$Todo(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.json.Json$Todo;", depth));
 }
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape($thiz, f1, make, unmake) {
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(make);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var this$9 = $m_sci_Vector$();
+    var $x_1 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(unmake).apply__O__O(p));
+    var elems = $x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2(self, y)]));
+    return this$9.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
 function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape($thiz, f1, f2, make, unmake) {
   var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => $n(make).apply__O__O__O(a1, a2)))));
   var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
@@ -9992,6 +10202,235 @@ function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$F
   }));
   return new $c_Lokay_effects_shape_Shape$Record(fields, write);
 }
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape($thiz, f1, f2, f3, make, unmake) {
+  var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a3) => $n(make).apply__O__O__O__O(a1, a2, a3)))))));
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var f$1 = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var this$7 = $n(f2);
+  var fa$1 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$7);
+  var f$2 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, fa$1);
+  var this$11 = $n(f3);
+  var fa$2 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$11);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f$2, fa$2);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var t = $as_T3($n(unmake).apply__O__O(p));
+    var this$21 = $m_sci_Vector$();
+    var $x_3 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T3__f__1);
+    var $x_2 = new $c_T2(self, y);
+    var self$1 = $n(f2).Lokay_effects_shape_Shape$Field__f_name;
+    var y$1 = $n($n(f2).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T3__f__2);
+    var $x_1 = new $c_T2(self$1, y$1);
+    var self$2 = $n(f3).Lokay_effects_shape_Shape$Field__f_name;
+    var y$2 = $n($n(f3).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T3__f__3);
+    var elems = $x_3.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_2, $x_1, new $c_T2(self$2, y$2)]));
+    return this$21.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F4__F1__Lokay_effects_shape_Shape($thiz, f1, f2, f3, f4, make, unmake) {
+  var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a3) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a4) => $n(make).apply__O__O__O__O__O(a1, a2, a3, a4)))))))));
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var f$1 = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var this$7 = $n(f2);
+  var fa$1 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$7);
+  var f$2 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, fa$1);
+  var this$11 = $n(f3);
+  var fa$2 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$11);
+  var f$3 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$2, fa$2);
+  var this$15 = $n(f4);
+  var fa$3 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$15);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f$3, fa$3);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var t = $as_T4($n(unmake).apply__O__O(p));
+    var this$27 = $m_sci_Vector$();
+    var $x_4 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T4__f__1);
+    var $x_3 = new $c_T2(self, y);
+    var self$1 = $n(f2).Lokay_effects_shape_Shape$Field__f_name;
+    var y$1 = $n($n(f2).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T4__f__2);
+    var $x_2 = new $c_T2(self$1, y$1);
+    var self$2 = $n(f3).Lokay_effects_shape_Shape$Field__f_name;
+    var y$2 = $n($n(f3).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T4__f__3);
+    var $x_1 = new $c_T2(self$2, y$2);
+    var self$3 = $n(f4).Lokay_effects_shape_Shape$Field__f_name;
+    var y$3 = $n($n(f4).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T4__f__4);
+    var elems = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_3, $x_2, $x_1, new $c_T2(self$3, y$3)]));
+    return this$27.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F5__F1__Lokay_effects_shape_Shape($thiz, f1, f2, f3, f4, f5, make, unmake) {
+  var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a3) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a4) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a5) => $n(make).apply__O__O__O__O__O__O(a1, a2, a3, a4, a5)))))))))));
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var f$1 = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var this$7 = $n(f2);
+  var fa$1 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$7);
+  var f$2 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, fa$1);
+  var this$11 = $n(f3);
+  var fa$2 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$11);
+  var f$3 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$2, fa$2);
+  var this$15 = $n(f4);
+  var fa$3 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$15);
+  var f$4 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$3, fa$3);
+  var this$19 = $n(f5);
+  var fa$4 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$19);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f$4, fa$4);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var t = $as_T5($n(unmake).apply__O__O(p));
+    var this$33 = $m_sci_Vector$();
+    var $x_5 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T5__f__1);
+    var $x_4 = new $c_T2(self, y);
+    var self$1 = $n(f2).Lokay_effects_shape_Shape$Field__f_name;
+    var y$1 = $n($n(f2).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T5__f__2);
+    var $x_3 = new $c_T2(self$1, y$1);
+    var self$2 = $n(f3).Lokay_effects_shape_Shape$Field__f_name;
+    var y$2 = $n($n(f3).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T5__f__3);
+    var $x_2 = new $c_T2(self$2, y$2);
+    var self$3 = $n(f4).Lokay_effects_shape_Shape$Field__f_name;
+    var y$3 = $n($n(f4).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T5__f__4);
+    var $x_1 = new $c_T2(self$3, y$3);
+    var self$4 = $n(f5).Lokay_effects_shape_Shape$Field__f_name;
+    var y$4 = $n($n(f5).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T5__f__5);
+    var elems = $x_5.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_4, $x_3, $x_2, $x_1, new $c_T2(self$4, y$4)]));
+    return this$33.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F6__F1__Lokay_effects_shape_Shape($thiz, f1, f2, f3, f4, f5, f6, make, unmake) {
+  var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a3) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a4) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a5) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a6) => $n(make).apply__O__O__O__O__O__O__O(a1, a2, a3, a4, a5, a6)))))))))))));
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var f$1 = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var this$7 = $n(f2);
+  var fa$1 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$7);
+  var f$2 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, fa$1);
+  var this$11 = $n(f3);
+  var fa$2 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$11);
+  var f$3 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$2, fa$2);
+  var this$15 = $n(f4);
+  var fa$3 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$15);
+  var f$4 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$3, fa$3);
+  var this$19 = $n(f5);
+  var fa$4 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$19);
+  var f$5 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$4, fa$4);
+  var this$23 = $n(f6);
+  var fa$5 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$23);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f$5, fa$5);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var t = $as_T6($n(unmake).apply__O__O(p));
+    var this$39 = $m_sci_Vector$();
+    var $x_6 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__1);
+    var $x_5 = new $c_T2(self, y);
+    var self$1 = $n(f2).Lokay_effects_shape_Shape$Field__f_name;
+    var y$1 = $n($n(f2).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__2);
+    var $x_4 = new $c_T2(self$1, y$1);
+    var self$2 = $n(f3).Lokay_effects_shape_Shape$Field__f_name;
+    var y$2 = $n($n(f3).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__3);
+    var $x_3 = new $c_T2(self$2, y$2);
+    var self$3 = $n(f4).Lokay_effects_shape_Shape$Field__f_name;
+    var y$3 = $n($n(f4).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__4);
+    var $x_2 = new $c_T2(self$3, y$3);
+    var self$4 = $n(f5).Lokay_effects_shape_Shape$Field__f_name;
+    var y$4 = $n($n(f5).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__5);
+    var $x_1 = new $c_T2(self$4, y$4);
+    var self$5 = $n(f6).Lokay_effects_shape_Shape$Field__f_name;
+    var y$5 = $n($n(f6).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T6__f__6);
+    var elems = $x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_5, $x_4, $x_3, $x_2, $x_1, new $c_T2(self$5, y$5)]));
+    return this$39.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
+function $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F9__F1__Lokay_effects_shape_Shape($thiz, f1, f2, f3, f4, f5, f6, f7, f8, f9, make, unmake) {
+  var a = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a1) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a2) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a3) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a4) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a5) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a6) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a7) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a8) => new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a9) => $n(make).apply__O__O__O__O__O__O__O__O__O__O(a1, a2, a3, a4, a5, a6, a7, a8, a9)))))))))))))))))));
+  var f = new $c_Lokay_effects_algebra_FreeAp$Pure(a);
+  var this$3 = $n(f1);
+  var fa = new $c_Lokay_effects_algebra_FreeAp$Lift(this$3);
+  var f$1 = new $c_Lokay_effects_algebra_FreeAp$Ap(f, fa);
+  var this$7 = $n(f2);
+  var fa$1 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$7);
+  var f$2 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$1, fa$1);
+  var this$11 = $n(f3);
+  var fa$2 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$11);
+  var f$3 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$2, fa$2);
+  var this$15 = $n(f4);
+  var fa$3 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$15);
+  var f$4 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$3, fa$3);
+  var this$19 = $n(f5);
+  var fa$4 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$19);
+  var f$5 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$4, fa$4);
+  var this$23 = $n(f6);
+  var fa$5 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$23);
+  var f$6 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$5, fa$5);
+  var this$27 = $n(f7);
+  var fa$6 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$27);
+  var f$7 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$6, fa$6);
+  var this$31 = $n(f8);
+  var fa$7 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$31);
+  var f$8 = new $c_Lokay_effects_algebra_FreeAp$Ap(f$7, fa$7);
+  var this$35 = $n(f9);
+  var fa$8 = new $c_Lokay_effects_algebra_FreeAp$Lift(this$35);
+  var fields = new $c_Lokay_effects_algebra_FreeAp$Ap(f$8, fa$8);
+  var write = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+    var t = $as_T9($n(unmake).apply__O__O(p));
+    var this$57 = $m_sci_Vector$();
+    var $x_9 = $m_sr_ScalaRunTime$();
+    var self = $n(f1).Lokay_effects_shape_Shape$Field__f_name;
+    var y = $n($n(f1).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__1);
+    var $x_8 = new $c_T2(self, y);
+    var self$1 = $n(f2).Lokay_effects_shape_Shape$Field__f_name;
+    var y$1 = $n($n(f2).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__2);
+    var $x_7 = new $c_T2(self$1, y$1);
+    var self$2 = $n(f3).Lokay_effects_shape_Shape$Field__f_name;
+    var y$2 = $n($n(f3).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__3);
+    var $x_6 = new $c_T2(self$2, y$2);
+    var self$3 = $n(f4).Lokay_effects_shape_Shape$Field__f_name;
+    var y$3 = $n($n(f4).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__4);
+    var $x_5 = new $c_T2(self$3, y$3);
+    var self$4 = $n(f5).Lokay_effects_shape_Shape$Field__f_name;
+    var y$4 = $n($n(f5).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__5);
+    var $x_4 = new $c_T2(self$4, y$4);
+    var self$5 = $n(f6).Lokay_effects_shape_Shape$Field__f_name;
+    var y$5 = $n($n(f6).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__6);
+    var $x_3 = new $c_T2(self$5, y$5);
+    var self$6 = $n(f7).Lokay_effects_shape_Shape$Field__f_name;
+    var y$6 = $n($n(f7).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__7);
+    var $x_2 = new $c_T2(self$6, y$6);
+    var self$7 = $n(f8).Lokay_effects_shape_Shape$Field__f_name;
+    var y$7 = $n($n(f8).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__8);
+    var $x_1 = new $c_T2(self$7, y$7);
+    var self$8 = $n(f9).Lokay_effects_shape_Shape$Field__f_name;
+    var y$8 = $n($n(f9).Lokay_effects_shape_Shape$Field__f_shape).encode__O__Lokay_effects_json_Json($n(t).T9__f__9);
+    var elems = $x_9.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_8, $x_7, $x_6, $x_5, $x_4, $x_3, $x_2, $x_1, new $c_T2(self$8, y$8)]));
+    return this$57.from__sc_IterableOnce__sci_Vector(elems);
+  }));
+  return new $c_Lokay_effects_shape_Shape$Record(fields, write);
+}
+function $is_Lokay_effects_shape_Schema(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_effects_shape_Schema)));
+}
+function $as_Lokay_effects_shape_Schema(obj) {
+  return (($is_Lokay_effects_shape_Schema(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema;", depth));
+}
 function $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape($thiz, to, from) {
   var to$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
     var value = $n(to).apply__O__O(p);
@@ -10011,6 +10450,37 @@ function $isArrayOf_Lokay_effects_shape_Shape(obj, depth) {
 function $asArrayOf_Lokay_effects_shape_Shape(obj, depth) {
   return (($isArrayOf_Lokay_effects_shape_Shape(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Shape;", depth));
 }
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$Case() {
+}
+$c_Lokay_effects_shape_Shape$Case.prototype = new $h_O();
+$c_Lokay_effects_shape_Shape$Case.prototype.constructor = $c_Lokay_effects_shape_Shape$Case;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$Case() {
+}
+$h_Lokay_effects_shape_Shape$Case.prototype = $c_Lokay_effects_shape_Shape$Case.prototype;
+$c_Lokay_effects_shape_Shape$Case.prototype.write__O__s_Option = (function(a) {
+  var this$1 = $n($as_s_Option($n(this.Lokay_effects_shape_Shape$Case$$anon$7__f_project).apply__O__O(a)));
+  var \u03b42$ = this.Lokay_effects_shape_Shape$Case$$anon$7__f_shape;
+  if (this$1.isEmpty__Z()) {
+    return $m_s_None$();
+  } else {
+    var x0 = this$1.get__O();
+    return new $c_s_Some($n(\u03b42$).encode__O__Lokay_effects_json_Json(x0));
+  }
+});
+function $as_Lokay_effects_shape_Shape$Case(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Shape$Case) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Shape$Case"));
+}
+function $isArrayOf_Lokay_effects_shape_Shape$Case(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Shape$Case)));
+}
+function $asArrayOf_Lokay_effects_shape_Shape$Case(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Shape$Case(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Shape$Case;", depth));
+}
+var $d_Lokay_effects_shape_Shape$Case = new $TypeData().initClass(0, "okay.effects.shape.Shape$Case", ({
+  Lokay_effects_shape_Shape$Case: 1
+}));
 function $as_Lokay_http_Bytes(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.http.Bytes"));
 }
@@ -10530,13 +11000,9 @@ function $p_Lokay_scala3_Cek$__inPlaceTaken__Lokay_scala3_At__Lokay_scala3_Level
     var x21 = \u01ce\u01ba$tailLocal2;
     if ((x21 instanceof $c_Lokay_scala3_Levels$Handled)) {
       var l = $as_Lokay_scala3_Levels$Handled(x21);
-      var this$1 = $n($n(l).Lokay_scala3_Levels$Handled__f_at);
-      var at$1 = at$tailLocal2;
-      var x19 = $m_Lokay_scala3_Taken$().outside__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_At(this$1, at$1);
+      var x19 = $n($n(l).Lokay_scala3_Levels$Handled__f_at).outside__Lokay_scala3_At__Lokay_scala3_At(at$tailLocal2);
       if ((x19 === null)) {
-        var this$2 = $n($n(l).Lokay_scala3_Levels$Handled__f_at);
-        var at$2 = at$tailLocal2;
-        var x17 = $m_Lokay_scala3_Taken$().apply__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_Taken(this$2, at$2);
+        var x17 = $n($n(l).Lokay_scala3_Levels$Handled__f_at).take__Lokay_scala3_At__Lokay_scala3_Taken(at$tailLocal2);
         if ((x17 instanceof $c_Lokay_scala3_Taken$Mine)) {
           return $n(l).Lokay_scala3_Levels$Handled__f_h;
         }
@@ -10778,11 +11244,11 @@ function $p_Lokay_scala3_Cek$__enter__Lokay_scala3_Prog__Lokay_scala3_Frames__Lo
     var \u01ce\u01ba$1 = new $c_Lokay_scala3_Levels$Handled(at, h$1, \u01cf\u0183, \u01ce\u01ba);
     return new $c_Lokay_scala3_Cek$State(c$1, \u01cf\u0183$1, \u01ce\u01ba$1);
   }
-  if (false) {
+  if ((c instanceof $c_Lokay_scala3_Prog$Remap)) {
     var r = $as_Lokay_scala3_Prog$Remap(c);
-    var c$2 = $n(r).p__Lokay_scala3_Prog();
+    var c$2 = $n(r).Lokay_scala3_Prog$Remap__f_p;
     var \u01cf\u0183$2 = new $c_Lokay_scala3_Frames$End();
-    var rename = $n(r).rename__Lokay_scala3_Sub();
+    var rename = $n(r).Lokay_scala3_Prog$Remap__f_rename;
     var \u01ce\u01ba$2 = new $c_Lokay_scala3_Levels$Renamed(rename, \u01cf\u0183, \u01ce\u01ba);
     return new $c_Lokay_scala3_Cek$State(c$2, \u01cf\u0183$2, \u01ce\u01ba$2);
   }
@@ -10855,13 +11321,9 @@ function $p_Lokay_scala3_Cek$__outTaken__Lokay_scala3_At__O__Lokay_scala3_Frames
     var x76 = \u01ce\u01ba$tailLocal5;
     if ((x76 instanceof $c_Lokay_scala3_Levels$Handled)) {
       var l = $as_Lokay_scala3_Levels$Handled(x76);
-      var this$1 = $n($n(l).Lokay_scala3_Levels$Handled__f_at);
-      var at$1 = at$tailLocal4;
-      var x74 = $m_Lokay_scala3_Taken$().outside__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_At(this$1, at$1);
+      var x74 = $n($n(l).Lokay_scala3_Levels$Handled__f_at).outside__Lokay_scala3_At__Lokay_scala3_At(at$tailLocal4);
       if ((x74 === null)) {
-        var this$2 = $n($n(l).Lokay_scala3_Levels$Handled__f_at);
-        var at$2 = at$tailLocal4;
-        var x71 = $m_Lokay_scala3_Taken$().apply__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_Taken(this$2, at$2);
+        var x71 = $n($n(l).Lokay_scala3_Levels$Handled__f_at).take__Lokay_scala3_At__Lokay_scala3_Taken(at$tailLocal4);
         if ((x71 instanceof $c_Lokay_scala3_Taken$Mine)) {
           return $p_Lokay_scala3_Cek$__here__Lokay_scala3_Levels$Handled__O__Lokay_scala3_Frames__Lokay_scala3_Crossed__Lokay_scala3_Cek$State($thiz, l, op, inner, crossed$tailLocal2);
         }
@@ -10869,10 +11331,10 @@ function $p_Lokay_scala3_Cek$__outTaken__Lokay_scala3_At__O__Lokay_scala3_Frames
           var t = $as_Lokay_scala3_Taken$Theirs(x71);
           var at$tailLocal4$tmp1 = $n(t).Lokay_scala3_Taken$Theirs__f_at;
           var inner$1 = crossed$tailLocal2;
-          var at$3 = $n(l).Lokay_scala3_Levels$Handled__f_at;
+          var at$1 = $n(l).Lokay_scala3_Levels$Handled__f_at;
           var h = $n(l).Lokay_scala3_Levels$Handled__f_h;
           var outside = $n(l).Lokay_scala3_Levels$Handled__f_outside;
-          var crossed$tailLocal2$tmp1 = new $c_Lokay_scala3_Crossed$Handled(inner$1, at$3, h, outside);
+          var crossed$tailLocal2$tmp1 = new $c_Lokay_scala3_Crossed$Handled(inner$1, at$1, h, outside);
           var \u01ce\u01ba$tailLocal5$tmp1 = $n(l).Lokay_scala3_Levels$Handled__f_up;
           at$tailLocal4 = at$tailLocal4$tmp1;
           crossed$tailLocal2 = crossed$tailLocal2$tmp1;
@@ -10883,10 +11345,10 @@ function $p_Lokay_scala3_Cek$__outTaken__Lokay_scala3_At__O__Lokay_scala3_Frames
       }
       if ((x74 !== null)) {
         var inner$2 = crossed$tailLocal2;
-        var at$4 = $n(l).Lokay_scala3_Levels$Handled__f_at;
+        var at$2 = $n(l).Lokay_scala3_Levels$Handled__f_at;
         var h$1 = $n(l).Lokay_scala3_Levels$Handled__f_h;
         var outside$1 = $n(l).Lokay_scala3_Levels$Handled__f_outside;
-        var crossed$tailLocal2$tmp2 = new $c_Lokay_scala3_Crossed$Handled(inner$2, at$4, h$1, outside$1);
+        var crossed$tailLocal2$tmp2 = new $c_Lokay_scala3_Crossed$Handled(inner$2, at$2, h$1, outside$1);
         var \u01ce\u01ba$tailLocal5$tmp2 = $n(l).Lokay_scala3_Levels$Handled__f_up;
         at$tailLocal4 = x74;
         crossed$tailLocal2 = crossed$tailLocal2$tmp2;
@@ -10966,6 +11428,9 @@ $c_Lokay_scala3_Cek$.prototype.run__Lokay_scala3_Prog__O = (function(p) {
   var $x_1 = new $c_Lokay_scala3_Frames$End();
   var escape = $m_Lokay_scala3_Escape$().Lokay_scala3_Escape$__f_pure;
   return $p_Lokay_scala3_Cek$__steps__Lokay_scala3_Prog__Lokay_scala3_Frames__Lokay_scala3_Levels__O(this, p, $x_1, new $c_Lokay_scala3_Levels$Top(escape));
+});
+$c_Lokay_scala3_Cek$.prototype.run__Lokay_scala3_Prog__Lokay_scala3_Escape__O = (function(p, escape) {
+  return $p_Lokay_scala3_Cek$__steps__Lokay_scala3_Prog__Lokay_scala3_Frames__Lokay_scala3_Levels__O(this, p, new $c_Lokay_scala3_Frames$End(), new $c_Lokay_scala3_Levels$Top(escape));
 });
 var $d_Lokay_scala3_Cek$ = new $TypeData().initClass($c_Lokay_scala3_Cek$, "okay.scala3.Cek$", ({
   Lokay_scala3_Cek$: 1
@@ -11845,6 +12310,222 @@ function $m_Lokay_serverless_store_Docs$() {
   return $n_Lokay_serverless_store_Docs$;
 }
 /** @constructor */
+function $c_Lokay_serverless_store_Journal$() {
+  this.Lokay_serverless_store_Journal$__f_stores = null;
+  $n_Lokay_serverless_store_Journal$ = this;
+  this.Lokay_serverless_store_Journal$__f_stores = $m_Lokay_store_Stores$().apply__Lokay_effects_Effects__Lokay_store_Stores($m_Lokay_effects_cek_OnCek$());
+}
+$c_Lokay_serverless_store_Journal$.prototype = new $h_O();
+$c_Lokay_serverless_store_Journal$.prototype.constructor = $c_Lokay_serverless_store_Journal$;
+/** @constructor */
+function $h_Lokay_serverless_store_Journal$() {
+}
+$h_Lokay_serverless_store_Journal$.prototype = $c_Lokay_serverless_store_Journal$.prototype;
+$c_Lokay_serverless_store_Journal$.prototype.apply__F0__F0__Lokay_scala3_Prog__Lokay_effects_cek_Into__Lokay_scala3_Prog = (function(ids, now, p, x$4) {
+  $m_Lokay_effects_cek_OnCek$();
+  var this$2 = $n(this.Lokay_serverless_store_Journal$__f_stores);
+  var p$1 = $as_Lokay_scala3_Prog(new $c_Lokay_store_Stores$OnData(this$2, ids, now).apply__O__O__O__O(p, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null)), ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+  var rename = $n(x$4).renaming__Lokay_scala3_Sub();
+  return new $c_Lokay_scala3_Prog$Remap(p$1, rename);
+});
+var $d_Lokay_serverless_store_Journal$ = new $TypeData().initClass($c_Lokay_serverless_store_Journal$, "okay.serverless.store.Journal$", ({
+  Lokay_serverless_store_Journal$: 1
+}));
+var $n_Lokay_serverless_store_Journal$;
+function $m_Lokay_serverless_store_Journal$() {
+  if ((!$n_Lokay_serverless_store_Journal$)) {
+    $n_Lokay_serverless_store_Journal$ = new $c_Lokay_serverless_store_Journal$();
+  }
+  return $n_Lokay_serverless_store_Journal$;
+}
+/** @constructor */
+function $c_Lokay_serverless_store_JournalPrograms$() {
+  this.Lokay_serverless_store_JournalPrograms$__f_passport = null;
+  this.Lokay_serverless_store_JournalPrograms$__f_program = null;
+  $n_Lokay_serverless_store_JournalPrograms$ = this;
+  $m_Lokay_store_Kind$();
+  var id = new $c_Lokay_store_KindId("passport");
+  var this$8 = $m_sci_Vector$();
+  var $x_2 = $m_sr_ScalaRunTime$();
+  var constraints = $m_sci_Nil$();
+  var schema = new $c_Lokay_effects_shape_Schema$Text(constraints);
+  var label = new $c_s_Some("Number");
+  var doc = $m_s_None$();
+  var default$1 = $m_s_None$();
+  var $x_1 = new $c_Lokay_effects_shape_Schema$Field("number", schema, label, doc, true, default$1);
+  var constraints$1 = $m_sci_Nil$();
+  var schema$1 = new $c_Lokay_effects_shape_Schema$Text(constraints$1);
+  var label$1 = new $c_s_Some("Country");
+  var doc$1 = $m_s_None$();
+  var default$2 = $m_s_None$();
+  var elems = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_shape_Schema$Field.getArrayOf().constr)([$x_1, new $c_Lokay_effects_shape_Schema$Field("country", schema$1, label$1, doc$1, false, default$2)]));
+  var fields = this$8.from__sc_IterableOnce__sci_Vector(elems);
+  var schema$2 = new $c_Lokay_effects_shape_Schema$Record(fields);
+  var this$10 = $m_sci_Set$();
+  var elems$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["number"]));
+  var secret = this$10.from__sc_IterableOnce__sci_Set(elems$1);
+  var summary = new $c_sci_$colon$colon("number", $m_sci_Nil$());
+  $m_Lokay_store_Kind$();
+  var meta = $m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty;
+  this.Lokay_serverless_store_JournalPrograms$__f_passport = new $c_Lokay_store_Kind(id, "Passport", schema$2, secret, summary, meta);
+  $m_Lokay_effects_cek_OnCek$();
+  var p$8 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).define__Lokay_store_Kind__O__O(this.Lokay_serverless_store_JournalPrograms$__f_passport, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+  var f$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1) => {
+    $as_jl_Void(_$1);
+    $m_Lokay_effects_cek_OnCek$();
+    var $x_4 = $m_sr_ScalaRunTime$();
+    var y = new $c_Lokay_effects_json_Json$Str("AB123");
+    var $x_3 = new $c_T2("number", y);
+    var y$1 = new $c_Lokay_effects_json_Json$Str("UA");
+    var fields$1 = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_3, new $c_T2("country", y$1)]));
+    $m_Lokay_effects_json_Json$Obj$();
+    var this$23 = $n(fields$1);
+    var fields$2 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$23);
+    var fields$1$1 = new $c_Lokay_effects_json_Json$Obj(fields$2);
+    var this$25 = $m_sci_Set$();
+    var elems$2 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["travel"]));
+    var tags$1 = this$25.from__sc_IterableOnce__sci_Set(elems$2);
+    $n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores);
+    var meta$1 = $m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty;
+    $n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores);
+    var note$1 = $m_s_None$();
+    var p$7 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).add__Lokay_store_KindId__Lokay_effects_json_Json$Obj__Lokay_effects_json_Json$Obj__sci_Set__s_Option__O__O($n(this.Lokay_serverless_store_JournalPrograms$__f_passport).Lokay_store_Kind__f_id, fields$1$1, meta$1, tags$1, note$1, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+    var f$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r) => {
+      var r$1 = $as_Lokay_store_Record(r);
+      $m_Lokay_effects_cek_OnCek$();
+      var $x_6 = $m_sr_ScalaRunTime$();
+      var y$2 = new $c_Lokay_effects_json_Json$Str("AB124");
+      var $x_5 = new $c_T2("number", y$2);
+      var y$3 = new $c_Lokay_effects_json_Json$Str("UA");
+      var fields$3 = $x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([$x_5, new $c_T2("country", y$3)]));
+      $m_Lokay_effects_json_Json$Obj$();
+      var this$37 = $n(fields$3);
+      var fields$4 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$37);
+      var fields$2$1 = new $c_Lokay_effects_json_Json$Obj(fields$4);
+      var this$39 = $m_sci_Set$();
+      var elems$3 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["travel"]));
+      var tags$2 = this$39.from__sc_IterableOnce__sci_Set(elems$3);
+      var note$2 = new $c_s_Some("renewed");
+      $n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores);
+      var meta$2 = $m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty;
+      var p$6 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).revise__Lokay_store_RecordId__Lokay_effects_json_Json$Obj__Lokay_effects_json_Json$Obj__sci_Set__s_Option__O__O($n(r$1).Lokay_store_Record__f_id, fields$2$1, meta$2, tags$2, note$2, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+      var f$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
+        $as_s_Option(_$2);
+        $m_Lokay_effects_cek_OnCek$();
+        var p$5 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).audit__Lokay_store_RecordId__T__T__O__O($n(r$1).Lokay_store_Record__f_id, "number", "owner", ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+        var f$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$3) => {
+          $as_jl_Void(_$3);
+          $m_Lokay_effects_cek_OnCek$();
+          var p$4 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).kinds__O__O(($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+          var f$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ks) => {
+            var ks$1 = $as_sci_List(ks);
+            $m_Lokay_effects_cek_OnCek$();
+            var p$3 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).find__T__s_Option__O__O("ab124", new $c_s_Some("travel"), ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+            var f$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((found) => {
+              var found$1 = $as_sci_List(found);
+              $m_Lokay_effects_cek_OnCek$();
+              var p$2 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).history__Lokay_store_RecordId__O__O($n(r$1).Lokay_store_Record__f_id, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+              var f$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((h) => {
+                var h$1 = $as_sci_List(h);
+                $m_Lokay_effects_cek_OnCek$();
+                var p$1 = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).get__Lokay_store_RecordId__O__O($n(r$1).Lokay_store_Record__f_id, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+                var f$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((now) => {
+                  var now$1 = $as_s_Option(now);
+                  $m_Lokay_effects_cek_OnCek$();
+                  var p = $as_Lokay_scala3_Prog($n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores).journaled__O__O(($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+                  var f$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((j) => {
+                    var j$1 = $as_T2(j);
+                    var this$57 = $n(ks$1);
+                    var f = ((_$4) => {
+                      var _$4$1 = $as_Lokay_store_Kind(_$4);
+                      return $n(_$4$1).Lokay_store_Kind__f_name;
+                    });
+                    if ((this$57 === $m_sci_Nil$())) {
+                      var _1 = $m_sci_Nil$();
+                    } else {
+                      var x0 = this$57.head__O();
+                      var h$2 = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+                      var t = h$2;
+                      var rest = $as_sci_List(this$57.tail__O());
+                      while ((rest !== $m_sci_Nil$())) {
+                        var x0$1 = $n(rest).head__O();
+                        var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+                        $n(t).sci_$colon$colon__f_next = nx;
+                        t = nx;
+                        rest = $as_sci_List($n(rest).tail__O());
+                      }
+                      var _1 = h$2;
+                    }
+                    var this$58 = $n($as_sc_SeqOps($n(j$1)._1__O()));
+                    var _5 = this$58.length__I();
+                    return new $c_T5(_1, found$1, h$1, now$1, _5);
+                  }));
+                  return new $c_Lokay_scala3_Prog$Map(p, f$1);
+                }));
+                return new $c_Lokay_scala3_Prog$FlatMap(p$1, f$2);
+              }));
+              return new $c_Lokay_scala3_Prog$FlatMap(p$2, f$3);
+            }));
+            return new $c_Lokay_scala3_Prog$FlatMap(p$3, f$4);
+          }));
+          return new $c_Lokay_scala3_Prog$FlatMap(p$4, f$5);
+        }));
+        return new $c_Lokay_scala3_Prog$FlatMap(p$5, f$6);
+      }));
+      return new $c_Lokay_scala3_Prog$FlatMap(p$6, f$7);
+    }));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$7, f$8);
+  }));
+  this.Lokay_serverless_store_JournalPrograms$__f_program = new $c_Lokay_scala3_Prog$FlatMap(p$8, f$9);
+}
+$c_Lokay_serverless_store_JournalPrograms$.prototype = new $h_O();
+$c_Lokay_serverless_store_JournalPrograms$.prototype.constructor = $c_Lokay_serverless_store_JournalPrograms$;
+/** @constructor */
+function $h_Lokay_serverless_store_JournalPrograms$() {
+}
+$h_Lokay_serverless_store_JournalPrograms$.prototype = $c_Lokay_serverless_store_JournalPrograms$.prototype;
+$c_Lokay_serverless_store_JournalPrograms$.prototype.ids__F0 = (function() {
+  var n = new $c_sr_IntRef(0);
+  return new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+    n.sr_IntRef__f_elem = ((1 + n.sr_IntRef__f_elem) | 0);
+    return ("id" + n.sr_IntRef__f_elem);
+  }));
+});
+$c_Lokay_serverless_store_JournalPrograms$.prototype.clock__F0 = (function() {
+  var t = new $c_sr_LongRef(1000, 0);
+  return new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+    var x_$_lo = t.sr_LongRef__f_elem_$lo;
+    var x_$_hi = t.sr_LongRef__f_elem_$hi;
+    var lo = ((1 + x_$_lo) | 0);
+    var hi = ((x_$_hi + ((lo === 0) | 0)) | 0);
+    t.sr_LongRef__f_elem_$lo = lo;
+    t.sr_LongRef__f_elem_$hi = hi;
+    return $bL(t.sr_LongRef__f_elem_$lo, t.sr_LongRef__f_elem_$hi);
+  }));
+});
+$c_Lokay_serverless_store_JournalPrograms$.prototype.reference__T5 = (function() {
+  var datas = $m_Lokay_store_Datas$().apply__Lokay_effects_Effects__Lokay_store_Datas($m_Lokay_effects_cek_OnCek$());
+  $m_Lokay_effects_cek_OnCek$();
+  var this$3 = $n(datas);
+  var backend = new $c_Lokay_store_Memory($m_sci_Map$EmptyMap$());
+  var $x_1 = new $c_Lokay_store_Datas$On(this$3, backend);
+  var this$4 = $n($m_Lokay_serverless_store_Journal$().Lokay_serverless_store_Journal$__f_stores);
+  var ids = this.ids__F0();
+  var now = this.clock__F0();
+  var p = $as_Lokay_scala3_Prog($x_1.apply__O__O__O(new $c_Lokay_store_Stores$OnData(this$4, ids, now).apply__O__O__O__O(this.Lokay_serverless_store_JournalPrograms$__f_program, ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null)), ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))), ($m_Lokay_effects_cek_OnCek$(), new $c_Lokay_effects_cek_OnCek$Spot$Last(null))));
+  return $as_T5($m_Lokay_scala3_Cek$().run__Lokay_scala3_Prog__Lokay_scala3_Escape__O(p, $m_Lokay_effects_cek_Spots$().Lokay_effects_cek_Spots$__f_escape));
+});
+var $d_Lokay_serverless_store_JournalPrograms$ = new $TypeData().initClass($c_Lokay_serverless_store_JournalPrograms$, "okay.serverless.store.JournalPrograms$", ({
+  Lokay_serverless_store_JournalPrograms$: 1
+}));
+var $n_Lokay_serverless_store_JournalPrograms$;
+function $m_Lokay_serverless_store_JournalPrograms$() {
+  if ((!$n_Lokay_serverless_store_JournalPrograms$)) {
+    $n_Lokay_serverless_store_JournalPrograms$ = new $c_Lokay_serverless_store_JournalPrograms$();
+  }
+  return $n_Lokay_serverless_store_JournalPrograms$;
+}
+/** @constructor */
 function $c_Lokay_serverless_store_Repo$() {
 }
 $c_Lokay_serverless_store_Repo$.prototype = new $h_O();
@@ -12363,6 +13044,120 @@ function $isArrayOf_Lokay_store_Data(obj, depth) {
 function $asArrayOf_Lokay_store_Data(obj, depth) {
   return (($isArrayOf_Lokay_store_Data(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Data;", depth));
 }
+/** @constructor */
+function $c_Lokay_store_Datas(implementation) {
+  this.Lokay_store_Datas__f_fx = null;
+  new $c_Lokay_store_Datas$Collection$(this);
+  this.Lokay_store_Datas__f_fx = implementation;
+}
+$c_Lokay_store_Datas.prototype = new $h_O();
+$c_Lokay_store_Datas.prototype.constructor = $c_Lokay_store_Datas;
+/** @constructor */
+function $h_Lokay_store_Datas() {
+}
+$h_Lokay_store_Datas.prototype = $c_Lokay_store_Datas.prototype;
+$c_Lokay_store_Datas.prototype.get__T__T__O__O = (function(collection, key, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Datas__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_s_Option(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Data$Get(collection, key, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Datas.prototype.put__T__T__Lokay_effects_json_Json__O__O = (function(collection, key, doc, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Datas__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    $as_jl_Void(x);
+  }));
+  var op = new $c_Lokay_store_Data$Put(collection, key, doc, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Datas.prototype.query__T__Lokay_store_Where__sci_List__s_Option__O__O = (function(collection, where, order, limit, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Datas__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_sci_List(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Data$Query(collection, where, order, limit, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Datas.prototype.count__T__Lokay_store_Where__O__O = (function(collection, where, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Datas__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var $x_1 = $uJ(x);
+    var x$1_$_lo = $x_1.l;
+    var x$1_$_hi = $x_1.h;
+    return $bL(x$1_$_lo, x$1_$_hi);
+  }));
+  var op = new $c_Lokay_store_Data$Count(collection, where, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+var $d_Lokay_store_Datas = new $TypeData().initClass($c_Lokay_store_Datas, "okay.store.Datas", ({
+  Lokay_store_Datas: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Datas$() {
+}
+$c_Lokay_store_Datas$.prototype = new $h_O();
+$c_Lokay_store_Datas$.prototype.constructor = $c_Lokay_store_Datas$;
+/** @constructor */
+function $h_Lokay_store_Datas$() {
+}
+$h_Lokay_store_Datas$.prototype = $c_Lokay_store_Datas$.prototype;
+$c_Lokay_store_Datas$.prototype.apply__Lokay_effects_Effects__Lokay_store_Datas = (function(fx) {
+  return new $c_Lokay_store_Datas(fx);
+});
+var $d_Lokay_store_Datas$ = new $TypeData().initClass($c_Lokay_store_Datas$, "okay.store.Datas$", ({
+  Lokay_store_Datas$: 1
+}));
+var $n_Lokay_store_Datas$;
+function $m_Lokay_store_Datas$() {
+  if ((!$n_Lokay_store_Datas$)) {
+    $n_Lokay_store_Datas$ = new $c_Lokay_store_Datas$();
+  }
+  return $n_Lokay_store_Datas$;
+}
+/** @constructor */
+function $c_Lokay_store_Datas$On(outer, backend) {
+  this.Lokay_store_Datas$On__f_okay$store$Datas$On$$backend = null;
+  this.Lokay_store_Datas$On__f_$outer = null;
+  this.Lokay_store_Datas$On__f_okay$store$Datas$On$$backend = backend;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.Lokay_store_Datas$On__f_$outer = outer;
+}
+$c_Lokay_store_Datas$On.prototype = new $h_O();
+$c_Lokay_store_Datas$On.prototype.constructor = $c_Lokay_store_Datas$On;
+/** @constructor */
+function $h_Lokay_store_Datas$On() {
+}
+$h_Lokay_store_Datas$On.prototype = $c_Lokay_store_Datas$On.prototype;
+$c_Lokay_store_Datas$On.prototype.apply__O__O__O = (function(p, sp) {
+  var this$1 = $n($as_Lokay_effects_Effectful($n(this.Lokay_store_Datas$On__f_$outer).Lokay_store_Datas__f_fx));
+  var h = new $c_Lokay_store_Datas$$anon$1(this);
+  return this$1.handle__Lokay_scala3_Prog__Lokay_effects_TailClauses__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_Prog($as_Lokay_scala3_Prog(p), h, $as_Lokay_effects_cek_OnCek$Spot(sp));
+});
+var $d_Lokay_store_Datas$On = new $TypeData().initClass($c_Lokay_store_Datas$On, "okay.store.Datas$On", ({
+  Lokay_store_Datas$On: 1
+}));
+function $is_Lokay_store_Event(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_store_Event)));
+}
+function $as_Lokay_store_Event(obj) {
+  return (($is_Lokay_store_Event(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event"));
+}
+function $isArrayOf_Lokay_store_Event(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event)));
+}
+function $asArrayOf_Lokay_store_Event(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event;", depth));
+}
 function $is_Lokay_store_Mapped(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_store_Mapped)));
 }
@@ -12410,6 +13205,856 @@ function $m_Lokay_store_SqlData$() {
   }
   return $n_Lokay_store_SqlData$;
 }
+function $is_Lokay_store_Store(obj) {
+  return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_store_Store)));
+}
+function $as_Lokay_store_Store(obj) {
+  return (($is_Lokay_store_Store(obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store"));
+}
+function $isArrayOf_Lokay_store_Store(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store)));
+}
+function $asArrayOf_Lokay_store_Store(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store;", depth));
+}
+/** @constructor */
+function $c_Lokay_store_Stores(implementation) {
+  this.Lokay_store_Stores__f_fx = null;
+  this.Lokay_store_Stores__f_fx = implementation;
+}
+$c_Lokay_store_Stores.prototype = new $h_O();
+$c_Lokay_store_Stores.prototype.constructor = $c_Lokay_store_Stores;
+/** @constructor */
+function $h_Lokay_store_Stores() {
+}
+$h_Lokay_store_Stores.prototype = $c_Lokay_store_Stores.prototype;
+$c_Lokay_store_Stores.prototype.kinds__O__O = (function(in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_sci_List(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Kinds(answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.find__T__s_Option__O__O = (function(text, tag, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_sci_List(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Find(text, tag, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.get__Lokay_store_RecordId__O__O = (function(id, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_s_Option(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Get(id, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.history__Lokay_store_RecordId__O__O = (function(id, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_sci_List(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$History(id, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.define__Lokay_store_Kind__O__O = (function(kind, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    $as_jl_Void(x);
+  }));
+  var op = new $c_Lokay_store_Store$Define(kind, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.add__Lokay_store_KindId__Lokay_effects_json_Json$Obj__Lokay_effects_json_Json$Obj__sci_Set__s_Option__O__O = (function(kind, fields, meta, tags, note, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_Lokay_store_Record(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Add(kind, fields, meta, tags, note, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.revise__Lokay_store_RecordId__Lokay_effects_json_Json$Obj__Lokay_effects_json_Json$Obj__sci_Set__s_Option__O__O = (function(id, fields, meta, tags, note, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_s_Option(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Revise(id, fields, meta, tags, note, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.audit__Lokay_store_RecordId__T__T__O__O = (function(id, field, by, in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    $as_jl_Void(x);
+  }));
+  var op = new $c_Lokay_store_Store$Audit(id, field, by, answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+$c_Lokay_store_Stores.prototype.journaled__O__O = (function(in$1) {
+  $n($as_Lokay_effects_Effectful(this.Lokay_store_Stores__f_fx));
+  var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_T2(x);
+    return x$1;
+  }));
+  var op = new $c_Lokay_store_Store$Journaled(answer);
+  var in$2 = $as_Lokay_effects_cek_OnCek$Spot(in$1);
+  return new $c_Lokay_scala3_Prog$Perform(in$2, op);
+});
+var $d_Lokay_store_Stores = new $TypeData().initClass($c_Lokay_store_Stores, "okay.store.Stores", ({
+  Lokay_store_Stores: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Stores$() {
+  this.Lokay_store_Stores$__f_kinds = null;
+  this.Lokay_store_Stores$__f_find = null;
+  this.Lokay_store_Stores$__f_get = null;
+  this.Lokay_store_Stores$__f_history = null;
+  this.Lokay_store_Stores$__f_define = null;
+  this.Lokay_store_Stores$__f_add = null;
+  this.Lokay_store_Stores$__f_revise = null;
+  this.Lokay_store_Stores$__f_retire = null;
+  this.Lokay_store_Stores$__f_audit = null;
+  this.Lokay_store_Stores$__f_journaled = null;
+  this.Lokay_store_Stores$__f_saved = null;
+  this.Lokay_store_Stores$__f_adopt = null;
+  $n_Lokay_store_Stores$ = this;
+  var this$7 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label = $m_s_None$();
+  var doc = $m_s_None$();
+  var default$1 = $m_s_None$();
+  var f1 = new $c_Lokay_effects_shape_Shape$Field("id", shape, label, doc, false, default$1);
+  var make = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((id) => {
+    var id$1 = $as_Lokay_store_RecordId(id);
+    return id$1;
+  }));
+  var unmake = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((id$2) => {
+    var id$3 = $as_Lokay_store_RecordId(id$2);
+    return id$3;
+  }));
+  var byId = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$7, f1, make, unmake);
+  var this$40 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$1 = $m_Lokay_store_Kind$().Lokay_store_Kind$__f_id;
+  var label$1 = $m_s_None$();
+  var doc$1 = $m_s_None$();
+  var default$2 = $m_s_None$();
+  var f1$1 = new $c_Lokay_effects_shape_Shape$Field("kind", shape$1, label$1, doc$1, false, default$2);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$2 = $m_Lokay_store_Record$().Lokay_store_Record$__f_obj;
+  var label$2 = $m_s_None$();
+  var doc$2 = $m_s_None$();
+  var default$3 = $m_s_None$();
+  var f2 = new $c_Lokay_effects_shape_Shape$Field("fields", shape$2, label$2, doc$2, false, default$3);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$3 = $m_Lokay_store_Record$().Lokay_store_Record$__f_obj;
+  var label$3 = $m_s_None$();
+  var doc$3 = $m_s_None$();
+  var default$4 = $m_s_None$();
+  var f3 = new $c_Lokay_effects_shape_Shape$Field("meta", shape$3, label$3, doc$3, false, default$4).withDefault__O__Lokay_effects_shape_Shape$Field($m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$4 = $m_Lokay_store_Record$().Lokay_store_Record$__f_tags;
+  var label$4 = $m_s_None$();
+  var doc$4 = $m_s_None$();
+  var default$5 = $m_s_None$();
+  var f4 = new $c_Lokay_effects_shape_Shape$Field("tags", shape$4, label$4, doc$4, false, default$5).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Set$EmptySet$());
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints = $m_sci_Nil$();
+  var this$32 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+  var shape$5 = new $c_Lokay_effects_shape_Shape$Optional(this$32);
+  var label$5 = $m_s_None$();
+  var doc$5 = $m_s_None$();
+  var default$6 = $m_s_None$();
+  var f5 = new $c_Lokay_effects_shape_Shape$Field("note", shape$5, label$5, doc$5, false, default$6);
+  var make$1 = new $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78(((k, f, m, t, n) => {
+    var k$1 = $as_Lokay_store_KindId(k);
+    var f$1 = $as_Lokay_effects_json_Json$Obj(f);
+    var m$1 = $as_Lokay_effects_json_Json$Obj(m);
+    var t$1 = $as_sci_Set(t);
+    var n$1 = $as_s_Option(n);
+    return new $c_T5(k$1, f$1, m$1, t$1, n$1);
+  }));
+  var unmake$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x) => {
+    var x$1 = $as_T5(x);
+    return x$1;
+  }));
+  var written = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F5__F1__Lokay_effects_shape_Shape(this$40, f1$1, f2, f3, f4, f5, make$1, unmake$1);
+  var this$73 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$6 = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label$6 = $m_s_None$();
+  var doc$6 = $m_s_None$();
+  var default$7 = $m_s_None$();
+  var f1$2 = new $c_Lokay_effects_shape_Shape$Field("id", shape$6, label$6, doc$6, false, default$7);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$7 = $m_Lokay_store_Record$().Lokay_store_Record$__f_obj;
+  var label$7 = $m_s_None$();
+  var doc$7 = $m_s_None$();
+  var default$8 = $m_s_None$();
+  var f2$1 = new $c_Lokay_effects_shape_Shape$Field("fields", shape$7, label$7, doc$7, false, default$8);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$8 = $m_Lokay_store_Record$().Lokay_store_Record$__f_obj;
+  var label$8 = $m_s_None$();
+  var doc$8 = $m_s_None$();
+  var default$9 = $m_s_None$();
+  var f3$1 = new $c_Lokay_effects_shape_Shape$Field("meta", shape$8, label$8, doc$8, false, default$9).withDefault__O__Lokay_effects_shape_Shape$Field($m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$9 = $m_Lokay_store_Record$().Lokay_store_Record$__f_tags;
+  var label$9 = $m_s_None$();
+  var doc$9 = $m_s_None$();
+  var default$10 = $m_s_None$();
+  var f4$1 = new $c_Lokay_effects_shape_Shape$Field("tags", shape$9, label$9, doc$9, false, default$10).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Set$EmptySet$());
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$1 = $m_sci_Nil$();
+  var this$65 = new $c_Lokay_effects_shape_Shape$Text(constraints$1);
+  var shape$10 = new $c_Lokay_effects_shape_Shape$Optional(this$65);
+  var label$10 = $m_s_None$();
+  var doc$10 = $m_s_None$();
+  var default$11 = $m_s_None$();
+  var f5$1 = new $c_Lokay_effects_shape_Shape$Field("note", shape$10, label$10, doc$10, false, default$11);
+  var make$2 = new $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78(((i, f$2, m$2, t$2, n$2) => {
+    var i$1 = $as_Lokay_store_RecordId(i);
+    var f$3 = $as_Lokay_effects_json_Json$Obj(f$2);
+    var m$3 = $as_Lokay_effects_json_Json$Obj(m$2);
+    var t$3 = $as_sci_Set(t$2);
+    var n$3 = $as_s_Option(n$2);
+    return new $c_T5(i$1, f$3, m$3, t$3, n$3);
+  }));
+  var unmake$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$2) => {
+    var x$3 = $as_T5(x$2);
+    return x$3;
+  }));
+  var revised = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F5__F1__Lokay_effects_shape_Shape(this$73, f1$2, f2$1, f3$1, f4$1, f5$1, make$2, unmake$2);
+  var params = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var this$75 = $n($m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape);
+  $n($m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape);
+  var min = 0;
+  $n($m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape);
+  var max = $m_s_None$();
+  var result = new $c_Lokay_effects_shape_Shape$Many(this$75, min, max);
+  var make$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$40) => {
+    $as_jl_Void(_$40);
+    var answer = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$4) => {
+      var x$5 = $as_sci_List(x$4);
+      return x$5;
+    }));
+    return new $c_Lokay_store_Store$Kinds(answer);
+  }));
+  var doc$11 = new $c_s_Some("the kinds of record");
+  this.Lokay_store_Stores$__f_kinds = new $c_Lokay_effects_describe_Op("kinds", params, result, make$3, doc$11, false);
+  var this$99 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$2 = $m_sci_Nil$();
+  var shape$11 = new $c_Lokay_effects_shape_Shape$Text(constraints$2);
+  var label$11 = $m_s_None$();
+  var doc$12 = $m_s_None$();
+  var default$12 = $m_s_None$();
+  var f1$3 = new $c_Lokay_effects_shape_Shape$Field("text", shape$11, label$11, doc$12, false, default$12).withDefault__O__Lokay_effects_shape_Shape$Field("");
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$3 = $m_sci_Nil$();
+  var this$91 = new $c_Lokay_effects_shape_Shape$Text(constraints$3);
+  var shape$12 = new $c_Lokay_effects_shape_Shape$Optional(this$91);
+  var label$12 = $m_s_None$();
+  var doc$13 = $m_s_None$();
+  var default$13 = $m_s_None$();
+  var f2$2 = new $c_Lokay_effects_shape_Shape$Field("tag", shape$12, label$12, doc$13, false, default$13);
+  var make$4 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((t$3$1, g) => {
+    var t$4 = $as_T(t$3$1);
+    var g$1 = $as_s_Option(g);
+    return new $c_T2(t$4, g$1);
+  }));
+  var unmake$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$3$1) => {
+    var x$6 = $as_T2(x$3$1);
+    return x$6;
+  }));
+  var params$1 = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$99, f1$3, f2$2, make$4, unmake$3);
+  var this$101 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var min$1 = 0;
+  $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var max$1 = $m_s_None$();
+  var result$1 = new $c_Lokay_effects_shape_Shape$Many(this$101, min$1, max$1);
+  var make$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a) => {
+    var a$1 = $as_T2(a);
+    var text = $as_T($n(a$1)._1__O());
+    var tag = $as_s_Option($n(a$1)._2__O());
+    var answer$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$7) => {
+      var x$8 = $as_sci_List(x$7);
+      return x$8;
+    }));
+    return new $c_Lokay_store_Store$Find(text, tag, answer$1);
+  }));
+  var doc$14 = new $c_s_Some("records by text in the fields, by tag");
+  this.Lokay_store_Stores$__f_find = new $c_Lokay_effects_describe_Op("find", params$1, result$1, make$5, doc$14, false);
+  var this$106 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var result$2 = new $c_Lokay_effects_shape_Shape$Optional(this$106);
+  var make$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((id$3$1) => {
+    var id$4 = $as_Lokay_store_RecordId(id$3$1);
+    var answer$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$9) => {
+      var x$10 = $as_s_Option(x$9);
+      return x$10;
+    }));
+    return new $c_Lokay_store_Store$Get(id$4, answer$2);
+  }));
+  var doc$15 = new $c_s_Some("a record as it stands");
+  this.Lokay_store_Stores$__f_get = new $c_Lokay_effects_describe_Op("get", byId, result$2, make$6, doc$15, false);
+  var this$112 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var min$2 = 0;
+  $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var max$2 = $m_s_None$();
+  var result$3 = new $c_Lokay_effects_shape_Shape$Many(this$112, min$2, max$2);
+  var make$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((id$4$1) => {
+    var id$5 = $as_Lokay_store_RecordId(id$4$1);
+    var answer$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$11) => {
+      var x$12 = $as_sci_List(x$11);
+      return x$12;
+    }));
+    return new $c_Lokay_store_Store$History(id$5, answer$3);
+  }));
+  var doc$16 = new $c_s_Some("a record's versions, newest first");
+  this.Lokay_store_Stores$__f_history = new $c_Lokay_effects_describe_Op("history", byId, result$3, make$7, doc$16, false);
+  var params$2 = $m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape;
+  var result$4 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var make$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((k$2) => {
+    var k$3 = $as_Lokay_store_Kind(k$2);
+    var answer$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$13) => {
+      $as_jl_Void(x$13);
+    }));
+    return new $c_Lokay_store_Store$Define(k$3, answer$4);
+  }));
+  var doc$17 = new $c_s_Some("a kind defined or revised");
+  this.Lokay_store_Stores$__f_define = new $c_Lokay_effects_describe_Op("define", params$2, result$4, make$8, doc$17, true);
+  var result$5 = $m_Lokay_store_Record$().Lokay_store_Record$__f_shape;
+  var make$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a$2) => {
+    var a$3 = $as_T5(a$2);
+    var kind = $as_Lokay_store_KindId($n(a$3).T5__f__1);
+    var fields = $as_Lokay_effects_json_Json$Obj($n(a$3).T5__f__2);
+    var meta = $as_Lokay_effects_json_Json$Obj($n(a$3).T5__f__3);
+    var tags = $as_sci_Set($n(a$3).T5__f__4);
+    var note = $as_s_Option($n(a$3).T5__f__5);
+    var answer$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$15) => {
+      var x$16 = $as_Lokay_store_Record(x$15);
+      return x$16;
+    }));
+    return new $c_Lokay_store_Store$Add(kind, fields, meta, tags, note, answer$5);
+  }));
+  var doc$18 = new $c_s_Some("a record added");
+  this.Lokay_store_Stores$__f_add = new $c_Lokay_effects_describe_Op("add", written, result$5, make$9, doc$18, true);
+  var this$123 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var result$6 = new $c_Lokay_effects_shape_Shape$Optional(this$123);
+  var make$10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a$3$1) => {
+    var a$4 = $as_T5(a$3$1);
+    var id$6 = $as_Lokay_store_RecordId($n(a$4).T5__f__1);
+    var fields$1 = $as_Lokay_effects_json_Json$Obj($n(a$4).T5__f__2);
+    var meta$1 = $as_Lokay_effects_json_Json$Obj($n(a$4).T5__f__3);
+    var tags$1 = $as_sci_Set($n(a$4).T5__f__4);
+    var note$1 = $as_s_Option($n(a$4).T5__f__5);
+    var answer$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$17) => {
+      var x$18 = $as_s_Option(x$17);
+      return x$18;
+    }));
+    return new $c_Lokay_store_Store$Revise(id$6, fields$1, meta$1, tags$1, note$1, answer$6);
+  }));
+  var doc$19 = new $c_s_Some("a new version");
+  this.Lokay_store_Stores$__f_revise = new $c_Lokay_effects_describe_Op("revise", revised, result$6, make$10, doc$19, true);
+  var this$144 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$13 = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label$13 = $m_s_None$();
+  var doc$20 = $m_s_None$();
+  var default$14 = $m_s_None$();
+  var f1$4 = new $c_Lokay_effects_shape_Shape$Field("id", shape$13, label$13, doc$20, false, default$14);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$4 = $m_sci_Nil$();
+  var this$136 = new $c_Lokay_effects_shape_Shape$Text(constraints$4);
+  var shape$14 = new $c_Lokay_effects_shape_Shape$Optional(this$136);
+  var label$14 = $m_s_None$();
+  var doc$21 = $m_s_None$();
+  var default$15 = $m_s_None$();
+  var f2$3 = new $c_Lokay_effects_shape_Shape$Field("reason", shape$14, label$14, doc$21, false, default$15);
+  var make$11 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((i$2, r) => {
+    var i$3 = $as_Lokay_store_RecordId(i$2);
+    var r$1 = $as_s_Option(r);
+    return new $c_T2(i$3, r$1);
+  }));
+  var unmake$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$4$1) => {
+    var x$19 = $as_T2(x$4$1);
+    return x$19;
+  }));
+  var params$3 = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$144, f1$4, f2$3, make$11, unmake$4);
+  var result$7 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var make$12 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a$4$1) => {
+    var a$5 = $as_T2(a$4$1);
+    var id$7 = $as_Lokay_store_RecordId($n(a$5)._1__O());
+    var reason = $as_s_Option($n(a$5)._2__O());
+    var answer$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$20) => {
+      $as_jl_Void(x$20);
+    }));
+    return new $c_Lokay_store_Store$Retire(id$7, reason, answer$7);
+  }));
+  var doc$22 = new $c_s_Some("a record retired");
+  this.Lokay_store_Stores$__f_retire = new $c_Lokay_effects_describe_Op("retire", params$3, result$7, make$12, doc$22, true);
+  var this$170 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$15 = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label$15 = $m_s_None$();
+  var doc$23 = $m_s_None$();
+  var default$16 = $m_s_None$();
+  var f1$5 = new $c_Lokay_effects_shape_Shape$Field("id", shape$15, label$15, doc$23, false, default$16);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$5 = $m_sci_Nil$();
+  var shape$16 = new $c_Lokay_effects_shape_Shape$Text(constraints$5);
+  var label$16 = $m_s_None$();
+  var doc$24 = $m_s_None$();
+  var default$17 = $m_s_None$();
+  var f2$4 = new $c_Lokay_effects_shape_Shape$Field("field", shape$16, label$16, doc$24, false, default$17);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$6 = $m_sci_Nil$();
+  var shape$17 = new $c_Lokay_effects_shape_Shape$Text(constraints$6);
+  var label$17 = $m_s_None$();
+  var doc$25 = $m_s_None$();
+  var default$18 = $m_s_None$();
+  var f3$2 = new $c_Lokay_effects_shape_Shape$Field("by", shape$17, label$17, doc$25, false, default$18);
+  var make$13 = new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((i$3$1, f$3$1, b) => {
+    var i$4 = $as_Lokay_store_RecordId(i$3$1);
+    var f$4 = $as_T(f$3$1);
+    var b$1 = $as_T(b);
+    return new $c_T3(i$4, f$4, b$1);
+  }));
+  var unmake$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$5$1) => {
+    var x$22 = $as_T3(x$5$1);
+    return x$22;
+  }));
+  var params$4 = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape(this$170, f1$5, f2$4, f3$2, make$13, unmake$5);
+  var result$8 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var make$14 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a$5$1) => {
+    var a$6 = $as_T3(a$5$1);
+    var id$8 = $as_Lokay_store_RecordId($n(a$6).T3__f__1);
+    var field = $as_T($n(a$6).T3__f__2);
+    var by = $as_T($n(a$6).T3__f__3);
+    var answer$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$23) => {
+      $as_jl_Void(x$23);
+    }));
+    return new $c_Lokay_store_Store$Audit(id$8, field, by, answer$8);
+  }));
+  var doc$26 = new $c_s_Some("an access written down");
+  this.Lokay_store_Stores$__f_audit = new $c_Lokay_effects_describe_Op("audit", params$4, result$8, make$14, doc$26, true);
+  var params$5 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var this$188 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var this$175 = $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  var min$3 = 0;
+  $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  var max$3 = $m_s_None$();
+  var shape$18 = new $c_Lokay_effects_shape_Shape$Many(this$175, min$3, max$3);
+  var label$18 = $m_s_None$();
+  var doc$27 = $m_s_None$();
+  var default$19 = $m_s_None$();
+  var f1$6 = new $c_Lokay_effects_shape_Shape$Field("events", shape$18, label$18, doc$27, false, default$19);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$19 = $m_Lokay_effects_shape_Shape$().int__Lokay_effects_shape_Shape();
+  var label$19 = $m_s_None$();
+  var doc$28 = $m_s_None$();
+  var default$20 = $m_s_None$();
+  var f2$5 = new $c_Lokay_effects_shape_Shape$Field("unsaved", shape$19, label$19, doc$28, false, default$20);
+  var make$15 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((e, n$3$1) => {
+    var e$1 = $as_sci_List(e);
+    var n$4 = $uI(n$3$1);
+    return new $c_T2(e$1, n$4);
+  }));
+  var unmake$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$6$1) => {
+    var x$25 = $as_T2(x$6$1);
+    return x$25;
+  }));
+  var result$9 = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$188, f1$6, f2$5, make$15, unmake$6);
+  var make$16 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$41) => {
+    $as_jl_Void(_$41);
+    var answer$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$26) => {
+      var x$27 = $as_T2(x$26);
+      return x$27;
+    }));
+    return new $c_Lokay_store_Store$Journaled(answer$9);
+  }));
+  var doc$29 = new $c_s_Some("the journal, and how many events are unsaved");
+  this.Lokay_store_Stores$__f_journaled = new $c_Lokay_effects_describe_Op("journaled", params$5, result$9, make$16, doc$29, false);
+  var params$6 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var result$10 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var make$17 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$42) => {
+    $as_jl_Void(_$42);
+    var answer$10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$28) => {
+      $as_jl_Void(x$28);
+    }));
+    return new $c_Lokay_store_Store$Saved(answer$10);
+  }));
+  var doc$30 = new $c_s_Some("the journal marked saved");
+  this.Lokay_store_Stores$__f_saved = new $c_Lokay_effects_describe_Op("saved", params$6, result$10, make$17, doc$30, true);
+  var this$203 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var this$196 = $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  var min$4 = 0;
+  $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  var max$4 = $m_s_None$();
+  var shape$20 = new $c_Lokay_effects_shape_Shape$Many(this$196, min$4, max$4);
+  var label$20 = $m_s_None$();
+  var doc$31 = $m_s_None$();
+  var default$21 = $m_s_None$();
+  var f1$7 = new $c_Lokay_effects_shape_Shape$Field("journal", shape$20, label$20, doc$31, false, default$21);
+  var make$18 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((j) => {
+    var j$1 = $as_sci_List(j);
+    return j$1;
+  }));
+  var unmake$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((j$2) => {
+    var j$3 = $as_sci_List(j$2);
+    return j$3;
+  }));
+  var params$7 = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$203, f1$7, make$18, unmake$7);
+  var result$11 = $m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit;
+  var make$19 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((j$3$1) => {
+    var j$4 = $as_sci_List(j$3$1);
+    var answer$11 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$30) => {
+      $as_jl_Void(x$30);
+    }));
+    return new $c_Lokay_store_Store$Adopt(j$4, answer$11);
+  }));
+  var doc$32 = new $c_s_Some("a journal as written, by this store and others, taken in");
+  this.Lokay_store_Stores$__f_adopt = new $c_Lokay_effects_describe_Op("adopt", params$7, result$11, make$19, doc$32, true);
+  new $c_Lokay_store_Stores$$anon$4();
+}
+$c_Lokay_store_Stores$.prototype = new $h_O();
+$c_Lokay_store_Stores$.prototype.constructor = $c_Lokay_store_Stores$;
+/** @constructor */
+function $h_Lokay_store_Stores$() {
+}
+$h_Lokay_store_Stores$.prototype = $c_Lokay_store_Stores$.prototype;
+$c_Lokay_store_Stores$.prototype.apply__Lokay_effects_Effects__Lokay_store_Stores = (function(fx) {
+  return new $c_Lokay_store_Stores(fx);
+});
+$c_Lokay_store_Stores$.prototype.finding__T__s_Option__Lokay_store_Where = (function(text, tag) {
+  var this$1 = $n($f_T__trim__T($n(text)));
+  var t = $as_T(this$1.toLowerCase());
+  var this$2 = $n(tag);
+  if (this$2.isEmpty__Z()) {
+    var $x_1 = $m_s_None$();
+  } else {
+    var x0 = this$2.get__O();
+    var g = $as_T(x0);
+    var path = new $c_sci_$colon$colon("tags", $m_sci_Nil$());
+    var value = new $c_Lokay_effects_json_Json$Str(g);
+    var $x_1 = new $c_s_Some(new $c_Lokay_store_Where$Has(path, value));
+  }
+  var this$10 = $n($x_1.toList__sci_List());
+  var this$5 = $n(t);
+  if ((this$5 === "")) {
+    var suffix = $m_sci_Nil$();
+  } else {
+    var path$1 = new $c_sci_$colon$colon("fields", $m_sci_Nil$());
+    var $x_3 = new $c_Lokay_store_Where$Contains(path$1, t);
+    var path$2 = new $c_sci_$colon$colon("tags", $m_sci_Nil$());
+    var $x_2 = new $c_Lokay_store_Where$Contains(path$2, t);
+    var path$3 = new $c_sci_$colon$colon("note", $m_sci_Nil$());
+    var any = new $c_sci_$colon$colon($x_3, new $c_sci_$colon$colon($x_2, new $c_sci_$colon$colon(new $c_Lokay_store_Where$Contains(path$3, t), $m_sci_Nil$())));
+    var suffix = new $c_sci_$colon$colon(new $c_Lokay_store_Where$Or(any), $m_sci_Nil$());
+  }
+  var all = this$10.appendedAll__sc_IterableOnce__sci_List(suffix);
+  return new $c_Lokay_store_Where$And(all);
+});
+var $d_Lokay_store_Stores$ = new $TypeData().initClass($c_Lokay_store_Stores$, "okay.store.Stores$", ({
+  Lokay_store_Stores$: 1
+}));
+var $n_Lokay_store_Stores$;
+function $m_Lokay_store_Stores$() {
+  if ((!$n_Lokay_store_Stores$)) {
+    $n_Lokay_store_Stores$ = new $c_Lokay_store_Stores$();
+  }
+  return $n_Lokay_store_Stores$;
+}
+function $p_Lokay_store_Stores$OnData__withSeq__Lokay_effects_json_Json__J__Lokay_effects_json_Json($thiz, j, seq_$_lo, seq_$_hi) {
+  if ((j instanceof $c_Lokay_effects_json_Json$Obj)) {
+    var o = $as_Lokay_effects_json_Json$Obj(j);
+    var y = $m_Lokay_effects_json_Json$().num__J__Lokay_effects_json_Json(seq_$_lo, seq_$_hi);
+    var field$1 = new $c_T2("seq", y);
+    return $n($n(o).without__T__Lokay_effects_json_Json$Obj("seq")).$plus$colon__T2__Lokay_effects_json_Json$Obj(field$1);
+  } else {
+    return j;
+  }
+}
+function $p_Lokay_store_Stores$OnData__key__J__T($thiz, seq_$_lo, seq_$_hi) {
+  return $m_sc_StringOps$().format$extension__T__sci_Seq__T("%012d", $m_sr_ScalaRunTime$().genericWrapArray__O__sci_ArraySeq(new $ac_O([$bL(seq_$_lo, seq_$_hi)])));
+}
+function $p_Lokay_store_Stores$OnData__retired$1__O__O($thiz, d$7) {
+  var Effects_this = $n($thiz.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+  var p$proxy3 = $n($thiz.Lokay_store_Stores$OnData__f_datas).query__T__Lokay_store_Where__sci_List__s_Option__O__O("retired", ($n($thiz.Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), ($n($thiz.Lokay_store_Stores$OnData__f_datas), $m_sci_Nil$()), ($n($thiz.Lokay_store_Stores$OnData__f_datas), $m_s_None$()), d$7);
+  var f$proxy3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$19) => {
+    var _$19$1 = $as_sci_List(_$19);
+    var this$5 = $n(_$19$1);
+    var f = ((x$1) => {
+      var x$1$1 = $as_T2(x$1);
+      if ((x$1$1 !== null)) {
+        var k = $as_T($n(x$1$1)._1__O());
+        return new $c_Lokay_store_RecordId(k);
+      }
+      throw new $c_s_MatchError(x$1$1);
+    });
+    if ((this$5 === $m_sci_Nil$())) {
+      var this$6 = $m_sci_Nil$();
+    } else {
+      var x0 = this$5.head__O();
+      var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+      var t = h;
+      var rest = $as_sci_List(this$5.tail__O());
+      while ((rest !== $m_sci_Nil$())) {
+        var x0$1 = $n(rest).head__O();
+        var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+        $n(t).sci_$colon$colon__f_next = nx;
+        t = nx;
+        rest = $as_sci_List($n(rest).tail__O());
+      }
+      var this$6 = h;
+    }
+    return $m_sci_Set$().from__sc_IterableOnce__sci_Set(this$6);
+  }));
+  $n($as_Lokay_effects_Effectful(Effects_this));
+  var p = $as_Lokay_scala3_Prog(p$proxy3);
+  return new $c_Lokay_scala3_Prog$Map(p, f$proxy3);
+}
+/** @constructor */
+function $c_Lokay_store_Stores$OnData(outer, ids, now) {
+  this.Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids = null;
+  this.Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now = null;
+  this.Lokay_store_Stores$OnData__f_datas = null;
+  this.Lokay_store_Stores$OnData__f_$outer = null;
+  this.Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids = ids;
+  this.Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now = now;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.Lokay_store_Stores$OnData__f_$outer = outer;
+  this.Lokay_store_Stores$OnData__f_datas = new $c_Lokay_store_Datas($n(outer).Lokay_store_Stores__f_fx);
+}
+$c_Lokay_store_Stores$OnData.prototype = new $h_O();
+$c_Lokay_store_Stores$OnData.prototype.constructor = $c_Lokay_store_Stores$OnData;
+/** @constructor */
+function $h_Lokay_store_Stores$OnData() {
+}
+$h_Lokay_store_Stores$OnData.prototype = $c_Lokay_store_Stores$OnData.prototype;
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$seqOf__Lokay_effects_json_Json__J = (function(d) {
+  var this$1 = $n($m_Lokay_store_Where$().at__Lokay_effects_json_Json__sci_List__s_Option(d, new $c_sci_$colon$colon("seq", $m_sci_Nil$())));
+  var pf = new $c_Lokay_store_Stores$$anon$2();
+  if ((!this$1.isEmpty__Z())) {
+    var this$2 = new $c_s_PartialFunction$Lifted(pf);
+    var v1 = this$1.get__O();
+    var $x_1 = this$2.apply__O__s_Option(v1);
+  } else {
+    var $x_1 = $m_s_None$();
+  }
+  var this$3 = $n($x_1);
+  return $uJ((this$3.isEmpty__Z() ? $bL(0, 0) : this$3.get__O()));
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$recordOf__Lokay_effects_json_Json__Lokay_store_Record = (function(d) {
+  var this$1 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape);
+  var this$2 = $n(this$1.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(d, $m_sci_Nil$()));
+  if ((!(this$2 instanceof $c_s_util_Right))) {
+    if ((this$2 instanceof $c_s_util_Left)) {
+      var x3 = $as_s_util_Left(this$2);
+      var a = $n(x3).s_util_Left__f_value;
+      var ps = $as_sci_List(a);
+      throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("a version does not read: " + $m_Lokay_effects_shape_Problem$().render__sci_List__T(ps)));
+    }
+    throw new $c_s_MatchError(this$2);
+  }
+  var x2 = $as_s_util_Right(this$2);
+  var b = $n(x2).s_util_Right__f_value;
+  var r = $as_Lokay_store_Record(b);
+  return r;
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$kindOf__Lokay_effects_json_Json__Lokay_store_Kind = (function(d) {
+  var this$1 = $n($m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape);
+  var this$2 = $n(this$1.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(d, $m_sci_Nil$()));
+  if ((!(this$2 instanceof $c_s_util_Right))) {
+    if ((this$2 instanceof $c_s_util_Left)) {
+      var x3 = $as_s_util_Left(this$2);
+      var a = $n(x3).s_util_Left__f_value;
+      var ps = $as_sci_List(a);
+      throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("a kind does not read: " + $m_Lokay_effects_shape_Problem$().render__sci_List__T(ps)));
+    }
+    throw new $c_s_MatchError(this$2);
+  }
+  var x2 = $as_s_util_Right(this$2);
+  var b = $n(x2).s_util_Right__f_value;
+  var k = $as_Lokay_store_Kind(b);
+  return k;
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$eventOf__Lokay_effects_json_Json__Lokay_store_Event = (function(d) {
+  var this$1 = $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape);
+  var this$2 = $n(this$1.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(d, $m_sci_Nil$()));
+  if ((!(this$2 instanceof $c_s_util_Right))) {
+    if ((this$2 instanceof $c_s_util_Left)) {
+      var x3 = $as_s_util_Left(this$2);
+      var a = $n(x3).s_util_Left__f_value;
+      var ps = $as_sci_List(a);
+      throw $ct_jl_IllegalStateException__T__(new $c_jl_IllegalStateException(), ("an event does not read: " + $m_Lokay_effects_shape_Problem$().render__sci_List__T(ps)));
+    }
+    throw new $c_s_MatchError(this$2);
+  }
+  var x2 = $as_s_util_Right(this$2);
+  var b = $n(x2).s_util_Right__f_value;
+  var e = $as_Lokay_store_Event(b);
+  return e;
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$eid__Lokay_store_EventId = (function() {
+  $m_Lokay_store_EventId$();
+  var value = $as_T($n(this.Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids).apply__O());
+  return new $c_Lokay_store_EventId(value);
+});
+$c_Lokay_store_Stores$OnData.prototype.apply__O__O__O__O = (function(p, sp, d) {
+  var this$1 = $n($as_Lokay_effects_Effectful($n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+  var h = new $c_Lokay_store_Stores$$anon$3(d, this);
+  return this$1.handle__Lokay_scala3_Prog__Lokay_effects_Clauses__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_Prog($as_Lokay_scala3_Prog(p), h, $as_Lokay_effects_cek_OnCek$Spot(sp));
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O = (function(d$1, e) {
+  var Effects_this = $n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+  var p$proxy1 = $n(this.Lokay_store_Stores$OnData__f_datas).count__T__Lokay_store_Where__O__O("events", ($n(this.Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), d$1);
+  var f$proxy1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((n) => {
+    var $x_1 = $uJ(n);
+    var n$1_$_lo = $x_1.l;
+    var n$1_$_hi = $x_1.h;
+    var $x_4 = $n(this.Lokay_store_Stores$OnData__f_datas);
+    var lo = ((1 + n$1_$_lo) | 0);
+    var hi = ((n$1_$_hi + ((lo === 0) | 0)) | 0);
+    var $x_3 = $p_Lokay_store_Stores$OnData__key__J__T(this, lo, hi);
+    var $x_2 = $n($m_Lokay_store_Event$().Lokay_store_Event$__f_shape).encode__O__Lokay_effects_json_Json(e);
+    var lo$1 = ((1 + n$1_$_lo) | 0);
+    var hi$1 = ((n$1_$_hi + ((lo$1 === 0) | 0)) | 0);
+    return $x_4.put__T__T__Lokay_effects_json_Json__O__O("events", $x_3, $p_Lokay_store_Stores$OnData__withSeq__Lokay_effects_json_Json__J__Lokay_effects_json_Json(this, $x_2, lo$1, hi$1), d$1);
+  }));
+  $n($as_Lokay_effects_Effectful(Effects_this));
+  var p = $as_Lokay_scala3_Prog(p$proxy1);
+  return new $c_Lokay_scala3_Prog$FlatMap(p, f$proxy1);
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$_$insert$1__O__Lokay_store_Record__O = (function(d$3, r) {
+  var Effects_this = $n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+  var p$proxy2 = $n(this.Lokay_store_Stores$OnData__f_datas).count__T__Lokay_store_Where__O__O("versions", ($n(this.Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), d$3);
+  var f$proxy2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((n) => {
+    var $x_1 = $uJ(n);
+    var n$1_$_lo = $x_1.l;
+    var n$1_$_hi = $x_1.h;
+    var $x_4 = $n(this.Lokay_store_Stores$OnData__f_datas);
+    var $x_3 = $n($n(r).Lokay_store_Record__f_version).Lokay_store_VersionId__f_value;
+    var $x_2 = $n($m_Lokay_store_Record$().Lokay_store_Record$__f_shape).encode__O__Lokay_effects_json_Json(r);
+    var lo = ((1 + n$1_$_lo) | 0);
+    var hi = ((n$1_$_hi + ((lo === 0) | 0)) | 0);
+    return $x_4.put__T__T__Lokay_effects_json_Json__O__O("versions", $x_3, $p_Lokay_store_Stores$OnData__withSeq__Lokay_effects_json_Json__J__Lokay_effects_json_Json(this, $x_2, lo, hi), d$3);
+  }));
+  $n($as_Lokay_effects_Effectful(Effects_this));
+  var p = $as_Lokay_scala3_Prog(p$proxy2);
+  return new $c_Lokay_scala3_Prog$FlatMap(p, f$proxy2);
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$_$putKind$1__O__Lokay_store_Kind__O = (function(d$5, kind) {
+  return $n(this.Lokay_store_Stores$OnData__f_datas).put__T__T__Lokay_effects_json_Json__O__O("kinds", $n($n(kind).Lokay_store_Kind__f_id).Lokay_store_KindId__f_value, $n($m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape).encode__O__Lokay_effects_json_Json(kind), d$5);
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$_$retire$1__O__Lokay_store_RecordId__s_Option__J__O = (function(d$6, id, reason, at_$_lo, at_$_hi) {
+  var $x_3 = $n(this.Lokay_store_Stores$OnData__f_datas);
+  var $x_2 = $n(id).Lokay_store_RecordId__f_value;
+  $m_Lokay_effects_json_Json$Obj$();
+  var this$3 = $m_sci_Vector$();
+  var $x_1 = $m_sr_ScalaRunTime$();
+  var y = $m_Lokay_effects_json_Json$().num__J__Lokay_effects_json_Json(at_$_lo, at_$_hi);
+  var elems = $x_1.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("at", y)]));
+  var this$8 = $n(this$3.from__sc_IterableOnce__sci_Vector(elems));
+  var this$4 = $n(reason);
+  if (this$4.isEmpty__Z()) {
+    var suffix = $m_s_None$();
+  } else {
+    var x0 = this$4.get__O();
+    var x = $as_T(x0);
+    var y$1 = new $c_Lokay_effects_json_Json$Str(x);
+    var suffix = new $c_s_Some(new $c_T2("reason", y$1));
+  }
+  var fields = this$8.appendedAll__sc_IterableOnce__sci_Vector(suffix);
+  return $x_3.put__T__T__Lokay_effects_json_Json__O__O("retired", $x_2, new $c_Lokay_effects_json_Json$Obj(fields), d$6);
+});
+$c_Lokay_store_Stores$OnData.prototype.okay$store$Stores$OnData$$_$current$1__O__Lokay_store_RecordId__O = (function(d$9, id) {
+  var Effects_this = $n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+  var p$proxy5 = $p_Lokay_store_Stores$OnData__retired$1__O__O(this, d$9);
+  var f$proxy5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((gone) => {
+    var gone$1 = $as_sci_Set(gone);
+    var this$2 = $n(gone$1);
+    if (this$2.contains__O__Z(id)) {
+      $n($as_Lokay_effects_Effectful($n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+      var a = $m_s_None$();
+      return new $c_Lokay_scala3_Prog$Value(a);
+    } else {
+      var Effects_this$1 = $n(this.Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+      var $x_2 = $n(this.Lokay_store_Stores$OnData__f_datas);
+      var path = new $c_sci_$colon$colon("id", $m_sci_Nil$());
+      var s = $n(id).Lokay_store_RecordId__f_value;
+      var value = new $c_Lokay_effects_json_Json$Str(s);
+      var $x_1 = new $c_Lokay_store_Where$Eq(path, value);
+      $m_Lokay_store_Order$();
+      var path$1 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["seq"]));
+      $m_Lokay_store_Order$();
+      var this$8 = $n(path$1);
+      var path$2 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$8);
+      var p$proxy4 = $x_2.query__T__Lokay_store_Where__sci_List__s_Option__O__O("versions", $x_1, new $c_sci_$colon$colon(new $c_Lokay_store_Order(path$2, true), $m_sci_Nil$()), new $c_s_Some(1), d$9);
+      var f$proxy4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$20) => {
+        var _$20$1 = $as_sci_List(_$20);
+        var this$12 = $n($n(_$20$1).headOption__s_Option());
+        if (this$12.isEmpty__Z()) {
+          return $m_s_None$();
+        } else {
+          var x0 = this$12.get__O();
+          var x$1 = $as_T2(x0);
+          matchResult44: {
+            var $x_3;
+            if ((x$1 !== null)) {
+              var d = $as_Lokay_effects_json_Json($n(x$1)._2__O());
+              var $x_3 = this.okay$store$Stores$OnData$$recordOf__Lokay_effects_json_Json__Lokay_store_Record(d);
+              break matchResult44;
+            }
+            throw new $c_s_MatchError(x$1);
+          }
+          return new $c_s_Some($x_3);
+        }
+      }));
+      $n($as_Lokay_effects_Effectful(Effects_this$1));
+      var p = $as_Lokay_scala3_Prog(p$proxy4);
+      return new $c_Lokay_scala3_Prog$Map(p, f$proxy4);
+    }
+  }));
+  $n($as_Lokay_effects_Effectful(Effects_this));
+  var p$1 = $as_Lokay_scala3_Prog(p$proxy5);
+  return new $c_Lokay_scala3_Prog$FlatMap(p$1, f$proxy5);
+});
+var $d_Lokay_store_Stores$OnData = new $TypeData().initClass($c_Lokay_store_Stores$OnData, "okay.store.Stores$OnData", ({
+  Lokay_store_Stores$OnData: 1
+}));
 function $is_Lokay_store_Where(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_store_Where)));
 }
@@ -17143,6 +18788,20 @@ $c_sc_StringOps$.prototype.slice$extension__T__I__I__T = (function(this$, from, 
       $charAt(this$10, end);
     }
     return $as_T(this$10.substring(start, end));
+  }
+});
+$c_sc_StringOps$.prototype.$times$extension__T__I__T = (function(this$, n) {
+  if ((n <= 0)) {
+    return "";
+  } else {
+    var this$1 = $n(this$);
+    var sb = $ct_jl_StringBuilder__I__(new $c_jl_StringBuilder(), Math.imul(this$1.length, n));
+    var i = 0;
+    while ((i < n)) {
+      sb.jl_StringBuilder__f_java$lang$StringBuilder$$content = (("" + sb.jl_StringBuilder__f_java$lang$StringBuilder$$content) + this$);
+      i = ((1 + i) | 0);
+    }
+    return sb.jl_StringBuilder__f_java$lang$StringBuilder$$content;
   }
 });
 $c_sc_StringOps$.prototype.stripPrefix$extension__T__T__T = (function(this$, prefix) {
@@ -26725,6 +28384,167 @@ var $d_Lmunit_internal_junitinterface_TagsFilter = new $TypeData().initClass($c_
   Lmunit_internal_junitinterface_TagsFilter: 1,
   Lorg_junit_runner_manipulation_Filter: 1
 }));
+function $f_Lokay_effects_Effects__$init$__V($thiz) {
+}
+/** @constructor */
+function $c_Lokay_effects_cek_Into$$anon$1() {
+  this.Lokay_effects_cek_Into$$anon$1__f_renaming = null;
+  this.Lokay_effects_cek_Into$$anon$1__f_renaming = new $c_Lokay_effects_cek_Into$$anon$2();
+}
+$c_Lokay_effects_cek_Into$$anon$1.prototype = new $h_O();
+$c_Lokay_effects_cek_Into$$anon$1.prototype.constructor = $c_Lokay_effects_cek_Into$$anon$1;
+/** @constructor */
+function $h_Lokay_effects_cek_Into$$anon$1() {
+}
+$h_Lokay_effects_cek_Into$$anon$1.prototype = $c_Lokay_effects_cek_Into$$anon$1.prototype;
+$c_Lokay_effects_cek_Into$$anon$1.prototype.renaming__Lokay_scala3_Sub = (function() {
+  return this.Lokay_effects_cek_Into$$anon$1__f_renaming;
+});
+var $d_Lokay_effects_cek_Into$$anon$1 = new $TypeData().initClass($c_Lokay_effects_cek_Into$$anon$1, "okay.effects.cek.Into$$anon$1", ({
+  Lokay_effects_cek_Into$$anon$1: 1,
+  Lokay_effects_cek_Into: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_Into$$anon$2() {
+}
+$c_Lokay_effects_cek_Into$$anon$2.prototype = new $h_O();
+$c_Lokay_effects_cek_Into$$anon$2.prototype.constructor = $c_Lokay_effects_cek_Into$$anon$2;
+/** @constructor */
+function $h_Lokay_effects_cek_Into$$anon$2() {
+}
+$h_Lokay_effects_cek_Into$$anon$2.prototype = $c_Lokay_effects_cek_Into$$anon$2.prototype;
+$c_Lokay_effects_cek_Into$$anon$2.prototype.apply__Lokay_scala3_At__Lokay_scala3_At = (function(at) {
+  if (false) {
+    return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+  }
+  if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+    return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+  }
+  throw new $c_s_MatchError(at);
+});
+var $d_Lokay_effects_cek_Into$$anon$2 = new $TypeData().initClass($c_Lokay_effects_cek_Into$$anon$2, "okay.effects.cek.Into$$anon$2", ({
+  Lokay_effects_cek_Into$$anon$2: 1,
+  Lokay_scala3_Sub: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_Into$$anon$3(e$1, r$1) {
+  this.Lokay_effects_cek_Into$$anon$3__f_renaming = null;
+  this.Lokay_effects_cek_Into$$anon$3__f_renaming = new $c_Lokay_effects_cek_Into$$anon$4(e$1, r$1, this);
+}
+$c_Lokay_effects_cek_Into$$anon$3.prototype = new $h_O();
+$c_Lokay_effects_cek_Into$$anon$3.prototype.constructor = $c_Lokay_effects_cek_Into$$anon$3;
+/** @constructor */
+function $h_Lokay_effects_cek_Into$$anon$3() {
+}
+$h_Lokay_effects_cek_Into$$anon$3.prototype = $c_Lokay_effects_cek_Into$$anon$3.prototype;
+$c_Lokay_effects_cek_Into$$anon$3.prototype.renaming__Lokay_scala3_Sub = (function() {
+  return this.Lokay_effects_cek_Into$$anon$3__f_renaming;
+});
+var $d_Lokay_effects_cek_Into$$anon$3 = new $TypeData().initClass($c_Lokay_effects_cek_Into$$anon$3, "okay.effects.cek.Into$$anon$3", ({
+  Lokay_effects_cek_Into$$anon$3: 1,
+  Lokay_effects_cek_Into: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_Into$$anon$4(e$3, r$3, outer) {
+  this.Lokay_effects_cek_Into$$anon$4__f_e$2 = null;
+  this.Lokay_effects_cek_Into$$anon$4__f_r$2 = null;
+  this.Lokay_effects_cek_Into$$anon$4__f_e$2 = e$3;
+  this.Lokay_effects_cek_Into$$anon$4__f_r$2 = r$3;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+}
+$c_Lokay_effects_cek_Into$$anon$4.prototype = new $h_O();
+$c_Lokay_effects_cek_Into$$anon$4.prototype.constructor = $c_Lokay_effects_cek_Into$$anon$4;
+/** @constructor */
+function $h_Lokay_effects_cek_Into$$anon$4() {
+}
+$h_Lokay_effects_cek_Into$$anon$4.prototype = $c_Lokay_effects_cek_Into$$anon$4.prototype;
+$c_Lokay_effects_cek_Into$$anon$4.prototype.apply__Lokay_scala3_At__Lokay_scala3_At = (function(at) {
+  if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+    var in$1 = this.Lokay_effects_cek_Into$$anon$4__f_e$2;
+    return in$1;
+  }
+  if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+    var i = $as_Lokay_effects_cek_OnCek$Spot$Init(at);
+    return $n($n(this.Lokay_effects_cek_Into$$anon$4__f_r$2).renaming__Lokay_scala3_Sub()).apply__Lokay_scala3_At__Lokay_scala3_At($n(i).Lokay_effects_cek_OnCek$Spot$Init__f_at);
+  }
+  if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+    return new $c_Lokay_effects_cek_OnCek$Spot$Absurd();
+  }
+  throw new $c_s_MatchError(at);
+});
+var $d_Lokay_effects_cek_Into$$anon$4 = new $TypeData().initClass($c_Lokay_effects_cek_Into$$anon$4, "okay.effects.cek.Into$$anon$4", ({
+  Lokay_effects_cek_Into$$anon$4: 1,
+  Lokay_scala3_Sub: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$$anon$1(h$9) {
+  this.Lokay_effects_cek_OnCek$$anon$1__f_h$2 = null;
+  this.Lokay_effects_cek_OnCek$$anon$1__f_h$2 = h$9;
+}
+$c_Lokay_effects_cek_OnCek$$anon$1.prototype = new $h_O();
+$c_Lokay_effects_cek_OnCek$$anon$1.prototype.constructor = $c_Lokay_effects_cek_OnCek$$anon$1;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$$anon$1() {
+}
+$h_Lokay_effects_cek_OnCek$$anon$1.prototype = $c_Lokay_effects_cek_OnCek$$anon$1.prototype;
+$c_Lokay_effects_cek_OnCek$$anon$1.prototype.toString__T = (function() {
+  return "<function2>";
+});
+$c_Lokay_effects_cek_OnCek$$anon$1.prototype.apply__O__O__O = (function(op, k) {
+  var this$1 = $n(this.Lokay_effects_cek_OnCek$$anon$1__f_h$2);
+  var k$1 = $as_F1(k);
+  return this$1.op__Lokay_store_Store__F1__O($as_Lokay_store_Store(op), k$1);
+});
+var $d_Lokay_effects_cek_OnCek$$anon$1 = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$$anon$1, "okay.effects.cek.OnCek$$anon$1", ({
+  Lokay_effects_cek_OnCek$$anon$1: 1,
+  F2: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$$anon$2(h$10) {
+  this.Lokay_effects_cek_OnCek$$anon$2__f_h$4 = null;
+  this.Lokay_effects_cek_OnCek$$anon$2__f_h$4 = h$10;
+}
+$c_Lokay_effects_cek_OnCek$$anon$2.prototype = new $h_O();
+$c_Lokay_effects_cek_OnCek$$anon$2.prototype.constructor = $c_Lokay_effects_cek_OnCek$$anon$2;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$$anon$2() {
+}
+$h_Lokay_effects_cek_OnCek$$anon$2.prototype = $c_Lokay_effects_cek_OnCek$$anon$2.prototype;
+$c_Lokay_effects_cek_OnCek$$anon$2.prototype.toString__T = (function() {
+  return "<function1>";
+});
+$c_Lokay_effects_cek_OnCek$$anon$2.prototype.apply__O__O = (function(op) {
+  var this$1 = $n(this.Lokay_effects_cek_OnCek$$anon$2__f_h$4);
+  return this$1.answer__Lokay_store_Data__O($as_Lokay_store_Data(op));
+});
+var $d_Lokay_effects_cek_OnCek$$anon$2 = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$$anon$2, "okay.effects.cek.OnCek$$anon$2", ({
+  Lokay_effects_cek_OnCek$$anon$2: 1,
+  F1: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_Spots$$anon$1() {
+}
+$c_Lokay_effects_cek_Spots$$anon$1.prototype = new $h_O();
+$c_Lokay_effects_cek_Spots$$anon$1.prototype.constructor = $c_Lokay_effects_cek_Spots$$anon$1;
+/** @constructor */
+function $h_Lokay_effects_cek_Spots$$anon$1() {
+}
+$h_Lokay_effects_cek_Spots$$anon$1.prototype = $c_Lokay_effects_cek_Spots$$anon$1.prototype;
+$c_Lokay_effects_cek_Spots$$anon$1.prototype.apply__Lokay_scala3_At__O__E = (function(at, op) {
+  if (false) {
+    $n($as_Lokay_effects_Void(op)).absurd__E();
+  }
+  if ((at instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd)) {
+    $n($as_Lokay_effects_Void(op)).absurd__E();
+  }
+  throw new $c_s_MatchError(at);
+});
+var $d_Lokay_effects_cek_Spots$$anon$1 = new $TypeData().initClass($c_Lokay_effects_cek_Spots$$anon$1, "okay.effects.cek.Spots$$anon$1", ({
+  Lokay_effects_cek_Spots$$anon$1: 1,
+  Lokay_scala3_Escape: 1
+}));
 function $is_Lokay_effects_shape_Constraint$OnNumber(obj) {
   return (!(!((obj && obj.$classData) && obj.$classData.ancestors.Lokay_effects_shape_Constraint$OnNumber)));
 }
@@ -26749,6 +28569,27 @@ function $isArrayOf_Lokay_effects_shape_Constraint$OnText(obj, depth) {
 function $asArrayOf_Lokay_effects_shape_Constraint$OnText(obj, depth) {
   return (($isArrayOf_Lokay_effects_shape_Constraint$OnText(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$OnText;", depth));
 }
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$Case$$anon$7(name0$1, shape0$1, inject0$1, project0$1) {
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_name = null;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_shape = null;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_inject = null;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_project = null;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_name = name0$1;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_shape = shape0$1;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_inject = inject0$1;
+  this.Lokay_effects_shape_Shape$Case$$anon$7__f_project = project0$1;
+}
+$c_Lokay_effects_shape_Shape$Case$$anon$7.prototype = new $h_Lokay_effects_shape_Shape$Case();
+$c_Lokay_effects_shape_Shape$Case$$anon$7.prototype.constructor = $c_Lokay_effects_shape_Shape$Case$$anon$7;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$Case$$anon$7() {
+}
+$h_Lokay_effects_shape_Shape$Case$$anon$7.prototype = $c_Lokay_effects_shape_Shape$Case$$anon$7.prototype;
+var $d_Lokay_effects_shape_Shape$Case$$anon$7 = new $TypeData().initClass($c_Lokay_effects_shape_Shape$Case$$anon$7, "okay.effects.shape.Shape$Case$$anon$7", ({
+  Lokay_effects_shape_Shape$Case$$anon$7: 1,
+  Lokay_effects_shape_Shape$Case: 1
+}));
 /** @constructor */
 function $c_Lokay_effects_shape_Shape$Field$$anon$8() {
 }
@@ -28979,6 +30820,42 @@ var $d_Lokay_serverless_store_StoreOn$$anon$4 = new $TypeData().initClass($c_Lok
   F2: 1
 }));
 /** @constructor */
+function $c_Lokay_serverless_store_StoreSuite$Registry$() {
+}
+$c_Lokay_serverless_store_StoreSuite$Registry$.prototype = new $h_O();
+$c_Lokay_serverless_store_StoreSuite$Registry$.prototype.constructor = $c_Lokay_serverless_store_StoreSuite$Registry$;
+/** @constructor */
+function $h_Lokay_serverless_store_StoreSuite$Registry$() {
+}
+$h_Lokay_serverless_store_StoreSuite$Registry$.prototype = $c_Lokay_serverless_store_StoreSuite$Registry$.prototype;
+$c_Lokay_serverless_store_StoreSuite$Registry$.prototype.fetch__T__Lokay_http_Request__Lokay_scala3_Prog = (function(name, request) {
+  var $x_8 = $m_Lokay_serverless_Durable$();
+  var $x_7 = $m_Lokay_serverless_store_StoreOn$();
+  var $x_6 = $m_Lokay_serverless_store_Journal$();
+  var $x_5 = $m_Lokay_serverless_store_JournalPrograms$().ids__F0();
+  var $x_4 = $m_Lokay_serverless_store_JournalPrograms$().clock__F0();
+  var $x_3 = $m_Lokay_serverless_store_JournalPrograms$().Lokay_serverless_store_JournalPrograms$__f_program;
+  var r = new $c_Lokay_effects_cek_Into$$anon$1();
+  var at = new $c_Lokay_scala3_Place$Last();
+  var $x_2 = $x_6.apply__F0__F0__Lokay_scala3_Prog__Lokay_effects_cek_Into__Lokay_scala3_Prog($x_5, $x_4, $x_3, new $c_Lokay_effects_cek_Into$$anon$3(at, r));
+  var at$1 = new $c_Lokay_scala3_Place$Last();
+  var at$2 = new $c_Lokay_scala3_Place$Last();
+  var $x_1 = $x_7.durable__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog($x_2, at$1, at$2);
+  var at$3 = new $c_Lokay_scala3_Place$Last();
+  var at$4 = new $c_Lokay_scala3_Place$Last();
+  var at$5 = new $c_Lokay_scala3_Place$Init(at$4);
+  var p = $x_8.step__T__Lokay_scala3_Prog__Lokay_scala3_Place__Lokay_scala3_Place__Lokay_scala3_Prog(name, $x_1, at$3, at$5);
+  var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((out) => {
+    var out$1 = $as_T5(out);
+    return $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response).text__T__I__Lokay_http_Response($n(out$1).toString__T(), ($n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Response), 200));
+  }));
+  return new $c_Lokay_scala3_Prog$Map(p, f);
+});
+var $d_Lokay_serverless_store_StoreSuite$Registry$ = new $TypeData().initClass($c_Lokay_serverless_store_StoreSuite$Registry$, "okay.serverless.store.StoreSuite$Registry$", ({
+  Lokay_serverless_store_StoreSuite$Registry$: 1,
+  Lokay_serverless_cloud_Actor: 1
+}));
+/** @constructor */
 function $c_Lokay_serverless_store_StoreSuite$Shops$() {
 }
 $c_Lokay_serverless_store_StoreSuite$Shops$.prototype = new $h_O();
@@ -29015,6 +30892,177 @@ var $d_Lokay_serverless_store_StoreSuite$Shops$ = new $TypeData().initClass($c_L
   Lokay_serverless_store_StoreSuite$Shops$: 1,
   Lokay_serverless_cloud_Actor: 1
 }));
+/** @constructor */
+function $c_Lokay_store_Datas$$anon$1(outer) {
+  this.Lokay_store_Datas$$anon$1__f_$outer = null;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.Lokay_store_Datas$$anon$1__f_$outer = outer;
+}
+$c_Lokay_store_Datas$$anon$1.prototype = new $h_O();
+$c_Lokay_store_Datas$$anon$1.prototype.constructor = $c_Lokay_store_Datas$$anon$1;
+/** @constructor */
+function $h_Lokay_store_Datas$$anon$1() {
+}
+$h_Lokay_store_Datas$$anon$1.prototype = $c_Lokay_store_Datas$$anon$1.prototype;
+$c_Lokay_store_Datas$$anon$1.prototype.ret__O__O = (function(a) {
+  $n($as_Lokay_effects_Effectful($n($n(this.Lokay_store_Datas$$anon$1__f_$outer).Lokay_store_Datas$On__f_$outer).Lokay_store_Datas__f_fx));
+  return new $c_Lokay_scala3_Prog$Value(a);
+});
+$c_Lokay_store_Datas$$anon$1.prototype.answer__Lokay_store_Data__O = (function(op) {
+  return $n($n(this.Lokay_store_Datas$$anon$1__f_$outer).Lokay_store_Datas$On__f_okay$store$Datas$On$$backend).answer__Lokay_store_Data__O(op);
+});
+var $d_Lokay_store_Datas$$anon$1 = new $TypeData().initClass($c_Lokay_store_Datas$$anon$1, "okay.store.Datas$$anon$1", ({
+  Lokay_store_Datas$$anon$1: 1,
+  Lokay_effects_TailClauses: 1
+}));
+function $p_Lokay_store_Memory__docs__T__sci_Map($thiz, c) {
+  return $as_sci_Map($n($thiz.Lokay_store_Memory__f_state).getOrElse__O__F0__O($m_Lokay_store_Data$().named__T__T(c), new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $m_sci_Map$EmptyMap$()))));
+}
+/** @constructor */
+function $c_Lokay_store_Memory(initial) {
+  this.Lokay_store_Memory__f_state = null;
+  this.Lokay_store_Memory__f_state = initial;
+}
+$c_Lokay_store_Memory.prototype = new $h_O();
+$c_Lokay_store_Memory.prototype.constructor = $c_Lokay_store_Memory;
+/** @constructor */
+function $h_Lokay_store_Memory() {
+}
+$h_Lokay_store_Memory.prototype = $c_Lokay_store_Memory.prototype;
+$c_Lokay_store_Memory.prototype.answer__Lokay_store_Data__O = (function(op) {
+  if ((op instanceof $c_Lokay_store_Data$Fresh)) {
+    var x$1 = $as_Lokay_store_Data$Fresh(op);
+    var this$2 = $n(x$1);
+    var x263 = this$2.Lokay_store_Data$Fresh__f_collection;
+    var this$3 = $n(x$1);
+    var x264 = this$3.Lokay_store_Data$Fresh__f_answer;
+    var keys = $as_sci_Map($n(this.Lokay_store_Memory__f_state).getOrElse__O__F0__O("_keys", new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $m_sci_Map$EmptyMap$()))));
+    var this$5 = $n($n(keys).get__O__s_Option($m_Lokay_store_Data$().named__T__T(x263)));
+    if (this$5.isEmpty__Z()) {
+      var $x_2 = $m_s_None$();
+    } else {
+      var x0 = this$5.get__O();
+      var _$52 = $as_Lokay_effects_json_Json(x0);
+      var $x_2 = $m_Lokay_store_Where$().at__Lokay_effects_json_Json__sci_List__s_Option(_$52, new $c_sci_$colon$colon("next", $m_sci_Nil$()));
+    }
+    var this$6 = $n($x_2);
+    var pf = new $c_Lokay_store_Memory$$anon$3();
+    if ((!this$6.isEmpty__Z())) {
+      var this$7 = new $c_s_PartialFunction$Lifted(pf);
+      var v1 = this$6.get__O();
+      var $x_3 = this$7.apply__O__s_Option(v1);
+    } else {
+      var $x_3 = $m_s_None$();
+    }
+    var this$8 = $n($x_3);
+    var $x_1 = $uJ((this$8.isEmpty__Z() ? $bL(0, 0) : this$8.get__O()));
+    var x_$_lo = $x_1.l;
+    var x_$_hi = $x_1.h;
+    var lo = ((1 + x_$_lo) | 0);
+    var hi = ((x_$_hi + ((lo === 0) | 0)) | 0);
+    var $x_5 = this.Lokay_store_Memory__f_state;
+    var $x_4 = $m_sr_ScalaRunTime$();
+    var y = $m_Lokay_effects_json_Json$().num__J__Lokay_effects_json_Json(lo, hi);
+    var fields = $x_4.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("next", y)]));
+    $m_Lokay_effects_json_Json$Obj$();
+    var this$13 = $n(fields);
+    var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$13);
+    this.Lokay_store_Memory__f_state = $as_sci_Map($n($x_5).updated__O__O__sci_MapOps("_keys", $n(keys).updated__O__O__sci_MapOps(x263, new $c_Lokay_effects_json_Json$Obj(fields$1))));
+    return $n(x264).apply__O__O($m_Lokay_store_Data$().key__J__T(lo, hi));
+  }
+  if ((op instanceof $c_Lokay_store_Data$Get)) {
+    var x$1$1 = $as_Lokay_store_Data$Get(op);
+    var this$16 = $n(x$1$1);
+    var x258 = this$16.Lokay_store_Data$Get__f_collection;
+    var this$17 = $n(x$1$1);
+    var x259 = this$17.Lokay_store_Data$Get__f_key;
+    var this$18 = $n(x$1$1);
+    var x260 = this$18.Lokay_store_Data$Get__f_answer;
+    return $n(x260).apply__O__O($n($p_Lokay_store_Memory__docs__T__sci_Map(this, x258)).get__O__s_Option(x259));
+  }
+  if ((op instanceof $c_Lokay_store_Data$Put)) {
+    var x$1$2 = $as_Lokay_store_Data$Put(op);
+    var this$20 = $n(x$1$2);
+    var x252 = this$20.Lokay_store_Data$Put__f_collection;
+    var this$21 = $n(x$1$2);
+    var x253 = this$21.Lokay_store_Data$Put__f_key;
+    var this$22 = $n(x$1$2);
+    var x254 = this$22.Lokay_store_Data$Put__f_doc;
+    var this$23 = $n(x$1$2);
+    var x255 = this$23.Lokay_store_Data$Put__f_answer;
+    this.Lokay_store_Memory__f_state = $as_sci_Map($n(this.Lokay_store_Memory__f_state).updated__O__O__sci_MapOps(x252, $n($p_Lokay_store_Memory__docs__T__sci_Map(this, x252)).updated__O__O__sci_MapOps(x253, x254)));
+    return $n(x255).apply__O__O((void 0));
+  }
+  if ((op instanceof $c_Lokay_store_Data$Delete)) {
+    var x$1$3 = $as_Lokay_store_Data$Delete(op);
+    var this$25 = $n(x$1$3);
+    var x247 = this$25.Lokay_store_Data$Delete__f_collection;
+    var this$26 = $n(x$1$3);
+    var x248 = this$26.Lokay_store_Data$Delete__f_key;
+    var this$27 = $n(x$1$3);
+    var x249 = this$27.Lokay_store_Data$Delete__f_answer;
+    var $x_6 = this.Lokay_store_Memory__f_state;
+    var this$28 = $n($p_Lokay_store_Memory__docs__T__sci_Map(this, x247));
+    this.Lokay_store_Memory__f_state = $as_sci_Map($n($x_6).updated__O__O__sci_MapOps(x247, this$28.removed__O__sci_MapOps(x248)));
+    return $n(x249).apply__O__O((void 0));
+  }
+  if ((op instanceof $c_Lokay_store_Data$Query)) {
+    var x$1$4 = $as_Lokay_store_Data$Query(op);
+    var this$30 = $n(x$1$4);
+    var x240 = this$30.Lokay_store_Data$Query__f_collection;
+    var this$31 = $n(x$1$4);
+    var x241 = this$31.Lokay_store_Data$Query__f_where;
+    var this$32 = $n(x$1$4);
+    var x242 = this$32.Lokay_store_Data$Query__f_order;
+    var this$33 = $n(x$1$4);
+    var x243 = this$33.Lokay_store_Data$Query__f_limit;
+    var this$34 = $n(x$1$4);
+    var x244 = this$34.Lokay_store_Data$Query__f_answer;
+    var $x_8 = $n(x244);
+    var $x_7 = $m_Lokay_store_Order$();
+    var this$35 = $n($p_Lokay_store_Memory__docs__T__sci_Map(this, x240));
+    return $x_8.apply__O__O($x_7.select__sci_List__Lokay_store_Where__sci_List__s_Option__sci_List($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$35), x241, x242, x243));
+  }
+  if ((op instanceof $c_Lokay_store_Data$Count)) {
+    var x$1$5 = $as_Lokay_store_Data$Count(op);
+    var this$38 = $n(x$1$5);
+    var x235 = this$38.Lokay_store_Data$Count__f_collection;
+    var this$39 = $n(x$1$5);
+    var x236 = this$39.Lokay_store_Data$Count__f_where;
+    var this$40 = $n(x$1$5);
+    var x237 = this$40.Lokay_store_Data$Count__f_answer;
+    var $x_10 = $n(x237);
+    var this$41 = $n($p_Lokay_store_Memory__docs__T__sci_Map(this, x235));
+    var res = 0;
+    var it = this$41.iterator__sc_Iterator();
+    while ($n(it).hasNext__Z()) {
+      var x0$1 = $n(it).next__O();
+      var x$1$6 = $as_T2(x0$1);
+      matchResult77: {
+        var $x_9;
+        if ((x$1$6 !== null)) {
+          var d = $as_Lokay_effects_json_Json($n(x$1$6)._2__O());
+          var $x_9 = $m_Lokay_store_Where$().holds__Lokay_store_Where__Lokay_effects_json_Json__Z(x236, d);
+          break matchResult77;
+        }
+        throw new $c_s_MatchError(x$1$6);
+      }
+      if ($x_9) {
+        res = ((1 + res) | 0);
+      }
+    }
+    var value = res;
+    var hi$1 = (value >> 31);
+    return $x_10.apply__O__O($bL(value, hi$1));
+  }
+  throw new $c_s_MatchError(op);
+});
+var $d_Lokay_store_Memory = new $TypeData().initClass($c_Lokay_store_Memory, "okay.store.Memory", ({
+  Lokay_store_Memory: 1,
+  Lokay_store_Backend: 1
+}));
 function $ct_Lokay_store_Path__sci_List__Lokay_effects_shape_Shape__($thiz, path, shape) {
   $thiz.Lokay_store_Path__f_path = path;
   $thiz.Lokay_store_Path__f_shape = shape;
@@ -29050,6 +31098,856 @@ $c_Lokay_store_Path.prototype.toString__T = (function() {
   var this$1 = $n(this.Lokay_store_Path__f_path);
   return (("Path(" + $f_sc_IterableOnceOps__mkString__T__T__T__T(this$1, "", ".", "")) + ")");
 });
+/** @constructor */
+function $c_Lokay_store_Stores$$anon$3(d$13, outer) {
+  this.Lokay_store_Stores$$anon$3__f_d$10 = null;
+  this.Lokay_store_Stores$$anon$3__f_$outer = null;
+  this.Lokay_store_Stores$$anon$3__f_d$10 = d$13;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.Lokay_store_Stores$$anon$3__f_$outer = outer;
+}
+$c_Lokay_store_Stores$$anon$3.prototype = new $h_O();
+$c_Lokay_store_Stores$$anon$3.prototype.constructor = $c_Lokay_store_Stores$$anon$3;
+/** @constructor */
+function $h_Lokay_store_Stores$$anon$3() {
+}
+$h_Lokay_store_Stores$$anon$3.prototype = $c_Lokay_store_Stores$$anon$3.prototype;
+$c_Lokay_store_Stores$$anon$3.prototype.ret__O__O = (function(a) {
+  $n($as_Lokay_effects_Effectful($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+  return new $c_Lokay_scala3_Prog$Value(a);
+});
+$c_Lokay_store_Stores$$anon$3.prototype.op__Lokay_store_Store__F1__O = (function(op, k) {
+  if ((op instanceof $c_Lokay_store_Store$Kinds)) {
+    var x$1 = $as_Lokay_store_Store$Kinds(op);
+    var this$2 = $n(x$1);
+    var x243 = this$2.Lokay_store_Store$Kinds__f_answer;
+    var Effects_this = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy6 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas).query__T__Lokay_store_Where__sci_List__s_Option__O__O("kinds", ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_sci_Nil$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_s_None$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((ks) => {
+      var ks$1 = $as_sci_List(ks);
+      var $x_1 = $n(k);
+      var this$7 = $n(ks$1);
+      var f = ((x$1$1) => {
+        var x$1$2 = $as_T2(x$1$1);
+        if ((x$1$2 !== null)) {
+          var d = $as_Lokay_effects_json_Json($n(x$1$2)._2__O());
+          return $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$kindOf__Lokay_effects_json_Json__Lokay_store_Kind(d);
+        }
+        throw new $c_s_MatchError(x$1$2);
+      });
+      if ((this$7 === $m_sci_Nil$())) {
+        var this$8 = $m_sci_Nil$();
+      } else {
+        var x0 = this$7.head__O();
+        var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+        var t = h;
+        var rest = $as_sci_List(this$7.tail__O());
+        while ((rest !== $m_sci_Nil$())) {
+          var x0$1 = $n(rest).head__O();
+          var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+          $n(t).sci_$colon$colon__f_next = nx;
+          t = nx;
+          rest = $as_sci_List($n(rest).tail__O());
+        }
+        var this$8 = h;
+      }
+      var f$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$21) => {
+        var _$21$1 = $as_Lokay_store_Kind(_$21);
+        return $n(_$21$1).Lokay_store_Kind__f_name;
+      }));
+      var ord = $m_s_math_Ordering$String$();
+      return $x_1.apply__O__O($n(x243).apply__O__O($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$8, f$1, ord)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this));
+    var p = $as_Lokay_scala3_Prog(p$proxy6);
+    return new $c_Lokay_scala3_Prog$FlatMap(p, f$proxy6);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Find)) {
+    var x$1$3 = $as_Lokay_store_Store$Find(op);
+    var this$12 = $n(x$1$3);
+    var x238 = this$12.Lokay_store_Store$Find__f_text;
+    var this$13 = $n(x$1$3);
+    var x239 = this$13.Lokay_store_Store$Find__f_tag;
+    var this$14 = $n(x$1$3);
+    var x240 = this$14.Lokay_store_Store$Find__f_answer;
+    var Effects_this$2 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var Effects_this$3 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var $x_3 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas);
+    var $x_2 = $m_Lokay_store_Stores$().finding__T__s_Option__Lokay_store_Where(x238, x239);
+    $m_Lokay_store_Order$();
+    var path = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["seq"]));
+    $m_Lokay_store_Order$();
+    var this$16 = $n(path);
+    var path$1 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$16);
+    var p$proxy8 = $x_3.query__T__Lokay_store_Where__sci_List__s_Option__O__O("versions", $x_2, new $c_sci_$colon$colon(new $c_Lokay_store_Order(path$1, true), $m_sci_Nil$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_s_None$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((hits) => {
+      var hits$1 = $as_sci_List(hits);
+      var this$20 = $n(hits$1);
+      var f$2 = ((x$1$4) => {
+        var x$1$5 = $as_T2(x$1$4);
+        if ((x$1$5 !== null)) {
+          var d$1 = $as_Lokay_effects_json_Json($n(x$1$5)._2__O());
+          return $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$recordOf__Lokay_effects_json_Json__Lokay_store_Record(d$1);
+        }
+        throw new $c_s_MatchError(x$1$5);
+      });
+      if ((this$20 === $m_sci_Nil$())) {
+        var this$22 = $m_sci_Nil$();
+      } else {
+        var x0$2 = this$20.head__O();
+        var h$1 = new $c_sci_$colon$colon(f$2(x0$2), $m_sci_Nil$());
+        var t$1 = h$1;
+        var rest$1 = $as_sci_List(this$20.tail__O());
+        while ((rest$1 !== $m_sci_Nil$())) {
+          var x0$3 = $n(rest$1).head__O();
+          var nx$1 = new $c_sci_$colon$colon(f$2(x0$3), $m_sci_Nil$());
+          $n(t$1).sci_$colon$colon__f_next = nx$1;
+          t$1 = nx$1;
+          rest$1 = $as_sci_List($n(rest$1).tail__O());
+        }
+        var this$22 = h$1;
+      }
+      var z = $m_sci_Nil$();
+      var acc = z;
+      var these = this$22;
+      while ((!$n(these).isEmpty__Z())) {
+        var x0$4 = acc;
+        var x1 = $n(these).head__O();
+        var acc$1 = $as_sci_List(x0$4);
+        var r = $as_Lokay_store_Record(x1);
+        var this$23 = $n(acc$1);
+        _return: {
+          var these$1 = this$23;
+          while ((!$n(these$1).isEmpty__Z())) {
+            var x0$5 = $n(these$1).head__O();
+            var _$22 = $as_Lokay_store_Record(x0$5);
+            var x = $n(_$22).Lokay_store_Record__f_id;
+            var x$2 = $n(r).Lokay_store_Record__f_id;
+            if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+              var $x_4 = true;
+              break _return;
+            }
+            these$1 = $as_sci_List($n(these$1).tail__O());
+          }
+          var $x_4 = false;
+        }
+        if ($x_4) {
+          acc = acc$1;
+        } else {
+          var this$24 = $n(acc$1);
+          acc = $as_sci_List($f_sc_StrictOptimizedSeqOps__appended__O__O(this$24, r));
+        }
+        these = $as_sc_LinearSeq($n(these).tail__O());
+      }
+      var newest = $as_sci_List(acc);
+      var this$27 = $n(newest);
+      $n($as_Lokay_effects_Effectful($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+      var a = $m_sci_Nil$();
+      var z$1 = new $c_Lokay_scala3_Prog$Value(a);
+      var acc$2 = z$1;
+      var these$2 = this$27;
+      while ((!$n(these$2).isEmpty__Z())) {
+        var x0$6 = acc$2;
+        var x1$1 = $n(these$2).head__O();
+        var r$1 = $as_Lokay_store_Record(x1$1);
+        var Effects_this$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+        var f$proxy8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$1) => ((rs) => {
+          var rs$1 = $as_sci_List(rs);
+          var Effects_this$4 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+          var p$proxy7 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$current$1__O__Lokay_store_RecordId__O(this.Lokay_store_Stores$$anon$3__f_d$10, $n(r$1).Lokay_store_Record__f_id);
+          var f$proxy7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((c) => {
+            var c$1 = $as_s_Option(c);
+            var this$28 = $n(c$1);
+            if ((!this$28.isEmpty__Z())) {
+              var x0$7 = this$28.get__O();
+              var _$23 = $as_Lokay_store_Record(x0$7);
+              var x$3 = $n(_$23).Lokay_store_Record__f_version;
+              var x$2$1 = $n(r$1).Lokay_store_Record__f_version;
+              var $x_5 = ((x$3 === null) ? (x$2$1 === null) : $n(x$3).equals__O__Z(x$2$1));
+            } else {
+              var $x_5 = false;
+            }
+            if ($x_5) {
+              var this$29 = $n(rs$1);
+              return $as_sci_List($f_sc_StrictOptimizedSeqOps__appended__O__O(this$29, r$1));
+            } else {
+              return rs$1;
+            }
+          }));
+          $n($as_Lokay_effects_Effectful(Effects_this$4));
+          var p$1 = $as_Lokay_scala3_Prog(p$proxy7);
+          return new $c_Lokay_scala3_Prog$Map(p$1, f$proxy7);
+        }))(r$1));
+        $n($as_Lokay_effects_Effectful(Effects_this$1));
+        var p$2 = $as_Lokay_scala3_Prog(x0$6);
+        acc$2 = new $c_Lokay_scala3_Prog$FlatMap(p$2, f$proxy8);
+        these$2 = $as_sc_LinearSeq($n(these$2).tail__O());
+      }
+      return acc$2;
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$3));
+    var p$3 = $as_Lokay_scala3_Prog(p$proxy8);
+    var p$proxy9 = new $c_Lokay_scala3_Prog$FlatMap(p$3, f$proxy9);
+    var f$proxy10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((rs$2) => {
+      var rs$3 = $as_sci_List(rs$2);
+      var $x_6 = $n(k);
+      var this$37 = $n(rs$3);
+      var f$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$2) => {
+        var r$3 = $as_Lokay_store_Record(r$2);
+        var x$4_$_lo = $n(r$3).Lokay_store_Record__f_at_$lo;
+        var x$4_$_hi = $n(r$3).Lokay_store_Record__f_at_$hi;
+        var lo = ((-x$4_$_lo) | 0);
+        var hi = ((((-x$4_$_hi) | 0) - ((lo !== 0) | 0)) | 0);
+        return $bL(lo, hi);
+      }));
+      var ord$1 = $m_s_math_Ordering$Long$();
+      return $x_6.apply__O__O($n(x240).apply__O__O($f_sc_SeqOps__sortBy__F1__s_math_Ordering__O(this$37, f$3, ord$1)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$2));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$proxy9, f$proxy10);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Get)) {
+    var x$1$6 = $as_Lokay_store_Store$Get(op);
+    var this$41 = $n(x$1$6);
+    var x234 = this$41.Lokay_store_Store$Get__f_id;
+    var this$42 = $n(x$1$6);
+    var x235 = this$42.Lokay_store_Store$Get__f_answer;
+    var Effects_this$4$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy10 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$current$1__O__Lokay_store_RecordId__O(this.Lokay_store_Stores$$anon$3__f_d$10, x234);
+    var f$proxy11 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$4) => {
+      var r$5 = $as_s_Option(r$4);
+      return $n(k).apply__O__O($n(x235).apply__O__O(r$5));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$4$1));
+    var p$4 = $as_Lokay_scala3_Prog(p$proxy10);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$4, f$proxy11);
+  }
+  if ((op instanceof $c_Lokay_store_Store$History)) {
+    var x$1$7 = $as_Lokay_store_Store$History(op);
+    var this$46 = $n(x$1$7);
+    var x230 = this$46.Lokay_store_Store$History__f_id;
+    var this$47 = $n(x$1$7);
+    var x231 = this$47.Lokay_store_Store$History__f_answer;
+    var Effects_this$5 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var $x_8 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas);
+    var path$2 = new $c_sci_$colon$colon("id", $m_sci_Nil$());
+    var s = $n(x230).Lokay_store_RecordId__f_value;
+    var value = new $c_Lokay_effects_json_Json$Str(s);
+    var $x_7 = new $c_Lokay_store_Where$Eq(path$2, value);
+    $m_Lokay_store_Order$();
+    var path$3 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["seq"]));
+    $m_Lokay_store_Order$();
+    var this$51 = $n(path$3);
+    var path$4 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$51);
+    var p$proxy11 = $x_8.query__T__Lokay_store_Where__sci_List__s_Option__O__O("versions", $x_7, new $c_sci_$colon$colon(new $c_Lokay_store_Order(path$4, true), $m_sci_Nil$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_s_None$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy12 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((vs) => {
+      var vs$1 = $as_sci_List(vs);
+      var $x_10 = $n(k);
+      var this$55 = $n(vs$1);
+      var f$4 = ((x$1$8) => {
+        var x$1$9 = $as_T2(x$1$8);
+        if ((x$1$9 !== null)) {
+          var d$2 = $as_Lokay_effects_json_Json($n(x$1$9)._2__O());
+          return $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$recordOf__Lokay_effects_json_Json__Lokay_store_Record(d$2);
+        }
+        throw new $c_s_MatchError(x$1$9);
+      });
+      if ((this$55 === $m_sci_Nil$())) {
+        var $x_9 = $m_sci_Nil$();
+      } else {
+        var x0$8 = this$55.head__O();
+        var h$2 = new $c_sci_$colon$colon(f$4(x0$8), $m_sci_Nil$());
+        var t$2 = h$2;
+        var rest$2 = $as_sci_List(this$55.tail__O());
+        while ((rest$2 !== $m_sci_Nil$())) {
+          var x0$9 = $n(rest$2).head__O();
+          var nx$2 = new $c_sci_$colon$colon(f$4(x0$9), $m_sci_Nil$());
+          $n(t$2).sci_$colon$colon__f_next = nx$2;
+          t$2 = nx$2;
+          rest$2 = $as_sci_List($n(rest$2).tail__O());
+        }
+        var $x_9 = h$2;
+      }
+      return $x_10.apply__O__O($n(x231).apply__O__O($x_9));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$5));
+    var p$5 = $as_Lokay_scala3_Prog(p$proxy11);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$5, f$proxy12);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Define)) {
+    var x$1$10 = $as_Lokay_store_Store$Define(op);
+    var this$59 = $n(x$1$10);
+    var x226 = this$59.Lokay_store_Store$Define__f_kind;
+    var this$60 = $n(x$1$10);
+    var x227 = this$60.Lokay_store_Store$Define__f_answer;
+    var Effects_this$6 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy14 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas).get__T__T__O__O("kinds", $n($n(x226).Lokay_store_Kind__f_id).Lokay_store_KindId__f_value, this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy15 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((known) => {
+      var known$1 = $as_s_Option(known);
+      var Effects_this$7 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+      var Effects_this$2$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+      var p$proxy12 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$putKind$1__O__Lokay_store_Kind__O(this.Lokay_store_Stores$$anon$3__f_d$10, x226);
+      var f$proxy13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$24) => {
+        $as_jl_Void(_$24);
+        var $x_11 = $uJ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now).apply__O());
+        var at_$_lo = $x_11.l;
+        var at_$_hi = $x_11.h;
+        var $x_14 = $n(this.Lokay_store_Stores$$anon$3__f_$outer);
+        var $x_13 = this.Lokay_store_Stores$$anon$3__f_d$10;
+        var this$61 = $n(known$1);
+        if ((!this$61.isEmpty__Z())) {
+          var eid = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+          var $x_12 = new $c_Lokay_store_Event$KindRevised(x226, at_$_lo, at_$_hi, eid);
+        } else {
+          var eid$1 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+          var $x_12 = new $c_Lokay_store_Event$KindDefined(x226, at_$_lo, at_$_hi, eid$1);
+        }
+        return $x_14.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O($x_13, $as_Lokay_store_Event($x_12));
+      }));
+      $n($as_Lokay_effects_Effectful(Effects_this$2$1));
+      var p$6 = $as_Lokay_scala3_Prog(p$proxy12);
+      var p$proxy13 = new $c_Lokay_scala3_Prog$FlatMap(p$6, f$proxy13);
+      var f$proxy14 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$25) => {
+        $as_jl_Void(_$25);
+        return $n(k).apply__O__O($n(x227).apply__O__O((void 0)));
+      }));
+      $n($as_Lokay_effects_Effectful(Effects_this$7));
+      return new $c_Lokay_scala3_Prog$FlatMap(p$proxy13, f$proxy14);
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$6));
+    var p$7 = $as_Lokay_scala3_Prog(p$proxy14);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$7, f$proxy15);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Add)) {
+    var x$1$11 = $as_Lokay_store_Store$Add(op);
+    var this$71 = $n(x$1$11);
+    var x218 = this$71.Lokay_store_Store$Add__f_kind;
+    var this$72 = $n(x$1$11);
+    var x219 = this$72.Lokay_store_Store$Add__f_fields;
+    var this$73 = $n(x$1$11);
+    var x220 = this$73.Lokay_store_Store$Add__f_meta;
+    var this$74 = $n(x$1$11);
+    var x221 = this$74.Lokay_store_Store$Add__f_tags;
+    var this$75 = $n(x$1$11);
+    var x222 = this$75.Lokay_store_Store$Add__f_note;
+    var this$76 = $n(x$1$11);
+    var x223 = this$76.Lokay_store_Store$Add__f_answer;
+    $m_Lokay_store_Record$();
+    var value$1 = $as_T($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids).apply__O());
+    var id = new $c_Lokay_store_RecordId(value$1);
+    var value$2 = $as_T($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids).apply__O());
+    var version = new $c_Lokay_store_VersionId(value$2);
+    var parent = $m_s_None$();
+    var $x_15 = $uJ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now).apply__O());
+    var at$1_$_lo = $x_15.l;
+    var at$1_$_hi = $x_15.h;
+    var r$2$1 = new $c_Lokay_store_Record(id, version, parent, x218, x219, x220, x221, x222, at$1_$_lo, at$1_$_hi);
+    var Effects_this$7$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var Effects_this$8 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy15 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$insert$1__O__Lokay_store_Record__O(this.Lokay_store_Stores$$anon$3__f_d$10, r$2$1);
+    var f$proxy16 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$26) => {
+      $as_jl_Void(_$26);
+      var $x_17 = $n(this.Lokay_store_Stores$$anon$3__f_$outer);
+      var $x_16 = this.Lokay_store_Stores$$anon$3__f_d$10;
+      var eid$2 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+      return $x_17.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O($x_16, new $c_Lokay_store_Event$RecordAdded(r$2$1, eid$2));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$8));
+    var p$8 = $as_Lokay_scala3_Prog(p$proxy15);
+    var p$proxy16 = new $c_Lokay_scala3_Prog$FlatMap(p$8, f$proxy16);
+    var f$proxy17 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$27) => {
+      $as_jl_Void(_$27);
+      return $n(k).apply__O__O($n(x223).apply__O__O(r$2$1));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$7$1));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$proxy16, f$proxy17);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Revise)) {
+    var x$1$12 = $as_Lokay_store_Store$Revise(op);
+    var this$86 = $n(x$1$12);
+    var x210 = this$86.Lokay_store_Store$Revise__f_id;
+    var this$87 = $n(x$1$12);
+    var x211 = this$87.Lokay_store_Store$Revise__f_fields;
+    var this$88 = $n(x$1$12);
+    var x212 = this$88.Lokay_store_Store$Revise__f_meta;
+    var this$89 = $n(x$1$12);
+    var x213 = this$89.Lokay_store_Store$Revise__f_tags;
+    var this$90 = $n(x$1$12);
+    var x214 = this$90.Lokay_store_Store$Revise__f_note;
+    var this$91 = $n(x$1$12);
+    var x215 = this$91.Lokay_store_Store$Revise__f_answer;
+    var Effects_this$9 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy19 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$current$1__O__Lokay_store_RecordId__O(this.Lokay_store_Stores$$anon$3__f_d$10, x210);
+    var f$proxy20 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$13) => {
+      var x$1$14 = $as_s_Option(x$1$13);
+      if ((x$1$14 instanceof $c_s_Some)) {
+        var old = $as_Lokay_store_Record($n($as_s_Some(x$1$14)).s_Some__f_value);
+        var value$3 = $as_T($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$ids).apply__O());
+        var version$2 = new $c_Lokay_store_VersionId(value$3);
+        var value$4 = $n(old).Lokay_store_Record__f_version;
+        var parent$2 = new $c_s_Some(value$4);
+        var $x_18 = $uJ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now).apply__O());
+        var at$2_$_lo = $x_18.l;
+        var at$2_$_hi = $x_18.h;
+        var this$94 = $n(old);
+        var id$2 = this$94.Lokay_store_Record__f_id;
+        var this$95 = $n(old);
+        var kind$2 = this$95.Lokay_store_Record__f_kind;
+        $n(old);
+        var r$6 = new $c_Lokay_store_Record(id$2, version$2, parent$2, kind$2, x211, x212, x213, x214, at$2_$_lo, at$2_$_hi);
+        var Effects_this$10 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+        var Effects_this$2$2 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+        var p$proxy17 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$insert$1__O__Lokay_store_Record__O(this.Lokay_store_Stores$$anon$3__f_d$10, r$6);
+        var f$proxy18 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$28) => {
+          $as_jl_Void(_$28);
+          var $x_20 = $n(this.Lokay_store_Stores$$anon$3__f_$outer);
+          var $x_19 = this.Lokay_store_Stores$$anon$3__f_d$10;
+          var eid$3 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+          return $x_20.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O($x_19, new $c_Lokay_store_Event$RecordRevised(r$6, eid$3));
+        }));
+        $n($as_Lokay_effects_Effectful(Effects_this$2$2));
+        var p$9 = $as_Lokay_scala3_Prog(p$proxy17);
+        var p$proxy18 = new $c_Lokay_scala3_Prog$FlatMap(p$9, f$proxy18);
+        var f$proxy19 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$29) => {
+          $as_jl_Void(_$29);
+          return $n(k).apply__O__O($n(x215).apply__O__O(new $c_s_Some(r$6)));
+        }));
+        $n($as_Lokay_effects_Effectful(Effects_this$10));
+        return new $c_Lokay_scala3_Prog$FlatMap(p$proxy18, f$proxy19);
+      }
+      var x$5 = $m_s_None$();
+      if ((x$5 === x$1$14)) {
+        return $n(k).apply__O__O($n(x215).apply__O__O($m_s_None$()));
+      }
+      throw new $c_s_MatchError(x$1$14);
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$9));
+    var p$10 = $as_Lokay_scala3_Prog(p$proxy19);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$10, f$proxy20);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Retire)) {
+    var x$1$15 = $as_Lokay_store_Store$Retire(op);
+    var this$106 = $n(x$1$15);
+    var x205 = this$106.Lokay_store_Store$Retire__f_id;
+    var this$107 = $n(x$1$15);
+    var x206 = this$107.Lokay_store_Store$Retire__f_reason;
+    var this$108 = $n(x$1$15);
+    var x207 = this$108.Lokay_store_Store$Retire__f_answer;
+    var $x_21 = $uJ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now).apply__O());
+    var at$3_$_lo = $x_21.l;
+    var at$3_$_hi = $x_21.h;
+    var Effects_this$10$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var Effects_this$11 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy20 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$retire$1__O__Lokay_store_RecordId__s_Option__J__O(this.Lokay_store_Stores$$anon$3__f_d$10, x205, x206, at$3_$_lo, at$3_$_hi);
+    var f$proxy21 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$30) => {
+      $as_jl_Void(_$30);
+      var $x_23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer);
+      var $x_22 = this.Lokay_store_Stores$$anon$3__f_d$10;
+      var eid$4 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+      return $x_23.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O($x_22, new $c_Lokay_store_Event$RecordRetired(x205, x206, at$3_$_lo, at$3_$_hi, eid$4));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$11));
+    var p$11 = $as_Lokay_scala3_Prog(p$proxy20);
+    var p$proxy21 = new $c_Lokay_scala3_Prog$FlatMap(p$11, f$proxy21);
+    var f$proxy22 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$31) => {
+      $as_jl_Void(_$31);
+      return $n(k).apply__O__O($n(x207).apply__O__O((void 0)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$10$1));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$proxy21, f$proxy22);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Audit)) {
+    var x$1$16 = $as_Lokay_store_Store$Audit(op);
+    var this$115 = $n(x$1$16);
+    var x199 = this$115.Lokay_store_Store$Audit__f_id;
+    var this$116 = $n(x$1$16);
+    var x200 = this$116.Lokay_store_Store$Audit__f_field;
+    var this$117 = $n(x$1$16);
+    var x201 = this$117.Lokay_store_Store$Audit__f_by;
+    var this$118 = $n(x$1$16);
+    var x202 = this$118.Lokay_store_Store$Audit__f_answer;
+    var $x_24 = $uJ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_okay$store$Stores$OnData$$now).apply__O());
+    var at$3$1_$_lo = $x_24.l;
+    var at$3$1_$_hi = $x_24.h;
+    var Effects_this$12 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var $x_26 = $n(this.Lokay_store_Stores$$anon$3__f_$outer);
+    var $x_25 = this.Lokay_store_Stores$$anon$3__f_d$10;
+    var eid$5 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eid__Lokay_store_EventId();
+    var p$proxy22 = $x_26.okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O($x_25, new $c_Lokay_store_Event$Accessed(x199, x200, x201, at$3$1_$_lo, at$3$1_$_hi, eid$5));
+    var f$proxy23 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$32) => {
+      $as_jl_Void(_$32);
+      return $n(k).apply__O__O($n(x202).apply__O__O((void 0)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$12));
+    var p$12 = $as_Lokay_scala3_Prog(p$proxy22);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$12, f$proxy23);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Adopt)) {
+    var x$1$17 = $as_Lokay_store_Store$Adopt(op);
+    var this$123 = $n(x$1$17);
+    var x195 = this$123.Lokay_store_Store$Adopt__f_journal;
+    var this$124 = $n(x$1$17);
+    var x196 = this$124.Lokay_store_Store$Adopt__f_answer;
+    var Effects_this$13 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var Effects_this$14 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy24 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas).query__T__Lokay_store_Where__sci_List__s_Option__O__O("events", ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_sci_Nil$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_s_None$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy26 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((es) => {
+      var es$1 = $as_sci_List(es);
+      var this$128 = $n(es$1);
+      var f$5 = ((x$1$18) => {
+        var x$1$19 = $as_T2(x$1$18);
+        if ((x$1$19 !== null)) {
+          var d$3 = $as_Lokay_effects_json_Json($n(x$1$19)._2__O());
+          return $m_Lokay_store_Event$().identity__Lokay_store_Event__Lokay_store_EventId($n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eventOf__Lokay_effects_json_Json__Lokay_store_Event(d$3));
+        }
+        throw new $c_s_MatchError(x$1$19);
+      });
+      if ((this$128 === $m_sci_Nil$())) {
+        var this$129 = $m_sci_Nil$();
+      } else {
+        var x0$10 = this$128.head__O();
+        var h$3 = new $c_sci_$colon$colon(f$5(x0$10), $m_sci_Nil$());
+        var t$3 = h$3;
+        var rest$3 = $as_sci_List(this$128.tail__O());
+        while ((rest$3 !== $m_sci_Nil$())) {
+          var x0$11 = $n(rest$3).head__O();
+          var nx$3 = new $c_sci_$colon$colon(f$5(x0$11), $m_sci_Nil$());
+          $n(t$3).sci_$colon$colon__f_next = nx$3;
+          t$3 = nx$3;
+          rest$3 = $as_sci_List($n(rest$3).tail__O());
+        }
+        var this$129 = h$3;
+      }
+      var known$2 = $m_sci_Set$().from__sc_IterableOnce__sci_Set(this$129);
+      var this$130 = $n(x195);
+      if ((this$130.lengthCompare__I__I(1) <= 0)) {
+        var $x_27 = this$130;
+      } else {
+        var builder = new $c_scm_ListBuffer();
+        var seen = $ct_scm_HashSet__(new $c_scm_HashSet());
+        var it = this$130.iterator__sc_Iterator();
+        var different = false;
+        while ($n(it).hasNext__Z()) {
+          var next = $n(it).next__O();
+          var e = $as_Lokay_store_Event(next);
+          if (seen.add__O__Z($m_Lokay_store_Event$().identity__Lokay_store_Event__Lokay_store_EventId(e))) {
+            builder.addOne__O__scm_ListBuffer(next);
+          } else {
+            different = true;
+          }
+        }
+        var $x_27 = (different ? builder.toList__sci_List() : this$130);
+      }
+      var this$134 = $n($x_27);
+      var f$6 = ((e$2) => {
+        var e$1 = $as_Lokay_store_Event(e$2);
+        var this$133 = $n(known$2);
+        var elem = $m_Lokay_store_Event$().identity__Lokay_store_Event__Lokay_store_EventId(e$1);
+        return this$133.contains__O__Z(elem);
+      });
+      var l = this$134;
+      block: {
+        var result;
+        while (true) {
+          if ($n(l).isEmpty__Z()) {
+            var result = $m_sci_Nil$();
+            break;
+          } else {
+            var h$4 = $n(l).head__O();
+            var t$4 = $as_sci_List($n(l).tail__O());
+            if ($uZ(f$6(h$4))) {
+              l = t$4;
+              continue;
+            }
+            var start = l;
+            var remaining = t$4;
+            while (true) {
+              if ($n(remaining).isEmpty__Z()) {
+                var result = start;
+                break block;
+              } else {
+                var x$6 = $n(remaining).head__O();
+                if ((!$uZ(f$6(x$6)))) {
+                  remaining = $as_sci_List($n(remaining).tail__O());
+                  continue;
+                }
+                var firstMiss = remaining;
+                var newHead = new $c_sci_$colon$colon($n(start).head__O(), $m_sci_Nil$());
+                var toProcess = $as_sci_List($n(start).tail__O());
+                var currentLast = newHead;
+                while ((toProcess !== firstMiss)) {
+                  var newElem = new $c_sci_$colon$colon($n(toProcess).head__O(), $m_sci_Nil$());
+                  $n(currentLast).sci_$colon$colon__f_next = newElem;
+                  currentLast = newElem;
+                  toProcess = $as_sci_List($n(toProcess).tail__O());
+                }
+                var next$1 = $as_sci_List($n(firstMiss).tail__O());
+                var nextToCopy = next$1;
+                while ((!$n(next$1).isEmpty__Z())) {
+                  var head = $n(next$1).head__O();
+                  if ((!$uZ(f$6(head)))) {
+                    next$1 = $as_sci_List($n(next$1).tail__O());
+                  } else {
+                    while ((nextToCopy !== next$1)) {
+                      var newElem$2 = new $c_sci_$colon$colon($n(nextToCopy).head__O(), $m_sci_Nil$());
+                      $n(currentLast).sci_$colon$colon__f_next = newElem$2;
+                      currentLast = newElem$2;
+                      nextToCopy = $as_sci_List($n(nextToCopy).tail__O());
+                    }
+                    nextToCopy = $as_sci_List($n(next$1).tail__O());
+                    next$1 = $as_sci_List($n(next$1).tail__O());
+                  }
+                }
+                if ((!$n(nextToCopy).isEmpty__Z())) {
+                  $n(currentLast).sci_$colon$colon__f_next = nextToCopy;
+                }
+                var result = newHead;
+                break block;
+              }
+            }
+          }
+        }
+      }
+      var this$137 = $n(result);
+      $n($as_Lokay_effects_Effectful($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+      var z$2 = new $c_Lokay_scala3_Prog$Value((void 0));
+      var acc$3 = z$2;
+      var these$3 = this$137;
+      while ((!$n(these$3).isEmpty__Z())) {
+        var x0$12 = acc$3;
+        var x1$2 = $n(these$3).head__O();
+        var e$3 = $as_Lokay_store_Event(x1$2);
+        var Effects_this$15 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+        var f$proxy25 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$3) => ((_$33) => {
+          $as_jl_Void(_$33);
+          var Effects_this$16 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+          matchResult50: {
+            var p$proxy23;
+            if ((e$3 instanceof $c_Lokay_store_Event$KindDefined)) {
+              var x$1$20 = $as_Lokay_store_Event$KindDefined(e$3);
+              var this$139 = $n(x$1$20);
+              var x177 = this$139.Lokay_store_Event$KindDefined__f_kind;
+              $n(x$1$20);
+              $n(x$1$20);
+              var p$proxy23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$putKind$1__O__Lokay_store_Kind__O(this.Lokay_store_Stores$$anon$3__f_d$10, x177);
+              break matchResult50;
+            }
+            if ((e$3 instanceof $c_Lokay_store_Event$KindRevised)) {
+              var x$1$21 = $as_Lokay_store_Event$KindRevised(e$3);
+              var this$143 = $n(x$1$21);
+              var x172 = this$143.Lokay_store_Event$KindRevised__f_kind;
+              $n(x$1$21);
+              $n(x$1$21);
+              var p$proxy23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$putKind$1__O__Lokay_store_Kind__O(this.Lokay_store_Stores$$anon$3__f_d$10, x172);
+              break matchResult50;
+            }
+            if ((e$3 instanceof $c_Lokay_store_Event$RecordAdded)) {
+              var x$1$22 = $as_Lokay_store_Event$RecordAdded(e$3);
+              var this$147 = $n(x$1$22);
+              var x168 = this$147.Lokay_store_Event$RecordAdded__f_record;
+              $n(x$1$22);
+              var p$proxy23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$insert$1__O__Lokay_store_Record__O(this.Lokay_store_Stores$$anon$3__f_d$10, x168);
+              break matchResult50;
+            }
+            if ((e$3 instanceof $c_Lokay_store_Event$RecordRevised)) {
+              var x$1$23 = $as_Lokay_store_Event$RecordRevised(e$3);
+              var this$150 = $n(x$1$23);
+              var x164 = this$150.Lokay_store_Event$RecordRevised__f_record;
+              $n(x$1$23);
+              var p$proxy23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$insert$1__O__Lokay_store_Record__O(this.Lokay_store_Stores$$anon$3__f_d$10, x164);
+              break matchResult50;
+            }
+            if ((e$3 instanceof $c_Lokay_store_Event$RecordRetired)) {
+              var x$1$24 = $as_Lokay_store_Event$RecordRetired(e$3);
+              var this$153 = $n(x$1$24);
+              var x158 = this$153.Lokay_store_Event$RecordRetired__f_id;
+              var this$154 = $n(x$1$24);
+              var x159 = this$154.Lokay_store_Event$RecordRetired__f_reason;
+              var this$155 = $n(x$1$24);
+              var x160_$_lo = this$155.Lokay_store_Event$RecordRetired__f_at_$lo;
+              var x160_$_hi = this$155.Lokay_store_Event$RecordRetired__f_at_$hi;
+              $n(x$1$24);
+              var p$proxy23 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$retire$1__O__Lokay_store_RecordId__s_Option__J__O(this.Lokay_store_Stores$$anon$3__f_d$10, x158, x159, x160_$_lo, x160_$_hi);
+              break matchResult50;
+            }
+            if ((e$3 instanceof $c_Lokay_store_Event$Accessed)) {
+              $n($as_Lokay_effects_Effectful($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx));
+              var p$proxy23 = new $c_Lokay_scala3_Prog$Value((void 0));
+              break matchResult50;
+            }
+            throw new $c_s_MatchError(e$3);
+          }
+          var f$proxy24 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$34) => {
+            $as_jl_Void(_$34);
+            return $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$_$note$1__O__Lokay_store_Event__O(this.Lokay_store_Stores$$anon$3__f_d$10, e$3);
+          }));
+          $n($as_Lokay_effects_Effectful(Effects_this$16));
+          var p$13 = $as_Lokay_scala3_Prog(p$proxy23);
+          return new $c_Lokay_scala3_Prog$FlatMap(p$13, f$proxy24);
+        }))(e$3));
+        $n($as_Lokay_effects_Effectful(Effects_this$15));
+        var p$14 = $as_Lokay_scala3_Prog(x0$12);
+        acc$3 = new $c_Lokay_scala3_Prog$FlatMap(p$14, f$proxy25);
+        these$3 = $as_sc_LinearSeq($n(these$3).tail__O());
+      }
+      return acc$3;
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$14));
+    var p$15 = $as_Lokay_scala3_Prog(p$proxy24);
+    var p$proxy25 = new $c_Lokay_scala3_Prog$FlatMap(p$15, f$proxy26);
+    var f$proxy27 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$35) => {
+      $as_jl_Void(_$35);
+      return $n(k).apply__O__O($n(x196).apply__O__O((void 0)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$13));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$proxy25, f$proxy27);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Journaled)) {
+    var x$1$25 = $as_Lokay_store_Store$Journaled(op);
+    var this$168 = $n(x$1$25);
+    var x192 = this$168.Lokay_store_Store$Journaled__f_answer;
+    var Effects_this$15$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var $x_29 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas);
+    var $x_28 = $m_Lokay_store_Where$All$();
+    $m_Lokay_store_Order$();
+    var path$5 = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_T.getArrayOf().constr)(["seq"]));
+    $m_Lokay_store_Order$();
+    var this$170 = $n(path$5);
+    var path$6 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$170);
+    $m_Lokay_store_Order$();
+    var descending = false;
+    var p$proxy27 = $x_29.query__T__Lokay_store_Where__sci_List__s_Option__O__O("events", $x_28, new $c_sci_$colon$colon(new $c_Lokay_store_Order(path$6, descending), $m_sci_Nil$()), ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_s_None$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy29 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((es$2) => {
+      var es$3 = $as_sci_List(es$2);
+      var Effects_this$17 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+      var p$proxy26 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas).get__T__T__O__O("marks", "saved", this.Lokay_store_Stores$$anon$3__f_d$10);
+      var f$proxy28 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((mark) => {
+        var mark$1 = $as_s_Option(mark);
+        var this$174 = $n(mark$1);
+        if (this$174.isEmpty__Z()) {
+          var this$175 = $m_s_None$();
+        } else {
+          var x0$13 = this$174.get__O();
+          var d$4 = $as_Lokay_effects_json_Json(x0$13);
+          var $x_31 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$seqOf__Lokay_effects_json_Json__J(d$4);
+          var this$175 = new $c_s_Some($x_31);
+        }
+        var $x_30 = $uJ((this$175.isEmpty__Z() ? $bL(0, 0) : this$175.get__O()));
+        var marked_$_lo = $x_30.l;
+        var marked_$_hi = $x_30.h;
+        var $x_34 = $n(k);
+        var this$176 = $n(es$3);
+        var f$7 = ((x$1$26) => {
+          var x$1$27 = $as_T2(x$1$26);
+          if ((x$1$27 !== null)) {
+            var d$5 = $as_Lokay_effects_json_Json($n(x$1$27)._2__O());
+            return $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$eventOf__Lokay_effects_json_Json__Lokay_store_Event(d$5);
+          }
+          throw new $c_s_MatchError(x$1$27);
+        });
+        if ((this$176 === $m_sci_Nil$())) {
+          var _1 = $m_sci_Nil$();
+        } else {
+          var x0$14 = this$176.head__O();
+          var h$5 = new $c_sci_$colon$colon(f$7(x0$14), $m_sci_Nil$());
+          var t$5 = h$5;
+          var rest$4 = $as_sci_List(this$176.tail__O());
+          while ((rest$4 !== $m_sci_Nil$())) {
+            var x0$15 = $n(rest$4).head__O();
+            var nx$4 = new $c_sci_$colon$colon(f$7(x0$15), $m_sci_Nil$());
+            $n(t$5).sci_$colon$colon__f_next = nx$4;
+            t$5 = nx$4;
+            rest$4 = $as_sci_List($n(rest$4).tail__O());
+          }
+          var _1 = h$5;
+        }
+        var this$177 = $n(es$3);
+        var res = 0;
+        var it$1 = this$177.iterator__sc_Iterator();
+        while ($n(it$1).hasNext__Z()) {
+          var x0$16 = $n(it$1).next__O();
+          var x$1$28 = $as_T2(x0$16);
+          matchResult52: {
+            var $x_32;
+            if ((x$1$28 !== null)) {
+              var d$6 = $as_Lokay_effects_json_Json($n(x$1$28)._2__O());
+              var $x_33 = $n(this.Lokay_store_Stores$$anon$3__f_$outer).okay$store$Stores$OnData$$seqOf__Lokay_effects_json_Json__J(d$6);
+              var x$7_$_lo = $x_33.l;
+              var x$7_$_hi = $x_33.h;
+              var $x_32 = ((x$7_$_hi === marked_$_hi) ? ((x$7_$_lo >>> 0) > (marked_$_lo >>> 0)) : (x$7_$_hi > marked_$_hi));
+              break matchResult52;
+            }
+            throw new $c_s_MatchError(x$1$28);
+          }
+          if ($x_32) {
+            res = ((1 + res) | 0);
+          }
+        }
+        var _2 = res;
+        return $x_34.apply__O__O($n(x192).apply__O__O(new $c_T2(_1, _2)));
+      }));
+      $n($as_Lokay_effects_Effectful(Effects_this$17));
+      var p$16 = $as_Lokay_scala3_Prog(p$proxy26);
+      return new $c_Lokay_scala3_Prog$FlatMap(p$16, f$proxy28);
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$15$1));
+    var p$17 = $as_Lokay_scala3_Prog(p$proxy27);
+    return new $c_Lokay_scala3_Prog$FlatMap(p$17, f$proxy29);
+  }
+  if ((op instanceof $c_Lokay_store_Store$Saved)) {
+    var x$1$29 = $as_Lokay_store_Store$Saved(op);
+    var this$185 = $n(x$1$29);
+    var x189 = this$185.Lokay_store_Store$Saved__f_answer;
+    var Effects_this$16$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var Effects_this$17$1 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_$outer).Lokay_store_Stores__f_fx;
+    var p$proxy28 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas).count__T__Lokay_store_Where__O__O("events", ($n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas), $m_Lokay_store_Where$All$()), this.Lokay_store_Stores$$anon$3__f_d$10);
+    var f$proxy30 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((n$4) => {
+      var $x_35 = $uJ(n$4);
+      var n_$_lo = $x_35.l;
+      var n_$_hi = $x_35.h;
+      var $x_37 = $n($n(this.Lokay_store_Stores$$anon$3__f_$outer).Lokay_store_Stores$OnData__f_datas);
+      var $x_36 = $m_sr_ScalaRunTime$();
+      var y = $m_Lokay_effects_json_Json$().num__J__Lokay_effects_json_Json(n_$_lo, n_$_hi);
+      var fields = $x_36.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("seq", y)]));
+      $m_Lokay_effects_json_Json$Obj$();
+      var this$190 = $n(fields);
+      var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$190);
+      return $x_37.put__T__T__Lokay_effects_json_Json__O__O("marks", "saved", new $c_Lokay_effects_json_Json$Obj(fields$1), this.Lokay_store_Stores$$anon$3__f_d$10);
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$17$1));
+    var p$18 = $as_Lokay_scala3_Prog(p$proxy28);
+    var p$proxy29 = new $c_Lokay_scala3_Prog$FlatMap(p$18, f$proxy30);
+    var f$proxy31 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$36) => {
+      $as_jl_Void(_$36);
+      return $n(k).apply__O__O($n(x189).apply__O__O((void 0)));
+    }));
+    $n($as_Lokay_effects_Effectful(Effects_this$16$1));
+    return new $c_Lokay_scala3_Prog$FlatMap(p$proxy29, f$proxy31);
+  }
+  throw new $c_s_MatchError(op);
+});
+var $d_Lokay_store_Stores$$anon$3 = new $TypeData().initClass($c_Lokay_store_Stores$$anon$3, "okay.store.Stores$$anon$3", ({
+  Lokay_store_Stores$$anon$3: 1,
+  Lokay_effects_Clauses: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Stores$$anon$4() {
+  $ct_Lokay_effects_describe_Describe__T__(this, "store");
+  var elems = $m_sr_ScalaRunTime$().wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_describe_Op.getArrayOf().constr)([$m_Lokay_store_Stores$().Lokay_store_Stores$__f_kinds, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_find, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_get, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_history, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_define, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_add, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_revise, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_retire, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_audit, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_journaled, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_saved, $m_Lokay_store_Stores$().Lokay_store_Stores$__f_adopt]));
+  $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
+}
+$c_Lokay_store_Stores$$anon$4.prototype = new $h_Lokay_effects_describe_Describe();
+$c_Lokay_store_Stores$$anon$4.prototype.constructor = $c_Lokay_store_Stores$$anon$4;
+/** @constructor */
+function $h_Lokay_store_Stores$$anon$4() {
+}
+$h_Lokay_store_Stores$$anon$4.prototype = $c_Lokay_store_Stores$$anon$4.prototype;
+var $d_Lokay_store_Stores$$anon$4 = new $TypeData().initClass($c_Lokay_store_Stores$$anon$4, "okay.store.Stores$$anon$4", ({
+  Lokay_store_Stores$$anon$4: 1,
+  Lokay_effects_describe_Describe: 1
+}));
 /** @constructor */
 function $c_Lorg_scalajs_junit_JUnitEvent(taskDef, status, selector, throwable, duration_$_lo, duration_$_hi) {
   this.Lorg_scalajs_junit_JUnitEvent__f_taskDef = null;
@@ -32590,6 +35488,12 @@ function $m_s_math_BigInt$() {
   }
   return $n_s_math_BigInt$;
 }
+function $f_s_math_Ordered__$less__O__Z($thiz, that) {
+  return ($thiz.compare__O__I(that) < 0);
+}
+function $f_s_math_Ordered__$greater__O__Z($thiz, that) {
+  return ($thiz.compare__O__I(that) > 0);
+}
 /** @constructor */
 function $c_s_reflect_ClassTag$() {
   this.s_reflect_ClassTag$__f_Byte = null;
@@ -32691,6 +35595,54 @@ $c_sr_AbstractFunction3.prototype.toString__T = (function() {
   return "<function3>";
 });
 /** @constructor */
+function $c_sr_AbstractFunction4() {
+}
+$c_sr_AbstractFunction4.prototype = new $h_O();
+$c_sr_AbstractFunction4.prototype.constructor = $c_sr_AbstractFunction4;
+/** @constructor */
+function $h_sr_AbstractFunction4() {
+}
+$h_sr_AbstractFunction4.prototype = $c_sr_AbstractFunction4.prototype;
+$c_sr_AbstractFunction4.prototype.toString__T = (function() {
+  return "<function4>";
+});
+/** @constructor */
+function $c_sr_AbstractFunction5() {
+}
+$c_sr_AbstractFunction5.prototype = new $h_O();
+$c_sr_AbstractFunction5.prototype.constructor = $c_sr_AbstractFunction5;
+/** @constructor */
+function $h_sr_AbstractFunction5() {
+}
+$h_sr_AbstractFunction5.prototype = $c_sr_AbstractFunction5.prototype;
+$c_sr_AbstractFunction5.prototype.toString__T = (function() {
+  return "<function5>";
+});
+/** @constructor */
+function $c_sr_AbstractFunction6() {
+}
+$c_sr_AbstractFunction6.prototype = new $h_O();
+$c_sr_AbstractFunction6.prototype.constructor = $c_sr_AbstractFunction6;
+/** @constructor */
+function $h_sr_AbstractFunction6() {
+}
+$h_sr_AbstractFunction6.prototype = $c_sr_AbstractFunction6.prototype;
+$c_sr_AbstractFunction6.prototype.toString__T = (function() {
+  return "<function6>";
+});
+/** @constructor */
+function $c_sr_AbstractFunction9() {
+}
+$c_sr_AbstractFunction9.prototype = new $h_O();
+$c_sr_AbstractFunction9.prototype.constructor = $c_sr_AbstractFunction9;
+/** @constructor */
+function $h_sr_AbstractFunction9() {
+}
+$h_sr_AbstractFunction9.prototype = $c_sr_AbstractFunction9.prototype;
+$c_sr_AbstractFunction9.prototype.toString__T = (function() {
+  return "<function9>";
+});
+/** @constructor */
 function $c_sr_BooleanRef(elem) {
   this.sr_BooleanRef__f_elem = false;
   this.sr_BooleanRef__f_elem = elem;
@@ -32749,6 +35701,28 @@ $c_sr_LazyRef.prototype.toString__T = (function() {
 });
 var $d_sr_LazyRef = new $TypeData().initClass($c_sr_LazyRef, "scala.runtime.LazyRef", ({
   sr_LazyRef: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_sr_LongRef(elem_$_lo, elem_$_hi) {
+  this.sr_LongRef__f_elem_$lo = 0;
+  this.sr_LongRef__f_elem_$hi = 0;
+  this.sr_LongRef__f_elem_$lo = elem_$_lo;
+  this.sr_LongRef__f_elem_$hi = elem_$_hi;
+}
+$c_sr_LongRef.prototype = new $h_O();
+$c_sr_LongRef.prototype.constructor = $c_sr_LongRef;
+/** @constructor */
+function $h_sr_LongRef() {
+}
+$h_sr_LongRef.prototype = $c_sr_LongRef.prototype;
+$c_sr_LongRef.prototype.toString__T = (function() {
+  var l_$_lo = this.sr_LongRef__f_elem_$lo;
+  var l_$_hi = this.sr_LongRef__f_elem_$hi;
+  return $m_RTLong$().toString__I__I__T(l_$_lo, l_$_hi);
+});
+var $d_sr_LongRef = new $TypeData().initClass($c_sr_LongRef, "scala.runtime.LongRef", ({
+  sr_LongRef: 1,
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
@@ -32927,6 +35901,36 @@ $c_s_util_hashing_MurmurHash3$accum$1.prototype.apply__O__O__O = (function(v1, v
 var $d_s_util_hashing_MurmurHash3$accum$1 = new $TypeData().initClass($c_s_util_hashing_MurmurHash3$accum$1, "scala.util.hashing.MurmurHash3$accum$1", ({
   s_util_hashing_MurmurHash3$accum$1: 1,
   F2: 1
+}));
+function $ct_s_util_matching_Regex__ju_regex_Pattern__sci_Seq__($thiz, pattern, groupNames) {
+  $thiz.s_util_matching_Regex__f_pattern = pattern;
+  return $thiz;
+}
+function $ct_s_util_matching_Regex__T__sci_Seq__($thiz, regex, groupNames) {
+  $ct_s_util_matching_Regex__ju_regex_Pattern__sci_Seq__($thiz, $m_ju_regex_PatternCompiler$().compile__T__I__ju_regex_Pattern(regex, 0), groupNames);
+  return $thiz;
+}
+/** @constructor */
+function $c_s_util_matching_Regex() {
+  this.s_util_matching_Regex__f_pattern = null;
+}
+$c_s_util_matching_Regex.prototype = new $h_O();
+$c_s_util_matching_Regex.prototype.constructor = $c_s_util_matching_Regex;
+/** @constructor */
+function $h_s_util_matching_Regex() {
+}
+$h_s_util_matching_Regex.prototype = $c_s_util_matching_Regex.prototype;
+$c_s_util_matching_Regex.prototype.matches__jl_CharSequence__Z = (function(source) {
+  var this$1 = $n(this.s_util_matching_Regex__f_pattern);
+  var m = new $c_ju_regex_Matcher(this$1, $dp_toString__T($n(source)));
+  return m.matches__Z();
+});
+$c_s_util_matching_Regex.prototype.toString__T = (function() {
+  return $n(this.s_util_matching_Regex__f_pattern).ju_regex_Pattern__f__pattern;
+});
+var $d_s_util_matching_Regex = new $TypeData().initClass($c_s_util_matching_Regex, "scala.util.matching.Regex", ({
+  s_util_matching_Regex: 1,
+  Ljava_io_Serializable: 1
 }));
 /** @constructor */
 function $c_Ljava_io_InputStream() {
@@ -34252,6 +37256,10 @@ $c_Lokay_effects_json_Json$.prototype.constructor = $c_Lokay_effects_json_Json$;
 function $h_Lokay_effects_json_Json$() {
 }
 $h_Lokay_effects_json_Json$.prototype = $c_Lokay_effects_json_Json$.prototype;
+$c_Lokay_effects_json_Json$.prototype.num__J__Lokay_effects_json_Json = (function(l_$_lo, l_$_hi) {
+  var n = $n($m_s_package$().BigDecimal__s_math_BigDecimal$()).apply__J__s_math_BigDecimal(l_$_lo, l_$_hi);
+  return new $c_Lokay_effects_json_Json$Num(n);
+});
 $c_Lokay_effects_json_Json$.prototype.kind__Lokay_effects_json_Json__T = (function(v) {
   var x = $m_Lokay_effects_json_Json$Null$();
   if ((x === v)) {
@@ -34439,6 +37447,663 @@ function $m_Lokay_effects_shape_Problem$() {
     $n_Lokay_effects_shape_Problem$ = new $c_Lokay_effects_shape_Problem$();
   }
   return $n_Lokay_effects_shape_Problem$;
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$() {
+  this.Lokay_effects_shape_Schema$__f_shape$lzy1 = null;
+  this.Lokay_effects_shape_Schema$__f_shapebitmap$1 = false;
+}
+$c_Lokay_effects_shape_Schema$.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$.prototype.constructor = $c_Lokay_effects_shape_Schema$;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$() {
+}
+$h_Lokay_effects_shape_Schema$.prototype = $c_Lokay_effects_shape_Schema$.prototype;
+$c_Lokay_effects_shape_Schema$.prototype.isRecord__Lokay_effects_shape_Schema__Z = (function(s) {
+  var s$tailLocal1 = s;
+  while (true) {
+    var x51 = s$tailLocal1;
+    if ((x51 instanceof $c_Lokay_effects_shape_Schema$Record)) {
+      var x$1 = $as_Lokay_effects_shape_Schema$Record(x51);
+      $n(x$1);
+      return true;
+    }
+    if ((x51 instanceof $c_Lokay_effects_shape_Schema$Described)) {
+      var x$1$1 = $as_Lokay_effects_shape_Schema$Described(x51);
+      var this$4 = $n(x$1$1);
+      var x54 = this$4.Lokay_effects_shape_Schema$Described__f_of;
+      $n(x$1$1);
+      $n(x$1$1);
+      s$tailLocal1 = x54;
+      continue;
+    }
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$.prototype.shape__Lokay_effects_shape_Shape = (function() {
+  if ((!this.Lokay_effects_shape_Schema$__f_shapebitmap$1)) {
+    $m_Lokay_effects_shape_Shape$();
+    var of = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => $m_Lokay_effects_shape_Schema$().shape__Lokay_effects_shape_Shape()));
+    var ref = new $c_Lokay_effects_shape_Shape$Deferred("schema", of);
+    $m_Lokay_effects_shape_Shape$();
+    var $x_6 = $m_sr_ScalaRunTime$();
+    var $x_5 = $m_Lokay_effects_shape_Shape$();
+    var this$9 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var shape = $m_Lokay_effects_shape_Shape$().int__Lokay_effects_shape_Shape();
+    var label = $m_s_None$();
+    var doc = $m_s_None$();
+    var default$1 = $m_s_None$();
+    var f1 = new $c_Lokay_effects_shape_Shape$Field("n", shape, label, doc, false, default$1);
+    var make = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$9) => {
+      var _$9$1 = $uI(_$9);
+      return new $c_Lokay_effects_shape_Constraint$MinLength(_$9$1);
+    }));
+    var unmake = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$10) => {
+      var _$10$1 = $as_Lokay_effects_shape_Constraint$MinLength(_$10);
+      return $n(_$10$1).Lokay_effects_shape_Constraint$MinLength__f_n;
+    }));
+    var $x_4 = $x_5.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("min-length", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$9, f1, make, unmake), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
+      var x$1$1 = $as_Lokay_effects_shape_Constraint$OnText(x$1);
+      if ((x$1$1 instanceof $c_Lokay_effects_shape_Constraint$MinLength)) {
+        var c = $as_Lokay_effects_shape_Constraint$MinLength(x$1$1);
+        return new $c_s_Some(c);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_3 = $m_Lokay_effects_shape_Shape$();
+    var this$17 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var shape$1 = $m_Lokay_effects_shape_Shape$().int__Lokay_effects_shape_Shape();
+    var label$1 = $m_s_None$();
+    var doc$1 = $m_s_None$();
+    var default$2 = $m_s_None$();
+    var f1$1 = new $c_Lokay_effects_shape_Shape$Field("n", shape$1, label$1, doc$1, false, default$2);
+    var make$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$11) => {
+      var _$11$1 = $uI(_$11);
+      return new $c_Lokay_effects_shape_Constraint$MaxLength(_$11$1);
+    }));
+    var unmake$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$12) => {
+      var _$12$1 = $as_Lokay_effects_shape_Constraint$MaxLength(_$12);
+      return $n(_$12$1).Lokay_effects_shape_Constraint$MaxLength__f_n;
+    }));
+    var $x_2 = $x_3.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("max-length", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$17, f1$1, make$1, unmake$1), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2) => {
+      var x$1$3 = $as_Lokay_effects_shape_Constraint$OnText(x$1$2);
+      if ((x$1$3 instanceof $c_Lokay_effects_shape_Constraint$MaxLength)) {
+        var c$1 = $as_Lokay_effects_shape_Constraint$MaxLength(x$1$3);
+        return new $c_s_Some(c$1);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_1 = $m_Lokay_effects_shape_Shape$();
+    var this$37 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints = $m_sci_Nil$();
+    var shape$2 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+    var label$2 = $m_s_None$();
+    var doc$2 = $m_s_None$();
+    var default$3 = $m_s_None$();
+    var f1$2 = new $c_Lokay_effects_shape_Shape$Field("regex", shape$2, label$2, doc$2, false, default$3);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$1 = $m_sci_Nil$();
+    var shape$3 = new $c_Lokay_effects_shape_Shape$Text(constraints$1);
+    var label$3 = $m_s_None$();
+    var doc$3 = $m_s_None$();
+    var default$4 = $m_s_None$();
+    var f2 = new $c_Lokay_effects_shape_Shape$Field("hint", shape$3, label$3, doc$3, false, default$4);
+    var make$2 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((_$13, _$14) => {
+      var _$13$1 = $as_T(_$13);
+      var _$14$1 = $as_T(_$14);
+      return new $c_Lokay_effects_shape_Constraint$Pattern(_$13$1, _$14$1);
+    }));
+    var unmake$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((p) => {
+      var p$1 = $as_Lokay_effects_shape_Constraint$Pattern(p);
+      var _1 = $n(p$1).Lokay_effects_shape_Constraint$Pattern__f_regex;
+      var _2 = $n(p$1).Lokay_effects_shape_Constraint$Pattern__f_hint;
+      return new $c_T2(_1, _2);
+    }));
+    var cases = $x_6.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_shape_Shape$Case.getArrayOf().constr)([$x_4, $x_2, $x_1.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("pattern", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$37, f1$2, f2, make$2, unmake$2), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$3$1) => {
+      var x$1$4 = $as_Lokay_effects_shape_Constraint$OnText(x$1$3$1);
+      if ((x$1$4 instanceof $c_Lokay_effects_shape_Constraint$Pattern)) {
+        var c$2 = $as_Lokay_effects_shape_Constraint$Pattern(x$1$4);
+        return new $c_s_Some(c$2);
+      } else {
+        return $m_s_None$();
+      }
+    })))]));
+    var this$40 = $n(cases);
+    var cases$1 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$40);
+    var onText = new $c_Lokay_effects_shape_Shape$OneOf(cases$1);
+    $m_Lokay_effects_shape_Shape$();
+    var $x_10 = $m_sr_ScalaRunTime$();
+    var $x_9 = $m_Lokay_effects_shape_Shape$();
+    var this$52 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$2 = $m_sci_Nil$();
+    var shape$4 = new $c_Lokay_effects_shape_Shape$Number(constraints$2);
+    var label$4 = $m_s_None$();
+    var doc$4 = $m_s_None$();
+    var default$5 = $m_s_None$();
+    var f1$3 = new $c_Lokay_effects_shape_Shape$Field("n", shape$4, label$4, doc$4, false, default$5);
+    var make$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$15) => {
+      var _$15$1 = $as_s_math_BigDecimal(_$15);
+      return new $c_Lokay_effects_shape_Constraint$Min(_$15$1);
+    }));
+    var unmake$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$16) => {
+      var _$16$1 = $as_Lokay_effects_shape_Constraint$Min(_$16);
+      return $n(_$16$1).Lokay_effects_shape_Constraint$Min__f_n;
+    }));
+    var $x_8 = $x_9.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("min", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$52, f1$3, make$3, unmake$3), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$4$1) => {
+      var x$1$5 = $as_Lokay_effects_shape_Constraint$OnNumber(x$1$4$1);
+      if ((x$1$5 instanceof $c_Lokay_effects_shape_Constraint$Min)) {
+        var c$3 = $as_Lokay_effects_shape_Constraint$Min(x$1$5);
+        return new $c_s_Some(c$3);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_7 = $m_Lokay_effects_shape_Shape$();
+    var this$63 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$3 = $m_sci_Nil$();
+    var shape$5 = new $c_Lokay_effects_shape_Shape$Number(constraints$3);
+    var label$5 = $m_s_None$();
+    var doc$5 = $m_s_None$();
+    var default$6 = $m_s_None$();
+    var f1$4 = new $c_Lokay_effects_shape_Shape$Field("n", shape$5, label$5, doc$5, false, default$6);
+    var make$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$17) => {
+      var _$17$1 = $as_s_math_BigDecimal(_$17);
+      return new $c_Lokay_effects_shape_Constraint$Max(_$17$1);
+    }));
+    var unmake$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$18) => {
+      var _$18$1 = $as_Lokay_effects_shape_Constraint$Max(_$18);
+      return $n(_$18$1).Lokay_effects_shape_Constraint$Max__f_n;
+    }));
+    var cases$2 = $x_10.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_shape_Shape$Case.getArrayOf().constr)([$x_8, $x_7.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("max", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$63, f1$4, make$4, unmake$4), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$5$1) => {
+      var x$1$6 = $as_Lokay_effects_shape_Constraint$OnNumber(x$1$5$1);
+      if ((x$1$6 instanceof $c_Lokay_effects_shape_Constraint$Max)) {
+        var c$4 = $as_Lokay_effects_shape_Constraint$Max(x$1$6);
+        return new $c_s_Some(c$4);
+      } else {
+        return $m_s_None$();
+      }
+    })))]));
+    var this$66 = $n(cases$2);
+    var cases$3 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$66);
+    var onNumber = new $c_Lokay_effects_shape_Shape$OneOf(cases$3);
+    var this$118 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$4 = $m_sci_Nil$();
+    var shape$6 = new $c_Lokay_effects_shape_Shape$Text(constraints$4);
+    var label$6 = $m_s_None$();
+    var doc$6 = $m_s_None$();
+    var default$7 = $m_s_None$();
+    var f1$5 = new $c_Lokay_effects_shape_Shape$Field("name", shape$6, label$6, doc$6, false, default$7);
+    $m_Lokay_effects_shape_Shape$();
+    var label$7 = $m_s_None$();
+    var doc$7 = $m_s_None$();
+    var default$8 = $m_s_None$();
+    var f2$1 = new $c_Lokay_effects_shape_Shape$Field("schema", ref, label$7, doc$7, false, default$8);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$5 = $m_sci_Nil$();
+    var this$85 = new $c_Lokay_effects_shape_Shape$Text(constraints$5);
+    var shape$7 = new $c_Lokay_effects_shape_Shape$Optional(this$85);
+    var label$8 = $m_s_None$();
+    var doc$8 = $m_s_None$();
+    var default$9 = $m_s_None$();
+    var f3 = new $c_Lokay_effects_shape_Shape$Field("label", shape$7, label$8, doc$8, false, default$9);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$6 = $m_sci_Nil$();
+    var this$95 = new $c_Lokay_effects_shape_Shape$Text(constraints$6);
+    var shape$8 = new $c_Lokay_effects_shape_Shape$Optional(this$95);
+    var label$9 = $m_s_None$();
+    var doc$9 = $m_s_None$();
+    var default$10 = $m_s_None$();
+    var f4 = new $c_Lokay_effects_shape_Shape$Field("doc", shape$8, label$9, doc$9, false, default$10);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var shape$9 = $m_Lokay_effects_shape_Shape$Bool$();
+    var label$10 = $m_s_None$();
+    var doc$10 = $m_s_None$();
+    var default$11 = $m_s_None$();
+    var f5 = new $c_Lokay_effects_shape_Shape$Field("secret", shape$9, label$10, doc$10, false, default$11).withDefault__O__Lokay_effects_shape_Shape$Field(false);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var this$109 = $m_Lokay_effects_shape_Shape$AnyValue$();
+    var shape$10 = new $c_Lokay_effects_shape_Shape$Optional(this$109);
+    var label$11 = $m_s_None$();
+    var doc$11 = $m_s_None$();
+    var default$12 = $m_s_None$();
+    var f6 = new $c_Lokay_effects_shape_Shape$Field("default", shape$10, label$11, doc$11, false, default$12);
+    var make$5 = new $c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e(((_$19, _$20, _$21, _$22, _$23, _$24) => {
+      var _$19$1 = $as_T(_$19);
+      var _$20$1 = $as_Lokay_effects_shape_Schema(_$20);
+      var _$21$1 = $as_s_Option(_$21);
+      var _$22$1 = $as_s_Option(_$22);
+      var _$23$1 = $uZ(_$23);
+      var _$24$1 = $as_s_Option(_$24);
+      return new $c_Lokay_effects_shape_Schema$Field(_$19$1, _$20$1, _$21$1, _$22$1, _$23$1, _$24$1);
+    }));
+    var unmake$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((f) => {
+      var f$1 = $as_Lokay_effects_shape_Schema$Field(f);
+      var _1$1 = $n(f$1).Lokay_effects_shape_Schema$Field__f_name;
+      var _2$1 = $n(f$1).Lokay_effects_shape_Schema$Field__f_schema;
+      var _3 = $n(f$1).Lokay_effects_shape_Schema$Field__f_label;
+      var _4 = $n(f$1).Lokay_effects_shape_Schema$Field__f_doc;
+      var _5 = $n(f$1).Lokay_effects_shape_Schema$Field__f_secret;
+      var _6 = $n(f$1).Lokay_effects_shape_Schema$Field__f_default;
+      return new $c_T6(_1$1, _2$1, _3, _4, _5, _6);
+    }));
+    var fieldShape = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F6__F1__Lokay_effects_shape_Shape(this$118, f1$5, f2$1, f3, f4, f5, f6, make$5, unmake$5);
+    var this$133 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$7 = $m_sci_Nil$();
+    var shape$11 = new $c_Lokay_effects_shape_Shape$Text(constraints$7);
+    var label$12 = $m_s_None$();
+    var doc$12 = $m_s_None$();
+    var default$13 = $m_s_None$();
+    var f1$6 = new $c_Lokay_effects_shape_Shape$Field("name", shape$11, label$12, doc$12, false, default$13);
+    $m_Lokay_effects_shape_Shape$();
+    var label$13 = $m_s_None$();
+    var doc$13 = $m_s_None$();
+    var default$14 = $m_s_None$();
+    var f2$2 = new $c_Lokay_effects_shape_Shape$Field("schema", ref, label$13, doc$13, false, default$14);
+    var make$6 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((n, s) => {
+      var n$1 = $as_T(n);
+      var s$1 = $as_Lokay_effects_shape_Schema(s);
+      return new $c_T2(n$1, s$1);
+    }));
+    var unmake$6 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((c$5) => {
+      var c$6 = $as_T2(c$5);
+      return c$6;
+    }));
+    var caseShape = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$133, f1$6, f2$2, make$6, unmake$6);
+    $m_Lokay_effects_shape_Shape$();
+    var $x_32 = $m_sr_ScalaRunTime$();
+    var $x_31 = $m_Lokay_effects_shape_Shape$();
+    var this$141 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var max = $m_s_None$();
+    var shape$12 = new $c_Lokay_effects_shape_Shape$Many(onText, 0, max);
+    var label$14 = $m_s_None$();
+    var doc$14 = $m_s_None$();
+    var default$15 = $m_s_None$();
+    var f1$7 = new $c_Lokay_effects_shape_Shape$Field("constraints", shape$12, label$14, doc$14, false, default$15).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Nil$());
+    var make$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$25) => {
+      var _$25$1 = $as_sci_List(_$25);
+      return new $c_Lokay_effects_shape_Schema$Text(_$25$1);
+    }));
+    var unmake$7 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$26) => {
+      var _$26$1 = $as_Lokay_effects_shape_Schema$Text(_$26);
+      return $n(_$26$1).Lokay_effects_shape_Schema$Text__f_constraints;
+    }));
+    var $x_30 = $x_31.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("text", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$141, f1$7, make$7, unmake$7), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$6$1) => {
+      var x$1$7 = $as_Lokay_effects_shape_Schema(x$1$6$1);
+      if ((x$1$7 instanceof $c_Lokay_effects_shape_Schema$Text)) {
+        var s$2 = $as_Lokay_effects_shape_Schema$Text(x$1$7);
+        return new $c_s_Some(s$2);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_29 = $m_Lokay_effects_shape_Shape$();
+    var this$150 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var max$1 = $m_s_None$();
+    var shape$13 = new $c_Lokay_effects_shape_Shape$Many(onNumber, 0, max$1);
+    var label$15 = $m_s_None$();
+    var doc$15 = $m_s_None$();
+    var default$16 = $m_s_None$();
+    var f1$8 = new $c_Lokay_effects_shape_Shape$Field("constraints", shape$13, label$15, doc$15, false, default$16).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Nil$());
+    var make$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$27) => {
+      var _$27$1 = $as_sci_List(_$27);
+      return new $c_Lokay_effects_shape_Schema$Integer(_$27$1);
+    }));
+    var unmake$8 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$28) => {
+      var _$28$1 = $as_Lokay_effects_shape_Schema$Integer(_$28);
+      return $n(_$28$1).Lokay_effects_shape_Schema$Integer__f_constraints;
+    }));
+    var $x_28 = $x_29.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("integer", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$150, f1$8, make$8, unmake$8), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$7$1) => {
+      var x$1$8 = $as_Lokay_effects_shape_Schema(x$1$7$1);
+      if ((x$1$8 instanceof $c_Lokay_effects_shape_Schema$Integer)) {
+        var s$3 = $as_Lokay_effects_shape_Schema$Integer(x$1$8);
+        return new $c_s_Some(s$3);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_27 = $m_Lokay_effects_shape_Shape$();
+    var this$159 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var max$2 = $m_s_None$();
+    var shape$14 = new $c_Lokay_effects_shape_Shape$Many(onNumber, 0, max$2);
+    var label$16 = $m_s_None$();
+    var doc$16 = $m_s_None$();
+    var default$17 = $m_s_None$();
+    var f1$9 = new $c_Lokay_effects_shape_Shape$Field("constraints", shape$14, label$16, doc$16, false, default$17).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Nil$());
+    var make$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$29) => {
+      var _$29$1 = $as_sci_List(_$29);
+      return new $c_Lokay_effects_shape_Schema$Number(_$29$1);
+    }));
+    var unmake$9 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$30) => {
+      var _$30$1 = $as_Lokay_effects_shape_Schema$Number(_$30);
+      return $n(_$30$1).Lokay_effects_shape_Schema$Number__f_constraints;
+    }));
+    var $x_26 = $x_27.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("number", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$159, f1$9, make$9, unmake$9), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$8$1) => {
+      var x$1$9 = $as_Lokay_effects_shape_Schema(x$1$8$1);
+      if ((x$1$9 instanceof $c_Lokay_effects_shape_Schema$Number)) {
+        var s$4 = $as_Lokay_effects_shape_Schema$Number(x$1$9);
+        return new $c_s_Some(s$4);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_25 = $m_Lokay_effects_shape_Shape$().sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("bool", $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape($n($m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$31) => {
+      $as_jl_Void(_$31);
+      return $m_Lokay_effects_shape_Schema$Bool$();
+    })), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$32) => {
+      $as_Lokay_effects_shape_Schema$Bool$(_$32);
+    }))), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$9$1) => {
+      var x$1$10 = $as_Lokay_effects_shape_Schema(x$1$9$1);
+      var x = $m_Lokay_effects_shape_Schema$Bool$();
+      if ((x === x$1$10)) {
+        var value = $m_Lokay_effects_shape_Schema$Bool$();
+        return new $c_s_Some(value);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_24 = $m_Lokay_effects_shape_Shape$().sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("date", $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape($n($m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$33) => {
+      $as_jl_Void(_$33);
+      return $m_Lokay_effects_shape_Schema$Date$();
+    })), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$34) => {
+      $as_Lokay_effects_shape_Schema$Date$(_$34);
+    }))), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$10$1) => {
+      var x$1$11 = $as_Lokay_effects_shape_Schema(x$1$10$1);
+      var x$2 = $m_Lokay_effects_shape_Schema$Date$();
+      if ((x$2 === x$1$11)) {
+        var value$1 = $m_Lokay_effects_shape_Schema$Date$();
+        return new $c_s_Some(value$1);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_23 = $m_Lokay_effects_shape_Shape$();
+    var this$173 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$8 = $m_sci_Nil$();
+    var \u03b41$ = new $c_Lokay_effects_shape_Shape$Text(constraints$8);
+    var max$3 = $m_s_None$();
+    var shape$15 = new $c_Lokay_effects_shape_Shape$Many(\u03b41$, 0, max$3);
+    var label$17 = $m_s_None$();
+    var doc$17 = $m_s_None$();
+    var default$18 = $m_s_None$();
+    var f1$10 = new $c_Lokay_effects_shape_Shape$Field("options", shape$15, label$17, doc$17, false, default$18);
+    var make$10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$35) => {
+      var _$35$1 = $as_sci_List(_$35);
+      return new $c_Lokay_effects_shape_Schema$Choice(_$35$1);
+    }));
+    var unmake$10 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$36) => {
+      var _$36$1 = $as_Lokay_effects_shape_Schema$Choice(_$36);
+      return $n(_$36$1).Lokay_effects_shape_Schema$Choice__f_options;
+    }));
+    var $x_22 = $x_23.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("choice", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$173, f1$10, make$10, unmake$10), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$11$1) => {
+      var x$1$12 = $as_Lokay_effects_shape_Schema(x$1$11$1);
+      if ((x$1$12 instanceof $c_Lokay_effects_shape_Schema$Choice)) {
+        var s$5 = $as_Lokay_effects_shape_Schema$Choice(x$1$12);
+        return new $c_s_Some(s$5);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_21 = $m_Lokay_effects_shape_Shape$();
+    var this$181 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var label$18 = $m_s_None$();
+    var doc$18 = $m_s_None$();
+    var default$19 = $m_s_None$();
+    var f1$11 = new $c_Lokay_effects_shape_Shape$Field("of", ref, label$18, doc$18, false, default$19);
+    var make$11 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$37) => {
+      var _$37$1 = $as_Lokay_effects_shape_Schema(_$37);
+      return new $c_Lokay_effects_shape_Schema$Optional(_$37$1);
+    }));
+    var unmake$11 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$38) => {
+      var _$38$1 = $as_Lokay_effects_shape_Schema$Optional(_$38);
+      return $n(_$38$1).Lokay_effects_shape_Schema$Optional__f_of;
+    }));
+    var $x_20 = $x_21.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("optional", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$181, f1$11, make$11, unmake$11), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$12$1) => {
+      var x$1$13 = $as_Lokay_effects_shape_Schema(x$1$12$1);
+      if ((x$1$13 instanceof $c_Lokay_effects_shape_Schema$Optional)) {
+        var s$6 = $as_Lokay_effects_shape_Schema$Optional(x$1$13);
+        return new $c_s_Some(s$6);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_19 = $m_Lokay_effects_shape_Shape$();
+    var this$202 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var label$19 = $m_s_None$();
+    var doc$19 = $m_s_None$();
+    var default$20 = $m_s_None$();
+    var f1$12 = new $c_Lokay_effects_shape_Shape$Field("of", ref, label$19, doc$19, false, default$20);
+    $m_Lokay_effects_shape_Shape$();
+    var shape$16 = $m_Lokay_effects_shape_Shape$().int__Lokay_effects_shape_Shape();
+    var label$20 = $m_s_None$();
+    var doc$20 = $m_s_None$();
+    var default$21 = $m_s_None$();
+    var f2$3 = new $c_Lokay_effects_shape_Shape$Field("min", shape$16, label$20, doc$20, false, default$21).withDefault__O__Lokay_effects_shape_Shape$Field(0);
+    $m_Lokay_effects_shape_Shape$();
+    var this$193 = $n($m_Lokay_effects_shape_Shape$().int__Lokay_effects_shape_Shape());
+    var shape$17 = new $c_Lokay_effects_shape_Shape$Optional(this$193);
+    var label$21 = $m_s_None$();
+    var doc$21 = $m_s_None$();
+    var default$22 = $m_s_None$();
+    var f3$1 = new $c_Lokay_effects_shape_Shape$Field("max", shape$17, label$21, doc$21, false, default$22);
+    var make$12 = new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((_$39, _$40, _$41) => {
+      var _$39$1 = $as_Lokay_effects_shape_Schema(_$39);
+      var _$40$1 = $uI(_$40);
+      var _$41$1 = $as_s_Option(_$41);
+      return new $c_Lokay_effects_shape_Schema$Many(_$39$1, _$40$1, _$41$1);
+    }));
+    var unmake$12 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((m) => {
+      var m$1 = $as_Lokay_effects_shape_Schema$Many(m);
+      var _1$2 = $n(m$1).Lokay_effects_shape_Schema$Many__f_of;
+      var _2$2 = $n(m$1).Lokay_effects_shape_Schema$Many__f_min;
+      var _3$1 = $n(m$1).Lokay_effects_shape_Schema$Many__f_max;
+      return new $c_T3(_1$2, _2$2, _3$1);
+    }));
+    var $x_18 = $x_19.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("many", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape(this$202, f1$12, f2$3, f3$1, make$12, unmake$12), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$13$1) => {
+      var x$1$14 = $as_Lokay_effects_shape_Schema(x$1$13$1);
+      if ((x$1$14 instanceof $c_Lokay_effects_shape_Schema$Many)) {
+        var s$7 = $as_Lokay_effects_shape_Schema$Many(x$1$14);
+        return new $c_s_Some(s$7);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_17 = $m_Lokay_effects_shape_Shape$();
+    var this$216 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var this$205 = $n(fieldShape);
+    $n(fieldShape);
+    var min = 0;
+    $n(fieldShape);
+    var max$4 = $m_s_None$();
+    var shape$18 = new $c_Lokay_effects_shape_Shape$Many(this$205, min, max$4);
+    var label$22 = $m_s_None$();
+    var doc$22 = $m_s_None$();
+    var default$23 = $m_s_None$();
+    var f1$13 = new $c_Lokay_effects_shape_Shape$Field("fields", shape$18, label$22, doc$22, false, default$23);
+    var make$13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((fs) => {
+      var fs$1 = $as_sci_List(fs);
+      var this$212 = $n(fs$1);
+      var fields = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$212);
+      return new $c_Lokay_effects_shape_Schema$Record(fields);
+    }));
+    var unmake$13 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$42) => {
+      var _$42$1 = $as_Lokay_effects_shape_Schema$Record(_$42);
+      var this$214 = $n($n(_$42$1).Lokay_effects_shape_Schema$Record__f_fields);
+      return $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$214);
+    }));
+    var $x_16 = $x_17.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("record", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$216, f1$13, make$13, unmake$13), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$14$1) => {
+      var x$1$15 = $as_Lokay_effects_shape_Schema(x$1$14$1);
+      if ((x$1$15 instanceof $c_Lokay_effects_shape_Schema$Record)) {
+        var s$8 = $as_Lokay_effects_shape_Schema$Record(x$1$15);
+        return new $c_s_Some(s$8);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_15 = $m_Lokay_effects_shape_Shape$();
+    var this$230 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var this$219 = $n(caseShape);
+    $n(caseShape);
+    var min$1 = 0;
+    $n(caseShape);
+    var max$5 = $m_s_None$();
+    var shape$19 = new $c_Lokay_effects_shape_Shape$Many(this$219, min$1, max$5);
+    var label$23 = $m_s_None$();
+    var doc$23 = $m_s_None$();
+    var default$24 = $m_s_None$();
+    var f1$14 = new $c_Lokay_effects_shape_Shape$Field("cases", shape$19, label$23, doc$23, false, default$24);
+    var make$14 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((cs) => {
+      var cs$1 = $as_sci_List(cs);
+      var this$226 = $n(cs$1);
+      var cases$4 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$226);
+      return new $c_Lokay_effects_shape_Schema$OneOf(cases$4);
+    }));
+    var unmake$14 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$43) => {
+      var _$43$1 = $as_Lokay_effects_shape_Schema$OneOf(_$43);
+      var this$228 = $n($n(_$43$1).Lokay_effects_shape_Schema$OneOf__f_cases);
+      return $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$228);
+    }));
+    var $x_14 = $x_15.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("sum", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$230, f1$14, make$14, unmake$14), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$15$1) => {
+      var x$1$16 = $as_Lokay_effects_shape_Schema(x$1$15$1);
+      if ((x$1$16 instanceof $c_Lokay_effects_shape_Schema$OneOf)) {
+        var s$9 = $as_Lokay_effects_shape_Schema$OneOf(x$1$16);
+        return new $c_s_Some(s$9);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_13 = $m_Lokay_effects_shape_Shape$();
+    var this$257 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var label$24 = $m_s_None$();
+    var doc$24 = $m_s_None$();
+    var default$25 = $m_s_None$();
+    var f1$15 = new $c_Lokay_effects_shape_Shape$Field("of", ref, label$24, doc$24, false, default$25);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$9 = $m_sci_Nil$();
+    var shape$20 = new $c_Lokay_effects_shape_Shape$Text(constraints$9);
+    var label$25 = $m_s_None$();
+    var doc$25 = $m_s_None$();
+    var default$26 = $m_s_None$();
+    var f2$4 = new $c_Lokay_effects_shape_Shape$Field("label", shape$20, label$25, doc$25, false, default$26);
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$10 = $m_sci_Nil$();
+    var this$248 = new $c_Lokay_effects_shape_Shape$Text(constraints$10);
+    var shape$21 = new $c_Lokay_effects_shape_Shape$Optional(this$248);
+    var label$26 = $m_s_None$();
+    var doc$26 = $m_s_None$();
+    var default$27 = $m_s_None$();
+    var f3$2 = new $c_Lokay_effects_shape_Shape$Field("doc", shape$21, label$26, doc$26, false, default$27);
+    var make$15 = new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((_$44, _$45, _$46) => {
+      var _$44$1 = $as_Lokay_effects_shape_Schema(_$44);
+      var _$45$1 = $as_T(_$45);
+      var _$46$1 = $as_s_Option(_$46);
+      return new $c_Lokay_effects_shape_Schema$Described(_$44$1, _$45$1, _$46$1);
+    }));
+    var unmake$15 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((d) => {
+      var d$1 = $as_Lokay_effects_shape_Schema$Described(d);
+      var _1$3 = $n(d$1).Lokay_effects_shape_Schema$Described__f_of;
+      var _2$3 = $n(d$1).Lokay_effects_shape_Schema$Described__f_label;
+      var _3$2 = $n(d$1).Lokay_effects_shape_Schema$Described__f_doc;
+      return new $c_T3(_1$3, _2$3, _3$2);
+    }));
+    var $x_12 = $x_13.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("described", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape(this$257, f1$15, f2$4, f3$2, make$15, unmake$15), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$16$1) => {
+      var x$1$17 = $as_Lokay_effects_shape_Schema(x$1$16$1);
+      if ((x$1$17 instanceof $c_Lokay_effects_shape_Schema$Described)) {
+        var s$10 = $as_Lokay_effects_shape_Schema$Described(x$1$17);
+        return new $c_s_Some(s$10);
+      } else {
+        return $m_s_None$();
+      }
+    })));
+    var $x_11 = $m_Lokay_effects_shape_Shape$();
+    var this$268 = $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    $m_Lokay_effects_shape_Shape$();
+    var constraints$11 = $m_sci_Nil$();
+    var shape$22 = new $c_Lokay_effects_shape_Shape$Text(constraints$11);
+    var label$27 = $m_s_None$();
+    var doc$27 = $m_s_None$();
+    var default$28 = $m_s_None$();
+    var f1$16 = new $c_Lokay_effects_shape_Shape$Field("name", shape$22, label$27, doc$27, false, default$28);
+    var make$16 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$47) => {
+      var _$47$1 = $as_T(_$47);
+      return new $c_Lokay_effects_shape_Schema$Ref(_$47$1);
+    }));
+    var unmake$16 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$48) => {
+      var _$48$1 = $as_Lokay_effects_shape_Schema$Ref(_$48);
+      return $n(_$48$1).Lokay_effects_shape_Schema$Ref__f_name;
+    }));
+    var cases$5 = $x_32.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_shape_Shape$Case.getArrayOf().constr)([$x_30, $x_28, $x_26, $x_25, $x_24, $x_22, $x_20, $x_18, $x_16, $x_14, $x_12, $x_11.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("ref", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__F1__F1__Lokay_effects_shape_Shape(this$268, f1$16, make$16, unmake$16), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$17$1) => {
+      var x$1$18 = $as_Lokay_effects_shape_Schema(x$1$17$1);
+      if ((x$1$18 instanceof $c_Lokay_effects_shape_Schema$Ref)) {
+        var s$11 = $as_Lokay_effects_shape_Schema$Ref(x$1$18);
+        return new $c_s_Some(s$11);
+      } else {
+        return $m_s_None$();
+      }
+    }))), $m_Lokay_effects_shape_Shape$().sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("any", $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape($n($m_Lokay_effects_shape_Shape$().Lokay_effects_shape_Shape$__f_unit), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$49) => {
+      $as_jl_Void(_$49);
+      return $m_Lokay_effects_shape_Schema$Any$();
+    })), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$50) => {
+      $as_Lokay_effects_shape_Schema$Any$(_$50);
+    }))), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$18$1) => {
+      var x$1$19 = $as_Lokay_effects_shape_Schema(x$1$18$1);
+      var x$3 = $m_Lokay_effects_shape_Schema$Any$();
+      if ((x$3 === x$1$19)) {
+        var value$2 = $m_Lokay_effects_shape_Schema$Any$();
+        return new $c_s_Some(value$2);
+      } else {
+        return $m_s_None$();
+      }
+    })))]));
+    var this$272 = $n(cases$5);
+    var cases$6 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$272);
+    this.Lokay_effects_shape_Schema$__f_shape$lzy1 = new $c_Lokay_effects_shape_Shape$OneOf(cases$6);
+    this.Lokay_effects_shape_Schema$__f_shapebitmap$1 = true;
+  }
+  return this.Lokay_effects_shape_Schema$__f_shape$lzy1;
+});
+var $d_Lokay_effects_shape_Schema$ = new $TypeData().initClass($c_Lokay_effects_shape_Schema$, "okay.effects.shape.Schema$", ({
+  Lokay_effects_shape_Schema$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Sum: 1
+}));
+var $n_Lokay_effects_shape_Schema$;
+function $m_Lokay_effects_shape_Schema$() {
+  if ((!$n_Lokay_effects_shape_Schema$)) {
+    $n_Lokay_effects_shape_Schema$ = new $c_Lokay_effects_shape_Schema$();
+  }
+  return $n_Lokay_effects_shape_Schema$;
 }
 /** @constructor */
 function $c_Lokay_effects_shape_Shape$Field$() {
@@ -35663,6 +39328,500 @@ function $m_Lokay_store_Data$() {
   return $n_Lokay_store_Data$;
 }
 /** @constructor */
+function $c_Lokay_store_Datas$Collection$(outer) {
+  this.Lokay_store_Datas$Collection$__f_$outer = null;
+  if ((outer === null)) {
+    throw $ct_jl_NullPointerException__(new $c_jl_NullPointerException());
+  }
+  this.Lokay_store_Datas$Collection$__f_$outer = outer;
+}
+$c_Lokay_store_Datas$Collection$.prototype = new $h_O();
+$c_Lokay_store_Datas$Collection$.prototype.constructor = $c_Lokay_store_Datas$Collection$;
+/** @constructor */
+function $h_Lokay_store_Datas$Collection$() {
+}
+$h_Lokay_store_Datas$Collection$.prototype = $c_Lokay_store_Datas$Collection$.prototype;
+$c_Lokay_store_Datas$Collection$.prototype.toString__T = (function() {
+  return "Collection";
+});
+var $d_Lokay_store_Datas$Collection$ = new $TypeData().initClass($c_Lokay_store_Datas$Collection$, "okay.store.Datas$Collection$", ({
+  Lokay_store_Datas$Collection$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+function $p_Lokay_store_Event$__fnv__T__T($thiz, s) {
+  var elem_$_lo = 0;
+  var elem_$_hi = 0;
+  elem_$_lo = (-2078137563);
+  elem_$_hi = (-873292572);
+  var this$4 = $n(s);
+  var len = this$4.length;
+  var i = 0;
+  while ((i < len)) {
+    var this$5 = $n(s);
+    var index = i;
+    var x0 = $charAt(this$5, index);
+    var x_$_lo = elem_$_lo;
+    var x_$_hi = elem_$_hi;
+    var value = (65535 & x0);
+    var hi = (value >> 31);
+    var lo = (x_$_lo ^ value);
+    var hi$1 = (x_$_hi ^ hi);
+    var b0 = (65535 & lo);
+    var b1 = ((lo >>> 16) | 0);
+    var a0b0 = Math.imul(435, b0);
+    var a0b1 = Math.imul(435, b1);
+    var lo$1 = ((a0b0 + (a0b1 << 16)) | 0);
+    var c1part = ((((a0b0 >>> 16) | 0) + a0b1) | 0);
+    var hi$2 = ((((Math.imul(435, hi$1) + (lo << 8)) | 0) + ((c1part >>> 16) | 0)) | 0);
+    elem_$_lo = lo$1;
+    elem_$_hi = hi$2;
+    i = ((1 + i) | 0);
+  }
+  var l_$_lo = elem_$_lo;
+  var l_$_hi = elem_$_hi;
+  var this$9 = $m_jl_Long$();
+  var hex = this$9.java$lang$Long$$toHexString__I__I__T(l_$_lo, l_$_hi);
+  var $x_1 = $m_sc_StringOps$();
+  var this$14 = $n(hex);
+  return (("" + $x_1.$times$extension__T__I__T("0", ((16 - this$14.length) | 0))) + hex);
+}
+/** @constructor */
+function $c_Lokay_store_Event$() {
+  this.Lokay_store_Event$__f_shape = null;
+  $n_Lokay_store_Event$ = this;
+  $m_Lokay_effects_shape_Shape$();
+  var shape = $m_Lokay_store_EventId$().Lokay_store_EventId$__f_shape;
+  var label = $m_s_None$();
+  var doc = $m_s_None$();
+  var default$1 = $m_s_None$();
+  var eid = new $c_Lokay_effects_shape_Shape$Field("eid", shape, label, doc, false, default$1).withDefault__O__Lokay_effects_shape_Shape$Field($m_Lokay_store_EventId$().Lokay_store_EventId$__f_none);
+  $m_Lokay_effects_shape_Shape$();
+  var $x_16 = $m_sr_ScalaRunTime$();
+  var $x_15 = $m_Lokay_effects_shape_Shape$();
+  var this$19 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$1 = $m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape;
+  var label$1 = $m_s_None$();
+  var doc$1 = $m_s_None$();
+  var default$2 = $m_s_None$();
+  var f2 = new $c_Lokay_effects_shape_Shape$Field("kind", shape$1, label$1, doc$1, false, default$2);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$2 = $m_Lokay_effects_shape_Shape$().long__Lokay_effects_shape_Shape();
+  var label$2 = $m_s_None$();
+  var doc$2 = $m_s_None$();
+  var default$3 = $m_s_None$();
+  var f3 = new $c_Lokay_effects_shape_Shape$Field("at", shape$2, label$2, doc$2, false, default$3);
+  var make = new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((i, k, at) => {
+    var i$1 = $as_Lokay_store_EventId(i);
+    var k$1 = $as_Lokay_store_Kind(k);
+    var $x_14 = $uJ(at);
+    var at$1_$_lo = $x_14.l;
+    var at$1_$_hi = $x_14.h;
+    return new $c_Lokay_store_Event$KindDefined(k$1, at$1_$_lo, at$1_$_hi, i$1);
+  }));
+  var unmake = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e) => {
+    var e$1 = $as_Lokay_store_Event$KindDefined(e);
+    var _1 = $n(e$1).Lokay_store_Event$KindDefined__f_eid;
+    var _2 = $n(e$1).Lokay_store_Event$KindDefined__f_kind;
+    var _3_$_lo = $n(e$1).Lokay_store_Event$KindDefined__f_at_$lo;
+    var _3_$_hi = $n(e$1).Lokay_store_Event$KindDefined__f_at_$hi;
+    return new $c_T3(_1, _2, $bL(_3_$_lo, _3_$_hi));
+  }));
+  var $x_13 = $x_15.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("kind-defined", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape(this$19, eid, f2, f3, make, unmake), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
+    var x$1$1 = $as_Lokay_store_Event(x$1);
+    if ((x$1$1 instanceof $c_Lokay_store_Event$KindDefined)) {
+      var e$2 = $as_Lokay_store_Event$KindDefined(x$1$1);
+      return new $c_s_Some(e$2);
+    } else {
+      return $m_s_None$();
+    }
+  })));
+  var $x_12 = $m_Lokay_effects_shape_Shape$();
+  var this$33 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$3 = $m_Lokay_store_Kind$().Lokay_store_Kind$__f_shape;
+  var label$3 = $m_s_None$();
+  var doc$3 = $m_s_None$();
+  var default$4 = $m_s_None$();
+  var f2$1 = new $c_Lokay_effects_shape_Shape$Field("kind", shape$3, label$3, doc$3, false, default$4);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$4 = $m_Lokay_effects_shape_Shape$().long__Lokay_effects_shape_Shape();
+  var label$4 = $m_s_None$();
+  var doc$4 = $m_s_None$();
+  var default$5 = $m_s_None$();
+  var f3$1 = new $c_Lokay_effects_shape_Shape$Field("at", shape$4, label$4, doc$4, false, default$5);
+  var make$1 = new $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(((i$2, k$2, at$2) => {
+    var i$3 = $as_Lokay_store_EventId(i$2);
+    var k$3 = $as_Lokay_store_Kind(k$2);
+    var $x_11 = $uJ(at$2);
+    var at$3_$_lo = $x_11.l;
+    var at$3_$_hi = $x_11.h;
+    return new $c_Lokay_store_Event$KindRevised(k$3, at$3_$_lo, at$3_$_hi, i$3);
+  }));
+  var unmake$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$2$1) => {
+    var e$3 = $as_Lokay_store_Event$KindRevised(e$2$1);
+    var _1$1 = $n(e$3).Lokay_store_Event$KindRevised__f_eid;
+    var _2$1 = $n(e$3).Lokay_store_Event$KindRevised__f_kind;
+    var _3$1_$_lo = $n(e$3).Lokay_store_Event$KindRevised__f_at_$lo;
+    var _3$1_$_hi = $n(e$3).Lokay_store_Event$KindRevised__f_at_$hi;
+    return new $c_T3(_1$1, _2$1, $bL(_3$1_$_lo, _3$1_$_hi));
+  }));
+  var $x_10 = $x_12.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("kind-revised", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F3__F1__Lokay_effects_shape_Shape(this$33, eid, f2$1, f3$1, make$1, unmake$1), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$2) => {
+    var x$1$3 = $as_Lokay_store_Event(x$1$2);
+    if ((x$1$3 instanceof $c_Lokay_store_Event$KindRevised)) {
+      var e$4 = $as_Lokay_store_Event$KindRevised(x$1$3);
+      return new $c_s_Some(e$4);
+    } else {
+      return $m_s_None$();
+    }
+  })));
+  var $x_9 = $m_Lokay_effects_shape_Shape$();
+  var this$42 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$5 = $m_Lokay_store_Record$().Lokay_store_Record$__f_shape;
+  var label$5 = $m_s_None$();
+  var doc$5 = $m_s_None$();
+  var default$6 = $m_s_None$();
+  var f2$2 = new $c_Lokay_effects_shape_Shape$Field("record", shape$5, label$5, doc$5, false, default$6);
+  var make$2 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((i$3$1, r) => {
+    var i$4 = $as_Lokay_store_EventId(i$3$1);
+    var r$1 = $as_Lokay_store_Record(r);
+    return new $c_Lokay_store_Event$RecordAdded(r$1, i$4);
+  }));
+  var unmake$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$3$1) => {
+    var e$5 = $as_Lokay_store_Event$RecordAdded(e$3$1);
+    var _1$2 = $n(e$5).Lokay_store_Event$RecordAdded__f_eid;
+    var _2$2 = $n(e$5).Lokay_store_Event$RecordAdded__f_record;
+    return new $c_T2(_1$2, _2$2);
+  }));
+  var $x_8 = $x_9.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("record-added", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$42, eid, f2$2, make$2, unmake$2), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$3$1) => {
+    var x$1$4 = $as_Lokay_store_Event(x$1$3$1);
+    if ((x$1$4 instanceof $c_Lokay_store_Event$RecordAdded)) {
+      var e$6 = $as_Lokay_store_Event$RecordAdded(x$1$4);
+      return new $c_s_Some(e$6);
+    } else {
+      return $m_s_None$();
+    }
+  })));
+  var $x_7 = $m_Lokay_effects_shape_Shape$();
+  var this$51 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$6 = $m_Lokay_store_Record$().Lokay_store_Record$__f_shape;
+  var label$6 = $m_s_None$();
+  var doc$6 = $m_s_None$();
+  var default$7 = $m_s_None$();
+  var f2$3 = new $c_Lokay_effects_shape_Shape$Field("record", shape$6, label$6, doc$6, false, default$7);
+  var make$3 = new $c_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7(((i$4$1, r$2) => {
+    var i$5 = $as_Lokay_store_EventId(i$4$1);
+    var r$3 = $as_Lokay_store_Record(r$2);
+    return new $c_Lokay_store_Event$RecordRevised(r$3, i$5);
+  }));
+  var unmake$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$4$1) => {
+    var e$7 = $as_Lokay_store_Event$RecordRevised(e$4$1);
+    var _1$3 = $n(e$7).Lokay_store_Event$RecordRevised__f_eid;
+    var _2$3 = $n(e$7).Lokay_store_Event$RecordRevised__f_record;
+    return new $c_T2(_1$3, _2$3);
+  }));
+  var $x_6 = $x_7.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("record-revised", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F2__F1__Lokay_effects_shape_Shape(this$51, eid, f2$3, make$3, unmake$3), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$4$1) => {
+    var x$1$5 = $as_Lokay_store_Event(x$1$4$1);
+    if ((x$1$5 instanceof $c_Lokay_store_Event$RecordRevised)) {
+      var e$8 = $as_Lokay_store_Event$RecordRevised(x$1$5);
+      return new $c_s_Some(e$8);
+    } else {
+      return $m_s_None$();
+    }
+  })));
+  var $x_5 = $m_Lokay_effects_shape_Shape$();
+  var this$75 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$7 = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label$7 = $m_s_None$();
+  var doc$7 = $m_s_None$();
+  var default$8 = $m_s_None$();
+  var f2$4 = new $c_Lokay_effects_shape_Shape$Field("id", shape$7, label$7, doc$7, false, default$8);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints = $m_sci_Nil$();
+  var this$61 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+  var shape$8 = new $c_Lokay_effects_shape_Shape$Optional(this$61);
+  var label$8 = $m_s_None$();
+  var doc$8 = $m_s_None$();
+  var default$9 = $m_s_None$();
+  var f3$2 = new $c_Lokay_effects_shape_Shape$Field("reason", shape$8, label$8, doc$8, false, default$9);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$9 = $m_Lokay_effects_shape_Shape$().long__Lokay_effects_shape_Shape();
+  var label$9 = $m_s_None$();
+  var doc$9 = $m_s_None$();
+  var default$10 = $m_s_None$();
+  var f4 = new $c_Lokay_effects_shape_Shape$Field("at", shape$9, label$9, doc$9, false, default$10);
+  var make$4 = new $c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c(((i$5$1, id, r$3$1, at$3$1) => {
+    var i$6 = $as_Lokay_store_EventId(i$5$1);
+    var id$1 = $as_Lokay_store_RecordId(id);
+    var r$4 = $as_s_Option(r$3$1);
+    var $x_4 = $uJ(at$3$1);
+    var at$4_$_lo = $x_4.l;
+    var at$4_$_hi = $x_4.h;
+    return new $c_Lokay_store_Event$RecordRetired(id$1, r$4, at$4_$_lo, at$4_$_hi, i$6);
+  }));
+  var unmake$4 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$5$1) => {
+    var e$9 = $as_Lokay_store_Event$RecordRetired(e$5$1);
+    var _1$4 = $n(e$9).Lokay_store_Event$RecordRetired__f_eid;
+    var _2$4 = $n(e$9).Lokay_store_Event$RecordRetired__f_id;
+    var _3$2 = $n(e$9).Lokay_store_Event$RecordRetired__f_reason;
+    var _4_$_lo = $n(e$9).Lokay_store_Event$RecordRetired__f_at_$lo;
+    var _4_$_hi = $n(e$9).Lokay_store_Event$RecordRetired__f_at_$hi;
+    return new $c_T4(_1$4, _2$4, _3$2, $bL(_4_$_lo, _4_$_hi));
+  }));
+  var $x_3 = $x_5.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("record-retired", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F4__F1__Lokay_effects_shape_Shape(this$75, eid, f2$4, f3$2, f4, make$4, unmake$4), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$5$1) => {
+    var x$1$6 = $as_Lokay_store_Event(x$1$5$1);
+    if ((x$1$6 instanceof $c_Lokay_store_Event$RecordRetired)) {
+      var e$10 = $as_Lokay_store_Event$RecordRetired(x$1$6);
+      return new $c_s_Some(e$10);
+    } else {
+      return $m_s_None$();
+    }
+  })));
+  var $x_2 = $m_Lokay_effects_shape_Shape$();
+  var this$105 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape$10 = $m_Lokay_store_Record$().Lokay_store_Record$__f_id;
+  var label$10 = $m_s_None$();
+  var doc$10 = $m_s_None$();
+  var default$11 = $m_s_None$();
+  var f2$5 = new $c_Lokay_effects_shape_Shape$Field("id", shape$10, label$10, doc$10, false, default$11);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$1 = $m_sci_Nil$();
+  var shape$11 = new $c_Lokay_effects_shape_Shape$Text(constraints$1);
+  var label$11 = $m_s_None$();
+  var doc$11 = $m_s_None$();
+  var default$12 = $m_s_None$();
+  var f3$3 = new $c_Lokay_effects_shape_Shape$Field("field", shape$11, label$11, doc$11, false, default$12);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$2 = $m_sci_Nil$();
+  var shape$12 = new $c_Lokay_effects_shape_Shape$Text(constraints$2);
+  var label$12 = $m_s_None$();
+  var doc$12 = $m_s_None$();
+  var default$13 = $m_s_None$();
+  var f4$1 = new $c_Lokay_effects_shape_Shape$Field("by", shape$12, label$12, doc$12, false, default$13);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$13 = $m_Lokay_effects_shape_Shape$().long__Lokay_effects_shape_Shape();
+  var label$13 = $m_s_None$();
+  var doc$13 = $m_s_None$();
+  var default$14 = $m_s_None$();
+  var f5 = new $c_Lokay_effects_shape_Shape$Field("at", shape$13, label$13, doc$13, false, default$14);
+  var make$5 = new $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78(((i$6$1, id$2, f, b, at$4$1) => {
+    var i$7 = $as_Lokay_store_EventId(i$6$1);
+    var id$3 = $as_Lokay_store_RecordId(id$2);
+    var f$1 = $as_T(f);
+    var b$1 = $as_T(b);
+    var $x_1 = $uJ(at$4$1);
+    var at$5_$_lo = $x_1.l;
+    var at$5_$_hi = $x_1.h;
+    return new $c_Lokay_store_Event$Accessed(id$3, f$1, b$1, at$5_$_lo, at$5_$_hi, i$7);
+  }));
+  var unmake$5 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((e$6$1) => {
+    var e$11 = $as_Lokay_store_Event$Accessed(e$6$1);
+    var _1$5 = $n(e$11).Lokay_store_Event$Accessed__f_eid;
+    var _2$5 = $n(e$11).Lokay_store_Event$Accessed__f_id;
+    var _3$3 = $n(e$11).Lokay_store_Event$Accessed__f_field;
+    var _4$1 = $n(e$11).Lokay_store_Event$Accessed__f_by;
+    var _5_$_lo = $n(e$11).Lokay_store_Event$Accessed__f_at_$lo;
+    var _5_$_hi = $n(e$11).Lokay_store_Event$Accessed__f_at_$hi;
+    return new $c_T5(_1$5, _2$5, _3$3, _4$1, $bL(_5_$_lo, _5_$_hi));
+  }));
+  var cases = $x_16.wrapRefArray__AO__sci_ArraySeq(new ($d_Lokay_effects_shape_Shape$Case.getArrayOf().constr)([$x_13, $x_10, $x_8, $x_6, $x_3, $x_2.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case("accessed", $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F5__F1__Lokay_effects_shape_Shape(this$105, eid, f2$5, f3$3, f4$1, f5, make$5, unmake$5), new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1$6$1) => {
+    var x$1$7 = $as_Lokay_store_Event(x$1$6$1);
+    if ((x$1$7 instanceof $c_Lokay_store_Event$Accessed)) {
+      var e$12 = $as_Lokay_store_Event$Accessed(x$1$7);
+      return new $c_s_Some(e$12);
+    } else {
+      return $m_s_None$();
+    }
+  })))]));
+  var this$108 = $n(cases);
+  var cases$1 = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$108);
+  this.Lokay_store_Event$__f_shape = new $c_Lokay_effects_shape_Shape$OneOf(cases$1);
+}
+$c_Lokay_store_Event$.prototype = new $h_O();
+$c_Lokay_store_Event$.prototype.constructor = $c_Lokay_store_Event$;
+/** @constructor */
+function $h_Lokay_store_Event$() {
+}
+$h_Lokay_store_Event$.prototype = $c_Lokay_store_Event$.prototype;
+$c_Lokay_store_Event$.prototype.identity__Lokay_store_Event__Lokay_store_EventId = (function(e) {
+  var x = $n(e).eid__Lokay_store_EventId();
+  var x$2 = $m_Lokay_store_EventId$().Lokay_store_EventId$__f_none;
+  if ((!((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2)))) {
+    return $n(e).eid__Lokay_store_EventId();
+  } else {
+    $m_Lokay_store_EventId$();
+    var value = ("h" + $p_Lokay_store_Event$__fnv__T__T(this, $m_Lokay_effects_json_Json$().print__Lokay_effects_json_Json__Z__T($n(this.Lokay_store_Event$__f_shape).encode__O__Lokay_effects_json_Json(e), false)));
+    return new $c_Lokay_store_EventId(value);
+  }
+});
+var $d_Lokay_store_Event$ = new $TypeData().initClass($c_Lokay_store_Event$, "okay.store.Event$", ({
+  Lokay_store_Event$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Sum: 1
+}));
+var $n_Lokay_store_Event$;
+function $m_Lokay_store_Event$() {
+  if ((!$n_Lokay_store_Event$)) {
+    $n_Lokay_store_Event$ = new $c_Lokay_store_Event$();
+  }
+  return $n_Lokay_store_Event$;
+}
+/** @constructor */
+function $c_Lokay_store_EventId$() {
+  this.Lokay_store_EventId$__f_none = null;
+  this.Lokay_store_EventId$__f_shape = null;
+  $n_Lokay_store_EventId$ = this;
+  this.Lokay_store_EventId$__f_none = ($m_Lokay_store_EventId$(), new $c_Lokay_store_EventId(""));
+  $m_Lokay_effects_shape_Shape$();
+  var constraints = $m_sci_Nil$();
+  var this$7 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+  var to = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1) => {
+    var _$1$1 = $as_T(_$1);
+    $m_Lokay_store_EventId$();
+    return new $c_Lokay_store_EventId(_$1$1);
+  }));
+  var from = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
+    var _$2$1 = $as_Lokay_store_EventId(_$2);
+    return $n(_$2$1).Lokay_store_EventId__f_value;
+  }));
+  this.Lokay_store_EventId$__f_shape = $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape(this$7, to, from);
+}
+$c_Lokay_store_EventId$.prototype = new $h_O();
+$c_Lokay_store_EventId$.prototype.constructor = $c_Lokay_store_EventId$;
+/** @constructor */
+function $h_Lokay_store_EventId$() {
+}
+$h_Lokay_store_EventId$.prototype = $c_Lokay_store_EventId$.prototype;
+var $d_Lokay_store_EventId$ = new $TypeData().initClass($c_Lokay_store_EventId$, "okay.store.EventId$", ({
+  Lokay_store_EventId$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_store_EventId$;
+function $m_Lokay_store_EventId$() {
+  if ((!$n_Lokay_store_EventId$)) {
+    $n_Lokay_store_EventId$ = new $c_Lokay_store_EventId$();
+  }
+  return $n_Lokay_store_EventId$;
+}
+/** @constructor */
+function $c_Lokay_store_Kind$() {
+  this.Lokay_store_Kind$__f_id = null;
+  this.Lokay_store_Kind$__f_shape = null;
+  $n_Lokay_store_Kind$ = this;
+  $m_Lokay_effects_shape_Shape$();
+  var constraints = $m_sci_Nil$();
+  var this$6 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+  var to = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$1) => {
+    var _$1$1 = $as_T(_$1);
+    return new $c_Lokay_store_KindId(_$1$1);
+  }));
+  var from = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
+    var _$2$1 = $as_Lokay_store_KindId(_$2);
+    return $n(_$2$1).Lokay_store_KindId__f_value;
+  }));
+  this.Lokay_store_Kind$__f_id = $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape(this$6, to, from);
+  var this$54 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape = this.Lokay_store_Kind$__f_id;
+  var label = $m_s_None$();
+  var doc = $m_s_None$();
+  var default$1 = $m_s_None$();
+  var f1 = new $c_Lokay_effects_shape_Shape$Field("id", shape, label, doc, false, default$1);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$1 = $m_sci_Nil$();
+  var shape$1 = new $c_Lokay_effects_shape_Shape$Text(constraints$1);
+  var label$1 = $m_s_None$();
+  var doc$1 = $m_s_None$();
+  var default$2 = $m_s_None$();
+  var f2 = new $c_Lokay_effects_shape_Shape$Field("name", shape$1, label$1, doc$1, false, default$2);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$2 = $m_Lokay_effects_shape_Schema$().shape__Lokay_effects_shape_Shape();
+  var label$2 = $m_s_None$();
+  var doc$2 = $m_s_None$();
+  var default$3 = $m_s_None$();
+  var f3 = new $c_Lokay_effects_shape_Shape$Field("schema", shape$2, label$2, doc$2, false, default$3);
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$2 = $m_sci_Nil$();
+  var \u03b41$ = new $c_Lokay_effects_shape_Shape$Text(constraints$2);
+  var max = $m_s_None$();
+  var shape$3 = new $c_Lokay_effects_shape_Shape$Many(\u03b41$, 0, max);
+  var label$3 = $m_s_None$();
+  var doc$3 = $m_s_None$();
+  var default$4 = $m_s_None$();
+  var f4 = new $c_Lokay_effects_shape_Shape$Field("secret", shape$3, label$3, doc$3, false, default$4).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Nil$());
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$3 = $m_sci_Nil$();
+  var \u03b42$ = new $c_Lokay_effects_shape_Shape$Text(constraints$3);
+  var max$1 = $m_s_None$();
+  var shape$4 = new $c_Lokay_effects_shape_Shape$Many(\u03b42$, 0, max$1);
+  var label$4 = $m_s_None$();
+  var doc$4 = $m_s_None$();
+  var default$5 = $m_s_None$();
+  var f5 = new $c_Lokay_effects_shape_Shape$Field("summary", shape$4, label$4, doc$4, false, default$5).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Nil$());
+  $m_Lokay_effects_shape_Shape$();
+  var shape$5 = $m_Lokay_store_Record$().Lokay_store_Record$__f_obj;
+  var label$5 = $m_s_None$();
+  var doc$5 = $m_s_None$();
+  var default$6 = $m_s_None$();
+  var f6 = new $c_Lokay_effects_shape_Shape$Field("meta", shape$5, label$5, doc$5, false, default$6).withDefault__O__Lokay_effects_shape_Shape$Field($m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty);
+  var make = new $c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e(((id, name, schema, secret, summary, meta) => {
+    var id$1 = $as_Lokay_store_KindId(id);
+    var name$1 = $as_T(name);
+    var schema$1 = $as_Lokay_effects_shape_Schema(schema);
+    var secret$1 = $as_sci_List(secret);
+    var summary$1 = $as_sci_List(summary);
+    var meta$1 = $as_Lokay_effects_json_Json$Obj(meta);
+    $m_Lokay_store_Kind$();
+    var this$48 = $n(secret$1);
+    var secret$2 = $m_sci_Set$().from__sc_IterableOnce__sci_Set(this$48);
+    return new $c_Lokay_store_Kind(id$1, name$1, schema$1, secret$2, summary$1, meta$1);
+  }));
+  var unmake = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((k) => {
+    var k$1 = $as_Lokay_store_Kind(k);
+    var _1 = $n(k$1).Lokay_store_Kind__f_id;
+    var _2 = $n(k$1).Lokay_store_Kind__f_name;
+    var _3 = $n(k$1).Lokay_store_Kind__f_schema;
+    var this$50 = $n($n(k$1).Lokay_store_Kind__f_secret);
+    var this$52 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$50));
+    var ord = $m_s_math_Ordering$String$();
+    var _4 = $f_sc_SeqOps__sorted__s_math_Ordering__O(this$52, ord);
+    var _5 = $n(k$1).Lokay_store_Kind__f_summary;
+    var _6 = $n(k$1).Lokay_store_Kind__f_meta;
+    return new $c_T6(_1, _2, _3, _4, _5, _6);
+  }));
+  this.Lokay_store_Kind$__f_shape = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F6__F1__Lokay_effects_shape_Shape(this$54, f1, f2, f3, f4, f5, f6, make, unmake);
+}
+$c_Lokay_store_Kind$.prototype = new $h_O();
+$c_Lokay_store_Kind$.prototype.constructor = $c_Lokay_store_Kind$;
+/** @constructor */
+function $h_Lokay_store_Kind$() {
+}
+$h_Lokay_store_Kind$.prototype = $c_Lokay_store_Kind$.prototype;
+var $d_Lokay_store_Kind$ = new $TypeData().initClass($c_Lokay_store_Kind$, "okay.store.Kind$", ({
+  Lokay_store_Kind$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_store_Kind$;
+function $m_Lokay_store_Kind$() {
+  if ((!$n_Lokay_store_Kind$)) {
+    $n_Lokay_store_Kind$ = new $c_Lokay_store_Kind$();
+  }
+  return $n_Lokay_store_Kind$;
+}
+/** @constructor */
 function $c_Lokay_store_Order$() {
   $n_Lokay_store_Order$ = this;
   var this$15 = $m_Lokay_effects_shape_Shape$();
@@ -35824,6 +39983,181 @@ function $m_Lokay_store_Order$() {
     $n_Lokay_store_Order$ = new $c_Lokay_store_Order$();
   }
   return $n_Lokay_store_Order$;
+}
+/** @constructor */
+function $c_Lokay_store_Record$() {
+  this.Lokay_store_Record$__f_id = null;
+  this.Lokay_store_Record$__f_version = null;
+  this.Lokay_store_Record$__f_obj = null;
+  this.Lokay_store_Record$__f_tags = null;
+  this.Lokay_store_Record$__f_shape = null;
+  $n_Lokay_store_Record$ = this;
+  $m_Lokay_effects_shape_Shape$();
+  var constraints = $m_sci_Nil$();
+  var this$6 = new $c_Lokay_effects_shape_Shape$Text(constraints);
+  var to = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$3) => {
+    var _$3$1 = $as_T(_$3);
+    return new $c_Lokay_store_RecordId(_$3$1);
+  }));
+  var from = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$4) => {
+    var _$4$1 = $as_Lokay_store_RecordId(_$4);
+    return $n(_$4$1).Lokay_store_RecordId__f_value;
+  }));
+  this.Lokay_store_Record$__f_id = $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape(this$6, to, from);
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$1 = $m_sci_Nil$();
+  var this$11 = new $c_Lokay_effects_shape_Shape$Text(constraints$1);
+  var to$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$5) => {
+    var _$5$1 = $as_T(_$5);
+    return new $c_Lokay_store_VersionId(_$5$1);
+  }));
+  var from$1 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$6) => {
+    var _$6$1 = $as_Lokay_store_VersionId(_$6);
+    return $n(_$6$1).Lokay_store_VersionId__f_value;
+  }));
+  this.Lokay_store_Record$__f_version = $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape(this$11, to$1, from$1);
+  $m_Lokay_effects_shape_Shape$();
+  var this$15 = $m_Lokay_effects_shape_Shape$AnyValue$();
+  var to$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((x$1) => {
+    var x$1$1 = $as_Lokay_effects_json_Json(x$1);
+    if ((x$1$1 instanceof $c_Lokay_effects_json_Json$Obj)) {
+      var o = $as_Lokay_effects_json_Json$Obj(x$1$1);
+      return new $c_s_util_Right(o);
+    } else {
+      var value = ("expected a record, got " + $m_Lokay_effects_json_Json$().kind__Lokay_effects_json_Json__T(x$1$1));
+      return new $c_s_util_Left(value);
+    }
+  }));
+  var from$2 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((o$1) => {
+    var o$2 = $as_Lokay_effects_json_Json$Obj(o$1);
+    return o$2;
+  }));
+  this.Lokay_store_Record$__f_obj = new $c_Lokay_effects_shape_Shape$Mapped(this$15, to$2, from$2);
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$2 = $m_sci_Nil$();
+  var \u03b43$ = new $c_Lokay_effects_shape_Shape$Text(constraints$2);
+  var max = $m_s_None$();
+  var this$25 = new $c_Lokay_effects_shape_Shape$Many(\u03b43$, 0, max);
+  var to$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$7) => {
+    var _$7$1 = $as_sci_List(_$7);
+    var this$21 = $n(_$7$1);
+    return $m_sci_Set$().from__sc_IterableOnce__sci_Set(this$21);
+  }));
+  var from$3 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$8) => {
+    var _$8$1 = $as_sci_Set(_$8);
+    var this$22 = $n(_$8$1);
+    var this$24 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$22));
+    var ord = $m_s_math_Ordering$String$();
+    return $as_sci_List($f_sc_SeqOps__sorted__s_math_Ordering__O(this$24, ord));
+  }));
+  this.Lokay_store_Record$__f_tags = $f_Lokay_effects_shape_Shape__map__F1__F1__Lokay_effects_shape_Shape(this$25, to$3, from$3);
+  var this$81 = $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var shape = this.Lokay_store_Record$__f_id;
+  var label = $m_s_None$();
+  var doc = $m_s_None$();
+  var default$1 = $m_s_None$();
+  var f1 = new $c_Lokay_effects_shape_Shape$Field("id", shape, label, doc, false, default$1);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$1 = this.Lokay_store_Record$__f_version;
+  var label$1 = $m_s_None$();
+  var doc$1 = $m_s_None$();
+  var default$2 = $m_s_None$();
+  var f2 = new $c_Lokay_effects_shape_Shape$Field("version", shape$1, label$1, doc$1, false, default$2);
+  $m_Lokay_effects_shape_Shape$();
+  var this$36 = $n(this.Lokay_store_Record$__f_version);
+  var shape$2 = new $c_Lokay_effects_shape_Shape$Optional(this$36);
+  var label$2 = $m_s_None$();
+  var doc$2 = $m_s_None$();
+  var default$3 = $m_s_None$();
+  var f3 = new $c_Lokay_effects_shape_Shape$Field("parent", shape$2, label$2, doc$2, false, default$3);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$3 = $m_Lokay_store_Kind$().Lokay_store_Kind$__f_id;
+  var label$3 = $m_s_None$();
+  var doc$3 = $m_s_None$();
+  var default$4 = $m_s_None$();
+  var f4 = new $c_Lokay_effects_shape_Shape$Field("kind", shape$3, label$3, doc$3, false, default$4);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$4 = this.Lokay_store_Record$__f_obj;
+  var label$4 = $m_s_None$();
+  var doc$4 = $m_s_None$();
+  var default$5 = $m_s_None$();
+  var f5 = new $c_Lokay_effects_shape_Shape$Field("fields", shape$4, label$4, doc$4, false, default$5);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$5 = this.Lokay_store_Record$__f_obj;
+  var label$5 = $m_s_None$();
+  var doc$5 = $m_s_None$();
+  var default$6 = $m_s_None$();
+  var f6 = new $c_Lokay_effects_shape_Shape$Field("meta", shape$5, label$5, doc$5, false, default$6).withDefault__O__Lokay_effects_shape_Shape$Field($m_Lokay_effects_json_Json$Obj$().Lokay_effects_json_Json$Obj$__f_empty);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$6 = this.Lokay_store_Record$__f_tags;
+  var label$6 = $m_s_None$();
+  var doc$6 = $m_s_None$();
+  var default$7 = $m_s_None$();
+  var f7 = new $c_Lokay_effects_shape_Shape$Field("tags", shape$6, label$6, doc$6, false, default$7).withDefault__O__Lokay_effects_shape_Shape$Field($m_sci_Set$EmptySet$());
+  $m_Lokay_effects_shape_Shape$();
+  $m_Lokay_effects_shape_Shape$();
+  var constraints$3 = $m_sci_Nil$();
+  var this$67 = new $c_Lokay_effects_shape_Shape$Text(constraints$3);
+  var shape$7 = new $c_Lokay_effects_shape_Shape$Optional(this$67);
+  var label$7 = $m_s_None$();
+  var doc$7 = $m_s_None$();
+  var default$8 = $m_s_None$();
+  var f8 = new $c_Lokay_effects_shape_Shape$Field("note", shape$7, label$7, doc$7, false, default$8);
+  $m_Lokay_effects_shape_Shape$();
+  var shape$8 = $m_Lokay_effects_shape_Shape$().long__Lokay_effects_shape_Shape();
+  var label$8 = $m_s_None$();
+  var doc$8 = $m_s_None$();
+  var default$9 = $m_s_None$();
+  var f9 = new $c_Lokay_effects_shape_Shape$Field("at", shape$8, label$8, doc$8, false, default$9);
+  var make = new $c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108(((id, version, parent, kind, fields, meta, tags, note, at) => {
+    var id$1 = $as_Lokay_store_RecordId(id);
+    var version$1 = $as_Lokay_store_VersionId(version);
+    var parent$1 = $as_s_Option(parent);
+    var kind$1 = $as_Lokay_store_KindId(kind);
+    var fields$1 = $as_Lokay_effects_json_Json$Obj(fields);
+    var meta$1 = $as_Lokay_effects_json_Json$Obj(meta);
+    var tags$1 = $as_sci_Set(tags);
+    var note$1 = $as_s_Option(note);
+    var $x_1 = $uJ(at);
+    var at$1_$_lo = $x_1.l;
+    var at$1_$_hi = $x_1.h;
+    $m_Lokay_store_Record$();
+    return new $c_Lokay_store_Record(id$1, version$1, parent$1, kind$1, fields$1, meta$1, tags$1, note$1, at$1_$_lo, at$1_$_hi);
+  }));
+  var unmake = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r) => {
+    var r$1 = $as_Lokay_store_Record(r);
+    var _1 = $n(r$1).Lokay_store_Record__f_id;
+    var _2 = $n(r$1).Lokay_store_Record__f_version;
+    var _3 = $n(r$1).Lokay_store_Record__f_parent;
+    var _4 = $n(r$1).Lokay_store_Record__f_kind;
+    var _5 = $n(r$1).Lokay_store_Record__f_fields;
+    var _6 = $n(r$1).Lokay_store_Record__f_meta;
+    var _7 = $n(r$1).Lokay_store_Record__f_tags;
+    var _8 = $n(r$1).Lokay_store_Record__f_note;
+    var _9_$_lo = $n(r$1).Lokay_store_Record__f_at_$lo;
+    var _9_$_hi = $n(r$1).Lokay_store_Record__f_at_$hi;
+    return new $c_T9(_1, _2, _3, _4, _5, _6, _7, _8, $bL(_9_$_lo, _9_$_hi));
+  }));
+  this.Lokay_store_Record$__f_shape = $f_Lokay_effects_shape_RecordWords__record__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__Lokay_effects_shape_Shape$Field__F9__F1__Lokay_effects_shape_Shape(this$81, f1, f2, f3, f4, f5, f6, f7, f8, f9, make, unmake);
+}
+$c_Lokay_store_Record$.prototype = new $h_O();
+$c_Lokay_store_Record$.prototype.constructor = $c_Lokay_store_Record$;
+/** @constructor */
+function $h_Lokay_store_Record$() {
+}
+$h_Lokay_store_Record$.prototype = $c_Lokay_store_Record$.prototype;
+var $d_Lokay_store_Record$ = new $TypeData().initClass($c_Lokay_store_Record$, "okay.store.Record$", ({
+  Lokay_store_Record$: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1
+}));
+var $n_Lokay_store_Record$;
+function $m_Lokay_store_Record$() {
+  if ((!$n_Lokay_store_Record$)) {
+    $n_Lokay_store_Record$ = new $c_Lokay_store_Record$();
+  }
+  return $n_Lokay_store_Record$;
 }
 function $p_Lokay_store_Where$__rank__s_Option__I($thiz, v) {
   matchAlts1: {
@@ -36089,7 +40423,7 @@ $c_Lokay_store_Where$.prototype.holds__Lokay_store_Where__Lokay_effects_json_Jso
   if ((x === w)) {
     return true;
   }
-  if (false) {
+  if ((w instanceof $c_Lokay_store_Where$Eq)) {
     var x$1 = $as_Lokay_store_Where$Eq(w);
     var this$2 = $n(x$1);
     var x188 = this$2.Lokay_store_Where$Eq__f_path;
@@ -36196,7 +40530,7 @@ $c_Lokay_store_Where$.prototype.holds__Lokay_store_Where__Lokay_effects_json_Jso
       return false;
     }
   }
-  if (false) {
+  if ((w instanceof $c_Lokay_store_Where$And)) {
     var x$1$7 = $as_Lokay_store_Where$And(w);
     var this$31 = $n(x$1$7);
     var x169 = this$31.Lokay_store_Where$And__f_all;
@@ -36212,7 +40546,7 @@ $c_Lokay_store_Where$.prototype.holds__Lokay_store_Where__Lokay_effects_json_Jso
     }
     return true;
   }
-  if (false) {
+  if ((w instanceof $c_Lokay_store_Where$Or)) {
     var x$1$8 = $as_Lokay_store_Where$Or(w);
     var this$34 = $n(x$1$8);
     var x166 = this$34.Lokay_store_Where$Or__f_any;
@@ -38089,6 +42423,9 @@ var $d_sc_IterableOps$WithFilter = new $TypeData().initClass($c_sc_IterableOps$W
   sc_WithFilter: 1,
   Ljava_io_Serializable: 1
 }));
+function $f_sc_Iterator__nextOption__s_Option($thiz) {
+  return ($thiz.hasNext__Z() ? new $c_s_Some($thiz.next__O()) : $m_s_None$());
+}
 function $f_sc_Iterator__indexWhere__F1__I__I($thiz, p, from) {
   var i = ((from > 0) ? from : 0);
   var dropped = $thiz.drop__I__sc_Iterator(from);
@@ -38395,6 +42732,42 @@ $c_sci_BitmapIndexedMapNode.prototype.updated__O__O__I__I__I__Z__sci_BitmapIndex
     return this.copyAndInsertValue__I__O__I__I__O__sci_BitmapIndexedMapNode(bitpos, key, originalHash, keyHash, value);
   }
 });
+$c_sci_BitmapIndexedMapNode.prototype.removed__O__I__I__I__sci_BitmapIndexedMapNode = (function(key, originalHash, keyHash, shift) {
+  var mask = $m_sci_Node$().maskFrom__I__I__I(keyHash, shift);
+  var bitpos = $m_sci_Node$().bitposFrom__I__I(mask);
+  if (((this.sci_BitmapIndexedMapNode__f_dataMap & bitpos) !== 0)) {
+    var index = $m_sci_Node$().indexFrom__I__I__I__I(this.sci_BitmapIndexedMapNode__f_dataMap, mask, bitpos);
+    var key0 = this.getKey__I__O(index);
+    if ($m_sr_BoxesRunTime$().equals__O__O__Z(key0, key)) {
+      var i = this.sci_BitmapIndexedMapNode__f_dataMap;
+      if (($m_jl_Integer$().bitCount__I__I(i) === 2)) {
+        var i$1 = this.sci_BitmapIndexedMapNode__f_nodeMap;
+        var $x_1 = ($m_jl_Integer$().bitCount__I__I(i$1) === 0);
+      } else {
+        var $x_1 = false;
+      }
+      if ($x_1) {
+        var newDataMap = ((shift === 0) ? (this.sci_BitmapIndexedMapNode__f_dataMap ^ bitpos) : $m_sci_Node$().bitposFrom__I__I($m_sci_Node$().maskFrom__I__I__I(keyHash, 0)));
+        return ((index === 0) ? new $c_sci_BitmapIndexedMapNode(newDataMap, 0, new $ac_O([this.getKey__I__O(1), this.getValue__I__O(1)]), new $ac_I(new Int32Array([$n(this.sci_BitmapIndexedMapNode__f_originalHashes).get(1)])), 1, $m_sc_Hashing$().improve__I__I(this.getHash__I__I(1))) : new $c_sci_BitmapIndexedMapNode(newDataMap, 0, new $ac_O([this.getKey__I__O(0), this.getValue__I__O(0)]), new $ac_I(new Int32Array([$n(this.sci_BitmapIndexedMapNode__f_originalHashes).get(0)])), 1, $m_sc_Hashing$().improve__I__I(this.getHash__I__I(0))));
+      } else {
+        return this.copyAndRemoveValue__I__I__sci_BitmapIndexedMapNode(bitpos, keyHash);
+      }
+    } else {
+      return this;
+    }
+  } else if (((this.sci_BitmapIndexedMapNode__f_nodeMap & bitpos) !== 0)) {
+    var index$2 = $m_sci_Node$().indexFrom__I__I__I__I(this.sci_BitmapIndexedMapNode__f_nodeMap, mask, bitpos);
+    var subNode = this.getNode__I__sci_MapNode(index$2);
+    var subNodeNew = $n(subNode).removed__O__I__I__I__sci_MapNode(key, originalHash, keyHash, ((5 + shift) | 0));
+    if ((subNodeNew === subNode)) {
+      return this;
+    }
+    var subNodeNewSize = $n(subNodeNew).size__I();
+    return ((subNodeNewSize === 1) ? ((this.sci_BitmapIndexedMapNode__f_size === $n(subNode).size__I()) ? $as_sci_BitmapIndexedMapNode(subNodeNew) : this.copyAndMigrateFromNodeToInline__I__sci_MapNode__sci_MapNode__sci_BitmapIndexedMapNode(bitpos, subNode, subNodeNew)) : ((subNodeNewSize > 1) ? this.copyAndSetNode__I__sci_MapNode__sci_MapNode__sci_BitmapIndexedMapNode(bitpos, subNode, subNodeNew) : this));
+  } else {
+    return this;
+  }
+});
 $c_sci_BitmapIndexedMapNode.prototype.mergeTwoKeyValPairs__O__O__I__I__O__O__I__I__I__sci_MapNode = (function(key0, value0, originalHash0, keyHash0, key1, value1, originalHash1, keyHash1, shift) {
   if ((shift >= 32)) {
     var this$4 = $m_sci_Vector$();
@@ -38472,6 +42845,18 @@ $c_sci_BitmapIndexedMapNode.prototype.copyAndInsertValue__I__O__I__I__O__sci_Bit
   var dstHashes = this.insertElement__AI__I__I__AI(this.sci_BitmapIndexedMapNode__f_originalHashes, dataIx, originalHash);
   return new $c_sci_BitmapIndexedMapNode((this.sci_BitmapIndexedMapNode__f_dataMap | bitpos), this.sci_BitmapIndexedMapNode__f_nodeMap, dst, dstHashes, ((1 + this.sci_BitmapIndexedMapNode__f_size) | 0), ((this.sci_BitmapIndexedMapNode__f_cachedJavaKeySetHashCode + keyHash) | 0));
 });
+$c_sci_BitmapIndexedMapNode.prototype.copyAndRemoveValue__I__I__sci_BitmapIndexedMapNode = (function(bitpos, keyHash) {
+  var dataIx = this.dataIndex__I__I(bitpos);
+  var idx = (dataIx << 1);
+  var src = this.sci_BitmapIndexedMapNode__f_content;
+  var dst = new $ac_O((($n(src).u.length - 2) | 0));
+  $systemArraycopyRefs($n(src), 0, dst, 0, idx);
+  var srcPos = ((2 + idx) | 0);
+  var length = (((($n(src).u.length - idx) | 0) - 2) | 0);
+  $systemArraycopyRefs($n(src), srcPos, dst, idx, length);
+  var dstHashes = this.removeElement__AI__I__AI(this.sci_BitmapIndexedMapNode__f_originalHashes, dataIx);
+  return new $c_sci_BitmapIndexedMapNode((this.sci_BitmapIndexedMapNode__f_dataMap ^ bitpos), this.sci_BitmapIndexedMapNode__f_nodeMap, dst, dstHashes, ((this.sci_BitmapIndexedMapNode__f_size - 1) | 0), ((this.sci_BitmapIndexedMapNode__f_cachedJavaKeySetHashCode - keyHash) | 0));
+});
 $c_sci_BitmapIndexedMapNode.prototype.migrateFromInlineToNodeInPlace__I__I__sci_MapNode__sci_BitmapIndexedMapNode = (function(bitpos, keyHash, node) {
   var dataIx = this.dataIndex__I__I(bitpos);
   var idxOld = (dataIx << 1);
@@ -38513,6 +42898,28 @@ $c_sci_BitmapIndexedMapNode.prototype.copyAndMigrateFromInlineToNode__I__I__sci_
   $systemArraycopyRefs($n(src), srcPos$1, dst, destPos, length$1);
   var dstHashes = this.removeElement__AI__I__AI(this.sci_BitmapIndexedMapNode__f_originalHashes, dataIx);
   return new $c_sci_BitmapIndexedMapNode((this.sci_BitmapIndexedMapNode__f_dataMap ^ bitpos), (this.sci_BitmapIndexedMapNode__f_nodeMap | bitpos), dst, dstHashes, ((((this.sci_BitmapIndexedMapNode__f_size - 1) | 0) + $n(node).size__I()) | 0), ((((this.sci_BitmapIndexedMapNode__f_cachedJavaKeySetHashCode - keyHash) | 0) + $n(node).cachedJavaKeySetHashCode__I()) | 0));
+});
+$c_sci_BitmapIndexedMapNode.prototype.copyAndMigrateFromNodeToInline__I__sci_MapNode__sci_MapNode__sci_BitmapIndexedMapNode = (function(bitpos, oldNode, node) {
+  var idxOld = (((($n(this.sci_BitmapIndexedMapNode__f_content).u.length - 1) | 0) - this.nodeIndex__I__I(bitpos)) | 0);
+  var dataIxNew = this.dataIndex__I__I(bitpos);
+  var idxNew = (dataIxNew << 1);
+  var key = $n(node).getKey__I__O(0);
+  var value = $n(node).getValue__I__O(0);
+  var src = this.sci_BitmapIndexedMapNode__f_content;
+  var dst = new $ac_O(((1 + $n(src).u.length) | 0));
+  $systemArraycopyRefs($n(src), 0, dst, 0, idxNew);
+  dst.set(idxNew, key);
+  dst.set(((1 + idxNew) | 0), value);
+  var destPos = ((2 + idxNew) | 0);
+  var length = ((idxOld - idxNew) | 0);
+  $systemArraycopyRefs($n(src), idxNew, dst, destPos, length);
+  var srcPos = ((1 + idxOld) | 0);
+  var destPos$1 = ((2 + idxOld) | 0);
+  var length$1 = (((($n(src).u.length - idxOld) | 0) - 1) | 0);
+  $systemArraycopyRefs($n(src), srcPos, dst, destPos$1, length$1);
+  var hash = $n(node).getHash__I__I(0);
+  var dstHashes = this.insertElement__AI__I__I__AI(this.sci_BitmapIndexedMapNode__f_originalHashes, dataIxNew, hash);
+  return new $c_sci_BitmapIndexedMapNode((this.sci_BitmapIndexedMapNode__f_dataMap | bitpos), (this.sci_BitmapIndexedMapNode__f_nodeMap ^ bitpos), dst, dstHashes, ((1 + ((this.sci_BitmapIndexedMapNode__f_size - $n(oldNode).size__I()) | 0)) | 0), ((((this.sci_BitmapIndexedMapNode__f_cachedJavaKeySetHashCode - $n(oldNode).cachedJavaKeySetHashCode__I()) | 0) + $n(node).cachedJavaKeySetHashCode__I()) | 0));
 });
 $c_sci_BitmapIndexedMapNode.prototype.foreach__F1__V = (function(f) {
   var i = this.sci_BitmapIndexedMapNode__f_dataMap;
@@ -38805,6 +43212,9 @@ $c_sci_BitmapIndexedMapNode.prototype.filterImpl__F1__Z__sci_MapNode = (function
 });
 $c_sci_BitmapIndexedMapNode.prototype.copy__sci_MapNode = (function() {
   return this.copy__sci_BitmapIndexedMapNode();
+});
+$c_sci_BitmapIndexedMapNode.prototype.removed__O__I__I__I__sci_MapNode = (function(key, originalHash, hash, shift) {
+  return this.removed__O__I__I__I__sci_BitmapIndexedMapNode(key, originalHash, hash, shift);
 });
 $c_sci_BitmapIndexedMapNode.prototype.updated__O__O__I__I__I__Z__sci_MapNode = (function(key, value, originalHash, hash, shift, replaceValue) {
   return this.updated__O__O__I__I__I__Z__sci_BitmapIndexedMapNode(key, value, originalHash, hash, shift, replaceValue);
@@ -39409,6 +43819,31 @@ $c_sci_HashCollisionMapNode.prototype.containsKey__O__I__I__I__Z = (function(key
 $c_sci_HashCollisionMapNode.prototype.updated__O__O__I__I__I__Z__sci_MapNode = (function(key, value, originalHash, hash, shift, replaceValue) {
   var index = this.indexOf__O__I(key);
   return ((index >= 0) ? (replaceValue ? (Object.is($n($as_T2($n(this.sci_HashCollisionMapNode__f_content).apply__I__O(index)))._2__O(), value) ? this : new $c_sci_HashCollisionMapNode(originalHash, hash, $n(this.sci_HashCollisionMapNode__f_content).updated__I__O__sci_Vector(index, new $c_T2(key, value)))) : this) : new $c_sci_HashCollisionMapNode(originalHash, hash, $n(this.sci_HashCollisionMapNode__f_content).appended__O__sci_Vector(new $c_T2(key, value))));
+});
+$c_sci_HashCollisionMapNode.prototype.removed__O__I__I__I__sci_MapNode = (function(key, originalHash, hash, shift) {
+  if ((!this.containsKey__O__I__I__I__Z(key, originalHash, hash, shift))) {
+    return this;
+  } else {
+    var this$1 = $n(this.sci_HashCollisionMapNode__f_content);
+    var pred = new $c_sr_AbstractFunction1_$$Lambda$7afc3dd0acc1681fb022ef921c83979087aaa919(((keyValuePair$2$2) => {
+      var keyValuePair$2 = $as_T2(keyValuePair$2$2);
+      return $m_sr_BoxesRunTime$().equals__O__O__Z($n(keyValuePair$2)._1__O(), key);
+    }));
+    var updatedContent = this$1.filterImpl__F1__Z__sci_Vector(pred, true);
+    var this$2 = $n(updatedContent);
+    var x1 = this$2.length__I();
+    if ((x1 === 1)) {
+      var x1$2 = $as_T2($n(updatedContent).apply__I__O(0));
+      if ((x1$2 === null)) {
+        throw new $c_s_MatchError(x1$2);
+      }
+      var k = $n(x1$2)._1__O();
+      var v = $n(x1$2)._2__O();
+      return new $c_sci_BitmapIndexedMapNode($m_sci_Node$().bitposFrom__I__I($m_sci_Node$().maskFrom__I__I__I(hash, 0)), 0, new $ac_O([k, v]), new $ac_I(new Int32Array([originalHash])), 1, hash);
+    } else {
+      return new $c_sci_HashCollisionMapNode(originalHash, hash, updatedContent);
+    }
+  }
 });
 $c_sci_HashCollisionMapNode.prototype.hasNodes__Z = (function() {
   return false;
@@ -40535,6 +44970,51 @@ $c_sjsr_AnonFunction2.prototype.constructor = $c_sjsr_AnonFunction2;
 function $h_sjsr_AnonFunction2() {
 }
 $h_sjsr_AnonFunction2.prototype = $c_sjsr_AnonFunction2.prototype;
+/** @constructor */
+function $c_sjsr_AnonFunction3() {
+}
+$c_sjsr_AnonFunction3.prototype = new $h_sr_AbstractFunction3();
+$c_sjsr_AnonFunction3.prototype.constructor = $c_sjsr_AnonFunction3;
+/** @constructor */
+function $h_sjsr_AnonFunction3() {
+}
+$h_sjsr_AnonFunction3.prototype = $c_sjsr_AnonFunction3.prototype;
+/** @constructor */
+function $c_sjsr_AnonFunction4() {
+}
+$c_sjsr_AnonFunction4.prototype = new $h_sr_AbstractFunction4();
+$c_sjsr_AnonFunction4.prototype.constructor = $c_sjsr_AnonFunction4;
+/** @constructor */
+function $h_sjsr_AnonFunction4() {
+}
+$h_sjsr_AnonFunction4.prototype = $c_sjsr_AnonFunction4.prototype;
+/** @constructor */
+function $c_sjsr_AnonFunction5() {
+}
+$c_sjsr_AnonFunction5.prototype = new $h_sr_AbstractFunction5();
+$c_sjsr_AnonFunction5.prototype.constructor = $c_sjsr_AnonFunction5;
+/** @constructor */
+function $h_sjsr_AnonFunction5() {
+}
+$h_sjsr_AnonFunction5.prototype = $c_sjsr_AnonFunction5.prototype;
+/** @constructor */
+function $c_sjsr_AnonFunction6() {
+}
+$c_sjsr_AnonFunction6.prototype = new $h_sr_AbstractFunction6();
+$c_sjsr_AnonFunction6.prototype.constructor = $c_sjsr_AnonFunction6;
+/** @constructor */
+function $h_sjsr_AnonFunction6() {
+}
+$h_sjsr_AnonFunction6.prototype = $c_sjsr_AnonFunction6.prototype;
+/** @constructor */
+function $c_sjsr_AnonFunction9() {
+}
+$c_sjsr_AnonFunction9.prototype = new $h_sr_AbstractFunction9();
+$c_sjsr_AnonFunction9.prototype.constructor = $c_sjsr_AnonFunction9;
+/** @constructor */
+function $h_sjsr_AnonFunction9() {
+}
+$h_sjsr_AnonFunction9.prototype = $c_sjsr_AnonFunction9.prototype;
 function $as_s_util_control_ControlThrowable(obj) {
   return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "scala.util.control.ControlThrowable"));
 }
@@ -44505,6 +48985,183 @@ var $d_Lmunit_internal_io_MunitPath = new $TypeData().initClass($c_Lmunit_intern
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
+function $c_Lokay_effects_describe_Op(name, params, result, make, doc, writes) {
+  this.Lokay_effects_describe_Op__f_name = null;
+  this.Lokay_effects_describe_Op__f_params = null;
+  this.Lokay_effects_describe_Op__f_result = null;
+  this.Lokay_effects_describe_Op__f_make = null;
+  this.Lokay_effects_describe_Op__f_doc = null;
+  this.Lokay_effects_describe_Op__f_writes = false;
+  this.Lokay_effects_describe_Op__f_name = name;
+  this.Lokay_effects_describe_Op__f_params = params;
+  this.Lokay_effects_describe_Op__f_result = result;
+  this.Lokay_effects_describe_Op__f_make = make;
+  this.Lokay_effects_describe_Op__f_doc = doc;
+  this.Lokay_effects_describe_Op__f_writes = writes;
+}
+$c_Lokay_effects_describe_Op.prototype = new $h_O();
+$c_Lokay_effects_describe_Op.prototype.constructor = $c_Lokay_effects_describe_Op;
+/** @constructor */
+function $h_Lokay_effects_describe_Op() {
+}
+$h_Lokay_effects_describe_Op.prototype = $c_Lokay_effects_describe_Op.prototype;
+$c_Lokay_effects_describe_Op.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_describe_Op.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 2561);
+  var hash$1 = acc;
+  var x = this.Lokay_effects_describe_Op__f_name;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x$1 = this.Lokay_effects_describe_Op__f_params;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$2 = this.Lokay_effects_describe_Op__f_result;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$2);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  var x$3 = this.Lokay_effects_describe_Op__f_make;
+  var data$3 = $m_sr_Statics$().anyHash__O__I(x$3);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$3);
+  var hash$5 = acc;
+  var x$4 = this.Lokay_effects_describe_Op__f_doc;
+  var data$4 = $m_sr_Statics$().anyHash__O__I(x$4);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$5, data$4);
+  var hash$6 = acc;
+  var data$5 = (this.Lokay_effects_describe_Op__f_writes ? 1231 : 1237);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$6, data$5);
+  var hash$7 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$7, 6);
+});
+$c_Lokay_effects_describe_Op.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_describe_Op)) {
+    var x$0$2 = $as_Lokay_effects_describe_Op(x$0);
+    if (((this.Lokay_effects_describe_Op__f_writes === $n(x$0$2).Lokay_effects_describe_Op__f_writes) && (this.Lokay_effects_describe_Op__f_name === $n(x$0$2).Lokay_effects_describe_Op__f_name))) {
+      var x = this.Lokay_effects_describe_Op__f_params;
+      var x$2 = $n(x$0$2).Lokay_effects_describe_Op__f_params;
+      var $x_3 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_3 = false;
+    }
+    if ($x_3) {
+      var x$3 = this.Lokay_effects_describe_Op__f_result;
+      var x$4 = $n(x$0$2).Lokay_effects_describe_Op__f_result;
+      var $x_2 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$5 = this.Lokay_effects_describe_Op__f_make;
+      var x$6 = $n(x$0$2).Lokay_effects_describe_Op__f_make;
+      var $x_1 = ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$7 = this.Lokay_effects_describe_Op__f_doc;
+      var x$8 = $n(x$0$2).Lokay_effects_describe_Op__f_doc;
+      return ((x$7 === null) ? (x$8 === null) : $n(x$7).equals__O__Z(x$8));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_describe_Op.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_describe_Op.prototype.productArity__I = (function() {
+  return 6;
+});
+$c_Lokay_effects_describe_Op.prototype.productPrefix__T = (function() {
+  return "Op";
+});
+$c_Lokay_effects_describe_Op.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_effects_describe_Op__f_name;
+      break;
+    }
+    case 1: {
+      return this.Lokay_effects_describe_Op__f_params;
+      break;
+    }
+    case 2: {
+      return this.Lokay_effects_describe_Op__f_result;
+      break;
+    }
+    case 3: {
+      return this.Lokay_effects_describe_Op__f_make;
+      break;
+    }
+    case 4: {
+      return this.Lokay_effects_describe_Op__f_doc;
+      break;
+    }
+    case 5: {
+      return this.Lokay_effects_describe_Op__f_writes;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_effects_describe_Op.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "name";
+      break;
+    }
+    case 1: {
+      return "params";
+      break;
+    }
+    case 2: {
+      return "result";
+      break;
+    }
+    case 3: {
+      return "make";
+      break;
+    }
+    case 4: {
+      return "doc";
+      break;
+    }
+    case 5: {
+      return "writes";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_effects_describe_Op(obj) {
+  return (((obj instanceof $c_Lokay_effects_describe_Op) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.describe.Op"));
+}
+function $isArrayOf_Lokay_effects_describe_Op(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_describe_Op)));
+}
+function $asArrayOf_Lokay_effects_describe_Op(obj, depth) {
+  return (($isArrayOf_Lokay_effects_describe_Op(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.describe.Op;", depth));
+}
+var $d_Lokay_effects_describe_Op = new $TypeData().initClass($c_Lokay_effects_describe_Op, "okay.effects.describe.Op", ({
+  Lokay_effects_describe_Op: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_effects_parsing_ParseError(offset_$_lo, offset_$_hi, line, column, expected, found) {
   this.Lokay_effects_parsing_ParseError__f_offset_$lo = 0;
   this.Lokay_effects_parsing_ParseError__f_offset_$hi = 0;
@@ -47285,6 +51942,284 @@ var $d_Lokay_serverless_store_StorePrograms$Sale = new $TypeData().initClass($c_
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
+function $c_Lokay_store_EventId(value) {
+  this.Lokay_store_EventId__f_value = null;
+  this.Lokay_store_EventId__f_value = value;
+}
+$c_Lokay_store_EventId.prototype = new $h_O();
+$c_Lokay_store_EventId.prototype.constructor = $c_Lokay_store_EventId;
+/** @constructor */
+function $h_Lokay_store_EventId() {
+}
+$h_Lokay_store_EventId.prototype = $c_Lokay_store_EventId.prototype;
+$c_Lokay_store_EventId.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_EventId.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1036951802, true);
+});
+$c_Lokay_store_EventId.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_EventId)) {
+    var x$0$2 = $as_Lokay_store_EventId(x$0);
+    return (this.Lokay_store_EventId__f_value === $n(x$0$2).Lokay_store_EventId__f_value);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_EventId.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_EventId.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_EventId.prototype.productPrefix__T = (function() {
+  return "EventId";
+});
+$c_Lokay_store_EventId.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_EventId__f_value;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_EventId.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "value";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_EventId(obj) {
+  return (((obj instanceof $c_Lokay_store_EventId) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.EventId"));
+}
+function $isArrayOf_Lokay_store_EventId(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_EventId)));
+}
+function $asArrayOf_Lokay_store_EventId(obj, depth) {
+  return (($isArrayOf_Lokay_store_EventId(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.EventId;", depth));
+}
+var $d_Lokay_store_EventId = new $TypeData().initClass($c_Lokay_store_EventId, "okay.store.EventId", ({
+  Lokay_store_EventId: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Kind(id, name, schema, secret, summary, meta) {
+  this.Lokay_store_Kind__f_id = null;
+  this.Lokay_store_Kind__f_name = null;
+  this.Lokay_store_Kind__f_schema = null;
+  this.Lokay_store_Kind__f_secret = null;
+  this.Lokay_store_Kind__f_summary = null;
+  this.Lokay_store_Kind__f_meta = null;
+  this.Lokay_store_Kind__f_id = id;
+  this.Lokay_store_Kind__f_name = name;
+  this.Lokay_store_Kind__f_schema = schema;
+  this.Lokay_store_Kind__f_secret = secret;
+  this.Lokay_store_Kind__f_summary = summary;
+  this.Lokay_store_Kind__f_meta = meta;
+}
+$c_Lokay_store_Kind.prototype = new $h_O();
+$c_Lokay_store_Kind.prototype.constructor = $c_Lokay_store_Kind;
+/** @constructor */
+function $h_Lokay_store_Kind() {
+}
+$h_Lokay_store_Kind.prototype = $c_Lokay_store_Kind.prototype;
+$c_Lokay_store_Kind.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Kind.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1605881420, true);
+});
+$c_Lokay_store_Kind.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Kind)) {
+    var x$0$2 = $as_Lokay_store_Kind(x$0);
+    var x = this.Lokay_store_Kind__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Kind__f_id;
+    if ((((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2)) && (this.Lokay_store_Kind__f_name === $n(x$0$2).Lokay_store_Kind__f_name))) {
+      var x$3 = this.Lokay_store_Kind__f_schema;
+      var x$4 = $n(x$0$2).Lokay_store_Kind__f_schema;
+      var $x_3 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_3 = false;
+    }
+    if ($x_3) {
+      var x$5 = this.Lokay_store_Kind__f_secret;
+      var x$6 = $n(x$0$2).Lokay_store_Kind__f_secret;
+      var $x_2 = ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$7 = this.Lokay_store_Kind__f_summary;
+      var x$8 = $n(x$0$2).Lokay_store_Kind__f_summary;
+      var $x_1 = ((x$7 === null) ? (x$8 === null) : $n(x$7).equals__O__Z(x$8));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$9 = this.Lokay_store_Kind__f_meta;
+      var x$10 = $n(x$0$2).Lokay_store_Kind__f_meta;
+      return ((x$9 === null) ? (x$10 === null) : $n(x$9).equals__O__Z(x$10));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Kind.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Kind.prototype.productArity__I = (function() {
+  return 6;
+});
+$c_Lokay_store_Kind.prototype.productPrefix__T = (function() {
+  return "Kind";
+});
+$c_Lokay_store_Kind.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Kind__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Kind__f_name;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Kind__f_schema;
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Kind__f_secret;
+      break;
+    }
+    case 4: {
+      return this.Lokay_store_Kind__f_summary;
+      break;
+    }
+    case 5: {
+      return this.Lokay_store_Kind__f_meta;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Kind.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "name";
+      break;
+    }
+    case 2: {
+      return "schema";
+      break;
+    }
+    case 3: {
+      return "secret";
+      break;
+    }
+    case 4: {
+      return "summary";
+      break;
+    }
+    case 5: {
+      return "meta";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Kind(obj) {
+  return (((obj instanceof $c_Lokay_store_Kind) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Kind"));
+}
+function $isArrayOf_Lokay_store_Kind(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Kind)));
+}
+function $asArrayOf_Lokay_store_Kind(obj, depth) {
+  return (($isArrayOf_Lokay_store_Kind(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Kind;", depth));
+}
+var $d_Lokay_store_Kind = new $TypeData().initClass($c_Lokay_store_Kind, "okay.store.Kind", ({
+  Lokay_store_Kind: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_KindId(value) {
+  this.Lokay_store_KindId__f_value = null;
+  this.Lokay_store_KindId__f_value = value;
+}
+$c_Lokay_store_KindId.prototype = new $h_O();
+$c_Lokay_store_KindId.prototype.constructor = $c_Lokay_store_KindId;
+/** @constructor */
+function $h_Lokay_store_KindId() {
+}
+$h_Lokay_store_KindId.prototype = $c_Lokay_store_KindId.prototype;
+$c_Lokay_store_KindId.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_KindId.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-18875015), true);
+});
+$c_Lokay_store_KindId.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_KindId)) {
+    var x$0$2 = $as_Lokay_store_KindId(x$0);
+    return (this.Lokay_store_KindId__f_value === $n(x$0$2).Lokay_store_KindId__f_value);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_KindId.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_KindId.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_KindId.prototype.productPrefix__T = (function() {
+  return "KindId";
+});
+$c_Lokay_store_KindId.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_KindId__f_value;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_KindId.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "value";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_KindId(obj) {
+  return (((obj instanceof $c_Lokay_store_KindId) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.KindId"));
+}
+function $isArrayOf_Lokay_store_KindId(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_KindId)));
+}
+function $asArrayOf_Lokay_store_KindId(obj, depth) {
+  return (($isArrayOf_Lokay_store_KindId(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.KindId;", depth));
+}
+var $d_Lokay_store_KindId = new $TypeData().initClass($c_Lokay_store_KindId, "okay.store.KindId", ({
+  Lokay_store_KindId: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_store_Mapping$() {
 }
 $c_Lokay_store_Mapping$.prototype = new $h_O();
@@ -47307,7 +52242,7 @@ $c_Lokay_store_Mapping$.prototype.keyed__T__Lokay_effects_shape_Shape__T__Lokay_
       }))));
       break matchResult6;
     }
-    if (false) {
+    if ((x10 instanceof $c_Lokay_effects_shape_Schema$Described)) {
       var x$1$1 = $as_Lokay_effects_shape_Schema$Described(x10);
       var this$4 = $n(x$1$1);
       var x13 = this$4.Lokay_effects_shape_Schema$Described__f_of;
@@ -47459,6 +52394,387 @@ function $asArrayOf_Lokay_store_Order(obj, depth) {
 }
 var $d_Lokay_store_Order = new $TypeData().initClass($c_Lokay_store_Order, "okay.store.Order", ({
   Lokay_store_Order: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Record(id, version, parent, kind, fields, meta, tags, note, at_$_lo, at_$_hi) {
+  this.Lokay_store_Record__f_id = null;
+  this.Lokay_store_Record__f_version = null;
+  this.Lokay_store_Record__f_parent = null;
+  this.Lokay_store_Record__f_kind = null;
+  this.Lokay_store_Record__f_fields = null;
+  this.Lokay_store_Record__f_meta = null;
+  this.Lokay_store_Record__f_tags = null;
+  this.Lokay_store_Record__f_note = null;
+  this.Lokay_store_Record__f_at_$lo = 0;
+  this.Lokay_store_Record__f_at_$hi = 0;
+  this.Lokay_store_Record__f_id = id;
+  this.Lokay_store_Record__f_version = version;
+  this.Lokay_store_Record__f_parent = parent;
+  this.Lokay_store_Record__f_kind = kind;
+  this.Lokay_store_Record__f_fields = fields;
+  this.Lokay_store_Record__f_meta = meta;
+  this.Lokay_store_Record__f_tags = tags;
+  this.Lokay_store_Record__f_note = note;
+  this.Lokay_store_Record__f_at_$lo = at_$_lo;
+  this.Lokay_store_Record__f_at_$hi = at_$_hi;
+}
+$c_Lokay_store_Record.prototype = new $h_O();
+$c_Lokay_store_Record.prototype.constructor = $c_Lokay_store_Record;
+/** @constructor */
+function $h_Lokay_store_Record() {
+}
+$h_Lokay_store_Record.prototype = $c_Lokay_store_Record.prototype;
+$c_Lokay_store_Record.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Record.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-1851041679));
+  var hash$1 = acc;
+  var x = this.Lokay_store_Record__f_id;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x$1 = this.Lokay_store_Record__f_version;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$2 = this.Lokay_store_Record__f_parent;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$2);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  var x$3 = this.Lokay_store_Record__f_kind;
+  var data$3 = $m_sr_Statics$().anyHash__O__I(x$3);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$3);
+  var hash$5 = acc;
+  var x$4 = this.Lokay_store_Record__f_fields;
+  var data$4 = $m_sr_Statics$().anyHash__O__I(x$4);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$5, data$4);
+  var hash$6 = acc;
+  var x$5 = this.Lokay_store_Record__f_meta;
+  var data$5 = $m_sr_Statics$().anyHash__O__I(x$5);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$6, data$5);
+  var hash$7 = acc;
+  var x$6 = this.Lokay_store_Record__f_tags;
+  var data$6 = $m_sr_Statics$().anyHash__O__I(x$6);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$7, data$6);
+  var hash$8 = acc;
+  var x$7 = this.Lokay_store_Record__f_note;
+  var data$7 = $m_sr_Statics$().anyHash__O__I(x$7);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$8, data$7);
+  var hash$9 = acc;
+  var lv_$_lo = this.Lokay_store_Record__f_at_$lo;
+  var lv_$_hi = this.Lokay_store_Record__f_at_$hi;
+  var data$8 = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$9, data$8);
+  var hash$10 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$10, 9);
+});
+$c_Lokay_store_Record.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Record)) {
+    var x$0$2 = $as_Lokay_store_Record(x$0);
+    var x_$_lo = this.Lokay_store_Record__f_at_$lo;
+    var x_$_hi = this.Lokay_store_Record__f_at_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_store_Record__f_at_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_store_Record__f_at_$hi;
+    if ((((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0)) {
+      var x$2 = this.Lokay_store_Record__f_id;
+      var x$2$1 = $n(x$0$2).Lokay_store_Record__f_id;
+      var $x_7 = ((x$2 === null) ? (x$2$1 === null) : $n(x$2).equals__O__Z(x$2$1));
+    } else {
+      var $x_7 = false;
+    }
+    if ($x_7) {
+      var x$3 = this.Lokay_store_Record__f_version;
+      var x$4 = $n(x$0$2).Lokay_store_Record__f_version;
+      var $x_6 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_6 = false;
+    }
+    if ($x_6) {
+      var x$5 = this.Lokay_store_Record__f_parent;
+      var x$6 = $n(x$0$2).Lokay_store_Record__f_parent;
+      var $x_5 = ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      var $x_5 = false;
+    }
+    if ($x_5) {
+      var x$7 = this.Lokay_store_Record__f_kind;
+      var x$8 = $n(x$0$2).Lokay_store_Record__f_kind;
+      var $x_4 = ((x$7 === null) ? (x$8 === null) : $n(x$7).equals__O__Z(x$8));
+    } else {
+      var $x_4 = false;
+    }
+    if ($x_4) {
+      var x$9 = this.Lokay_store_Record__f_fields;
+      var x$10 = $n(x$0$2).Lokay_store_Record__f_fields;
+      var $x_3 = ((x$9 === null) ? (x$10 === null) : $n(x$9).equals__O__Z(x$10));
+    } else {
+      var $x_3 = false;
+    }
+    if ($x_3) {
+      var x$11 = this.Lokay_store_Record__f_meta;
+      var x$12 = $n(x$0$2).Lokay_store_Record__f_meta;
+      var $x_2 = ((x$11 === null) ? (x$12 === null) : $n(x$11).equals__O__Z(x$12));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$13 = this.Lokay_store_Record__f_tags;
+      var x$14 = $n(x$0$2).Lokay_store_Record__f_tags;
+      var $x_1 = ((x$13 === null) ? (x$14 === null) : $n(x$13).equals__O__Z(x$14));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$15 = this.Lokay_store_Record__f_note;
+      var x$16 = $n(x$0$2).Lokay_store_Record__f_note;
+      return ((x$15 === null) ? (x$16 === null) : $n(x$15).equals__O__Z(x$16));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Record.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Record.prototype.productArity__I = (function() {
+  return 9;
+});
+$c_Lokay_store_Record.prototype.productPrefix__T = (function() {
+  return "Record";
+});
+$c_Lokay_store_Record.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Record__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Record__f_version;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Record__f_parent;
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Record__f_kind;
+      break;
+    }
+    case 4: {
+      return this.Lokay_store_Record__f_fields;
+      break;
+    }
+    case 5: {
+      return this.Lokay_store_Record__f_meta;
+      break;
+    }
+    case 6: {
+      return this.Lokay_store_Record__f_tags;
+      break;
+    }
+    case 7: {
+      return this.Lokay_store_Record__f_note;
+      break;
+    }
+    case 8: {
+      return $bL(this.Lokay_store_Record__f_at_$lo, this.Lokay_store_Record__f_at_$hi);
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Record.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "version";
+      break;
+    }
+    case 2: {
+      return "parent";
+      break;
+    }
+    case 3: {
+      return "kind";
+      break;
+    }
+    case 4: {
+      return "fields";
+      break;
+    }
+    case 5: {
+      return "meta";
+      break;
+    }
+    case 6: {
+      return "tags";
+      break;
+    }
+    case 7: {
+      return "note";
+      break;
+    }
+    case 8: {
+      return "at";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Record(obj) {
+  return (((obj instanceof $c_Lokay_store_Record) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Record"));
+}
+function $isArrayOf_Lokay_store_Record(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Record)));
+}
+function $asArrayOf_Lokay_store_Record(obj, depth) {
+  return (($isArrayOf_Lokay_store_Record(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Record;", depth));
+}
+var $d_Lokay_store_Record = new $TypeData().initClass($c_Lokay_store_Record, "okay.store.Record", ({
+  Lokay_store_Record: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_RecordId(value) {
+  this.Lokay_store_RecordId__f_value = null;
+  this.Lokay_store_RecordId__f_value = value;
+}
+$c_Lokay_store_RecordId.prototype = new $h_O();
+$c_Lokay_store_RecordId.prototype.constructor = $c_Lokay_store_RecordId;
+/** @constructor */
+function $h_Lokay_store_RecordId() {
+}
+$h_Lokay_store_RecordId.prototype = $c_Lokay_store_RecordId.prototype;
+$c_Lokay_store_RecordId.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_RecordId.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-751366040), true);
+});
+$c_Lokay_store_RecordId.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_RecordId)) {
+    var x$0$2 = $as_Lokay_store_RecordId(x$0);
+    return (this.Lokay_store_RecordId__f_value === $n(x$0$2).Lokay_store_RecordId__f_value);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_RecordId.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_RecordId.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_RecordId.prototype.productPrefix__T = (function() {
+  return "RecordId";
+});
+$c_Lokay_store_RecordId.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_RecordId__f_value;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_RecordId.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "value";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_RecordId(obj) {
+  return (((obj instanceof $c_Lokay_store_RecordId) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.RecordId"));
+}
+function $isArrayOf_Lokay_store_RecordId(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_RecordId)));
+}
+function $asArrayOf_Lokay_store_RecordId(obj, depth) {
+  return (($isArrayOf_Lokay_store_RecordId(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.RecordId;", depth));
+}
+var $d_Lokay_store_RecordId = new $TypeData().initClass($c_Lokay_store_RecordId, "okay.store.RecordId", ({
+  Lokay_store_RecordId: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_VersionId(value) {
+  this.Lokay_store_VersionId__f_value = null;
+  this.Lokay_store_VersionId__f_value = value;
+}
+$c_Lokay_store_VersionId.prototype = new $h_O();
+$c_Lokay_store_VersionId.prototype.constructor = $c_Lokay_store_VersionId;
+/** @constructor */
+function $h_Lokay_store_VersionId() {
+}
+$h_Lokay_store_VersionId.prototype = $c_Lokay_store_VersionId.prototype;
+$c_Lokay_store_VersionId.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_VersionId.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-969032822), true);
+});
+$c_Lokay_store_VersionId.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_VersionId)) {
+    var x$0$2 = $as_Lokay_store_VersionId(x$0);
+    return (this.Lokay_store_VersionId__f_value === $n(x$0$2).Lokay_store_VersionId__f_value);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_VersionId.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_VersionId.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_VersionId.prototype.productPrefix__T = (function() {
+  return "VersionId";
+});
+$c_Lokay_store_VersionId.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_VersionId__f_value;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_VersionId.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "value";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_VersionId(obj) {
+  return (((obj instanceof $c_Lokay_store_VersionId) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.VersionId"));
+}
+function $isArrayOf_Lokay_store_VersionId(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_VersionId)));
+}
+function $asArrayOf_Lokay_store_VersionId(obj, depth) {
+  return (($isArrayOf_Lokay_store_VersionId(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.VersionId;", depth));
+}
+var $d_Lokay_store_VersionId = new $TypeData().initClass($c_Lokay_store_VersionId, "okay.store.VersionId", ({
+  Lokay_store_VersionId: 1,
   s_Equals: 1,
   s_Product: 1,
   Ljava_io_Serializable: 1
@@ -48582,6 +53898,106 @@ var $d_sjsr_AnonFunction2_$$Lambda$770e9b86e03b055b1d78d82135c9f39ea48d32d7 = ne
   F2: 1
 }));
 /** @constructor */
+function $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96(f) {
+  this.sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96__f_f = null;
+  this.sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96__f_f = f;
+}
+$c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96.prototype = new $h_sjsr_AnonFunction3();
+$c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96.prototype.constructor = $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96;
+/** @constructor */
+function $h_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96() {
+}
+$h_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96.prototype = $c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96.prototype;
+$c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96.prototype.apply__O__O__O__O = (function(x0, x1, x2) {
+  return $n(this.sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96__f_f)(x0, x1, x2);
+});
+var $d_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96 = new $TypeData().initClass($c_sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96, "scala.scalajs.runtime.AnonFunction3.$$Lambda$73f37e31ba038fe839c174212837da323f140c96", ({
+  sjsr_AnonFunction3_$$Lambda$73f37e31ba038fe839c174212837da323f140c96: 1,
+  sjsr_AnonFunction3: 1,
+  sr_AbstractFunction3: 1,
+  F3: 1
+}));
+/** @constructor */
+function $c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c(f) {
+  this.sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c__f_f = null;
+  this.sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c__f_f = f;
+}
+$c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c.prototype = new $h_sjsr_AnonFunction4();
+$c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c.prototype.constructor = $c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c;
+/** @constructor */
+function $h_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c() {
+}
+$h_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c.prototype = $c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c.prototype;
+$c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c.prototype.apply__O__O__O__O__O = (function(x0, x1, x2, x3) {
+  return $n(this.sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c__f_f)(x0, x1, x2, x3);
+});
+var $d_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c = new $TypeData().initClass($c_sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c, "scala.scalajs.runtime.AnonFunction4.$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c", ({
+  sjsr_AnonFunction4_$$Lambda$120c664e6fb20e1c3552e9e8baf775b7682c102c: 1,
+  sjsr_AnonFunction4: 1,
+  sr_AbstractFunction4: 1,
+  F4: 1
+}));
+/** @constructor */
+function $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78(f) {
+  this.sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78__f_f = null;
+  this.sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78__f_f = f;
+}
+$c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78.prototype = new $h_sjsr_AnonFunction5();
+$c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78.prototype.constructor = $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78;
+/** @constructor */
+function $h_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78() {
+}
+$h_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78.prototype = $c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78.prototype;
+$c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78.prototype.apply__O__O__O__O__O__O = (function(x0, x1, x2, x3, x4) {
+  return $n(this.sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78__f_f)(x0, x1, x2, x3, x4);
+});
+var $d_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78 = new $TypeData().initClass($c_sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78, "scala.scalajs.runtime.AnonFunction5.$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78", ({
+  sjsr_AnonFunction5_$$Lambda$82b0277dcf29bf41e6ebe3ec24e151817649fe78: 1,
+  sjsr_AnonFunction5: 1,
+  sr_AbstractFunction5: 1,
+  F5: 1
+}));
+/** @constructor */
+function $c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e(f) {
+  this.sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e__f_f = null;
+  this.sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e__f_f = f;
+}
+$c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e.prototype = new $h_sjsr_AnonFunction6();
+$c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e.prototype.constructor = $c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e;
+/** @constructor */
+function $h_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e() {
+}
+$h_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e.prototype = $c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e.prototype;
+$c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e.prototype.apply__O__O__O__O__O__O__O = (function(x0, x1, x2, x3, x4, x5) {
+  return $n(this.sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e__f_f)(x0, x1, x2, x3, x4, x5);
+});
+var $d_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e = new $TypeData().initClass($c_sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e, "scala.scalajs.runtime.AnonFunction6.$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e", ({
+  sjsr_AnonFunction6_$$Lambda$39017dae4a967fbe8fca0cd4c8f04f299a6cfb7e: 1,
+  sjsr_AnonFunction6: 1,
+  sr_AbstractFunction6: 1,
+  F6: 1
+}));
+/** @constructor */
+function $c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108(f) {
+  this.sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108__f_f = null;
+  this.sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108__f_f = f;
+}
+$c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108.prototype = new $h_sjsr_AnonFunction9();
+$c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108.prototype.constructor = $c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108;
+/** @constructor */
+function $h_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108() {
+}
+$h_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108.prototype = $c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108.prototype;
+$c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108.prototype.apply__O__O__O__O__O__O__O__O__O__O = (function(x0, x1, x2, x3, x4, x5, x6, x7, x8) {
+  return $n(this.sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108__f_f)(x0, x1, x2, x3, x4, x5, x6, x7, x8);
+});
+var $d_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108 = new $TypeData().initClass($c_sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108, "scala.scalajs.runtime.AnonFunction9.$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108", ({
+  sjsr_AnonFunction9_$$Lambda$bec0fa2ea8c2338588bd1e26523619ac4d96b108: 1,
+  sjsr_AnonFunction9: 1,
+  sr_AbstractFunction9: 1,
+  F9: 1
+}));
+/** @constructor */
 function $c_s_util_Either() {
 }
 $c_s_util_Either.prototype = new $h_O();
@@ -48595,6 +54011,15 @@ $c_s_util_Either.prototype.flatMap__F1__s_util_Either = (function(f) {
     var x2 = $as_s_util_Right(this);
     var b = $n(x2).s_util_Right__f_value;
     return $as_s_util_Either($n(f).apply__O__O(b));
+  } else {
+    return this;
+  }
+});
+$c_s_util_Either.prototype.map__F1__s_util_Either = (function(f) {
+  if ((this instanceof $c_s_util_Right)) {
+    var x2 = $as_s_util_Right(this);
+    var b = $n(x2).s_util_Right__f_value;
+    return new $c_s_util_Right($n(f).apply__O__O(b));
   } else {
     return this;
   }
@@ -51234,6 +56659,49 @@ var $d_Lokay_effects_algebra_Validated$Valid = new $TypeData().initClass($c_Loka
   s_Product: 1,
   Ljava_io_Serializable: 1
 }));
+function $p_Lokay_effects_cek_OnCek$__general__Lokay_effects_Clauses__Lokay_scala3_Handler($thiz, h) {
+  var ret = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a) => $as_Lokay_scala3_Prog($n(h).ret__O__O(a))));
+  var op = new $c_Lokay_effects_cek_OnCek$$anon$1(h);
+  return new $c_Lokay_scala3_Handler$General(ret, op);
+}
+function $p_Lokay_effects_cek_OnCek$__tail__Lokay_effects_TailClauses__Lokay_scala3_Handler($thiz, h) {
+  var ret = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((a) => $as_Lokay_scala3_Prog($n(h).ret__O__O(a))));
+  var answer = new $c_Lokay_effects_cek_OnCek$$anon$2(h);
+  return new $c_Lokay_scala3_Handler$Tail(ret, answer);
+}
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$() {
+  $n_Lokay_effects_cek_OnCek$ = this;
+  $f_Lokay_effects_Effects__$init$__V(this);
+}
+$c_Lokay_effects_cek_OnCek$.prototype = new $h_O();
+$c_Lokay_effects_cek_OnCek$.prototype.constructor = $c_Lokay_effects_cek_OnCek$;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$() {
+}
+$h_Lokay_effects_cek_OnCek$.prototype = $c_Lokay_effects_cek_OnCek$.prototype;
+$c_Lokay_effects_cek_OnCek$.prototype.handle__Lokay_scala3_Prog__Lokay_effects_Clauses__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_Prog = (function(p, h, s) {
+  var h$1 = $p_Lokay_effects_cek_OnCek$__general__Lokay_effects_Clauses__Lokay_scala3_Handler(this, h);
+  return new $c_Lokay_scala3_Prog$Handle(p, s, h$1);
+});
+$c_Lokay_effects_cek_OnCek$.prototype.handle__Lokay_scala3_Prog__Lokay_effects_TailClauses__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_Prog = (function(p, h, s) {
+  var h$1 = $p_Lokay_effects_cek_OnCek$__tail__Lokay_effects_TailClauses__Lokay_scala3_Handler(this, h);
+  return new $c_Lokay_scala3_Prog$Handle(p, s, h$1);
+});
+var $d_Lokay_effects_cek_OnCek$ = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$, "okay.effects.cek.OnCek$", ({
+  Lokay_effects_cek_OnCek$: 1,
+  Lokay_effects_Effectful: 1,
+  Lokay_effects_Effects: 1,
+  Lokay_effects_Runner: 1,
+  Lokay_effects_Self: 1
+}));
+var $n_Lokay_effects_cek_OnCek$;
+function $m_Lokay_effects_cek_OnCek$() {
+  if ((!$n_Lokay_effects_cek_OnCek$)) {
+    $n_Lokay_effects_cek_OnCek$ = new $c_Lokay_effects_cek_OnCek$();
+  }
+  return $n_Lokay_effects_cek_OnCek$;
+}
 /** @constructor */
 function $c_Lokay_effects_json_Json$Arr(items) {
   this.Lokay_effects_json_Json$Arr__f_items = null;
@@ -51563,6 +57031,23 @@ $c_Lokay_effects_json_Json$Obj.prototype.get__T__s_Option = (function(name) {
   var pf = new $c_Lokay_effects_json_Json$Obj$$anon$1(name);
   return $f_sc_IterableOnceOps__collectFirst__s_PartialFunction__s_Option(this$1, pf);
 });
+$c_Lokay_effects_json_Json$Obj.prototype.without__T__Lokay_effects_json_Json$Obj = (function(name) {
+  $m_Lokay_effects_json_Json$Obj$();
+  var this$1 = $n(this.Lokay_effects_json_Json$Obj__f_fields);
+  var pred = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((_$2) => {
+    var _$2$1 = $as_T2(_$2);
+    var x = $n(_$2$1)._1__O();
+    return ((x === null) ? (name === null) : $dp_equals__O__Z($n(x), name));
+  }));
+  var fields = this$1.filterImpl__F1__Z__sci_Vector(pred, true);
+  return new $c_Lokay_effects_json_Json$Obj(fields);
+});
+$c_Lokay_effects_json_Json$Obj.prototype.$plus$colon__T2__Lokay_effects_json_Json$Obj = (function(field) {
+  $m_Lokay_effects_json_Json$Obj$();
+  var this$1 = $n(this.Lokay_effects_json_Json$Obj__f_fields);
+  var fields = this$1.prepended__O__sci_Vector(field);
+  return new $c_Lokay_effects_json_Json$Obj(fields);
+});
 function $as_Lokay_effects_json_Json$Obj(obj) {
   return (((obj instanceof $c_Lokay_effects_json_Json$Obj) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.json.Json$Obj"));
 }
@@ -51840,8 +57325,160 @@ var $d_Lokay_effects_json_Json$Value = new $TypeData().initClass($c_Lokay_effect
   s_Product: 1,
   Ljava_io_Serializable: 1
 }));
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$Choice(options) {
+  this.Lokay_effects_shape_Schema$Choice__f_options = null;
+  this.Lokay_effects_shape_Schema$Choice__f_options = options;
+}
+$c_Lokay_effects_shape_Schema$Choice.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Choice.prototype.constructor = $c_Lokay_effects_shape_Schema$Choice;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Choice() {
+}
+$h_Lokay_effects_shape_Schema$Choice.prototype = $c_Lokay_effects_shape_Schema$Choice.prototype;
+$c_Lokay_effects_shape_Schema$Choice.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 2147058976, true);
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Schema$Choice)) {
+    var x$0$2 = $as_Lokay_effects_shape_Schema$Choice(x$0);
+    var x = this.Lokay_effects_shape_Schema$Choice__f_options;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Schema$Choice__f_options;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.productPrefix__T = (function() {
+  return "Choice";
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Schema$Choice__f_options;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$Choice.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "options";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$Choice(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Choice) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Choice"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Choice(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Choice)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Choice(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Choice(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Choice;", depth));
+}
+var $d_Lokay_effects_shape_Schema$Choice = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Choice, "okay.effects.shape.Schema$Choice", ({
+  Lokay_effects_shape_Schema$Choice: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$Described(of, label, doc) {
+  this.Lokay_effects_shape_Schema$Described__f_of = null;
+  this.Lokay_effects_shape_Schema$Described__f_label = null;
+  this.Lokay_effects_shape_Schema$Described__f_doc = null;
+  this.Lokay_effects_shape_Schema$Described__f_of = of;
+  this.Lokay_effects_shape_Schema$Described__f_label = label;
+  this.Lokay_effects_shape_Schema$Described__f_doc = doc;
+}
+$c_Lokay_effects_shape_Schema$Described.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Described.prototype.constructor = $c_Lokay_effects_shape_Schema$Described;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Described() {
+}
+$h_Lokay_effects_shape_Schema$Described.prototype = $c_Lokay_effects_shape_Schema$Described.prototype;
+$c_Lokay_effects_shape_Schema$Described.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 2041724785, true);
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Schema$Described)) {
+    var x$0$2 = $as_Lokay_effects_shape_Schema$Described(x$0);
+    var x = this.Lokay_effects_shape_Schema$Described__f_of;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Schema$Described__f_of;
+    if ((((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2)) && (this.Lokay_effects_shape_Schema$Described__f_label === $n(x$0$2).Lokay_effects_shape_Schema$Described__f_label))) {
+      var x$3 = this.Lokay_effects_shape_Schema$Described__f_doc;
+      var x$4 = $n(x$0$2).Lokay_effects_shape_Schema$Described__f_doc;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.productPrefix__T = (function() {
+  return "Described";
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_effects_shape_Schema$Described__f_of;
+      break;
+    }
+    case 1: {
+      return this.Lokay_effects_shape_Schema$Described__f_label;
+      break;
+    }
+    case 2: {
+      return this.Lokay_effects_shape_Schema$Described__f_doc;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_effects_shape_Schema$Described.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "of";
+      break;
+    }
+    case 1: {
+      return "label";
+      break;
+    }
+    case 2: {
+      return "doc";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
 function $as_Lokay_effects_shape_Schema$Described(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Described"));
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Described) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Described"));
 }
 function $isArrayOf_Lokay_effects_shape_Schema$Described(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Described)));
@@ -51849,6 +57486,13 @@ function $isArrayOf_Lokay_effects_shape_Schema$Described(obj, depth) {
 function $asArrayOf_Lokay_effects_shape_Schema$Described(obj, depth) {
   return (($isArrayOf_Lokay_effects_shape_Schema$Described(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Described;", depth));
 }
+var $d_Lokay_effects_shape_Schema$Described = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Described, "okay.effects.shape.Schema$Described", ({
+  Lokay_effects_shape_Schema$Described: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 /** @constructor */
 function $c_Lokay_effects_shape_Schema$Integer(constraints) {
   this.Lokay_effects_shape_Schema$Integer__f_constraints = null;
@@ -52104,6 +57748,138 @@ var $d_Lokay_effects_shape_Schema$Number = new $TypeData().initClass($c_Lokay_ef
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
+function $c_Lokay_effects_shape_Schema$OneOf(cases) {
+  this.Lokay_effects_shape_Schema$OneOf__f_cases = null;
+  this.Lokay_effects_shape_Schema$OneOf__f_cases = cases;
+}
+$c_Lokay_effects_shape_Schema$OneOf.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$OneOf.prototype.constructor = $c_Lokay_effects_shape_Schema$OneOf;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$OneOf() {
+}
+$h_Lokay_effects_shape_Schema$OneOf.prototype = $c_Lokay_effects_shape_Schema$OneOf.prototype;
+$c_Lokay_effects_shape_Schema$OneOf.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-926075863), true);
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Schema$OneOf)) {
+    var x$0$2 = $as_Lokay_effects_shape_Schema$OneOf(x$0);
+    var x = this.Lokay_effects_shape_Schema$OneOf__f_cases;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Schema$OneOf__f_cases;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.productPrefix__T = (function() {
+  return "OneOf";
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Schema$OneOf__f_cases;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$OneOf.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "cases";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$OneOf(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$OneOf) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$OneOf"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$OneOf(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$OneOf)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$OneOf(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$OneOf(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$OneOf;", depth));
+}
+var $d_Lokay_effects_shape_Schema$OneOf = new $TypeData().initClass($c_Lokay_effects_shape_Schema$OneOf, "okay.effects.shape.Schema$OneOf", ({
+  Lokay_effects_shape_Schema$OneOf: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$Optional(of) {
+  this.Lokay_effects_shape_Schema$Optional__f_of = null;
+  this.Lokay_effects_shape_Schema$Optional__f_of = of;
+}
+$c_Lokay_effects_shape_Schema$Optional.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Optional.prototype.constructor = $c_Lokay_effects_shape_Schema$Optional;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Optional() {
+}
+$h_Lokay_effects_shape_Schema$Optional.prototype = $c_Lokay_effects_shape_Schema$Optional.prototype;
+$c_Lokay_effects_shape_Schema$Optional.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-651526155), true);
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Schema$Optional)) {
+    var x$0$2 = $as_Lokay_effects_shape_Schema$Optional(x$0);
+    var x = this.Lokay_effects_shape_Schema$Optional__f_of;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Schema$Optional__f_of;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.productPrefix__T = (function() {
+  return "Optional";
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Schema$Optional__f_of;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$Optional.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "of";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$Optional(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Optional) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Optional"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Optional(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Optional)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Optional(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Optional(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Optional;", depth));
+}
+var $d_Lokay_effects_shape_Schema$Optional = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Optional, "okay.effects.shape.Schema$Optional", ({
+  Lokay_effects_shape_Schema$Optional: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_effects_shape_Schema$Record(fields) {
   this.Lokay_effects_shape_Schema$Record__f_fields = null;
   this.Lokay_effects_shape_Schema$Record__f_fields = fields;
@@ -52164,6 +57940,70 @@ function $asArrayOf_Lokay_effects_shape_Schema$Record(obj, depth) {
 }
 var $d_Lokay_effects_shape_Schema$Record = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Record, "okay.effects.shape.Schema$Record", ({
   Lokay_effects_shape_Schema$Record: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$Ref(name) {
+  this.Lokay_effects_shape_Schema$Ref__f_name = null;
+  this.Lokay_effects_shape_Schema$Ref__f_name = name;
+}
+$c_Lokay_effects_shape_Schema$Ref.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Ref.prototype.constructor = $c_Lokay_effects_shape_Schema$Ref;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Ref() {
+}
+$h_Lokay_effects_shape_Schema$Ref.prototype = $c_Lokay_effects_shape_Schema$Ref.prototype;
+$c_Lokay_effects_shape_Schema$Ref.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1406403772), true);
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Schema$Ref)) {
+    var x$0$2 = $as_Lokay_effects_shape_Schema$Ref(x$0);
+    return (this.Lokay_effects_shape_Schema$Ref__f_name === $n(x$0$2).Lokay_effects_shape_Schema$Ref__f_name);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.productPrefix__T = (function() {
+  return "Ref";
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Schema$Ref__f_name;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$Ref.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "name";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$Ref(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Ref) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Ref"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Ref(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Ref)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Ref(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Ref(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Ref;", depth));
+}
+var $d_Lokay_effects_shape_Schema$Ref = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Ref, "okay.effects.shape.Schema$Ref", ({
+  Lokay_effects_shape_Schema$Ref: 1,
   Lokay_effects_shape_Schema: 1,
   s_Equals: 1,
   s_Product: 1,
@@ -52367,6 +58207,10 @@ $c_Lokay_effects_shape_Shape$.prototype.long__Lokay_effects_shape_Shape = (funct
   }));
   return new $c_Lokay_effects_shape_Shape$Mapped(this$6, to, from);
 });
+$c_Lokay_effects_shape_Shape$.prototype.sub__T__Lokay_effects_shape_Shape__F1__Lokay_effects_shape_Shape$Case = (function(name, shape, project) {
+  var inject0 = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((b) => b));
+  return new $c_Lokay_effects_shape_Shape$Case$$anon$7(name, shape, inject0, project);
+});
 var $d_Lokay_effects_shape_Shape$ = new $TypeData().initClass($c_Lokay_effects_shape_Shape$, "okay.effects.shape.Shape$", ({
   Lokay_effects_shape_Shape$: 1,
   Lokay_effects_shape_RecordWords: 1,
@@ -52381,6 +58225,111 @@ function $m_Lokay_effects_shape_Shape$() {
   }
   return $n_Lokay_effects_shape_Shape$;
 }
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$Deferred(name, of) {
+  this.Lokay_effects_shape_Shape$Deferred__f_name = null;
+  this.Lokay_effects_shape_Shape$Deferred__f_of = null;
+  this.Lokay_effects_shape_Shape$Deferred__f_inner$lzy1 = null;
+  this.Lokay_effects_shape_Shape$Deferred__f_innerbitmap$1 = false;
+  this.Lokay_effects_shape_Shape$Deferred__f_name = name;
+  this.Lokay_effects_shape_Shape$Deferred__f_of = of;
+}
+$c_Lokay_effects_shape_Shape$Deferred.prototype = new $h_O();
+$c_Lokay_effects_shape_Shape$Deferred.prototype.constructor = $c_Lokay_effects_shape_Shape$Deferred;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$Deferred() {
+}
+$h_Lokay_effects_shape_Shape$Deferred.prototype = $c_Lokay_effects_shape_Shape$Deferred.prototype;
+$c_Lokay_effects_shape_Shape$Deferred.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1469049769), true);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Shape$Deferred)) {
+    var x$0$2 = $as_Lokay_effects_shape_Shape$Deferred(x$0);
+    if ((this.Lokay_effects_shape_Shape$Deferred__f_name === $n(x$0$2).Lokay_effects_shape_Shape$Deferred__f_name)) {
+      var x = this.Lokay_effects_shape_Shape$Deferred__f_of;
+      var x$2 = $n(x$0$2).Lokay_effects_shape_Shape$Deferred__f_of;
+      if ((x === null)) {
+        return (x$2 === null);
+      } else {
+        var this$1 = $n(x);
+        return (this$1 === x$2);
+      }
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.productPrefix__T = (function() {
+  return "Deferred";
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Shape$Deferred__f_name;
+  }
+  if ((n === 1)) {
+    return this.Lokay_effects_shape_Shape$Deferred__f_of;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "name";
+  }
+  if ((n === 1)) {
+    return "of";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.inner__Lokay_effects_shape_Shape = (function() {
+  if ((!this.Lokay_effects_shape_Shape$Deferred__f_innerbitmap$1)) {
+    this.Lokay_effects_shape_Shape$Deferred__f_inner$lzy1 = $as_Lokay_effects_shape_Shape($n(this.Lokay_effects_shape_Shape$Deferred__f_of).apply__O());
+    this.Lokay_effects_shape_Shape$Deferred__f_innerbitmap$1 = true;
+  }
+  return this.Lokay_effects_shape_Shape$Deferred__f_inner$lzy1;
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either = (function(v, path) {
+  return $n(this.inner__Lokay_effects_shape_Shape()).decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(v, path);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.encode__O__Lokay_effects_json_Json = (function(a) {
+  return $n(this.inner__Lokay_effects_shape_Shape()).encode__O__Lokay_effects_json_Json(a);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.erased__Lokay_effects_shape_Schema = (function() {
+  var name = this.Lokay_effects_shape_Shape$Deferred__f_name;
+  return new $c_Lokay_effects_shape_Schema$Ref(name);
+});
+$c_Lokay_effects_shape_Shape$Deferred.prototype.absent__s_Option = (function() {
+  return $n(this.inner__Lokay_effects_shape_Shape()).absent__s_Option();
+});
+function $as_Lokay_effects_shape_Shape$Deferred(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Shape$Deferred) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Shape$Deferred"));
+}
+function $isArrayOf_Lokay_effects_shape_Shape$Deferred(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Shape$Deferred)));
+}
+function $asArrayOf_Lokay_effects_shape_Shape$Deferred(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Shape$Deferred(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Shape$Deferred;", depth));
+}
+var $d_Lokay_effects_shape_Shape$Deferred = new $TypeData().initClass($c_Lokay_effects_shape_Shape$Deferred, "okay.effects.shape.Shape$Deferred", ({
+  Lokay_effects_shape_Shape$Deferred: 1,
+  Lokay_effects_shape_Shape: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 /** @constructor */
 function $c_Lokay_effects_shape_Shape$Integer(constraints) {
   this.Lokay_effects_shape_Shape$Integer__f_constraints = null;
@@ -53060,6 +59009,344 @@ function $asArrayOf_Lokay_effects_shape_Shape$Number(obj, depth) {
 }
 var $d_Lokay_effects_shape_Shape$Number = new $TypeData().initClass($c_Lokay_effects_shape_Shape$Number, "okay.effects.shape.Shape$Number", ({
   Lokay_effects_shape_Shape$Number: 1,
+  Lokay_effects_shape_Shape: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+function $p_Lokay_effects_shape_Shape$OneOf__names__T($thiz) {
+  var this$1 = $n($thiz.Lokay_effects_shape_Shape$OneOf__f_cases);
+  var f = ((_$32) => {
+    var _$32$1 = $as_Lokay_effects_shape_Shape$Case(_$32);
+    return $n(_$32$1).Lokay_effects_shape_Shape$Case$$anon$7__f_name;
+  });
+  if ((this$1 === $m_sci_Nil$())) {
+    var this$2 = $m_sci_Nil$();
+  } else {
+    var x0 = this$1.head__O();
+    var h = new $c_sci_$colon$colon(f(x0), $m_sci_Nil$());
+    var t = h;
+    var rest = $as_sci_List(this$1.tail__O());
+    while ((rest !== $m_sci_Nil$())) {
+      var x0$1 = $n(rest).head__O();
+      var nx = new $c_sci_$colon$colon(f(x0$1), $m_sci_Nil$());
+      $n(t).sci_$colon$colon__f_next = nx;
+      t = nx;
+      rest = $as_sci_List($n(rest).tail__O());
+    }
+    var this$2 = h;
+  }
+  return $f_sc_IterableOnceOps__mkString__T__T__T__T(this$2, "", ", ", "");
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$OneOf(cases) {
+  this.Lokay_effects_shape_Shape$OneOf__f_cases = null;
+  this.Lokay_effects_shape_Shape$OneOf__f_cases = cases;
+}
+$c_Lokay_effects_shape_Shape$OneOf.prototype = new $h_O();
+$c_Lokay_effects_shape_Shape$OneOf.prototype.constructor = $c_Lokay_effects_shape_Shape$OneOf;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$OneOf() {
+}
+$h_Lokay_effects_shape_Shape$OneOf.prototype = $c_Lokay_effects_shape_Shape$OneOf.prototype;
+$c_Lokay_effects_shape_Shape$OneOf.prototype.absent__s_Option = (function() {
+  return $m_s_None$();
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-926075863), true);
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Shape$OneOf)) {
+    var x$0$2 = $as_Lokay_effects_shape_Shape$OneOf(x$0);
+    var x = this.Lokay_effects_shape_Shape$OneOf__f_cases;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Shape$OneOf__f_cases;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.productPrefix__T = (function() {
+  return "OneOf";
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Shape$OneOf__f_cases;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "cases";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either = (function(v, path) {
+  if ((v instanceof $c_Lokay_effects_json_Json$Obj)) {
+    var o = $as_Lokay_effects_json_Json$Obj(v);
+    var x116 = $n(o).get__T__s_Option("type");
+    if ((x116 instanceof $c_s_Some)) {
+      var x120 = $as_Lokay_effects_json_Json($n($as_s_Some(x116)).s_Some__f_value);
+      if ((x120 instanceof $c_Lokay_effects_json_Json$Str)) {
+        var x$1 = $as_Lokay_effects_json_Json$Str(x120);
+        var this$2 = $n(x$1);
+        var x123 = this$2.Lokay_effects_json_Json$Str__f_s;
+        var this$3 = $n(this.Lokay_effects_shape_Shape$OneOf__f_cases);
+        _return: {
+          var these = this$3;
+          while ((!$n(these).isEmpty__Z())) {
+            var x0 = $n(these).head__O();
+            var _$33 = $as_Lokay_effects_shape_Shape$Case(x0);
+            if (($n(_$33).Lokay_effects_shape_Shape$Case$$anon$7__f_name === x123)) {
+              var x113 = new $c_s_Some($n(these).head__O());
+              break _return;
+            }
+            these = $as_sci_List($n(these).tail__O());
+          }
+          var x113 = $m_s_None$();
+        }
+        if ((x113 instanceof $c_s_Some)) {
+          var c = $as_Lokay_effects_shape_Shape$Case($n($as_s_Some(x113)).s_Some__f_value);
+          if (this.flat__Lokay_effects_shape_Shape$Case__Z(c)) {
+            return $n($n($n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_shape).decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either($n(o).without__T__Lokay_effects_json_Json$Obj("type"), path)).map__F1__s_util_Either($n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_inject);
+          } else {
+            var x110 = $n(o).get__T__s_Option("value");
+            if ((x110 instanceof $c_s_Some)) {
+              var x = $as_Lokay_effects_json_Json($n($as_s_Some(x110)).s_Some__f_value);
+              var $x_1 = $n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_shape;
+              var this$4 = $n(path);
+              return $n($n($x_1).decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(x, new $c_sci_$colon$colon("value", this$4))).map__F1__s_util_Either($n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_inject);
+            }
+            var x$2 = $m_s_None$();
+            if ((x$2 === x110)) {
+              var this$5 = $n($n($n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_shape).absent__s_Option());
+              var f = $n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_inject;
+              var this$6 = (this$5.isEmpty__Z() ? $m_s_None$() : new $c_s_Some($n(f).apply__O__O(this$5.get__O())));
+              if (this$6.isEmpty__Z()) {
+                var this$7 = $n(path);
+                var path$1 = new $c_sci_$colon$colon("value", this$7).reverse__sci_List();
+                return new $c_s_util_Left(new $c_sci_$colon$colon(new $c_Lokay_effects_shape_Problem(path$1, "required"), $m_sci_Nil$()));
+              } else {
+                return new $c_s_util_Right(this$6.get__O());
+              }
+            }
+            throw new $c_s_MatchError(x110);
+          }
+        }
+        var x$4 = $m_s_None$();
+        if ((x$4 === x113)) {
+          var $x_2 = $m_Lokay_effects_shape_Shape$();
+          var this$9 = $n(path);
+          return $x_2.problem__sci_List__T__s_util_Either(new $c_sci_$colon$colon("type", this$9), ("one of " + $p_Lokay_effects_shape_Shape$OneOf__names__T(this)));
+        }
+        throw new $c_s_MatchError(x113);
+      }
+      var $x_4 = $m_Lokay_effects_shape_Shape$();
+      var $x_3 = $p_Lokay_effects_shape_Shape$OneOf__names__T(this);
+      var this$10 = $n(path);
+      return $x_4.expected__T__Lokay_effects_json_Json__sci_List__s_util_Either(("one of " + $x_3), x120, new $c_sci_$colon$colon("type", this$10));
+    }
+    var x$6 = $m_s_None$();
+    if ((x$6 === x116)) {
+      return $m_Lokay_effects_shape_Shape$().problem__sci_List__T__s_util_Either(path, ("a 'type' field naming one of " + $p_Lokay_effects_shape_Shape$OneOf__names__T(this)));
+    }
+    throw new $c_s_MatchError(x116);
+  } else {
+    return $m_Lokay_effects_shape_Shape$().expected__T__Lokay_effects_json_Json__sci_List__s_util_Either("a record with a 'type'", v, path);
+  }
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.encode__O__Lokay_effects_json_Json = (function(a) {
+  matchResult55: {
+    var $x_1;
+    var this$3 = $n($n(this.Lokay_effects_shape_Shape$OneOf__f_cases).iterator__sc_Iterator());
+    var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((c) => {
+      var c$1 = $as_Lokay_effects_shape_Shape$Case(c);
+      var this$1 = $n($n(c$1).write__O__s_Option(a));
+      if (this$1.isEmpty__Z()) {
+        return $m_s_None$();
+      } else {
+        var x0 = this$1.get__O();
+        var v = $as_Lokay_effects_json_Json(x0);
+        return new $c_s_Some(new $c_T2(c$1, v));
+      }
+    }));
+    var this$4 = new $c_sc_Iterator$$anon$10(this$3, f);
+    var x128 = $f_sc_Iterator__nextOption__s_Option(this$4);
+    if ((x128 instanceof $c_s_Some)) {
+      var x130 = $as_T2($n($as_s_Some(x128)).s_Some__f_value);
+      if ((x130 !== null)) {
+        var c$2 = $as_Lokay_effects_shape_Shape$Case($n(x130)._1__O());
+        var body = $as_Lokay_effects_json_Json($n(x130)._2__O());
+        if ((body instanceof $c_Lokay_effects_json_Json$Obj)) {
+          var o = $as_Lokay_effects_json_Json$Obj(body);
+          if (this.flat__Lokay_effects_shape_Shape$Case__Z(c$2)) {
+            var s = $n(c$2).Lokay_effects_shape_Shape$Case$$anon$7__f_name;
+            var y = new $c_Lokay_effects_json_Json$Str(s);
+            var field$1 = new $c_T2("type", y);
+            var $x_1 = $n(o).$plus$colon__T2__Lokay_effects_json_Json$Obj(field$1);
+            break matchResult55;
+          }
+        }
+        $m_Lokay_effects_json_Json$Obj$();
+        var $x_2 = $m_sr_ScalaRunTime$();
+        var s$1 = $n(c$2).Lokay_effects_shape_Shape$Case$$anon$7__f_name;
+        var y$1 = new $c_Lokay_effects_json_Json$Str(s$1);
+        var fields = $x_2.wrapRefArray__AO__sci_ArraySeq(new ($d_T2.getArrayOf().constr)([new $c_T2("type", y$1), new $c_T2("value", body)]));
+        $m_Lokay_effects_json_Json$Obj$();
+        var this$14 = $n(fields);
+        var fields$1 = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$14);
+        var $x_1 = new $c_Lokay_effects_json_Json$Obj(fields$1);
+        break matchResult55;
+      }
+    }
+    var x = $m_s_None$();
+    if ((x === x128)) {
+      var $x_1 = $m_Lokay_effects_json_Json$Null$();
+      break matchResult55;
+    }
+    throw new $c_s_MatchError(x128);
+  }
+  return $as_Lokay_effects_json_Json($x_1);
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.erased__Lokay_effects_shape_Schema = (function() {
+  var this$3 = $n($n(this.Lokay_effects_shape_Shape$OneOf__f_cases).iterator__sc_Iterator());
+  var f = new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((c) => {
+    var c$1 = $as_Lokay_effects_shape_Shape$Case(c);
+    var self = $n(c$1).Lokay_effects_shape_Shape$Case$$anon$7__f_name;
+    var y = $n($n(c$1).Lokay_effects_shape_Shape$Case$$anon$7__f_shape).erased__Lokay_effects_shape_Schema();
+    return new $c_T2(self, y);
+  }));
+  var this$4 = new $c_sc_Iterator$$anon$9(this$3, f);
+  var cases = $m_sci_Vector$().from__sc_IterableOnce__sci_Vector(this$4);
+  return new $c_Lokay_effects_shape_Schema$OneOf(cases);
+});
+$c_Lokay_effects_shape_Shape$OneOf.prototype.flat__Lokay_effects_shape_Shape$Case__Z = (function(c) {
+  return $m_Lokay_effects_shape_Schema$().isRecord__Lokay_effects_shape_Schema__Z($n($n(c).Lokay_effects_shape_Shape$Case$$anon$7__f_shape).erased__Lokay_effects_shape_Schema());
+});
+function $as_Lokay_effects_shape_Shape$OneOf(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Shape$OneOf) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Shape$OneOf"));
+}
+function $isArrayOf_Lokay_effects_shape_Shape$OneOf(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Shape$OneOf)));
+}
+function $asArrayOf_Lokay_effects_shape_Shape$OneOf(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Shape$OneOf(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Shape$OneOf;", depth));
+}
+var $d_Lokay_effects_shape_Shape$OneOf = new $TypeData().initClass($c_Lokay_effects_shape_Shape$OneOf, "okay.effects.shape.Shape$OneOf", ({
+  Lokay_effects_shape_Shape$OneOf: 1,
+  Lokay_effects_shape_Shape: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$Optional(of) {
+  this.Lokay_effects_shape_Shape$Optional__f_of = null;
+  this.Lokay_effects_shape_Shape$Optional__f_of = of;
+}
+$c_Lokay_effects_shape_Shape$Optional.prototype = new $h_O();
+$c_Lokay_effects_shape_Shape$Optional.prototype.constructor = $c_Lokay_effects_shape_Shape$Optional;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$Optional() {
+}
+$h_Lokay_effects_shape_Shape$Optional.prototype = $c_Lokay_effects_shape_Shape$Optional.prototype;
+$c_Lokay_effects_shape_Shape$Optional.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-651526155), true);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Shape$Optional)) {
+    var x$0$2 = $as_Lokay_effects_shape_Shape$Optional(x$0);
+    var x = this.Lokay_effects_shape_Shape$Optional__f_of;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Shape$Optional__f_of;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.productPrefix__T = (function() {
+  return "Optional";
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Shape$Optional__f_of;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "of";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either = (function(v, path) {
+  var x = $m_Lokay_effects_json_Json$Null$();
+  if ((x === v)) {
+    var value = $m_s_None$();
+    return new $c_s_util_Right(value);
+  } else {
+    var this$2 = $n($n(this.Lokay_effects_shape_Shape$Optional__f_of).decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either(v, path));
+    if ((this$2 instanceof $c_s_util_Right)) {
+      var x2 = $as_s_util_Right(this$2);
+      var b = $n(x2).s_util_Right__f_value;
+      return new $c_s_util_Right(new $c_s_Some(b));
+    } else {
+      return this$2;
+    }
+  }
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.encode__s_Option__Lokay_effects_json_Json = (function(a) {
+  var this$1 = $n(a);
+  if (this$1.isEmpty__Z()) {
+    var $x_1 = $m_Lokay_effects_json_Json$Null$();
+  } else {
+    var x0 = this$1.get__O();
+    var $x_1 = $n(this.Lokay_effects_shape_Shape$Optional__f_of).encode__O__Lokay_effects_json_Json(x0);
+  }
+  return $as_Lokay_effects_json_Json($x_1);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.erased__Lokay_effects_shape_Schema = (function() {
+  var of = $n(this.Lokay_effects_shape_Shape$Optional__f_of).erased__Lokay_effects_shape_Schema();
+  return new $c_Lokay_effects_shape_Schema$Optional(of);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.absent__s_Option = (function() {
+  var value = $m_s_None$();
+  return new $c_s_Some(value);
+});
+$c_Lokay_effects_shape_Shape$Optional.prototype.encode__O__Lokay_effects_json_Json = (function(p) {
+  return this.encode__s_Option__Lokay_effects_json_Json($as_s_Option(p));
+});
+function $as_Lokay_effects_shape_Shape$Optional(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Shape$Optional) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Shape$Optional"));
+}
+function $isArrayOf_Lokay_effects_shape_Shape$Optional(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Shape$Optional)));
+}
+function $asArrayOf_Lokay_effects_shape_Shape$Optional(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Shape$Optional(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Shape$Optional;", depth));
+}
+var $d_Lokay_effects_shape_Shape$Optional = new $TypeData().initClass($c_Lokay_effects_shape_Shape$Optional, "okay.effects.shape.Shape$Optional", ({
+  Lokay_effects_shape_Shape$Optional: 1,
   Lokay_effects_shape_Shape: 1,
   s_Equals: 1,
   s_Product: 1,
@@ -55033,6 +61320,753 @@ var $d_Lokay_store_Data$Query = new $TypeData().initClass($c_Lokay_store_Data$Qu
   Ljava_io_Serializable: 1
 }));
 /** @constructor */
+function $c_Lokay_store_Event$Accessed(id, field, by, at_$_lo, at_$_hi, eid) {
+  this.Lokay_store_Event$Accessed__f_id = null;
+  this.Lokay_store_Event$Accessed__f_field = null;
+  this.Lokay_store_Event$Accessed__f_by = null;
+  this.Lokay_store_Event$Accessed__f_at_$lo = 0;
+  this.Lokay_store_Event$Accessed__f_at_$hi = 0;
+  this.Lokay_store_Event$Accessed__f_eid = null;
+  this.Lokay_store_Event$Accessed__f_id = id;
+  this.Lokay_store_Event$Accessed__f_field = field;
+  this.Lokay_store_Event$Accessed__f_by = by;
+  this.Lokay_store_Event$Accessed__f_at_$lo = at_$_lo;
+  this.Lokay_store_Event$Accessed__f_at_$hi = at_$_hi;
+  this.Lokay_store_Event$Accessed__f_eid = eid;
+}
+$c_Lokay_store_Event$Accessed.prototype = new $h_O();
+$c_Lokay_store_Event$Accessed.prototype.constructor = $c_Lokay_store_Event$Accessed;
+/** @constructor */
+function $h_Lokay_store_Event$Accessed() {
+}
+$h_Lokay_store_Event$Accessed.prototype = $c_Lokay_store_Event$Accessed.prototype;
+$c_Lokay_store_Event$Accessed.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$Accessed.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-2081792733));
+  var hash$1 = acc;
+  var x = this.Lokay_store_Event$Accessed__f_id;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x$1 = this.Lokay_store_Event$Accessed__f_field;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$2 = this.Lokay_store_Event$Accessed__f_by;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$2);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  var lv_$_lo = this.Lokay_store_Event$Accessed__f_at_$lo;
+  var lv_$_hi = this.Lokay_store_Event$Accessed__f_at_$hi;
+  var data$3 = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$3);
+  var hash$5 = acc;
+  var x$3 = this.Lokay_store_Event$Accessed__f_eid;
+  var data$4 = $m_sr_Statics$().anyHash__O__I(x$3);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$5, data$4);
+  var hash$6 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$6, 5);
+});
+$c_Lokay_store_Event$Accessed.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$Accessed)) {
+    var x$0$2 = $as_Lokay_store_Event$Accessed(x$0);
+    var x_$_lo = this.Lokay_store_Event$Accessed__f_at_$lo;
+    var x_$_hi = this.Lokay_store_Event$Accessed__f_at_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_store_Event$Accessed__f_at_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_store_Event$Accessed__f_at_$hi;
+    if ((((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0)) {
+      var x$2 = this.Lokay_store_Event$Accessed__f_id;
+      var x$2$1 = $n(x$0$2).Lokay_store_Event$Accessed__f_id;
+      var $x_1 = ((x$2 === null) ? (x$2$1 === null) : $n(x$2).equals__O__Z(x$2$1));
+    } else {
+      var $x_1 = false;
+    }
+    if ((($x_1 && (this.Lokay_store_Event$Accessed__f_field === $n(x$0$2).Lokay_store_Event$Accessed__f_field)) && (this.Lokay_store_Event$Accessed__f_by === $n(x$0$2).Lokay_store_Event$Accessed__f_by))) {
+      var x$3 = this.Lokay_store_Event$Accessed__f_eid;
+      var x$4 = $n(x$0$2).Lokay_store_Event$Accessed__f_eid;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$Accessed.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$Accessed.prototype.productArity__I = (function() {
+  return 5;
+});
+$c_Lokay_store_Event$Accessed.prototype.productPrefix__T = (function() {
+  return "Accessed";
+});
+$c_Lokay_store_Event$Accessed.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Event$Accessed__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Event$Accessed__f_field;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Event$Accessed__f_by;
+      break;
+    }
+    case 3: {
+      return $bL(this.Lokay_store_Event$Accessed__f_at_$lo, this.Lokay_store_Event$Accessed__f_at_$hi);
+      break;
+    }
+    case 4: {
+      return this.Lokay_store_Event$Accessed__f_eid;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$Accessed.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "field";
+      break;
+    }
+    case 2: {
+      return "by";
+      break;
+    }
+    case 3: {
+      return "at";
+      break;
+    }
+    case 4: {
+      return "eid";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$Accessed.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$Accessed__f_eid;
+});
+function $as_Lokay_store_Event$Accessed(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$Accessed) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$Accessed"));
+}
+function $isArrayOf_Lokay_store_Event$Accessed(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$Accessed)));
+}
+function $asArrayOf_Lokay_store_Event$Accessed(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$Accessed(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$Accessed;", depth));
+}
+var $d_Lokay_store_Event$Accessed = new $TypeData().initClass($c_Lokay_store_Event$Accessed, "okay.store.Event$Accessed", ({
+  Lokay_store_Event$Accessed: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Event$KindDefined(kind, at_$_lo, at_$_hi, eid) {
+  this.Lokay_store_Event$KindDefined__f_kind = null;
+  this.Lokay_store_Event$KindDefined__f_at_$lo = 0;
+  this.Lokay_store_Event$KindDefined__f_at_$hi = 0;
+  this.Lokay_store_Event$KindDefined__f_eid = null;
+  this.Lokay_store_Event$KindDefined__f_kind = kind;
+  this.Lokay_store_Event$KindDefined__f_at_$lo = at_$_lo;
+  this.Lokay_store_Event$KindDefined__f_at_$hi = at_$_hi;
+  this.Lokay_store_Event$KindDefined__f_eid = eid;
+}
+$c_Lokay_store_Event$KindDefined.prototype = new $h_O();
+$c_Lokay_store_Event$KindDefined.prototype.constructor = $c_Lokay_store_Event$KindDefined;
+/** @constructor */
+function $h_Lokay_store_Event$KindDefined() {
+}
+$h_Lokay_store_Event$KindDefined.prototype = $c_Lokay_store_Event$KindDefined.prototype;
+$c_Lokay_store_Event$KindDefined.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$KindDefined.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-640879691));
+  var hash$1 = acc;
+  var x = this.Lokay_store_Event$KindDefined__f_kind;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var lv_$_lo = this.Lokay_store_Event$KindDefined__f_at_$lo;
+  var lv_$_hi = this.Lokay_store_Event$KindDefined__f_at_$hi;
+  var data$1 = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$1 = this.Lokay_store_Event$KindDefined__f_eid;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$4, 3);
+});
+$c_Lokay_store_Event$KindDefined.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$KindDefined)) {
+    var x$0$2 = $as_Lokay_store_Event$KindDefined(x$0);
+    var x_$_lo = this.Lokay_store_Event$KindDefined__f_at_$lo;
+    var x_$_hi = this.Lokay_store_Event$KindDefined__f_at_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_store_Event$KindDefined__f_at_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_store_Event$KindDefined__f_at_$hi;
+    if ((((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0)) {
+      var x$2 = this.Lokay_store_Event$KindDefined__f_kind;
+      var x$2$1 = $n(x$0$2).Lokay_store_Event$KindDefined__f_kind;
+      var $x_1 = ((x$2 === null) ? (x$2$1 === null) : $n(x$2).equals__O__Z(x$2$1));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$3 = this.Lokay_store_Event$KindDefined__f_eid;
+      var x$4 = $n(x$0$2).Lokay_store_Event$KindDefined__f_eid;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$KindDefined.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$KindDefined.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_store_Event$KindDefined.prototype.productPrefix__T = (function() {
+  return "KindDefined";
+});
+$c_Lokay_store_Event$KindDefined.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Event$KindDefined__f_kind;
+      break;
+    }
+    case 1: {
+      return $bL(this.Lokay_store_Event$KindDefined__f_at_$lo, this.Lokay_store_Event$KindDefined__f_at_$hi);
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Event$KindDefined__f_eid;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$KindDefined.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "kind";
+      break;
+    }
+    case 1: {
+      return "at";
+      break;
+    }
+    case 2: {
+      return "eid";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$KindDefined.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$KindDefined__f_eid;
+});
+function $as_Lokay_store_Event$KindDefined(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$KindDefined) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$KindDefined"));
+}
+function $isArrayOf_Lokay_store_Event$KindDefined(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$KindDefined)));
+}
+function $asArrayOf_Lokay_store_Event$KindDefined(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$KindDefined(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$KindDefined;", depth));
+}
+var $d_Lokay_store_Event$KindDefined = new $TypeData().initClass($c_Lokay_store_Event$KindDefined, "okay.store.Event$KindDefined", ({
+  Lokay_store_Event$KindDefined: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Event$KindRevised(kind, at_$_lo, at_$_hi, eid) {
+  this.Lokay_store_Event$KindRevised__f_kind = null;
+  this.Lokay_store_Event$KindRevised__f_at_$lo = 0;
+  this.Lokay_store_Event$KindRevised__f_at_$hi = 0;
+  this.Lokay_store_Event$KindRevised__f_eid = null;
+  this.Lokay_store_Event$KindRevised__f_kind = kind;
+  this.Lokay_store_Event$KindRevised__f_at_$lo = at_$_lo;
+  this.Lokay_store_Event$KindRevised__f_at_$hi = at_$_hi;
+  this.Lokay_store_Event$KindRevised__f_eid = eid;
+}
+$c_Lokay_store_Event$KindRevised.prototype = new $h_O();
+$c_Lokay_store_Event$KindRevised.prototype.constructor = $c_Lokay_store_Event$KindRevised;
+/** @constructor */
+function $h_Lokay_store_Event$KindRevised() {
+}
+$h_Lokay_store_Event$KindRevised.prototype = $c_Lokay_store_Event$KindRevised.prototype;
+$c_Lokay_store_Event$KindRevised.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$KindRevised.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, (-1085948904));
+  var hash$1 = acc;
+  var x = this.Lokay_store_Event$KindRevised__f_kind;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var lv_$_lo = this.Lokay_store_Event$KindRevised__f_at_$lo;
+  var lv_$_hi = this.Lokay_store_Event$KindRevised__f_at_$hi;
+  var data$1 = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var x$1 = this.Lokay_store_Event$KindRevised__f_eid;
+  var data$2 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$4, 3);
+});
+$c_Lokay_store_Event$KindRevised.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$KindRevised)) {
+    var x$0$2 = $as_Lokay_store_Event$KindRevised(x$0);
+    var x_$_lo = this.Lokay_store_Event$KindRevised__f_at_$lo;
+    var x_$_hi = this.Lokay_store_Event$KindRevised__f_at_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_store_Event$KindRevised__f_at_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_store_Event$KindRevised__f_at_$hi;
+    if ((((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0)) {
+      var x$2 = this.Lokay_store_Event$KindRevised__f_kind;
+      var x$2$1 = $n(x$0$2).Lokay_store_Event$KindRevised__f_kind;
+      var $x_1 = ((x$2 === null) ? (x$2$1 === null) : $n(x$2).equals__O__Z(x$2$1));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$3 = this.Lokay_store_Event$KindRevised__f_eid;
+      var x$4 = $n(x$0$2).Lokay_store_Event$KindRevised__f_eid;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$KindRevised.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$KindRevised.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_store_Event$KindRevised.prototype.productPrefix__T = (function() {
+  return "KindRevised";
+});
+$c_Lokay_store_Event$KindRevised.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Event$KindRevised__f_kind;
+      break;
+    }
+    case 1: {
+      return $bL(this.Lokay_store_Event$KindRevised__f_at_$lo, this.Lokay_store_Event$KindRevised__f_at_$hi);
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Event$KindRevised__f_eid;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$KindRevised.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "kind";
+      break;
+    }
+    case 1: {
+      return "at";
+      break;
+    }
+    case 2: {
+      return "eid";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$KindRevised.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$KindRevised__f_eid;
+});
+function $as_Lokay_store_Event$KindRevised(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$KindRevised) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$KindRevised"));
+}
+function $isArrayOf_Lokay_store_Event$KindRevised(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$KindRevised)));
+}
+function $asArrayOf_Lokay_store_Event$KindRevised(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$KindRevised(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$KindRevised;", depth));
+}
+var $d_Lokay_store_Event$KindRevised = new $TypeData().initClass($c_Lokay_store_Event$KindRevised, "okay.store.Event$KindRevised", ({
+  Lokay_store_Event$KindRevised: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Event$RecordAdded(record, eid) {
+  this.Lokay_store_Event$RecordAdded__f_record = null;
+  this.Lokay_store_Event$RecordAdded__f_eid = null;
+  this.Lokay_store_Event$RecordAdded__f_record = record;
+  this.Lokay_store_Event$RecordAdded__f_eid = eid;
+}
+$c_Lokay_store_Event$RecordAdded.prototype = new $h_O();
+$c_Lokay_store_Event$RecordAdded.prototype.constructor = $c_Lokay_store_Event$RecordAdded;
+/** @constructor */
+function $h_Lokay_store_Event$RecordAdded() {
+}
+$h_Lokay_store_Event$RecordAdded.prototype = $c_Lokay_store_Event$RecordAdded.prototype;
+$c_Lokay_store_Event$RecordAdded.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$RecordAdded.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1759588736), true);
+});
+$c_Lokay_store_Event$RecordAdded.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$RecordAdded)) {
+    var x$0$2 = $as_Lokay_store_Event$RecordAdded(x$0);
+    var x = this.Lokay_store_Event$RecordAdded__f_record;
+    var x$2 = $n(x$0$2).Lokay_store_Event$RecordAdded__f_record;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Event$RecordAdded__f_eid;
+      var x$4 = $n(x$0$2).Lokay_store_Event$RecordAdded__f_eid;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$RecordAdded.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$RecordAdded.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Event$RecordAdded.prototype.productPrefix__T = (function() {
+  return "RecordAdded";
+});
+$c_Lokay_store_Event$RecordAdded.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Event$RecordAdded__f_record;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Event$RecordAdded__f_eid;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Event$RecordAdded.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "record";
+  }
+  if ((n === 1)) {
+    return "eid";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Event$RecordAdded.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$RecordAdded__f_eid;
+});
+function $as_Lokay_store_Event$RecordAdded(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$RecordAdded) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$RecordAdded"));
+}
+function $isArrayOf_Lokay_store_Event$RecordAdded(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$RecordAdded)));
+}
+function $asArrayOf_Lokay_store_Event$RecordAdded(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$RecordAdded(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$RecordAdded;", depth));
+}
+var $d_Lokay_store_Event$RecordAdded = new $TypeData().initClass($c_Lokay_store_Event$RecordAdded, "okay.store.Event$RecordAdded", ({
+  Lokay_store_Event$RecordAdded: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Event$RecordRetired(id, reason, at_$_lo, at_$_hi, eid) {
+  this.Lokay_store_Event$RecordRetired__f_id = null;
+  this.Lokay_store_Event$RecordRetired__f_reason = null;
+  this.Lokay_store_Event$RecordRetired__f_at_$lo = 0;
+  this.Lokay_store_Event$RecordRetired__f_at_$hi = 0;
+  this.Lokay_store_Event$RecordRetired__f_eid = null;
+  this.Lokay_store_Event$RecordRetired__f_id = id;
+  this.Lokay_store_Event$RecordRetired__f_reason = reason;
+  this.Lokay_store_Event$RecordRetired__f_at_$lo = at_$_lo;
+  this.Lokay_store_Event$RecordRetired__f_at_$hi = at_$_hi;
+  this.Lokay_store_Event$RecordRetired__f_eid = eid;
+}
+$c_Lokay_store_Event$RecordRetired.prototype = new $h_O();
+$c_Lokay_store_Event$RecordRetired.prototype.constructor = $c_Lokay_store_Event$RecordRetired;
+/** @constructor */
+function $h_Lokay_store_Event$RecordRetired() {
+}
+$h_Lokay_store_Event$RecordRetired.prototype = $c_Lokay_store_Event$RecordRetired.prototype;
+$c_Lokay_store_Event$RecordRetired.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$RecordRetired.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 779289080);
+  var hash$1 = acc;
+  var x = this.Lokay_store_Event$RecordRetired__f_id;
+  var data = $m_sr_Statics$().anyHash__O__I(x);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  var x$1 = this.Lokay_store_Event$RecordRetired__f_reason;
+  var data$1 = $m_sr_Statics$().anyHash__O__I(x$1);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$2, data$1);
+  var hash$3 = acc;
+  var lv_$_lo = this.Lokay_store_Event$RecordRetired__f_at_$lo;
+  var lv_$_hi = this.Lokay_store_Event$RecordRetired__f_at_$hi;
+  var data$2 = $m_sr_Statics$().longHash__J__I(lv_$_lo, lv_$_hi);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$3, data$2);
+  var hash$4 = acc;
+  var x$2 = this.Lokay_store_Event$RecordRetired__f_eid;
+  var data$3 = $m_sr_Statics$().anyHash__O__I(x$2);
+  acc = $m_sr_Statics$().mix__I__I__I(hash$4, data$3);
+  var hash$5 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$5, 4);
+});
+$c_Lokay_store_Event$RecordRetired.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$RecordRetired)) {
+    var x$0$2 = $as_Lokay_store_Event$RecordRetired(x$0);
+    var x_$_lo = this.Lokay_store_Event$RecordRetired__f_at_$lo;
+    var x_$_hi = this.Lokay_store_Event$RecordRetired__f_at_$hi;
+    var x$1_$_lo = $n(x$0$2).Lokay_store_Event$RecordRetired__f_at_$lo;
+    var x$1_$_hi = $n(x$0$2).Lokay_store_Event$RecordRetired__f_at_$hi;
+    if ((((x_$_lo ^ x$1_$_lo) | (x_$_hi ^ x$1_$_hi)) === 0)) {
+      var x$2 = this.Lokay_store_Event$RecordRetired__f_id;
+      var x$2$1 = $n(x$0$2).Lokay_store_Event$RecordRetired__f_id;
+      var $x_2 = ((x$2 === null) ? (x$2$1 === null) : $n(x$2).equals__O__Z(x$2$1));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$3 = this.Lokay_store_Event$RecordRetired__f_reason;
+      var x$4 = $n(x$0$2).Lokay_store_Event$RecordRetired__f_reason;
+      var $x_1 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$5 = this.Lokay_store_Event$RecordRetired__f_eid;
+      var x$6 = $n(x$0$2).Lokay_store_Event$RecordRetired__f_eid;
+      return ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$RecordRetired.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$RecordRetired.prototype.productArity__I = (function() {
+  return 4;
+});
+$c_Lokay_store_Event$RecordRetired.prototype.productPrefix__T = (function() {
+  return "RecordRetired";
+});
+$c_Lokay_store_Event$RecordRetired.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Event$RecordRetired__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Event$RecordRetired__f_reason;
+      break;
+    }
+    case 2: {
+      return $bL(this.Lokay_store_Event$RecordRetired__f_at_$lo, this.Lokay_store_Event$RecordRetired__f_at_$hi);
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Event$RecordRetired__f_eid;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$RecordRetired.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "reason";
+      break;
+    }
+    case 2: {
+      return "at";
+      break;
+    }
+    case 3: {
+      return "eid";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Event$RecordRetired.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$RecordRetired__f_eid;
+});
+function $as_Lokay_store_Event$RecordRetired(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$RecordRetired) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$RecordRetired"));
+}
+function $isArrayOf_Lokay_store_Event$RecordRetired(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$RecordRetired)));
+}
+function $asArrayOf_Lokay_store_Event$RecordRetired(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$RecordRetired(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$RecordRetired;", depth));
+}
+var $d_Lokay_store_Event$RecordRetired = new $TypeData().initClass($c_Lokay_store_Event$RecordRetired, "okay.store.Event$RecordRetired", ({
+  Lokay_store_Event$RecordRetired: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Event$RecordRevised(record, eid) {
+  this.Lokay_store_Event$RecordRevised__f_record = null;
+  this.Lokay_store_Event$RecordRevised__f_eid = null;
+  this.Lokay_store_Event$RecordRevised__f_record = record;
+  this.Lokay_store_Event$RecordRevised__f_eid = eid;
+}
+$c_Lokay_store_Event$RecordRevised.prototype = new $h_O();
+$c_Lokay_store_Event$RecordRevised.prototype.constructor = $c_Lokay_store_Event$RecordRevised;
+/** @constructor */
+function $h_Lokay_store_Event$RecordRevised() {
+}
+$h_Lokay_store_Event$RecordRevised.prototype = $c_Lokay_store_Event$RecordRevised.prototype;
+$c_Lokay_store_Event$RecordRevised.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Event$RecordRevised.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1464370519, true);
+});
+$c_Lokay_store_Event$RecordRevised.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Event$RecordRevised)) {
+    var x$0$2 = $as_Lokay_store_Event$RecordRevised(x$0);
+    var x = this.Lokay_store_Event$RecordRevised__f_record;
+    var x$2 = $n(x$0$2).Lokay_store_Event$RecordRevised__f_record;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Event$RecordRevised__f_eid;
+      var x$4 = $n(x$0$2).Lokay_store_Event$RecordRevised__f_eid;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Event$RecordRevised.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Event$RecordRevised.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Event$RecordRevised.prototype.productPrefix__T = (function() {
+  return "RecordRevised";
+});
+$c_Lokay_store_Event$RecordRevised.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Event$RecordRevised__f_record;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Event$RecordRevised__f_eid;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Event$RecordRevised.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "record";
+  }
+  if ((n === 1)) {
+    return "eid";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Event$RecordRevised.prototype.eid__Lokay_store_EventId = (function() {
+  return this.Lokay_store_Event$RecordRevised__f_eid;
+});
+function $as_Lokay_store_Event$RecordRevised(obj) {
+  return (((obj instanceof $c_Lokay_store_Event$RecordRevised) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Event$RecordRevised"));
+}
+function $isArrayOf_Lokay_store_Event$RecordRevised(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Event$RecordRevised)));
+}
+function $asArrayOf_Lokay_store_Event$RecordRevised(obj, depth) {
+  return (($isArrayOf_Lokay_store_Event$RecordRevised(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Event$RecordRevised;", depth));
+}
+var $d_Lokay_store_Event$RecordRevised = new $TypeData().initClass($c_Lokay_store_Event$RecordRevised, "okay.store.Event$RecordRevised", ({
+  Lokay_store_Event$RecordRevised: 1,
+  Lokay_store_Event: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_store_Mapped$Count(where, answer) {
   this.Lokay_store_Mapped$Count__f_where = null;
   this.Lokay_store_Mapped$Count__f_answer = null;
@@ -55695,8 +62729,1308 @@ var $d_Lokay_store_Mapping = new $TypeData().initClass($c_Lokay_store_Mapping, "
   s_Product: 1,
   Ljava_io_Serializable: 1
 }));
+/** @constructor */
+function $c_Lokay_store_Memory$$anon$3() {
+}
+$c_Lokay_store_Memory$$anon$3.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lokay_store_Memory$$anon$3.prototype.constructor = $c_Lokay_store_Memory$$anon$3;
+/** @constructor */
+function $h_Lokay_store_Memory$$anon$3() {
+}
+$h_Lokay_store_Memory$$anon$3.prototype = $c_Lokay_store_Memory$$anon$3.prototype;
+$c_Lokay_store_Memory$$anon$3.prototype.isDefinedAt__Lokay_effects_json_Json__Z = (function(x) {
+  if ((x instanceof $c_Lokay_effects_json_Json$Num)) {
+    var x$1 = $as_Lokay_effects_json_Json$Num(x);
+    $n(x$1);
+    return true;
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Memory$$anon$3.prototype.applyOrElse__Lokay_effects_json_Json__F1__O = (function(x, default$1) {
+  if ((x instanceof $c_Lokay_effects_json_Json$Num)) {
+    var x$1 = $as_Lokay_effects_json_Json$Num(x);
+    var this$2 = $n(x$1);
+    var x228 = this$2.Lokay_effects_json_Json$Num__f_n;
+    var this$3 = $n(x228);
+    return $n(this$3.s_math_BigDecimal__f_bigDecimal).longValue__J();
+  } else {
+    return $n(default$1).apply__O__O(x);
+  }
+});
+$c_Lokay_store_Memory$$anon$3.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__Lokay_effects_json_Json__Z($as_Lokay_effects_json_Json(x));
+});
+$c_Lokay_store_Memory$$anon$3.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
+  return this.applyOrElse__Lokay_effects_json_Json__F1__O($as_Lokay_effects_json_Json(x), default$1);
+});
+var $d_Lokay_store_Memory$$anon$3 = new $TypeData().initClass($c_Lokay_store_Memory$$anon$3, "okay.store.Memory$$anon$3", ({
+  Lokay_store_Memory$$anon$3: 1,
+  sr_AbstractPartialFunction: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Add(kind, fields, meta, tags, note, answer) {
+  this.Lokay_store_Store$Add__f_kind = null;
+  this.Lokay_store_Store$Add__f_fields = null;
+  this.Lokay_store_Store$Add__f_meta = null;
+  this.Lokay_store_Store$Add__f_tags = null;
+  this.Lokay_store_Store$Add__f_note = null;
+  this.Lokay_store_Store$Add__f_answer = null;
+  this.Lokay_store_Store$Add__f_kind = kind;
+  this.Lokay_store_Store$Add__f_fields = fields;
+  this.Lokay_store_Store$Add__f_meta = meta;
+  this.Lokay_store_Store$Add__f_tags = tags;
+  this.Lokay_store_Store$Add__f_note = note;
+  this.Lokay_store_Store$Add__f_answer = answer;
+}
+$c_Lokay_store_Store$Add.prototype = new $h_O();
+$c_Lokay_store_Store$Add.prototype.constructor = $c_Lokay_store_Store$Add;
+/** @constructor */
+function $h_Lokay_store_Store$Add() {
+}
+$h_Lokay_store_Store$Add.prototype = $c_Lokay_store_Store$Add.prototype;
+$c_Lokay_store_Store$Add.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Add.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1901880159), true);
+});
+$c_Lokay_store_Store$Add.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Add)) {
+    var x$0$2 = $as_Lokay_store_Store$Add(x$0);
+    var x = this.Lokay_store_Store$Add__f_kind;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Add__f_kind;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Add__f_fields;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Add__f_fields;
+      var $x_4 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_4 = false;
+    }
+    if ($x_4) {
+      var x$5 = this.Lokay_store_Store$Add__f_meta;
+      var x$6 = $n(x$0$2).Lokay_store_Store$Add__f_meta;
+      var $x_3 = ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      var $x_3 = false;
+    }
+    if ($x_3) {
+      var x$7 = this.Lokay_store_Store$Add__f_tags;
+      var x$8 = $n(x$0$2).Lokay_store_Store$Add__f_tags;
+      var $x_2 = ((x$7 === null) ? (x$8 === null) : $n(x$7).equals__O__Z(x$8));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$9 = this.Lokay_store_Store$Add__f_note;
+      var x$10 = $n(x$0$2).Lokay_store_Store$Add__f_note;
+      var $x_1 = ((x$9 === null) ? (x$10 === null) : $n(x$9).equals__O__Z(x$10));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$11 = this.Lokay_store_Store$Add__f_answer;
+      var x$12 = $n(x$0$2).Lokay_store_Store$Add__f_answer;
+      return ((x$11 === null) ? (x$12 === null) : $n(x$11).equals__O__Z(x$12));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Add.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Add.prototype.productArity__I = (function() {
+  return 6;
+});
+$c_Lokay_store_Store$Add.prototype.productPrefix__T = (function() {
+  return "Add";
+});
+$c_Lokay_store_Store$Add.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Store$Add__f_kind;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Store$Add__f_fields;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Store$Add__f_meta;
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Store$Add__f_tags;
+      break;
+    }
+    case 4: {
+      return this.Lokay_store_Store$Add__f_note;
+      break;
+    }
+    case 5: {
+      return this.Lokay_store_Store$Add__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Store$Add.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "kind";
+      break;
+    }
+    case 1: {
+      return "fields";
+      break;
+    }
+    case 2: {
+      return "meta";
+      break;
+    }
+    case 3: {
+      return "tags";
+      break;
+    }
+    case 4: {
+      return "note";
+      break;
+    }
+    case 5: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Store$Add(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Add) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Add"));
+}
+function $isArrayOf_Lokay_store_Store$Add(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Add)));
+}
+function $asArrayOf_Lokay_store_Store$Add(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Add(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Add;", depth));
+}
+var $d_Lokay_store_Store$Add = new $TypeData().initClass($c_Lokay_store_Store$Add, "okay.store.Store$Add", ({
+  Lokay_store_Store$Add: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Adopt(journal, answer) {
+  this.Lokay_store_Store$Adopt__f_journal = null;
+  this.Lokay_store_Store$Adopt__f_answer = null;
+  this.Lokay_store_Store$Adopt__f_journal = journal;
+  this.Lokay_store_Store$Adopt__f_answer = answer;
+}
+$c_Lokay_store_Store$Adopt.prototype = new $h_O();
+$c_Lokay_store_Store$Adopt.prototype.constructor = $c_Lokay_store_Store$Adopt;
+/** @constructor */
+function $h_Lokay_store_Store$Adopt() {
+}
+$h_Lokay_store_Store$Adopt.prototype = $c_Lokay_store_Store$Adopt.prototype;
+$c_Lokay_store_Store$Adopt.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Adopt.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1216001621, true);
+});
+$c_Lokay_store_Store$Adopt.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Adopt)) {
+    var x$0$2 = $as_Lokay_store_Store$Adopt(x$0);
+    var x = this.Lokay_store_Store$Adopt__f_journal;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Adopt__f_journal;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Adopt__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Adopt__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Adopt.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Adopt.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Store$Adopt.prototype.productPrefix__T = (function() {
+  return "Adopt";
+});
+$c_Lokay_store_Store$Adopt.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Adopt__f_journal;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Store$Adopt__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Adopt.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "journal";
+  }
+  if ((n === 1)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Adopt(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Adopt) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Adopt"));
+}
+function $isArrayOf_Lokay_store_Store$Adopt(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Adopt)));
+}
+function $asArrayOf_Lokay_store_Store$Adopt(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Adopt(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Adopt;", depth));
+}
+var $d_Lokay_store_Store$Adopt = new $TypeData().initClass($c_Lokay_store_Store$Adopt, "okay.store.Store$Adopt", ({
+  Lokay_store_Store$Adopt: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Audit(id, field, by, answer) {
+  this.Lokay_store_Store$Audit__f_id = null;
+  this.Lokay_store_Store$Audit__f_field = null;
+  this.Lokay_store_Store$Audit__f_by = null;
+  this.Lokay_store_Store$Audit__f_answer = null;
+  this.Lokay_store_Store$Audit__f_id = id;
+  this.Lokay_store_Store$Audit__f_field = field;
+  this.Lokay_store_Store$Audit__f_by = by;
+  this.Lokay_store_Store$Audit__f_answer = answer;
+}
+$c_Lokay_store_Store$Audit.prototype = new $h_O();
+$c_Lokay_store_Store$Audit.prototype.constructor = $c_Lokay_store_Store$Audit;
+/** @constructor */
+function $h_Lokay_store_Store$Audit() {
+}
+$h_Lokay_store_Store$Audit.prototype = $c_Lokay_store_Store$Audit.prototype;
+$c_Lokay_store_Store$Audit.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Audit.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 194795323, true);
+});
+$c_Lokay_store_Store$Audit.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Audit)) {
+    var x$0$2 = $as_Lokay_store_Store$Audit(x$0);
+    var x = this.Lokay_store_Store$Audit__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Audit__f_id;
+    if (((((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2)) && (this.Lokay_store_Store$Audit__f_field === $n(x$0$2).Lokay_store_Store$Audit__f_field)) && (this.Lokay_store_Store$Audit__f_by === $n(x$0$2).Lokay_store_Store$Audit__f_by))) {
+      var x$3 = this.Lokay_store_Store$Audit__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Audit__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Audit.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Audit.prototype.productArity__I = (function() {
+  return 4;
+});
+$c_Lokay_store_Store$Audit.prototype.productPrefix__T = (function() {
+  return "Audit";
+});
+$c_Lokay_store_Store$Audit.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Store$Audit__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Store$Audit__f_field;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Store$Audit__f_by;
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Store$Audit__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Store$Audit.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "field";
+      break;
+    }
+    case 2: {
+      return "by";
+      break;
+    }
+    case 3: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Store$Audit(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Audit) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Audit"));
+}
+function $isArrayOf_Lokay_store_Store$Audit(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Audit)));
+}
+function $asArrayOf_Lokay_store_Store$Audit(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Audit(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Audit;", depth));
+}
+var $d_Lokay_store_Store$Audit = new $TypeData().initClass($c_Lokay_store_Store$Audit, "okay.store.Store$Audit", ({
+  Lokay_store_Store$Audit: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Define(kind, answer) {
+  this.Lokay_store_Store$Define__f_kind = null;
+  this.Lokay_store_Store$Define__f_answer = null;
+  this.Lokay_store_Store$Define__f_kind = kind;
+  this.Lokay_store_Store$Define__f_answer = answer;
+}
+$c_Lokay_store_Store$Define.prototype = new $h_O();
+$c_Lokay_store_Store$Define.prototype.constructor = $c_Lokay_store_Store$Define;
+/** @constructor */
+function $h_Lokay_store_Store$Define() {
+}
+$h_Lokay_store_Store$Define.prototype = $c_Lokay_store_Store$Define.prototype;
+$c_Lokay_store_Store$Define.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Define.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1231867512), true);
+});
+$c_Lokay_store_Store$Define.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Define)) {
+    var x$0$2 = $as_Lokay_store_Store$Define(x$0);
+    var x = this.Lokay_store_Store$Define__f_kind;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Define__f_kind;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Define__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Define__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Define.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Define.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Store$Define.prototype.productPrefix__T = (function() {
+  return "Define";
+});
+$c_Lokay_store_Store$Define.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Define__f_kind;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Store$Define__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Define.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "kind";
+  }
+  if ((n === 1)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Define(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Define) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Define"));
+}
+function $isArrayOf_Lokay_store_Store$Define(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Define)));
+}
+function $asArrayOf_Lokay_store_Store$Define(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Define(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Define;", depth));
+}
+var $d_Lokay_store_Store$Define = new $TypeData().initClass($c_Lokay_store_Store$Define, "okay.store.Store$Define", ({
+  Lokay_store_Store$Define: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Find(text, tag, answer) {
+  this.Lokay_store_Store$Find__f_text = null;
+  this.Lokay_store_Store$Find__f_tag = null;
+  this.Lokay_store_Store$Find__f_answer = null;
+  this.Lokay_store_Store$Find__f_text = text;
+  this.Lokay_store_Store$Find__f_tag = tag;
+  this.Lokay_store_Store$Find__f_answer = answer;
+}
+$c_Lokay_store_Store$Find.prototype = new $h_O();
+$c_Lokay_store_Store$Find.prototype.constructor = $c_Lokay_store_Store$Find;
+/** @constructor */
+function $h_Lokay_store_Store$Find() {
+}
+$h_Lokay_store_Store$Find.prototype = $c_Lokay_store_Store$Find.prototype;
+$c_Lokay_store_Store$Find.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Find.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1156729586, true);
+});
+$c_Lokay_store_Store$Find.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Find)) {
+    var x$0$2 = $as_Lokay_store_Store$Find(x$0);
+    if ((this.Lokay_store_Store$Find__f_text === $n(x$0$2).Lokay_store_Store$Find__f_text)) {
+      var x = this.Lokay_store_Store$Find__f_tag;
+      var x$2 = $n(x$0$2).Lokay_store_Store$Find__f_tag;
+      var $x_1 = ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$3 = this.Lokay_store_Store$Find__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Find__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Find.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Find.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_store_Store$Find.prototype.productPrefix__T = (function() {
+  return "Find";
+});
+$c_Lokay_store_Store$Find.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Store$Find__f_text;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Store$Find__f_tag;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Store$Find__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Store$Find.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "text";
+      break;
+    }
+    case 1: {
+      return "tag";
+      break;
+    }
+    case 2: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Store$Find(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Find) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Find"));
+}
+function $isArrayOf_Lokay_store_Store$Find(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Find)));
+}
+function $asArrayOf_Lokay_store_Store$Find(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Find(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Find;", depth));
+}
+var $d_Lokay_store_Store$Find = new $TypeData().initClass($c_Lokay_store_Store$Find, "okay.store.Store$Find", ({
+  Lokay_store_Store$Find: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Get(id, answer) {
+  this.Lokay_store_Store$Get__f_id = null;
+  this.Lokay_store_Store$Get__f_answer = null;
+  this.Lokay_store_Store$Get__f_id = id;
+  this.Lokay_store_Store$Get__f_answer = answer;
+}
+$c_Lokay_store_Store$Get.prototype = new $h_O();
+$c_Lokay_store_Store$Get.prototype.constructor = $c_Lokay_store_Store$Get;
+/** @constructor */
+function $h_Lokay_store_Store$Get() {
+}
+$h_Lokay_store_Store$Get.prototype = $c_Lokay_store_Store$Get.prototype;
+$c_Lokay_store_Store$Get.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Get.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1634228874), true);
+});
+$c_Lokay_store_Store$Get.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Get)) {
+    var x$0$2 = $as_Lokay_store_Store$Get(x$0);
+    var x = this.Lokay_store_Store$Get__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Get__f_id;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Get__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Get__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Get.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Get.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Store$Get.prototype.productPrefix__T = (function() {
+  return "Get";
+});
+$c_Lokay_store_Store$Get.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Get__f_id;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Store$Get__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Get.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "id";
+  }
+  if ((n === 1)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Get(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Get) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Get"));
+}
+function $isArrayOf_Lokay_store_Store$Get(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Get)));
+}
+function $asArrayOf_Lokay_store_Store$Get(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Get(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Get;", depth));
+}
+var $d_Lokay_store_Store$Get = new $TypeData().initClass($c_Lokay_store_Store$Get, "okay.store.Store$Get", ({
+  Lokay_store_Store$Get: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$History(id, answer) {
+  this.Lokay_store_Store$History__f_id = null;
+  this.Lokay_store_Store$History__f_answer = null;
+  this.Lokay_store_Store$History__f_id = id;
+  this.Lokay_store_Store$History__f_answer = answer;
+}
+$c_Lokay_store_Store$History.prototype = new $h_O();
+$c_Lokay_store_Store$History.prototype.constructor = $c_Lokay_store_Store$History;
+/** @constructor */
+function $h_Lokay_store_Store$History() {
+}
+$h_Lokay_store_Store$History.prototype = $c_Lokay_store_Store$History.prototype;
+$c_Lokay_store_Store$History.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$History.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-523109800), true);
+});
+$c_Lokay_store_Store$History.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$History)) {
+    var x$0$2 = $as_Lokay_store_Store$History(x$0);
+    var x = this.Lokay_store_Store$History__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Store$History__f_id;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$History__f_answer;
+      var x$4 = $n(x$0$2).Lokay_store_Store$History__f_answer;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$History.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$History.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Store$History.prototype.productPrefix__T = (function() {
+  return "History";
+});
+$c_Lokay_store_Store$History.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$History__f_id;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Store$History__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$History.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "id";
+  }
+  if ((n === 1)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$History(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$History) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$History"));
+}
+function $isArrayOf_Lokay_store_Store$History(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$History)));
+}
+function $asArrayOf_Lokay_store_Store$History(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$History(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$History;", depth));
+}
+var $d_Lokay_store_Store$History = new $TypeData().initClass($c_Lokay_store_Store$History, "okay.store.Store$History", ({
+  Lokay_store_Store$History: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Journaled(answer) {
+  this.Lokay_store_Store$Journaled__f_answer = null;
+  this.Lokay_store_Store$Journaled__f_answer = answer;
+}
+$c_Lokay_store_Store$Journaled.prototype = new $h_O();
+$c_Lokay_store_Store$Journaled.prototype.constructor = $c_Lokay_store_Store$Journaled;
+/** @constructor */
+function $h_Lokay_store_Store$Journaled() {
+}
+$h_Lokay_store_Store$Journaled.prototype = $c_Lokay_store_Store$Journaled.prototype;
+$c_Lokay_store_Store$Journaled.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Journaled.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-768575186), true);
+});
+$c_Lokay_store_Store$Journaled.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Journaled)) {
+    var x$0$2 = $as_Lokay_store_Store$Journaled(x$0);
+    var x = this.Lokay_store_Store$Journaled__f_answer;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Journaled__f_answer;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Journaled.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Journaled.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_Store$Journaled.prototype.productPrefix__T = (function() {
+  return "Journaled";
+});
+$c_Lokay_store_Store$Journaled.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Journaled__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Journaled.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Journaled(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Journaled) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Journaled"));
+}
+function $isArrayOf_Lokay_store_Store$Journaled(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Journaled)));
+}
+function $asArrayOf_Lokay_store_Store$Journaled(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Journaled(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Journaled;", depth));
+}
+var $d_Lokay_store_Store$Journaled = new $TypeData().initClass($c_Lokay_store_Store$Journaled, "okay.store.Store$Journaled", ({
+  Lokay_store_Store$Journaled: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Kinds(answer) {
+  this.Lokay_store_Store$Kinds__f_answer = null;
+  this.Lokay_store_Store$Kinds__f_answer = answer;
+}
+$c_Lokay_store_Store$Kinds.prototype = new $h_O();
+$c_Lokay_store_Store$Kinds.prototype.constructor = $c_Lokay_store_Store$Kinds;
+/** @constructor */
+function $h_Lokay_store_Store$Kinds() {
+}
+$h_Lokay_store_Store$Kinds.prototype = $c_Lokay_store_Store$Kinds.prototype;
+$c_Lokay_store_Store$Kinds.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Kinds.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 994195458, true);
+});
+$c_Lokay_store_Store$Kinds.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Kinds)) {
+    var x$0$2 = $as_Lokay_store_Store$Kinds(x$0);
+    var x = this.Lokay_store_Store$Kinds__f_answer;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Kinds__f_answer;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Kinds.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Kinds.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_Store$Kinds.prototype.productPrefix__T = (function() {
+  return "Kinds";
+});
+$c_Lokay_store_Store$Kinds.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Kinds__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Kinds.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Kinds(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Kinds) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Kinds"));
+}
+function $isArrayOf_Lokay_store_Store$Kinds(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Kinds)));
+}
+function $asArrayOf_Lokay_store_Store$Kinds(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Kinds(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Kinds;", depth));
+}
+var $d_Lokay_store_Store$Kinds = new $TypeData().initClass($c_Lokay_store_Store$Kinds, "okay.store.Store$Kinds", ({
+  Lokay_store_Store$Kinds: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Retire(id, reason, answer) {
+  this.Lokay_store_Store$Retire__f_id = null;
+  this.Lokay_store_Store$Retire__f_reason = null;
+  this.Lokay_store_Store$Retire__f_answer = null;
+  this.Lokay_store_Store$Retire__f_id = id;
+  this.Lokay_store_Store$Retire__f_reason = reason;
+  this.Lokay_store_Store$Retire__f_answer = answer;
+}
+$c_Lokay_store_Store$Retire.prototype = new $h_O();
+$c_Lokay_store_Store$Retire.prototype.constructor = $c_Lokay_store_Store$Retire;
+/** @constructor */
+function $h_Lokay_store_Store$Retire() {
+}
+$h_Lokay_store_Store$Retire.prototype = $c_Lokay_store_Store$Retire.prototype;
+$c_Lokay_store_Store$Retire.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Retire.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-2020169162), true);
+});
+$c_Lokay_store_Store$Retire.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Retire)) {
+    var x$0$2 = $as_Lokay_store_Store$Retire(x$0);
+    var x = this.Lokay_store_Store$Retire__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Retire__f_id;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Retire__f_reason;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Retire__f_reason;
+      var $x_1 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$5 = this.Lokay_store_Store$Retire__f_answer;
+      var x$6 = $n(x$0$2).Lokay_store_Store$Retire__f_answer;
+      return ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Retire.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Retire.prototype.productArity__I = (function() {
+  return 3;
+});
+$c_Lokay_store_Store$Retire.prototype.productPrefix__T = (function() {
+  return "Retire";
+});
+$c_Lokay_store_Store$Retire.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Store$Retire__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Store$Retire__f_reason;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Store$Retire__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Store$Retire.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "reason";
+      break;
+    }
+    case 2: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Store$Retire(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Retire) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Retire"));
+}
+function $isArrayOf_Lokay_store_Store$Retire(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Retire)));
+}
+function $asArrayOf_Lokay_store_Store$Retire(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Retire(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Retire;", depth));
+}
+var $d_Lokay_store_Store$Retire = new $TypeData().initClass($c_Lokay_store_Store$Retire, "okay.store.Store$Retire", ({
+  Lokay_store_Store$Retire: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Revise(id, fields, meta, tags, note, answer) {
+  this.Lokay_store_Store$Revise__f_id = null;
+  this.Lokay_store_Store$Revise__f_fields = null;
+  this.Lokay_store_Store$Revise__f_meta = null;
+  this.Lokay_store_Store$Revise__f_tags = null;
+  this.Lokay_store_Store$Revise__f_note = null;
+  this.Lokay_store_Store$Revise__f_answer = null;
+  this.Lokay_store_Store$Revise__f_id = id;
+  this.Lokay_store_Store$Revise__f_fields = fields;
+  this.Lokay_store_Store$Revise__f_meta = meta;
+  this.Lokay_store_Store$Revise__f_tags = tags;
+  this.Lokay_store_Store$Revise__f_note = note;
+  this.Lokay_store_Store$Revise__f_answer = answer;
+}
+$c_Lokay_store_Store$Revise.prototype = new $h_O();
+$c_Lokay_store_Store$Revise.prototype.constructor = $c_Lokay_store_Store$Revise;
+/** @constructor */
+function $h_Lokay_store_Store$Revise() {
+}
+$h_Lokay_store_Store$Revise.prototype = $c_Lokay_store_Store$Revise.prototype;
+$c_Lokay_store_Store$Revise.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Revise.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-248818869), true);
+});
+$c_Lokay_store_Store$Revise.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Revise)) {
+    var x$0$2 = $as_Lokay_store_Store$Revise(x$0);
+    var x = this.Lokay_store_Store$Revise__f_id;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Revise__f_id;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Store$Revise__f_fields;
+      var x$4 = $n(x$0$2).Lokay_store_Store$Revise__f_fields;
+      var $x_4 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      var $x_4 = false;
+    }
+    if ($x_4) {
+      var x$5 = this.Lokay_store_Store$Revise__f_meta;
+      var x$6 = $n(x$0$2).Lokay_store_Store$Revise__f_meta;
+      var $x_3 = ((x$5 === null) ? (x$6 === null) : $n(x$5).equals__O__Z(x$6));
+    } else {
+      var $x_3 = false;
+    }
+    if ($x_3) {
+      var x$7 = this.Lokay_store_Store$Revise__f_tags;
+      var x$8 = $n(x$0$2).Lokay_store_Store$Revise__f_tags;
+      var $x_2 = ((x$7 === null) ? (x$8 === null) : $n(x$7).equals__O__Z(x$8));
+    } else {
+      var $x_2 = false;
+    }
+    if ($x_2) {
+      var x$9 = this.Lokay_store_Store$Revise__f_note;
+      var x$10 = $n(x$0$2).Lokay_store_Store$Revise__f_note;
+      var $x_1 = ((x$9 === null) ? (x$10 === null) : $n(x$9).equals__O__Z(x$10));
+    } else {
+      var $x_1 = false;
+    }
+    if ($x_1) {
+      var x$11 = this.Lokay_store_Store$Revise__f_answer;
+      var x$12 = $n(x$0$2).Lokay_store_Store$Revise__f_answer;
+      return ((x$11 === null) ? (x$12 === null) : $n(x$11).equals__O__Z(x$12));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Revise.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Revise.prototype.productArity__I = (function() {
+  return 6;
+});
+$c_Lokay_store_Store$Revise.prototype.productPrefix__T = (function() {
+  return "Revise";
+});
+$c_Lokay_store_Store$Revise.prototype.productElement__I__O = (function(n) {
+  switch (n) {
+    case 0: {
+      return this.Lokay_store_Store$Revise__f_id;
+      break;
+    }
+    case 1: {
+      return this.Lokay_store_Store$Revise__f_fields;
+      break;
+    }
+    case 2: {
+      return this.Lokay_store_Store$Revise__f_meta;
+      break;
+    }
+    case 3: {
+      return this.Lokay_store_Store$Revise__f_tags;
+      break;
+    }
+    case 4: {
+      return this.Lokay_store_Store$Revise__f_note;
+      break;
+    }
+    case 5: {
+      return this.Lokay_store_Store$Revise__f_answer;
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+$c_Lokay_store_Store$Revise.prototype.productElementName__I__T = (function(n) {
+  switch (n) {
+    case 0: {
+      return "id";
+      break;
+    }
+    case 1: {
+      return "fields";
+      break;
+    }
+    case 2: {
+      return "meta";
+      break;
+    }
+    case 3: {
+      return "tags";
+      break;
+    }
+    case 4: {
+      return "note";
+      break;
+    }
+    case 5: {
+      return "answer";
+      break;
+    }
+    default: {
+      throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+    }
+  }
+});
+function $as_Lokay_store_Store$Revise(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Revise) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Revise"));
+}
+function $isArrayOf_Lokay_store_Store$Revise(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Revise)));
+}
+function $asArrayOf_Lokay_store_Store$Revise(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Revise(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Revise;", depth));
+}
+var $d_Lokay_store_Store$Revise = new $TypeData().initClass($c_Lokay_store_Store$Revise, "okay.store.Store$Revise", ({
+  Lokay_store_Store$Revise: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Store$Saved(answer) {
+  this.Lokay_store_Store$Saved__f_answer = null;
+  this.Lokay_store_Store$Saved__f_answer = answer;
+}
+$c_Lokay_store_Store$Saved.prototype = new $h_O();
+$c_Lokay_store_Store$Saved.prototype.constructor = $c_Lokay_store_Store$Saved;
+/** @constructor */
+function $h_Lokay_store_Store$Saved() {
+}
+$h_Lokay_store_Store$Saved.prototype = $c_Lokay_store_Store$Saved.prototype;
+$c_Lokay_store_Store$Saved.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Store$Saved.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1344372351, true);
+});
+$c_Lokay_store_Store$Saved.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Store$Saved)) {
+    var x$0$2 = $as_Lokay_store_Store$Saved(x$0);
+    var x = this.Lokay_store_Store$Saved__f_answer;
+    var x$2 = $n(x$0$2).Lokay_store_Store$Saved__f_answer;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Store$Saved.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Store$Saved.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_Store$Saved.prototype.productPrefix__T = (function() {
+  return "Saved";
+});
+$c_Lokay_store_Store$Saved.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Store$Saved__f_answer;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Store$Saved.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "answer";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_store_Store$Saved(obj) {
+  return (((obj instanceof $c_Lokay_store_Store$Saved) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Store$Saved"));
+}
+function $isArrayOf_Lokay_store_Store$Saved(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Store$Saved)));
+}
+function $asArrayOf_Lokay_store_Store$Saved(obj, depth) {
+  return (($isArrayOf_Lokay_store_Store$Saved(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Store$Saved;", depth));
+}
+var $d_Lokay_store_Store$Saved = new $TypeData().initClass($c_Lokay_store_Store$Saved, "okay.store.Store$Saved", ({
+  Lokay_store_Store$Saved: 1,
+  Lokay_store_Store: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Stores$$anon$2() {
+}
+$c_Lokay_store_Stores$$anon$2.prototype = new $h_sr_AbstractPartialFunction();
+$c_Lokay_store_Stores$$anon$2.prototype.constructor = $c_Lokay_store_Stores$$anon$2;
+/** @constructor */
+function $h_Lokay_store_Stores$$anon$2() {
+}
+$h_Lokay_store_Stores$$anon$2.prototype = $c_Lokay_store_Stores$$anon$2.prototype;
+$c_Lokay_store_Stores$$anon$2.prototype.isDefinedAt__Lokay_effects_json_Json__Z = (function(x) {
+  if ((x instanceof $c_Lokay_effects_json_Json$Num)) {
+    var x$1 = $as_Lokay_effects_json_Json$Num(x);
+    $n(x$1);
+    return true;
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Stores$$anon$2.prototype.applyOrElse__Lokay_effects_json_Json__F1__O = (function(x, default$1) {
+  if ((x instanceof $c_Lokay_effects_json_Json$Num)) {
+    var x$1 = $as_Lokay_effects_json_Json$Num(x);
+    var this$2 = $n(x$1);
+    var x130 = this$2.Lokay_effects_json_Json$Num__f_n;
+    var this$3 = $n(x130);
+    return $n(this$3.s_math_BigDecimal__f_bigDecimal).longValue__J();
+  } else {
+    return $n(default$1).apply__O__O(x);
+  }
+});
+$c_Lokay_store_Stores$$anon$2.prototype.isDefinedAt__O__Z = (function(x) {
+  return this.isDefinedAt__Lokay_effects_json_Json__Z($as_Lokay_effects_json_Json(x));
+});
+$c_Lokay_store_Stores$$anon$2.prototype.applyOrElse__O__F1__O = (function(x, default$1) {
+  return this.applyOrElse__Lokay_effects_json_Json__F1__O($as_Lokay_effects_json_Json(x), default$1);
+});
+var $d_Lokay_store_Stores$$anon$2 = new $TypeData().initClass($c_Lokay_store_Stores$$anon$2, "okay.store.Stores$$anon$2", ({
+  Lokay_store_Stores$$anon$2: 1,
+  sr_AbstractPartialFunction: 1,
+  F1: 1,
+  s_PartialFunction: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_store_Where$And(all) {
+  this.Lokay_store_Where$And__f_all = null;
+  this.Lokay_store_Where$And__f_all = all;
+}
+$c_Lokay_store_Where$And.prototype = new $h_O();
+$c_Lokay_store_Where$And.prototype.constructor = $c_Lokay_store_Where$And;
+/** @constructor */
+function $h_Lokay_store_Where$And() {
+}
+$h_Lokay_store_Where$And.prototype = $c_Lokay_store_Where$And.prototype;
+$c_Lokay_store_Where$And.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Where$And.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1120186015, true);
+});
+$c_Lokay_store_Where$And.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Where$And)) {
+    var x$0$2 = $as_Lokay_store_Where$And(x$0);
+    var x = this.Lokay_store_Where$And__f_all;
+    var x$2 = $n(x$0$2).Lokay_store_Where$And__f_all;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Where$And.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Where$And.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_Where$And.prototype.productPrefix__T = (function() {
+  return "And";
+});
+$c_Lokay_store_Where$And.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Where$And__f_all;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Where$And.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "all";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
 function $as_Lokay_store_Where$And(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$And"));
+  return (((obj instanceof $c_Lokay_store_Where$And) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$And"));
 }
 function $isArrayOf_Lokay_store_Where$And(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Where$And)));
@@ -55704,6 +64038,13 @@ function $isArrayOf_Lokay_store_Where$And(obj, depth) {
 function $asArrayOf_Lokay_store_Where$And(obj, depth) {
   return (($isArrayOf_Lokay_store_Where$And(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Where$And;", depth));
 }
+var $d_Lokay_store_Where$And = new $TypeData().initClass($c_Lokay_store_Where$And, "okay.store.Where$And", ({
+  Lokay_store_Where$And: 1,
+  Lokay_store_Where: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 /** @constructor */
 function $c_Lokay_store_Where$Contains(path, text) {
   this.Lokay_store_Where$Contains__f_path = null;
@@ -55782,8 +64123,72 @@ var $d_Lokay_store_Where$Contains = new $TypeData().initClass($c_Lokay_store_Whe
   s_Product: 1,
   Ljava_io_Serializable: 1
 }));
+/** @constructor */
+function $c_Lokay_store_Where$Eq(path, value) {
+  this.Lokay_store_Where$Eq__f_path = null;
+  this.Lokay_store_Where$Eq__f_value = null;
+  this.Lokay_store_Where$Eq__f_path = path;
+  this.Lokay_store_Where$Eq__f_value = value;
+}
+$c_Lokay_store_Where$Eq.prototype = new $h_O();
+$c_Lokay_store_Where$Eq.prototype.constructor = $c_Lokay_store_Where$Eq;
+/** @constructor */
+function $h_Lokay_store_Where$Eq() {
+}
+$h_Lokay_store_Where$Eq.prototype = $c_Lokay_store_Where$Eq.prototype;
+$c_Lokay_store_Where$Eq.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Where$Eq.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-671096758), true);
+});
+$c_Lokay_store_Where$Eq.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Where$Eq)) {
+    var x$0$2 = $as_Lokay_store_Where$Eq(x$0);
+    var x = this.Lokay_store_Where$Eq__f_path;
+    var x$2 = $n(x$0$2).Lokay_store_Where$Eq__f_path;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_store_Where$Eq__f_value;
+      var x$4 = $n(x$0$2).Lokay_store_Where$Eq__f_value;
+      return ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Where$Eq.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Where$Eq.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_store_Where$Eq.prototype.productPrefix__T = (function() {
+  return "Eq";
+});
+$c_Lokay_store_Where$Eq.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Where$Eq__f_path;
+  }
+  if ((n === 1)) {
+    return this.Lokay_store_Where$Eq__f_value;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Where$Eq.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "path";
+  }
+  if ((n === 1)) {
+    return "value";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
 function $as_Lokay_store_Where$Eq(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$Eq"));
+  return (((obj instanceof $c_Lokay_store_Where$Eq) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$Eq"));
 }
 function $isArrayOf_Lokay_store_Where$Eq(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Where$Eq)));
@@ -55791,6 +64196,13 @@ function $isArrayOf_Lokay_store_Where$Eq(obj, depth) {
 function $asArrayOf_Lokay_store_Where$Eq(obj, depth) {
   return (($isArrayOf_Lokay_store_Where$Eq(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Where$Eq;", depth));
 }
+var $d_Lokay_store_Where$Eq = new $TypeData().initClass($c_Lokay_store_Where$Eq, "okay.store.Where$Eq", ({
+  Lokay_store_Where$Eq: 1,
+  Lokay_store_Where: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 /** @constructor */
 function $c_Lokay_store_Where$Greater(path, than) {
   this.Lokay_store_Where$Greater__f_path = null;
@@ -56040,8 +64452,58 @@ function $isArrayOf_Lokay_store_Where$Not(obj, depth) {
 function $asArrayOf_Lokay_store_Where$Not(obj, depth) {
   return (($isArrayOf_Lokay_store_Where$Not(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Where$Not;", depth));
 }
+/** @constructor */
+function $c_Lokay_store_Where$Or(any) {
+  this.Lokay_store_Where$Or__f_any = null;
+  this.Lokay_store_Where$Or__f_any = any;
+}
+$c_Lokay_store_Where$Or.prototype = new $h_O();
+$c_Lokay_store_Where$Or.prototype.constructor = $c_Lokay_store_Where$Or;
+/** @constructor */
+function $h_Lokay_store_Where$Or() {
+}
+$h_Lokay_store_Where$Or.prototype = $c_Lokay_store_Where$Or.prototype;
+$c_Lokay_store_Where$Or.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_store_Where$Or.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-1974307096), true);
+});
+$c_Lokay_store_Where$Or.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_store_Where$Or)) {
+    var x$0$2 = $as_Lokay_store_Where$Or(x$0);
+    var x = this.Lokay_store_Where$Or__f_any;
+    var x$2 = $n(x$0$2).Lokay_store_Where$Or__f_any;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_store_Where$Or.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_store_Where$Or.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_store_Where$Or.prototype.productPrefix__T = (function() {
+  return "Or";
+});
+$c_Lokay_store_Where$Or.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_store_Where$Or__f_any;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_store_Where$Or.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "any";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
 function $as_Lokay_store_Where$Or(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$Or"));
+  return (((obj instanceof $c_Lokay_store_Where$Or) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.store.Where$Or"));
 }
 function $isArrayOf_Lokay_store_Where$Or(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_store_Where$Or)));
@@ -56049,6 +64511,13 @@ function $isArrayOf_Lokay_store_Where$Or(obj, depth) {
 function $asArrayOf_Lokay_store_Where$Or(obj, depth) {
   return (($isArrayOf_Lokay_store_Where$Or(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.store.Where$Or;", depth));
 }
+var $d_Lokay_store_Where$Or = new $TypeData().initClass($c_Lokay_store_Where$Or, "okay.store.Where$Or", ({
+  Lokay_store_Where$Or: 1,
+  Lokay_store_Where: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
 function $ct_Lorg_junit_ComparisonFailure__T__T__T__($thiz, message, fExpected, fActual) {
   $ct_jl_AssertionError__O__($thiz, message);
   return $thiz;
@@ -63276,6 +71745,9 @@ $c_s_concurrent_duration_FiniteDuration.prototype.hashCode__I = (function() {
   var x_$_hi = $x_1.h;
   return x_$_lo;
 });
+$c_s_concurrent_duration_FiniteDuration.prototype.compare__O__I = (function(that) {
+  return this.compare__s_concurrent_duration_Duration__I($as_s_concurrent_duration_Duration(that));
+});
 function $as_s_concurrent_duration_FiniteDuration(obj) {
   return (((obj instanceof $c_s_concurrent_duration_FiniteDuration) || (obj === null)) ? obj : $throwClassCastException(obj, "scala.concurrent.duration.FiniteDuration"));
 }
@@ -64888,6 +73360,440 @@ var $d_Lmunit_package$$anon$1 = new $TypeData().initClass($c_Lmunit_package$$ano
   Lmunit_internal_junitinterface_PendingTag: 1
 }));
 /** @constructor */
+function $c_Lokay_effects_cek_OnCek$Spot() {
+}
+$c_Lokay_effects_cek_OnCek$Spot.prototype = new $h_O();
+$c_Lokay_effects_cek_OnCek$Spot.prototype.constructor = $c_Lokay_effects_cek_OnCek$Spot;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$Spot() {
+}
+$h_Lokay_effects_cek_OnCek$Spot.prototype = $c_Lokay_effects_cek_OnCek$Spot.prototype;
+$c_Lokay_effects_cek_OnCek$Spot.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_cek_OnCek$Spot.prototype.take__Lokay_scala3_At__Lokay_scala3_Taken = (function(at) {
+  return $m_Lokay_effects_cek_Spots$().take__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_Taken(this, at);
+});
+$c_Lokay_effects_cek_OnCek$Spot.prototype.outside__Lokay_scala3_At__Lokay_scala3_At = (function(at) {
+  return $m_Lokay_effects_cek_Spots$().outside__Lokay_effects_cek_OnCek$Spot__Lokay_scala3_At__Lokay_scala3_At(this, at);
+});
+function $as_Lokay_effects_cek_OnCek$Spot(obj) {
+  return (((obj instanceof $c_Lokay_effects_cek_OnCek$Spot) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.cek.OnCek$Spot"));
+}
+function $isArrayOf_Lokay_effects_cek_OnCek$Spot(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_cek_OnCek$Spot)));
+}
+function $asArrayOf_Lokay_effects_cek_OnCek$Spot(obj, depth) {
+  return (($isArrayOf_Lokay_effects_cek_OnCek$Spot(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.cek.OnCek$Spot;", depth));
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Constraint$Max(n) {
+  this.Lokay_effects_shape_Constraint$Max__f_n = null;
+  this.Lokay_effects_shape_Constraint$Max__f_n = n;
+}
+$c_Lokay_effects_shape_Constraint$Max.prototype = new $h_O();
+$c_Lokay_effects_shape_Constraint$Max.prototype.constructor = $c_Lokay_effects_shape_Constraint$Max;
+/** @constructor */
+function $h_Lokay_effects_shape_Constraint$Max() {
+}
+$h_Lokay_effects_shape_Constraint$Max.prototype = $c_Lokay_effects_shape_Constraint$Max.prototype;
+$c_Lokay_effects_shape_Constraint$Max.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1669861544, true);
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Constraint$Max)) {
+    var x$0$2 = $as_Lokay_effects_shape_Constraint$Max(x$0);
+    var x = this.Lokay_effects_shape_Constraint$Max__f_n;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Constraint$Max__f_n;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.productPrefix__T = (function() {
+  return "Max";
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Constraint$Max__f_n;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "n";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Max.prototype.check__s_math_BigDecimal__s_Option = (function(x) {
+  var this$1 = $n(x);
+  var that = this.Lokay_effects_shape_Constraint$Max__f_n;
+  if ($f_s_math_Ordered__$greater__O__Z(this$1, that)) {
+    var value = ("at most " + this.Lokay_effects_shape_Constraint$Max__f_n);
+    return new $c_s_Some(value);
+  } else {
+    return $m_s_None$();
+  }
+});
+function $as_Lokay_effects_shape_Constraint$Max(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Constraint$Max) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Constraint$Max"));
+}
+function $isArrayOf_Lokay_effects_shape_Constraint$Max(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Constraint$Max)));
+}
+function $asArrayOf_Lokay_effects_shape_Constraint$Max(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Constraint$Max(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$Max;", depth));
+}
+var $d_Lokay_effects_shape_Constraint$Max = new $TypeData().initClass($c_Lokay_effects_shape_Constraint$Max, "okay.effects.shape.Constraint$Max", ({
+  Lokay_effects_shape_Constraint$Max: 1,
+  Lokay_effects_shape_Constraint: 1,
+  Lokay_effects_shape_Constraint$OnNumber: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Constraint$MaxLength(n) {
+  this.Lokay_effects_shape_Constraint$MaxLength__f_n = 0;
+  this.Lokay_effects_shape_Constraint$MaxLength__f_n = n;
+}
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype = new $h_O();
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.constructor = $c_Lokay_effects_shape_Constraint$MaxLength;
+/** @constructor */
+function $h_Lokay_effects_shape_Constraint$MaxLength() {
+}
+$h_Lokay_effects_shape_Constraint$MaxLength.prototype = $c_Lokay_effects_shape_Constraint$MaxLength.prototype;
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 1212567882);
+  var hash$1 = acc;
+  var data = this.Lokay_effects_shape_Constraint$MaxLength__f_n;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$2, 1);
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Constraint$MaxLength)) {
+    var x$0$2 = $as_Lokay_effects_shape_Constraint$MaxLength(x$0);
+    return (this.Lokay_effects_shape_Constraint$MaxLength__f_n === $n(x$0$2).Lokay_effects_shape_Constraint$MaxLength__f_n);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.productPrefix__T = (function() {
+  return "MaxLength";
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Constraint$MaxLength__f_n;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "n";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$MaxLength.prototype.check__T__s_Option = (function(s) {
+  var this$1 = $n(s);
+  if ((this$1.length > this.Lokay_effects_shape_Constraint$MaxLength__f_n)) {
+    var value = (("at most " + this.Lokay_effects_shape_Constraint$MaxLength__f_n) + " characters");
+    return new $c_s_Some(value);
+  } else {
+    return $m_s_None$();
+  }
+});
+function $as_Lokay_effects_shape_Constraint$MaxLength(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Constraint$MaxLength) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Constraint$MaxLength"));
+}
+function $isArrayOf_Lokay_effects_shape_Constraint$MaxLength(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Constraint$MaxLength)));
+}
+function $asArrayOf_Lokay_effects_shape_Constraint$MaxLength(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Constraint$MaxLength(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$MaxLength;", depth));
+}
+var $d_Lokay_effects_shape_Constraint$MaxLength = new $TypeData().initClass($c_Lokay_effects_shape_Constraint$MaxLength, "okay.effects.shape.Constraint$MaxLength", ({
+  Lokay_effects_shape_Constraint$MaxLength: 1,
+  Lokay_effects_shape_Constraint: 1,
+  Lokay_effects_shape_Constraint$OnText: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Constraint$Min(n) {
+  this.Lokay_effects_shape_Constraint$Min__f_n = null;
+  this.Lokay_effects_shape_Constraint$Min__f_n = n;
+}
+$c_Lokay_effects_shape_Constraint$Min.prototype = new $h_O();
+$c_Lokay_effects_shape_Constraint$Min.prototype.constructor = $c_Lokay_effects_shape_Constraint$Min;
+/** @constructor */
+function $h_Lokay_effects_shape_Constraint$Min() {
+}
+$h_Lokay_effects_shape_Constraint$Min.prototype = $c_Lokay_effects_shape_Constraint$Min.prototype;
+$c_Lokay_effects_shape_Constraint$Min.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-241819269), true);
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Constraint$Min)) {
+    var x$0$2 = $as_Lokay_effects_shape_Constraint$Min(x$0);
+    var x = this.Lokay_effects_shape_Constraint$Min__f_n;
+    var x$2 = $n(x$0$2).Lokay_effects_shape_Constraint$Min__f_n;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.productPrefix__T = (function() {
+  return "Min";
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Constraint$Min__f_n;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "n";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Min.prototype.check__s_math_BigDecimal__s_Option = (function(x) {
+  var this$1 = $n(x);
+  var that = this.Lokay_effects_shape_Constraint$Min__f_n;
+  if ($f_s_math_Ordered__$less__O__Z(this$1, that)) {
+    var value = ("at least " + this.Lokay_effects_shape_Constraint$Min__f_n);
+    return new $c_s_Some(value);
+  } else {
+    return $m_s_None$();
+  }
+});
+function $as_Lokay_effects_shape_Constraint$Min(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Constraint$Min) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Constraint$Min"));
+}
+function $isArrayOf_Lokay_effects_shape_Constraint$Min(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Constraint$Min)));
+}
+function $asArrayOf_Lokay_effects_shape_Constraint$Min(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Constraint$Min(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$Min;", depth));
+}
+var $d_Lokay_effects_shape_Constraint$Min = new $TypeData().initClass($c_Lokay_effects_shape_Constraint$Min, "okay.effects.shape.Constraint$Min", ({
+  Lokay_effects_shape_Constraint$Min: 1,
+  Lokay_effects_shape_Constraint: 1,
+  Lokay_effects_shape_Constraint$OnNumber: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_shape_Constraint$MinLength(n) {
+  this.Lokay_effects_shape_Constraint$MinLength__f_n = 0;
+  this.Lokay_effects_shape_Constraint$MinLength__f_n = n;
+}
+$c_Lokay_effects_shape_Constraint$MinLength.prototype = new $h_O();
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.constructor = $c_Lokay_effects_shape_Constraint$MinLength;
+/** @constructor */
+function $h_Lokay_effects_shape_Constraint$MinLength() {
+}
+$h_Lokay_effects_shape_Constraint$MinLength.prototype = $c_Lokay_effects_shape_Constraint$MinLength.prototype;
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.hashCode__I = (function() {
+  var acc = (-889275714);
+  var hash = acc;
+  acc = $m_sr_Statics$().mix__I__I__I(hash, 1985046456);
+  var hash$1 = acc;
+  var data = this.Lokay_effects_shape_Constraint$MinLength__f_n;
+  acc = $m_sr_Statics$().mix__I__I__I(hash$1, data);
+  var hash$2 = acc;
+  return $m_sr_Statics$().finalizeHash__I__I__I(hash$2, 1);
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Constraint$MinLength)) {
+    var x$0$2 = $as_Lokay_effects_shape_Constraint$MinLength(x$0);
+    return (this.Lokay_effects_shape_Constraint$MinLength__f_n === $n(x$0$2).Lokay_effects_shape_Constraint$MinLength__f_n);
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.productPrefix__T = (function() {
+  return "MinLength";
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Constraint$MinLength__f_n;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "n";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$MinLength.prototype.check__T__s_Option = (function(s) {
+  var this$1 = $n(s);
+  if ((this$1.length < this.Lokay_effects_shape_Constraint$MinLength__f_n)) {
+    var value = (("at least " + this.Lokay_effects_shape_Constraint$MinLength__f_n) + " characters");
+    return new $c_s_Some(value);
+  } else {
+    return $m_s_None$();
+  }
+});
+function $as_Lokay_effects_shape_Constraint$MinLength(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Constraint$MinLength) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Constraint$MinLength"));
+}
+function $isArrayOf_Lokay_effects_shape_Constraint$MinLength(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Constraint$MinLength)));
+}
+function $asArrayOf_Lokay_effects_shape_Constraint$MinLength(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Constraint$MinLength(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$MinLength;", depth));
+}
+var $d_Lokay_effects_shape_Constraint$MinLength = new $TypeData().initClass($c_Lokay_effects_shape_Constraint$MinLength, "okay.effects.shape.Constraint$MinLength", ({
+  Lokay_effects_shape_Constraint$MinLength: 1,
+  Lokay_effects_shape_Constraint: 1,
+  Lokay_effects_shape_Constraint$OnText: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+function $p_Lokay_effects_shape_Constraint$Pattern__compiled__s_util_matching_Regex($thiz) {
+  if ((!$thiz.Lokay_effects_shape_Constraint$Pattern__f_compiledbitmap$1)) {
+    var x = $thiz.Lokay_effects_shape_Constraint$Pattern__f_regex;
+    $thiz.Lokay_effects_shape_Constraint$Pattern__f_compiled$lzy1 = $ct_s_util_matching_Regex__T__sci_Seq__(new $c_s_util_matching_Regex(), x, $m_sci_Nil$());
+    $thiz.Lokay_effects_shape_Constraint$Pattern__f_compiledbitmap$1 = true;
+  }
+  return $thiz.Lokay_effects_shape_Constraint$Pattern__f_compiled$lzy1;
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Constraint$Pattern(regex, hint) {
+  this.Lokay_effects_shape_Constraint$Pattern__f_regex = null;
+  this.Lokay_effects_shape_Constraint$Pattern__f_hint = null;
+  this.Lokay_effects_shape_Constraint$Pattern__f_compiled$lzy1 = null;
+  this.Lokay_effects_shape_Constraint$Pattern__f_compiledbitmap$1 = false;
+  this.Lokay_effects_shape_Constraint$Pattern__f_regex = regex;
+  this.Lokay_effects_shape_Constraint$Pattern__f_hint = hint;
+}
+$c_Lokay_effects_shape_Constraint$Pattern.prototype = new $h_O();
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.constructor = $c_Lokay_effects_shape_Constraint$Pattern;
+/** @constructor */
+function $h_Lokay_effects_shape_Constraint$Pattern() {
+}
+$h_Lokay_effects_shape_Constraint$Pattern.prototype = $c_Lokay_effects_shape_Constraint$Pattern.prototype;
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, (-978322432), true);
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_shape_Constraint$Pattern)) {
+    var x$0$2 = $as_Lokay_effects_shape_Constraint$Pattern(x$0);
+    return ((this.Lokay_effects_shape_Constraint$Pattern__f_regex === $n(x$0$2).Lokay_effects_shape_Constraint$Pattern__f_regex) && (this.Lokay_effects_shape_Constraint$Pattern__f_hint === $n(x$0$2).Lokay_effects_shape_Constraint$Pattern__f_hint));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.productPrefix__T = (function() {
+  return "Pattern";
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_shape_Constraint$Pattern__f_regex;
+  }
+  if ((n === 1)) {
+    return this.Lokay_effects_shape_Constraint$Pattern__f_hint;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "regex";
+  }
+  if ((n === 1)) {
+    return "hint";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Constraint$Pattern.prototype.check__T__s_Option = (function(s) {
+  if ($n($p_Lokay_effects_shape_Constraint$Pattern__compiled__s_util_matching_Regex(this)).matches__jl_CharSequence__Z(s)) {
+    return $m_s_None$();
+  } else {
+    var value = ("not " + this.Lokay_effects_shape_Constraint$Pattern__f_hint);
+    return new $c_s_Some(value);
+  }
+});
+function $as_Lokay_effects_shape_Constraint$Pattern(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Constraint$Pattern) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Constraint$Pattern"));
+}
+function $isArrayOf_Lokay_effects_shape_Constraint$Pattern(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Constraint$Pattern)));
+}
+function $asArrayOf_Lokay_effects_shape_Constraint$Pattern(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Constraint$Pattern(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Constraint$Pattern;", depth));
+}
+var $d_Lokay_effects_shape_Constraint$Pattern = new $TypeData().initClass($c_Lokay_effects_shape_Constraint$Pattern, "okay.effects.shape.Constraint$Pattern", ({
+  Lokay_effects_shape_Constraint$Pattern: 1,
+  Lokay_effects_shape_Constraint: 1,
+  Lokay_effects_shape_Constraint$OnText: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1
+}));
+/** @constructor */
 function $c_Lokay_scala3_Crossed$Handled(inner, at, h, outside) {
   this.Lokay_scala3_Crossed$Handled__f_inner = null;
   this.Lokay_scala3_Crossed$Handled__f_at = null;
@@ -65086,7 +73992,12 @@ $c_Lokay_scala3_Crossed$Renamed.prototype.equals__O__Z = (function(x$0) {
     if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
       var x$3 = this.Lokay_scala3_Crossed$Renamed__f_rename;
       var x$4 = $n(x$0$2).Lokay_scala3_Crossed$Renamed__f_rename;
-      var $x_1 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
+      if ((x$3 === null)) {
+        var $x_1 = (x$4 === null);
+      } else {
+        var this$1 = $n(x$3);
+        var $x_1 = (this$1 === x$4);
+      }
     } else {
       var $x_1 = false;
     }
@@ -65888,7 +74799,13 @@ $c_Lokay_scala3_Levels$Renamed.prototype.equals__O__Z = (function(x$0) {
     var x$0$2 = $as_Lokay_scala3_Levels$Renamed(x$0);
     var x = this.Lokay_scala3_Levels$Renamed__f_rename;
     var x$2 = $n(x$0$2).Lokay_scala3_Levels$Renamed__f_rename;
-    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+    if ((x === null)) {
+      var $x_2 = (x$2 === null);
+    } else {
+      var this$1 = $n(x);
+      var $x_2 = (this$1 === x$2);
+    }
+    if ($x_2) {
       var x$3 = this.Lokay_scala3_Levels$Renamed__f_outside;
       var x$4 = $n(x$0$2).Lokay_scala3_Levels$Renamed__f_outside;
       var $x_1 = ((x$3 === null) ? (x$4 === null) : $n(x$3).equals__O__Z(x$4));
@@ -66050,6 +74967,12 @@ function $h_Lokay_scala3_Place() {
 $h_Lokay_scala3_Place.prototype = $c_Lokay_scala3_Place.prototype;
 $c_Lokay_scala3_Place.prototype.productIterator__sc_Iterator = (function() {
   return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_scala3_Place.prototype.take__Lokay_scala3_At__Lokay_scala3_Taken = (function(at) {
+  return $m_Lokay_scala3_Taken$().apply__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_Taken(this, at);
+});
+$c_Lokay_scala3_Place.prototype.outside__Lokay_scala3_At__Lokay_scala3_At = (function(at) {
+  return $m_Lokay_scala3_Taken$().outside__Lokay_scala3_Place__Lokay_scala3_At__Lokay_scala3_At(this, at);
 });
 function $as_Lokay_scala3_Place(obj) {
   return (((obj instanceof $c_Lokay_scala3_Place) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.scala3.Place"));
@@ -66479,8 +75402,74 @@ var $d_Lokay_scala3_Prog$Perform = new $TypeData().initClass($c_Lokay_scala3_Pro
   Ljava_io_Serializable: 1,
   s_reflect_Enum: 1
 }));
+/** @constructor */
+function $c_Lokay_scala3_Prog$Remap(p, rename) {
+  this.Lokay_scala3_Prog$Remap__f_p = null;
+  this.Lokay_scala3_Prog$Remap__f_rename = null;
+  this.Lokay_scala3_Prog$Remap__f_p = p;
+  this.Lokay_scala3_Prog$Remap__f_rename = rename;
+}
+$c_Lokay_scala3_Prog$Remap.prototype = new $h_Lokay_scala3_Prog();
+$c_Lokay_scala3_Prog$Remap.prototype.constructor = $c_Lokay_scala3_Prog$Remap;
+/** @constructor */
+function $h_Lokay_scala3_Prog$Remap() {
+}
+$h_Lokay_scala3_Prog$Remap.prototype = $c_Lokay_scala3_Prog$Remap.prototype;
+$c_Lokay_scala3_Prog$Remap.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 1125203753, true);
+});
+$c_Lokay_scala3_Prog$Remap.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_scala3_Prog$Remap)) {
+    var x$0$2 = $as_Lokay_scala3_Prog$Remap(x$0);
+    var x = this.Lokay_scala3_Prog$Remap__f_p;
+    var x$2 = $n(x$0$2).Lokay_scala3_Prog$Remap__f_p;
+    if (((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2))) {
+      var x$3 = this.Lokay_scala3_Prog$Remap__f_rename;
+      var x$4 = $n(x$0$2).Lokay_scala3_Prog$Remap__f_rename;
+      if ((x$3 === null)) {
+        return (x$4 === null);
+      } else {
+        var this$1 = $n(x$3);
+        return (this$1 === x$4);
+      }
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+});
+$c_Lokay_scala3_Prog$Remap.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_scala3_Prog$Remap.prototype.productArity__I = (function() {
+  return 2;
+});
+$c_Lokay_scala3_Prog$Remap.prototype.productPrefix__T = (function() {
+  return "Remap";
+});
+$c_Lokay_scala3_Prog$Remap.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_scala3_Prog$Remap__f_p;
+  }
+  if ((n === 1)) {
+    return this.Lokay_scala3_Prog$Remap__f_rename;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_scala3_Prog$Remap.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "p";
+  }
+  if ((n === 1)) {
+    return "rename";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
 function $as_Lokay_scala3_Prog$Remap(obj) {
-  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.scala3.Prog$Remap"));
+  return (((obj instanceof $c_Lokay_scala3_Prog$Remap) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.scala3.Prog$Remap"));
 }
 function $isArrayOf_Lokay_scala3_Prog$Remap(obj, depth) {
   return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_scala3_Prog$Remap)));
@@ -66488,6 +75477,14 @@ function $isArrayOf_Lokay_scala3_Prog$Remap(obj, depth) {
 function $asArrayOf_Lokay_scala3_Prog$Remap(obj, depth) {
   return (($isArrayOf_Lokay_scala3_Prog$Remap(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.scala3.Prog$Remap;", depth));
 }
+var $d_Lokay_scala3_Prog$Remap = new $TypeData().initClass($c_Lokay_scala3_Prog$Remap, "okay.scala3.Prog$Remap", ({
+  Lokay_scala3_Prog$Remap: 1,
+  Lokay_scala3_Prog: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
 /** @constructor */
 function $c_Lokay_scala3_Prog$Resume(inner, crossed, at, h, x) {
   this.Lokay_scala3_Prog$Resume__f_inner = null;
@@ -70464,6 +79461,9 @@ $c_s_concurrent_duration_Duration$$anon$1.prototype.equals__O__Z = (function(oth
 $c_s_concurrent_duration_Duration$$anon$1.prototype.compare__s_concurrent_duration_Duration__I = (function(other) {
   return ((other !== this) | 0);
 });
+$c_s_concurrent_duration_Duration$$anon$1.prototype.compare__O__I = (function(that) {
+  return this.compare__s_concurrent_duration_Duration__I($as_s_concurrent_duration_Duration(that));
+});
 var $d_s_concurrent_duration_Duration$$anon$1 = new $TypeData().initClass($c_s_concurrent_duration_Duration$$anon$1, "scala.concurrent.duration.Duration$$anon$1", ({
   s_concurrent_duration_Duration$$anon$1: 1,
   s_concurrent_duration_Duration$Infinite: 1,
@@ -70627,6 +79627,11 @@ $c_sr_RichBoolean.prototype.constructor = $c_sr_RichBoolean;
 function $h_sr_RichBoolean() {
 }
 $h_sr_RichBoolean.prototype = $c_sr_RichBoolean.prototype;
+$c_sr_RichBoolean.prototype.compare__O__I = (function(y) {
+  var x = this.sr_RichBoolean__f_self;
+  var y$1 = $uZ(y);
+  return ((x === y$1) ? 0 : (x ? 1 : (-1)));
+});
 $c_sr_RichBoolean.prototype.toString__T = (function() {
   return $f_s_Proxy__toString__T(this);
 });
@@ -71318,6 +80323,193 @@ var $d_Lmunit_FailSuiteException = new $TypeData().initClass($c_Lmunit_FailSuite
   Ljava_io_Serializable: 1,
   Lmunit_FailExceptionLike: 1
 }));
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$Spot$Absurd() {
+}
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype = new $h_Lokay_effects_cek_OnCek$Spot();
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.constructor = $c_Lokay_effects_cek_OnCek$Spot$Absurd;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$Spot$Absurd() {
+}
+$h_Lokay_effects_cek_OnCek$Spot$Absurd.prototype = $c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype;
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.hashCode__I = (function() {
+  return 1954941909;
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.equals__O__Z = (function(x$0) {
+  return ((this === x$0) || ((x$0 instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd) && ($as_Lokay_effects_cek_OnCek$Spot$Absurd(x$0), true)));
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.productPrefix__T = (function() {
+  return "Absurd";
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.productElement__I__O = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_cek_OnCek$Spot$Absurd.prototype.productElementName__I__T = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_cek_OnCek$Spot$Absurd(obj) {
+  return (((obj instanceof $c_Lokay_effects_cek_OnCek$Spot$Absurd) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.cek.OnCek$Spot$Absurd"));
+}
+function $isArrayOf_Lokay_effects_cek_OnCek$Spot$Absurd(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_cek_OnCek$Spot$Absurd)));
+}
+function $asArrayOf_Lokay_effects_cek_OnCek$Spot$Absurd(obj, depth) {
+  return (($isArrayOf_Lokay_effects_cek_OnCek$Spot$Absurd(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.cek.OnCek$Spot$Absurd;", depth));
+}
+var $d_Lokay_effects_cek_OnCek$Spot$Absurd = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$Spot$Absurd, "okay.effects.cek.OnCek$Spot$Absurd", ({
+  Lokay_effects_cek_OnCek$Spot$Absurd: 1,
+  Lokay_effects_cek_OnCek$Spot: 1,
+  Lokay_scala3_At: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$Spot$Init(at) {
+  this.Lokay_effects_cek_OnCek$Spot$Init__f_at = null;
+  this.Lokay_effects_cek_OnCek$Spot$Init__f_at = at;
+}
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype = new $h_Lokay_effects_cek_OnCek$Spot();
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.constructor = $c_Lokay_effects_cek_OnCek$Spot$Init;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$Spot$Init() {
+}
+$h_Lokay_effects_cek_OnCek$Spot$Init.prototype = $c_Lokay_effects_cek_OnCek$Spot$Init.prototype;
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 934343888, true);
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_cek_OnCek$Spot$Init)) {
+    var x$0$2 = $as_Lokay_effects_cek_OnCek$Spot$Init(x$0);
+    var x = this.Lokay_effects_cek_OnCek$Spot$Init__f_at;
+    var x$2 = $n(x$0$2).Lokay_effects_cek_OnCek$Spot$Init__f_at;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.productPrefix__T = (function() {
+  return "Init";
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_cek_OnCek$Spot$Init__f_at;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_cek_OnCek$Spot$Init.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "at";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_cek_OnCek$Spot$Init(obj) {
+  return (((obj instanceof $c_Lokay_effects_cek_OnCek$Spot$Init) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.cek.OnCek$Spot$Init"));
+}
+function $isArrayOf_Lokay_effects_cek_OnCek$Spot$Init(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_cek_OnCek$Spot$Init)));
+}
+function $asArrayOf_Lokay_effects_cek_OnCek$Spot$Init(obj, depth) {
+  return (($isArrayOf_Lokay_effects_cek_OnCek$Spot$Init(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.cek.OnCek$Spot$Init;", depth));
+}
+var $d_Lokay_effects_cek_OnCek$Spot$Init = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$Spot$Init, "okay.effects.cek.OnCek$Spot$Init", ({
+  Lokay_effects_cek_OnCek$Spot$Init: 1,
+  Lokay_effects_cek_OnCek$Spot: 1,
+  Lokay_scala3_At: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+/** @constructor */
+function $c_Lokay_effects_cek_OnCek$Spot$Last(proof) {
+  this.Lokay_effects_cek_OnCek$Spot$Last__f_proof = null;
+  this.Lokay_effects_cek_OnCek$Spot$Last__f_proof = proof;
+}
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype = new $h_Lokay_effects_cek_OnCek$Spot();
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.constructor = $c_Lokay_effects_cek_OnCek$Spot$Last;
+/** @constructor */
+function $h_Lokay_effects_cek_OnCek$Spot$Last() {
+}
+$h_Lokay_effects_cek_OnCek$Spot$Last.prototype = $c_Lokay_effects_cek_OnCek$Spot$Last.prototype;
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.hashCode__I = (function() {
+  return $m_s_util_hashing_MurmurHash3$().productHash__s_Product__I__Z__I(this, 2141835732, true);
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.equals__O__Z = (function(x$0) {
+  if ((this === x$0)) {
+    return true;
+  } else if ((x$0 instanceof $c_Lokay_effects_cek_OnCek$Spot$Last)) {
+    var x$0$2 = $as_Lokay_effects_cek_OnCek$Spot$Last(x$0);
+    var x = this.Lokay_effects_cek_OnCek$Spot$Last__f_proof;
+    var x$2 = $n(x$0$2).Lokay_effects_cek_OnCek$Spot$Last__f_proof;
+    return ((x === null) ? (x$2 === null) : $n(x).equals__O__Z(x$2));
+  } else {
+    return false;
+  }
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.toString__T = (function() {
+  return $m_sr_ScalaRunTime$()._toString__s_Product__T(this);
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.productArity__I = (function() {
+  return 1;
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.productPrefix__T = (function() {
+  return "Last";
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.productElement__I__O = (function(n) {
+  if ((n === 0)) {
+    return this.Lokay_effects_cek_OnCek$Spot$Last__f_proof;
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_cek_OnCek$Spot$Last.prototype.productElementName__I__T = (function(n) {
+  if ((n === 0)) {
+    return "proof";
+  }
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_cek_OnCek$Spot$Last(obj) {
+  return (((obj instanceof $c_Lokay_effects_cek_OnCek$Spot$Last) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.cek.OnCek$Spot$Last"));
+}
+function $isArrayOf_Lokay_effects_cek_OnCek$Spot$Last(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_cek_OnCek$Spot$Last)));
+}
+function $asArrayOf_Lokay_effects_cek_OnCek$Spot$Last(obj, depth) {
+  return (($isArrayOf_Lokay_effects_cek_OnCek$Spot$Last(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.cek.OnCek$Spot$Last;", depth));
+}
+var $d_Lokay_effects_cek_OnCek$Spot$Last = new $TypeData().initClass($c_Lokay_effects_cek_OnCek$Spot$Last, "okay.effects.cek.OnCek$Spot$Last", ({
+  Lokay_effects_cek_OnCek$Spot$Last: 1,
+  Lokay_effects_cek_OnCek$Spot: 1,
+  Lokay_scala3_At: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_reflect_Enum: 1
+}));
+function $as_Lokay_effects_cek_OnCek$Spot$Only(obj) {
+  return ((false || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.cek.OnCek$Spot$Only"));
+}
+function $isArrayOf_Lokay_effects_cek_OnCek$Spot$Only(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_cek_OnCek$Spot$Only)));
+}
+function $asArrayOf_Lokay_effects_cek_OnCek$Spot$Only(obj, depth) {
+  return (($isArrayOf_Lokay_effects_cek_OnCek$Spot$Only(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.cek.OnCek$Spot$Only;", depth));
+}
 class $c_Lokay_effects_json_Descent$Failed extends $c_jl_RuntimeException {
   constructor(at, what) {
     super();
@@ -73613,6 +82805,62 @@ function $m_Lokay_effects_json_Json$Null$() {
   return $n_Lokay_effects_json_Json$Null$;
 }
 /** @constructor */
+function $c_Lokay_effects_shape_Schema$Any$() {
+}
+$c_Lokay_effects_shape_Schema$Any$.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Any$.prototype.constructor = $c_Lokay_effects_shape_Schema$Any$;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Any$() {
+}
+$h_Lokay_effects_shape_Schema$Any$.prototype = $c_Lokay_effects_shape_Schema$Any$.prototype;
+$c_Lokay_effects_shape_Schema$Any$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.hashCode__I = (function() {
+  return 65996;
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.toString__T = (function() {
+  return "Any";
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.productPrefix__T = (function() {
+  return "Any";
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.productElement__I__O = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$Any$.prototype.productElementName__I__T = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$Any$(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Any$) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Any$"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Any$(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Any$)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Any$(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Any$(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Any$;", depth));
+}
+var $d_Lokay_effects_shape_Schema$Any$ = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Any$, "okay.effects.shape.Schema$Any$", ({
+  Lokay_effects_shape_Schema$Any$: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1,
+  s_deriving_Mirror$Singleton: 1
+}));
+var $n_Lokay_effects_shape_Schema$Any$;
+function $m_Lokay_effects_shape_Schema$Any$() {
+  if ((!$n_Lokay_effects_shape_Schema$Any$)) {
+    $n_Lokay_effects_shape_Schema$Any$ = new $c_Lokay_effects_shape_Schema$Any$();
+  }
+  return $n_Lokay_effects_shape_Schema$Any$;
+}
+/** @constructor */
 function $c_Lokay_effects_shape_Schema$Bool$() {
 }
 $c_Lokay_effects_shape_Schema$Bool$.prototype = new $h_O();
@@ -73642,6 +82890,15 @@ $c_Lokay_effects_shape_Schema$Bool$.prototype.productElement__I__O = (function(n
 $c_Lokay_effects_shape_Schema$Bool$.prototype.productElementName__I__T = (function(n) {
   throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
 });
+function $as_Lokay_effects_shape_Schema$Bool$(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Bool$) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Bool$"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Bool$(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Bool$)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Bool$(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Bool$(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Bool$;", depth));
+}
 var $d_Lokay_effects_shape_Schema$Bool$ = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Bool$, "okay.effects.shape.Schema$Bool$", ({
   Lokay_effects_shape_Schema$Bool$: 1,
   Lokay_effects_shape_Schema: 1,
@@ -73658,6 +82915,122 @@ function $m_Lokay_effects_shape_Schema$Bool$() {
     $n_Lokay_effects_shape_Schema$Bool$ = new $c_Lokay_effects_shape_Schema$Bool$();
   }
   return $n_Lokay_effects_shape_Schema$Bool$;
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Schema$Date$() {
+}
+$c_Lokay_effects_shape_Schema$Date$.prototype = new $h_O();
+$c_Lokay_effects_shape_Schema$Date$.prototype.constructor = $c_Lokay_effects_shape_Schema$Date$;
+/** @constructor */
+function $h_Lokay_effects_shape_Schema$Date$() {
+}
+$h_Lokay_effects_shape_Schema$Date$.prototype = $c_Lokay_effects_shape_Schema$Date$.prototype;
+$c_Lokay_effects_shape_Schema$Date$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.hashCode__I = (function() {
+  return 2122702;
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.toString__T = (function() {
+  return "Date";
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.productPrefix__T = (function() {
+  return "Date";
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.productElement__I__O = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Schema$Date$.prototype.productElementName__I__T = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+function $as_Lokay_effects_shape_Schema$Date$(obj) {
+  return (((obj instanceof $c_Lokay_effects_shape_Schema$Date$) || (obj === null)) ? obj : $throwClassCastException(obj, "okay.effects.shape.Schema$Date$"));
+}
+function $isArrayOf_Lokay_effects_shape_Schema$Date$(obj, depth) {
+  return (!(!(((obj && obj.$classData) && (obj.$classData.arrayDepth === depth)) && obj.$classData.arrayBase.ancestors.Lokay_effects_shape_Schema$Date$)));
+}
+function $asArrayOf_Lokay_effects_shape_Schema$Date$(obj, depth) {
+  return (($isArrayOf_Lokay_effects_shape_Schema$Date$(obj, depth) || (obj === null)) ? obj : $throwArrayCastException(obj, "Lokay.effects.shape.Schema$Date$;", depth));
+}
+var $d_Lokay_effects_shape_Schema$Date$ = new $TypeData().initClass($c_Lokay_effects_shape_Schema$Date$, "okay.effects.shape.Schema$Date$", ({
+  Lokay_effects_shape_Schema$Date$: 1,
+  Lokay_effects_shape_Schema: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1,
+  s_deriving_Mirror$Singleton: 1
+}));
+var $n_Lokay_effects_shape_Schema$Date$;
+function $m_Lokay_effects_shape_Schema$Date$() {
+  if ((!$n_Lokay_effects_shape_Schema$Date$)) {
+    $n_Lokay_effects_shape_Schema$Date$ = new $c_Lokay_effects_shape_Schema$Date$();
+  }
+  return $n_Lokay_effects_shape_Schema$Date$;
+}
+/** @constructor */
+function $c_Lokay_effects_shape_Shape$AnyValue$() {
+}
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype = new $h_O();
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.constructor = $c_Lokay_effects_shape_Shape$AnyValue$;
+/** @constructor */
+function $h_Lokay_effects_shape_Shape$AnyValue$() {
+}
+$h_Lokay_effects_shape_Shape$AnyValue$.prototype = $c_Lokay_effects_shape_Shape$AnyValue$.prototype;
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.absent__s_Option = (function() {
+  return $m_s_None$();
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.productIterator__sc_Iterator = (function() {
+  return new $c_s_Product$$anon$1(this);
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.hashCode__I = (function() {
+  return (-293740795);
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.toString__T = (function() {
+  return "AnyValue";
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.productArity__I = (function() {
+  return 0;
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.productPrefix__T = (function() {
+  return "AnyValue";
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.productElement__I__O = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.productElementName__I__T = (function(n) {
+  throw $ct_jl_IndexOutOfBoundsException__T__(new $c_jl_IndexOutOfBoundsException(), ("" + n));
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.decodeAt__Lokay_effects_json_Json__sci_List__s_util_Either = (function(v, path) {
+  return new $c_s_util_Right(v);
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.erased__Lokay_effects_shape_Schema = (function() {
+  return $m_Lokay_effects_shape_Schema$Any$();
+});
+$c_Lokay_effects_shape_Shape$AnyValue$.prototype.encode__O__Lokay_effects_json_Json = (function(p) {
+  var v = $as_Lokay_effects_json_Json(p);
+  return v;
+});
+var $d_Lokay_effects_shape_Shape$AnyValue$ = new $TypeData().initClass($c_Lokay_effects_shape_Shape$AnyValue$, "okay.effects.shape.Shape$AnyValue$", ({
+  Lokay_effects_shape_Shape$AnyValue$: 1,
+  Lokay_effects_shape_Shape: 1,
+  s_Equals: 1,
+  s_Product: 1,
+  Ljava_io_Serializable: 1,
+  s_deriving_Mirror: 1,
+  s_deriving_Mirror$Product: 1,
+  s_deriving_Mirror$Singleton: 1
+}));
+var $n_Lokay_effects_shape_Shape$AnyValue$;
+function $m_Lokay_effects_shape_Shape$AnyValue$() {
+  if ((!$n_Lokay_effects_shape_Shape$AnyValue$)) {
+    $n_Lokay_effects_shape_Shape$AnyValue$ = new $c_Lokay_effects_shape_Shape$AnyValue$();
+  }
+  return $n_Lokay_effects_shape_Shape$AnyValue$;
 }
 /** @constructor */
 function $c_Lokay_effects_shape_Shape$Bool$() {
@@ -74043,6 +83416,10 @@ $c_s_math_BigDecimal.prototype.toBigIntExact__s_Option = (function() {
 $c_s_math_BigDecimal.prototype.toString__T = (function() {
   return $n(this.s_math_BigDecimal__f_bigDecimal).toString__T();
 });
+$c_s_math_BigDecimal.prototype.compare__O__I = (function(that) {
+  var that$1 = $as_s_math_BigDecimal(that);
+  return $n(this.s_math_BigDecimal__f_bigDecimal).compareTo__Ljava_math_BigDecimal__I($n(that$1).s_math_BigDecimal__f_bigDecimal);
+});
 $c_s_math_BigDecimal.prototype.underlying__O = (function() {
   return this.s_math_BigDecimal__f_bigDecimal;
 });
@@ -74368,6 +83745,9 @@ $c_s_math_BigInt.prototype.toString__T = (function() {
     var this$2 = $n(this.s_math_BigInt__f__bigInteger);
     return $m_Ljava_math_Conversion$().toDecimalScaledString__Ljava_math_BigInteger__T(this$2);
   }
+});
+$c_s_math_BigInt.prototype.compare__O__I = (function(that) {
+  return this.compare__s_math_BigInt__I($as_s_math_BigInt(that));
 });
 $c_s_math_BigInt.prototype.underlying__O = (function() {
   return this.bigInteger__Ljava_math_BigInteger();
@@ -75176,6 +84556,12 @@ $c_sr_RichInt.prototype.constructor = $c_sr_RichInt;
 function $h_sr_RichInt() {
 }
 $h_sr_RichInt.prototype = $c_sr_RichInt.prototype;
+$c_sr_RichInt.prototype.compare__O__I = (function(y) {
+  $m_s_math_Ordering$Int$();
+  var x = this.sr_RichInt__f_self;
+  var y$1 = $uI(y);
+  return ((x === y$1) ? 0 : ((x < y$1) ? (-1) : 1));
+});
 $c_sr_RichInt.prototype.compareTo__O__I = (function(that) {
   $m_s_math_Ordering$Int$();
   var x = this.sr_RichInt__f_self;
@@ -76452,6 +85838,14 @@ $h_sr_RichLong.prototype = $c_sr_RichLong.prototype;
 $c_sr_RichLong.prototype.isWhole__Z = (function() {
   return true;
 });
+$c_sr_RichLong.prototype.compare__O__I = (function(y) {
+  var x_$_lo = this.sr_RichLong__f_self_$lo;
+  var x_$_hi = this.sr_RichLong__f_self_$hi;
+  var $x_1 = $uJ(y);
+  var y$1_$_lo = $x_1.l;
+  var y$1_$_hi = $x_1.h;
+  return ((x_$_hi === y$1_$_hi) ? ((x_$_lo === y$1_$_lo) ? 0 : (((x_$_lo >>> 0) < (y$1_$_lo >>> 0)) ? (-1) : 1)) : ((x_$_hi < y$1_$_hi) ? (-1) : 1));
+});
 $c_sr_RichLong.prototype.compareTo__O__I = (function(that) {
   var x_$_lo = this.sr_RichLong__f_self_$lo;
   var x_$_hi = this.sr_RichLong__f_self_$hi;
@@ -76552,6 +85946,8 @@ function $c_Lokay_serverless_store_StoreSuite() {
   this.Lokay_serverless_store_StoreSuite__f_given_ExecutionContextbitmap$1 = false;
   this.Lokay_serverless_store_StoreSuite__f_Shops$lzy1 = null;
   this.Lokay_serverless_store_StoreSuite__f_Shopsbitmap$1 = false;
+  this.Lokay_serverless_store_StoreSuite__f_Registry$lzy1 = null;
+  this.Lokay_serverless_store_StoreSuite__f_Registrybitmap$1 = false;
   $ct_Lmunit_FunSuite__(this);
   var body = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
     var c = new $c_Lokay_serverless_cloud_MemoryCloud($m_Lokay_serverless_cloud_MemoryCloud$().$lessinit$greater$default$1__F0(), this.given_ExecutionContext__s_concurrent_ExecutionContext());
@@ -76665,6 +86061,72 @@ function $c_Lokay_serverless_store_StoreSuite() {
   }));
   var loc$7 = new $c_Lmunit_Location("store/src/test/scala/okay/serverless/store/StoreSuite.scala", 49);
   $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "in an object's durable state: the same answers, the documents in its storage", body$1, loc$7);
+  var body$2 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+    var c$2 = new $c_Lokay_serverless_cloud_MemoryCloud($m_Lokay_serverless_cloud_MemoryCloud$().$lessinit$greater$default$1__F0(), this.given_ExecutionContext__s_concurrent_ExecutionContext());
+    $n(c$2.Lokay_serverless_cloud_MemoryCloud__f_actors).update__O__O__V("REGISTRY", this.Registry__Lokay_serverless_store_StoreSuite$Registry$());
+    var $x_17 = c$2.Lokay_serverless_cloud_MemoryCloud__f_platform;
+    var $x_16 = $m_Lokay_serverless_cloud_Objects$();
+    var this$92 = $n($m_Lokay_serverless_cloud_Http$package$().Lokay_serverless_cloud_Http$package$__f_Request);
+    var $x_15 = this$92.apply__T__T__Lokay_http_Request("GET", "/");
+    var at$35 = new $c_Lokay_scala3_Place$Last();
+    return $n($n($x_17).future__Lokay_scala3_Prog__s_concurrent_ExecutionContext__s_concurrent_Future($x_16.call__T__T__Lokay_http_Request__Lokay_scala3_Place__Lokay_scala3_Prog("REGISTRY", "ua", $x_15, at$35), this.given_ExecutionContext__s_concurrent_ExecutionContext())).map__F1__s_concurrent_ExecutionContext__s_concurrent_Future(new $c_sjsr_AnonFunction1_$$Lambda$412915ce24663401f4bc24349a746e1dbd693dc1(((r$2) => {
+      var r$3 = $as_Lokay_http_Response(r$2);
+      var obtained$2 = $m_Lokay_serverless_cloud_Http$package$().text__Lokay_http_Response__T(r$3);
+      var expected$2 = $n($m_Lokay_serverless_store_JournalPrograms$().reference__T5()).toString__T();
+      var clue$6 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => "values are not the same"));
+      var loc$8 = new $c_Lmunit_Location("store/src/test/scala/okay/serverless/store/StoreSuite.scala", 62);
+      var compare$3 = $m_Lmunit_Compare$().Lmunit_Compare$__f_anyEquality;
+      var diffOptions$3 = $m_Lmunit_diff_DiffOptions$().Lmunit_diff_DiffOptions$__f_default;
+      $f_Lmunit_Assertions__assertEquals__O__O__F0__Lmunit_Location__Lmunit_Compare__Lmunit_diff_DiffOptions__V(this, obtained$2, expected$2, clue$6, loc$8, compare$3, diffOptions$3);
+      var this$98 = $n(c$2.stored__T__T__sci_Map("REGISTRY", "ua"));
+      var this$99 = $n(this$98.keySet__sc_Set());
+      var this$101 = $n($m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(this$99));
+      var ord = $m_s_math_Ordering$String$();
+      var stored$1 = $as_sci_List($f_sc_SeqOps__sorted__s_math_Ordering__O(this$101, ord));
+      var cond$3 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+        var this$102 = $n(stored$1);
+        var these = this$102;
+        while ((!$n(these).isEmpty__Z())) {
+          var x0 = $n(these).head__O();
+          var _$1 = $as_T(x0);
+          var this$103 = $n(_$1);
+          if ($uZ(this$103.startsWith("data/events/"))) {
+            return true;
+          }
+          these = $as_sci_List($n(these).tail__O());
+        }
+        return false;
+      }));
+      var clue$7 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+        var this$104 = $n(stored$1);
+        return $f_sc_Iterable__toString__T(this$104);
+      }));
+      var loc$9 = new $c_Lmunit_Location("store/src/test/scala/okay/serverless/store/StoreSuite.scala", 64);
+      $f_Lmunit_Assertions__assert__F0__F0__Lmunit_Location__V(this, cond$3, clue$7, loc$9);
+      var cond$4 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+        var this$105 = $n(stored$1);
+        var these$1 = this$105;
+        while ((!$n(these$1).isEmpty__Z())) {
+          var x0$1 = $n(these$1).head__O();
+          var _$2 = $as_T(x0$1);
+          var this$106 = $n(_$2);
+          if ($uZ(this$106.startsWith("data/versions/"))) {
+            return true;
+          }
+          these$1 = $as_sci_List($n(these$1).tail__O());
+        }
+        return false;
+      }));
+      var clue$8 = new $c_sjsr_AnonFunction0_$$Lambda$2bf0f8dc580d6edeb2d6a336c52a1bab3049702d((() => {
+        var this$107 = $n(stored$1);
+        return $f_sc_Iterable__toString__T(this$107);
+      }));
+      var loc$10 = new $c_Lmunit_Location("store/src/test/scala/okay/serverless/store/StoreSuite.scala", 65);
+      $f_Lmunit_Assertions__assert__F0__F0__Lmunit_Location__V(this, cond$4, clue$8, loc$10);
+    })), this.given_ExecutionContext__s_concurrent_ExecutionContext());
+  }));
+  var loc$11 = new $c_Lmunit_Location("store/src/test/scala/okay/serverless/store/StoreSuite.scala", 67);
+  $f_Lmunit_BaseFunSuite__test__T__F0__Lmunit_Location__V(this, "okay-store's journaled records in an object: okay-store's own handler, the answers its reference gives", body$2, loc$11);
 }
 $c_Lokay_serverless_store_StoreSuite.prototype = new $h_Lmunit_FunSuite();
 $c_Lokay_serverless_store_StoreSuite.prototype.constructor = $c_Lokay_serverless_store_StoreSuite;
@@ -76685,6 +86147,13 @@ $c_Lokay_serverless_store_StoreSuite.prototype.Shops__Lokay_serverless_store_Sto
     this.Lokay_serverless_store_StoreSuite__f_Shopsbitmap$1 = true;
   }
   return this.Lokay_serverless_store_StoreSuite__f_Shops$lzy1;
+});
+$c_Lokay_serverless_store_StoreSuite.prototype.Registry__Lokay_serverless_store_StoreSuite$Registry$ = (function() {
+  if ((!this.Lokay_serverless_store_StoreSuite__f_Registrybitmap$1)) {
+    this.Lokay_serverless_store_StoreSuite__f_Registry$lzy1 = new $c_Lokay_serverless_store_StoreSuite$Registry$();
+    this.Lokay_serverless_store_StoreSuite__f_Registrybitmap$1 = true;
+  }
+  return this.Lokay_serverless_store_StoreSuite__f_Registry$lzy1;
 });
 var $d_Lokay_serverless_store_StoreSuite = new $TypeData().initClass($c_Lokay_serverless_store_StoreSuite, "okay.serverless.store.StoreSuite", ({
   Lokay_serverless_store_StoreSuite: 1,
@@ -78955,6 +88424,9 @@ $c_sci_Map$EmptyMap$.prototype.keysIterator__sc_Iterator = (function() {
 $c_sci_Map$EmptyMap$.prototype.valuesIterator__sc_Iterator = (function() {
   return $m_sc_Iterator$().sc_Iterator$__f_scala$collection$Iterator$$_empty;
 });
+$c_sci_Map$EmptyMap$.prototype.removed__O__sci_MapOps = (function(key) {
+  return this;
+});
 $c_sci_Map$EmptyMap$.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return new $c_sci_Map$Map1(key, value);
 });
@@ -79226,6 +88698,9 @@ $c_sci_Map$Map1.prototype.valuesIterator__sc_Iterator = (function() {
 $c_sci_Map$Map1.prototype.updated__O__O__sci_Map = (function(key, value) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map1__f_key1) ? new $c_sci_Map$Map1(this.sci_Map$Map1__f_key1, value) : new $c_sci_Map$Map2(this.sci_Map$Map1__f_key1, this.sci_Map$Map1__f_value1, key, value));
 });
+$c_sci_Map$Map1.prototype.removed__O__sci_Map = (function(key) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map1__f_key1) ? $m_sci_Map$EmptyMap$() : this);
+});
 $c_sci_Map$Map1.prototype.foreach__F1__V = (function(f) {
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map1__f_key1, this.sci_Map$Map1__f_value1));
 });
@@ -79248,6 +88723,9 @@ $c_sci_Map$Map1.prototype.hashCode__I = (function() {
   h = $m_s_util_hashing_MurmurHash3$().mix__I__I__I(h, b);
   h = $m_s_util_hashing_MurmurHash3$().mixLast__I__I__I(h, c);
   return $m_s_util_hashing_MurmurHash3$().finalizeHash__I__I__I(h, 1);
+});
+$c_sci_Map$Map1.prototype.removed__O__sci_MapOps = (function(key) {
+  return this.removed__O__sci_Map(key);
 });
 $c_sci_Map$Map1.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return this.updated__O__O__sci_Map(key, value);
@@ -79354,6 +88832,9 @@ $c_sci_Map$Map2.prototype.valuesIterator__sc_Iterator = (function() {
 $c_sci_Map$Map2.prototype.updated__O__O__sci_Map = (function(key, value) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1) ? new $c_sci_Map$Map2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, value, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2) ? new $c_sci_Map$Map2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, value) : new $c_sci_Map$Map3(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2, key, value)));
 });
+$c_sci_Map$Map2.prototype.removed__O__sci_Map = (function(key) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1) ? new $c_sci_Map$Map1(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2) ? new $c_sci_Map$Map1(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1) : this));
+});
 $c_sci_Map$Map2.prototype.foreach__F1__V = (function(f) {
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key1, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value1));
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$key2, this.sci_Map$Map2__f_scala$collection$immutable$Map$Map2$$value2));
@@ -79413,6 +88894,9 @@ $c_sci_Map$Map2.prototype.hashCode__I = (function() {
   h = $m_s_util_hashing_MurmurHash3$().mix__I__I__I(h, b);
   h = $m_s_util_hashing_MurmurHash3$().mixLast__I__I__I(h, c);
   return $m_s_util_hashing_MurmurHash3$().finalizeHash__I__I__I(h, 2);
+});
+$c_sci_Map$Map2.prototype.removed__O__sci_MapOps = (function(key) {
+  return this.removed__O__sci_Map(key);
 });
 $c_sci_Map$Map2.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return this.updated__O__O__sci_Map(key, value);
@@ -79525,6 +89009,9 @@ $c_sci_Map$Map3.prototype.valuesIterator__sc_Iterator = (function() {
 $c_sci_Map$Map3.prototype.updated__O__O__sci_Map = (function(key, value) {
   return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, value, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, value, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3) ? new $c_sci_Map$Map3(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, value) : new $c_sci_Map$Map4(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3, key, value))));
 });
+$c_sci_Map$Map3.prototype.removed__O__sci_Map = (function(key) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1) ? new $c_sci_Map$Map2(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2) ? new $c_sci_Map$Map2(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value3) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key3) ? new $c_sci_Map$Map2(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2) : this)));
+});
 $c_sci_Map$Map3.prototype.foreach__F1__V = (function(f) {
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key1, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value1));
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$key2, this.sci_Map$Map3__f_scala$collection$immutable$Map$Map3$$value2));
@@ -79608,6 +89095,9 @@ $c_sci_Map$Map3.prototype.hashCode__I = (function() {
   h = $m_s_util_hashing_MurmurHash3$().mix__I__I__I(h, b);
   h = $m_s_util_hashing_MurmurHash3$().mixLast__I__I__I(h, c);
   return $m_s_util_hashing_MurmurHash3$().finalizeHash__I__I__I(h, 3);
+});
+$c_sci_Map$Map3.prototype.removed__O__sci_MapOps = (function(key) {
+  return this.removed__O__sci_Map(key);
 });
 $c_sci_Map$Map3.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return this.updated__O__O__sci_Map(key, value);
@@ -79737,6 +89227,9 @@ $c_sci_Map$Map4.prototype.updated__O__O__sci_Map = (function(key, value) {
     return $n($n($n($n($n(this$1.sci_HashMap$__f_EmptyMap).updated__O__O__sci_HashMap(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value1)).updated__O__O__sci_HashMap(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value2)).updated__O__O__sci_HashMap(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value3)).updated__O__O__sci_HashMap(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key4, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value4)).updated__O__O__sci_HashMap(key, value);
   }
 });
+$c_sci_Map$Map4.prototype.removed__O__sci_Map = (function(key) {
+  return ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1) ? new $c_sci_Map$Map3(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key4, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value4) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2) ? new $c_sci_Map$Map3(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key4, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value4) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key3) ? new $c_sci_Map$Map3(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key4, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value4) : ($m_sr_BoxesRunTime$().equals__O__O__Z(key, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key4) ? new $c_sci_Map$Map3(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key3, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value3) : this))));
+});
 $c_sci_Map$Map4.prototype.foreach__F1__V = (function(f) {
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key1, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value1));
   $n(f).apply__O__O(new $c_T2(this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$key2, this.sci_Map$Map4__f_scala$collection$immutable$Map$Map4$$value2));
@@ -79850,6 +89343,9 @@ $c_sci_Map$Map4.prototype.hashCode__I = (function() {
   h = $m_s_util_hashing_MurmurHash3$().mix__I__I__I(h, b);
   h = $m_s_util_hashing_MurmurHash3$().mixLast__I__I__I(h, c);
   return $m_s_util_hashing_MurmurHash3$().finalizeHash__I__I__I(h, 4);
+});
+$c_sci_Map$Map4.prototype.removed__O__sci_MapOps = (function(key) {
+  return this.removed__O__sci_Map(key);
 });
 $c_sci_Map$Map4.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return this.updated__O__O__sci_Map(key, value);
@@ -80918,6 +90414,11 @@ $c_sci_HashMap.prototype.updated__O__O__sci_HashMap = (function(key, value) {
   var newRootNode = $n(this.sci_HashMap__f_rootNode).updated__O__O__I__I__I__Z__sci_BitmapIndexedMapNode(key, value, keyUnimprovedHash, $m_sc_Hashing$().improve__I__I(keyUnimprovedHash), 0, true);
   return ((newRootNode === this.sci_HashMap__f_rootNode) ? this : new $c_sci_HashMap(newRootNode));
 });
+$c_sci_HashMap.prototype.removed__O__sci_HashMap = (function(key) {
+  var keyUnimprovedHash = $m_sr_Statics$().anyHash__O__I(key);
+  var newRootNode = $n(this.sci_HashMap__f_rootNode).removed__O__I__I__I__sci_BitmapIndexedMapNode(key, keyUnimprovedHash, $m_sc_Hashing$().improve__I__I(keyUnimprovedHash), 0);
+  return ((newRootNode === this.sci_HashMap__f_rootNode) ? this : new $c_sci_HashMap(newRootNode));
+});
 $c_sci_HashMap.prototype.foreach__F1__V = (function(f) {
   $n(this.sci_HashMap__f_rootNode).foreach__F1__V(f);
 });
@@ -80969,6 +90470,9 @@ $c_sci_HashMap.prototype.last__O = (function() {
 });
 $c_sci_HashMap.prototype.head__O = (function() {
   return $as_T2($n(this.iterator__sc_Iterator()).next__O());
+});
+$c_sci_HashMap.prototype.removed__O__sci_MapOps = (function(key) {
+  return this.removed__O__sci_HashMap(key);
 });
 $c_sci_HashMap.prototype.updated__O__O__sci_MapOps = (function(key, value) {
   return this.updated__O__O__sci_HashMap(key, value);
@@ -85499,6 +95003,9 @@ $c_sci_$colon$colon.prototype.productElementName__I__T = (function(x$1) {
 $c_sci_$colon$colon.prototype.tail__O = (function() {
   return this.sci_$colon$colon__f_next;
 });
+$c_sci_$colon$colon.prototype.headOption__s_Option = (function() {
+  return new $c_s_Some(this.sci_$colon$colon__f_head);
+});
 $c_sci_$colon$colon.prototype.collectionClassName__ = (function() {
   return "List";
 });
@@ -85586,6 +95093,9 @@ $c_sci_Nil$.prototype.last__O = (function() {
 });
 $c_sci_Nil$.prototype.tail__O = (function() {
   this.tail__E();
+});
+$c_sci_Nil$.prototype.headOption__s_Option = (function() {
+  return $m_s_None$();
 });
 $c_sci_Nil$.prototype.head__O = (function() {
   this.head__E();

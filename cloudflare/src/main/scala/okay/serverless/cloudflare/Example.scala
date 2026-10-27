@@ -5,9 +5,11 @@ import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
 import okay.effects.shape.Shape
-import okay.serverless.store.{Repo, StoreOn}
+import okay.serverless.store.{Journal, Repo, StoreOn}
 import okay.serverless.{Codec, Durable, field}
 import okay.store.{Data, Dialect, Mapping}
+
+import scala.scalajs.js
 
 import scala.scalajs.js.annotation.JSExportTopLevel
 
@@ -105,6 +107,25 @@ object Example:
         StoreOn.data[Sale, AS, SD, String](sales)(selling[AS](r.param("item").getOrElse("?"),
           r.param("qty").map(_.toInt).getOrElse(1))))).map(Response.text(_))
 
+  /** A REGISTRY: okay-store's journaled records — kinds, versions, the journal — in an object, a request one
+   * transaction; okay-store's own handler, put into the cloud's row by okay-simple's bridge */
+  val passport: okay.store.Kind = okay.store.Kind(okay.store.KindId("passport"), "Passport",
+    okay.effects.shape.Schema.Record(Vector(okay.effects.shape.Schema.Field("number",
+      okay.effects.shape.Schema.Text(Nil), Some("Number"), None, true, None))))
+  object Registries extends Actor:
+    import Journal.stores.*
+    def fetch(name: String, r: Request): Response ! InActor =
+      val number = r.param("number").getOrElse("?")
+      val records: okay.effects.cek.OnCek.![String, Journal.Records] =
+        okay.effects.cek.OnCek.flatMap(define[Journal.Records](passport))(_ =>
+          okay.effects.cek.OnCek.flatMap(add[Journal.Records](passport.id,
+            Json.obj("number" -> Json.Str(number))))(_ =>
+            okay.effects.cek.OnCek.map(journaled[Journal.Records])(j =>
+              s"${j._1.size} events; ${j._1.map(_.getClass.getSimpleName).distinct.sorted.mkString(",")}")))
+      Clock.now[InActor].flatMap(t => Durable.step[ActorStep, InActor, String](name)(
+        StoreOn.durable[SD, ActorStep, String](Journal[SD, String](() => js.Dynamic.global.crypto.randomUUID()
+          .asInstanceOf[String], () => t)(records)))).map(Response.text(_))
+
   /** THE APP: a route an effect */
   object Shop extends App:
     override def objectFor(r: Request): Option[(String, String)] = r.path.split('/').toList match
@@ -147,6 +168,7 @@ object Example:
       case "/store/d1" => sold(r, "DB", Dialect.sqlite)
       case "/store/pg" => sold(r, "PG", Dialect.postgres)
       case "/store/shop" => Objects.call[Cloud]("SHOPS", r.param("shop").getOrElse("main"), r)
+      case "/store/registry" => Objects.call[Cloud]("REGISTRIES", r.param("of").getOrElse("main"), r)
       case "/queue" => Queues.send[Cloud]("JOBS", q(r, "body")).as(Response.text("queued"))
       case "/cached" => Cache.through[Cloud]("https://okay.example/cached", 60)(
           Clock.now[Cloud].map(t => Response.text(s"made at $t")))
@@ -170,4 +192,4 @@ object Example:
 
   @JSExportTopLevel("worker")
   val worker: Worker = Worker(Shop, Map("ACCOUNTS" -> Accounts, "ROOMS" -> Rooms, "ORDERS" -> Orders,
-    "SHOPS" -> Shops))
+    "SHOPS" -> Shops, "REGISTRIES" -> Registries))

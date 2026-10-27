@@ -37,7 +37,8 @@ lazy val simple = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
  * object's `Durable` state (specs/store.md) */
 lazy val store = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("store")).dependsOn(core)
   .settings(name := "okay-serverless-store", libraryDependencies ++= Seq(
-    "io.github.okay-effects" %%% "okay-store" % "0.1.0", munit.value))
+    "io.github.okay-effects" %%% "okay-store" % "0.1.0", "io.github.okay-effects" %%% "okay-effects-cek" % "0.1.1",
+    munit.value))
 
 /** A POLICY'S STATE, DURABLE: okay-policy's `States` kept by `Durable` — a decision and its changes one step, one
  * transaction; decided again if the state changed meanwhile */

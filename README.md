@@ -61,7 +61,8 @@ UTF-8. The same program runs in memory (`MemoryCloud`, for tests), on Cloudflare
 [okay-store](https://github.com/okay-effects/okay-store)'s types in a store run here on the cloud's effects —
 `StoreOn.sql` (D1, Postgres through Hyperdrive or RDS Proxy, SQLite), `StoreOn.kv`, `StoreOn.durable` (an object a
 store of its own, a step one transaction): `Repo.save(sale)`, `Repo.find(sales.at(_.qty) > 2)`, the field checked by
-the compiler. [specs/store.md](specs/store.md).
+the compiler. okay-store's journaled records too (`Journal`): its own handler, put into the cloud's row by okay-simple's
+bridge (`OnCek.into`), no Future between. [specs/store.md](specs/store.md).
 
 ## Platforms
 

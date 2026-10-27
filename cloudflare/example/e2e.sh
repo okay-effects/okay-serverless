@@ -51,6 +51,9 @@ expect "$(curl -s "$P/store/pg?item=tea&qty=3"; echo; curl -s "$P/store/pg?item=
   $'000000000001 of 1; big: tea\n000000000002 of 2; big: pot,tea' "okay-store on Postgres through Hyperdrive"
 expect "$(curl -s "$P/store/shop?shop=kyiv&item=tea&qty=2"; echo; curl -s "$P/store/shop?shop=lviv&item=cup&qty=5")" \
   $'000000000001 of 1; big: tea\n000000000001 of 1; big: cup' "okay-store in an object: a shop its own store"
+expect "$(curl -s "$P/store/registry?of=ua&number=AB1"; echo; curl -s "$P/store/registry?of=ua&number=AB2")" \
+  $'2 events; KindDefined,RecordAdded\n4 events; KindDefined,KindRevised,RecordAdded' \
+  "okay-store's journaled records in an object: okay-store's own handler, through the bridge"
 expect "$(curl -s "$P/queue?body=j1")" "queued" "a queue: sent"
 expect "$(curl -s "$P/cached")" "made at" "the cache: made"
 first=$(curl -s "$P/cached")

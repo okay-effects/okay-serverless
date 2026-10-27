@@ -1,6 +1,7 @@
 # okay-serverless — okay-store in the cloud (spec, 2026-10-27)
 
-Status: built (module `store`), checked on memory, SQLite, Postgres, and on `wrangler dev` (D1, Hyperdrive, an object).
+Status: built (module `store`), checked on memory, SQLite, Postgres, and on `wrangler dev` (D1, Hyperdrive, objects):
+a type's repository and okay-store's journaled records.
 
 ## Where it stands
 
@@ -43,8 +44,20 @@ Worker or a Lambda run the same statements; its tests compare them with the refe
 - Postgres (`aws/test.sh`, a Postgres from `tools/`): the same answers, through `AwsPorts.postgres`;
 - `wrangler dev` (`cloudflare/example/e2e.sh`): one program on D1, on Postgres through Hyperdrive, in an object.
 
+## Journaled records: okay-store's own handler, through the bridge
+
+`Store` (kinds, versions with their parents, the journal of events, the audit) is handled by okay-store's own
+`Stores.onData`, written over okay-simple's interface. On `OnCek` (okay-simple's interface on okay-scala's machine) that
+program is okay-scala's already; okay-simple's `OnCek.into[R]` (okay-effects-cek 0.1.1, `Into`) renames its row's
+places to `R`'s — each of its effects found in `R` by okay-scala's `In` — so it is one program of the cloud's row:
+`Journal(ids, now)(records)`, its `Data` then handled by `StoreOn.sql`, `.kv`, `.durable` as any. One machine, one run;
+in an object, inside `Durable.step`, a record, its version and its event are one transaction with the rest of the
+step. Nothing of okay-store rewritten. Checked against okay-store's own reference (its handler on its own `Data` in
+memory): the same answers in an object (memory), on SQLite, on Postgres; on `wrangler dev`, in an object.
+
+The same bridge serves any okay-simple code in an okay-scala program: okay-faces' faces, okay-http's handlers.
+
 ## Not yet
 
-`Store` (okay-store's journaled records) has its handler on `Data` in okay-store (`Stores.onData`), written over
-okay-simple's interface; run here it needs okay-simple's runner (a program to a `Future`), not done. A type served as
-REST or MCP from its mapping (`Mapping.describe`) is okay-faces' — on okay-simple, the same way.
+A type served as REST or MCP from its mapping (`Mapping.describe`) is okay-faces'; with the bridge it can run in a
+Worker or a Lambda the same way — a Worker that serves a mapped type from D1 or an object is the next step.

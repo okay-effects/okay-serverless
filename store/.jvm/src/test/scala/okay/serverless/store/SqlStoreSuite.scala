@@ -26,3 +26,12 @@ class SqlStoreSuite extends munit.FunSuite:
       assertEquals(got, expected)
       assertEquals(rows.map(_("key")), List(SqlValue.Text("000000000001"), SqlValue.Text("000000000002")))
   }
+
+  test("okay-store's journaled records on SQLite: the answers okay-store's reference gives") {
+    val p = MemoryCloud().withSql(SqliteSql())
+    val db = s"journal${System.nanoTime}"
+    p.future(StoreOn.sql[D, Cloud, JournalPrograms.Out](db, Dialect.sqlite)(
+      Journal[D, JournalPrograms.Out](JournalPrograms.ids(), JournalPrograms.clock())(JournalPrograms.program)))
+      .map(got => assertEquals(got, JournalPrograms.reference))
+  }
+

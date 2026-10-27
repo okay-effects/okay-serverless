@@ -1,27 +1,27 @@
 [info] Fast optimizing /Users/sergiy/work/my/okay-serverless/store/.js/target/scala-3.3.8/okay-serverless-store-test-fastopt
-[debug] Linker: Compute reachability: 240814 us
-[debug] Linker: Assemble LinkedClasses: 25653 us
-[debug] Linker: 287913 us
-[debug] Desugarer: Desugar: 12889 us
-[debug] Desugarer: 12996 us
+[debug] Linker: Compute reachability: 266722 us
+[debug] Linker: Assemble LinkedClasses: 26382 us
+[debug] Linker: 307995 us
+[debug] Desugarer: Desugar: 15202 us
+[debug] Desugarer: 15350 us
 [debug] Optimizer: Batch mode: true
-[debug] Optimizer: Incremental part: 44977 us
-[debug] Optimizer: Elidable constructors: 2793 us
-[debug] Optimizer: Optimizing 14464 methods.
-[debug] Optimizer: Optimizer part: 436129 us
-[debug] Optimizer: 489267 us
-[debug] Refiner: Compute reachability: 64412 us
-[debug] Refiner: Assemble LinkedClasses: 11092 us
-[debug] Refiner: 76292 us
-[debug] Module Splitter: Calculate Dependency Info: 890 us
-[debug] Module Splitter: Analyze Modules: 432 us
-[debug] Module Splitter: Assemble Modules: 2667 us
-[debug] Module Splitter: 4464 us
-[debug] Emitter: Generate Classes: 518405 us
-[debug] Emitter: Write trees: 17457 us
-[debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1503
-[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 6873
-[debug] Emitter: Pre prints: 10122
-[debug] Emitter: 555460 us
-[debug] BasicBackend: Write result: 48259 us
+[debug] Optimizer: Incremental part: 46713 us
+[debug] Optimizer: Elidable constructors: 3081 us
+[debug] Optimizer: Optimizing 15961 methods.
+[debug] Optimizer: Optimizer part: 417258 us
+[debug] Optimizer: 472886 us
+[debug] Refiner: Compute reachability: 72841 us
+[debug] Refiner: Assemble LinkedClasses: 11718 us
+[debug] Refiner: 85358 us
+[debug] Module Splitter: Calculate Dependency Info: 848 us
+[debug] Module Splitter: Analyze Modules: 301 us
+[debug] Module Splitter: Assemble Modules: 2361 us
+[debug] Module Splitter: 3943 us
+[debug] Emitter: Generate Classes: 509365 us
+[debug] Emitter: Write trees: 15869 us
+[debug] Emitter: Class tree cache stats: reused: 0 -- invalidated: 1612
+[debug] Emitter: Method tree cache stats: reused: 0 -- invalidated: 7516
+[debug] Emitter: Pre prints: 11026
+[debug] Emitter: 542278 us
+[debug] BasicBackend: Write result: 63318 us
 [debug] BasicBackend: total modules: 1; re-written: 1

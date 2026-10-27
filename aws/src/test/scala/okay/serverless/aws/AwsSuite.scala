@@ -154,6 +154,21 @@ class AwsSuite extends munit.FunSuite:
     yield assertEquals(got, expected)
   }
 
+  test("OKAY-STORE'S JOURNALED RECORDS ON POSTGRES: okay-store's own handler, the answers of its reference") {
+    assume(postgres.isDefined, "OKAY_POSTGRES")
+    import okay.serverless.store.{Journal, JournalPrograms, StoreOn}
+    type D[X] = (Cloud + okay.store.Data)[X]
+    val db = s"journal$unique"
+    for
+      _ <- AwsPorts(client, table, sql = AwsPorts.postgres(_ => postgres)).platform
+        .future(Sql.run[Cloud]("main", s"create schema $db"))
+      got <- AwsPorts(client, table,
+          sql = AwsPorts.postgres(_ => postgres.map(u => s"$u?options=-c%20search_path%3D$db")))
+        .platform.future(StoreOn.sql[D, Cloud, JournalPrograms.Out]("main", okay.store.Dialect.postgres)(
+          Journal[D, JournalPrograms.Out](JournalPrograms.ids(), JournalPrograms.clock())(JournalPrograms.program)))
+    yield assertEquals(got, JournalPrograms.reference)
+  }
+
   test("A LAMBDA: SQS — acknowledged, or a batch item failure; EventBridge's schedule") {
     def record(id: String, body: String) = obj(messageId = id, body = body, eventSource = "aws:sqs",
       eventSourceARN = "arn:aws:sqs:eu-west-1:1:jobs", attributes = obj(ApproximateReceiveCount = "1",

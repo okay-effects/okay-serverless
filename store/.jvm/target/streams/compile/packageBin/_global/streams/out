@@ -1,0 +1,41 @@
+[debug] Packaging /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/okay-serverless-store_3-0.1.0-SNAPSHOT.jar ...
+[debug] Input file mappings:
+[debug] 	okay
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay
+[debug] 	okay/serverless
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless
+[debug] 	okay/serverless/store
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store
+[debug] 	okay/serverless/store/StoreOn$$anon$1.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn$$anon$1.class
+[debug] 	okay/serverless/store/StoreOn$$anon$3.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn$$anon$3.class
+[debug] 	okay/serverless/store/StoreOn.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn.class
+[debug] 	okay/serverless/store/StoreOn$.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn$.class
+[debug] 	okay/serverless/store/StoreOn.tasty
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn.tasty
+[debug] 	okay/serverless/store/StoreOn$$anon$2.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn$$anon$2.class
+[debug] 	okay/serverless/store/StoreOn$$anon$4.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/StoreOn$$anon$4.class
+[debug] 	okay/serverless/store/Repo.tasty
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Repo.tasty
+[debug] 	okay/serverless/store/Journal.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Journal.class
+[debug] 	okay/serverless/store/Docs.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Docs.class
+[debug] 	okay/serverless/store/Journal$.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Journal$.class
+[debug] 	okay/serverless/store/Repo$.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Repo$.class
+[debug] 	okay/serverless/store/Docs$.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Docs$.class
+[debug] 	okay/serverless/store/Docs.tasty
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Docs.tasty
+[debug] 	okay/serverless/store/Journal.tasty
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Journal.tasty
+[debug] 	okay/serverless/store/Repo.class
+[debug] 	  /Users/sergiy/work/my/okay-serverless/store/.jvm/target/scala-3.3.8/classes/okay/serverless/store/Repo.class
+[debug] Done packaging.

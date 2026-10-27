@@ -47,3 +47,22 @@ class StoreSuite extends munit.FunSuite:
       assert(!stored.contains("data/sales/x1"), "removed")
     }
   }
+
+  /** a registry: an object; its records journaled in its own state, a request one transaction */
+  object Registry extends Actor:
+    def fetch(name: String, request: Request): Response ! InActor =
+      Durable.step[ActorStep, InActor, JournalPrograms.Out](name)(StoreOn.durable[AD, ActorStep, JournalPrograms.Out](
+        Journal[AD, JournalPrograms.Out](JournalPrograms.ids(), JournalPrograms.clock())(JournalPrograms.program)))
+        .map(out => Response.text(out.toString))
+
+  test("okay-store's journaled records in an object: okay-store's own handler, the answers its reference gives") {
+    val c = MemoryCloud()
+    c.actors("REGISTRY") = Registry
+    c.platform.future(Objects.call[Cloud]("REGISTRY", "ua", Request.get("/"))).map { r =>
+      assertEquals(r.text, JournalPrograms.reference.toString)
+      val stored = c.stored("REGISTRY", "ua").keys.toList.sorted
+      assert(stored.exists(_.startsWith("data/events/")), stored.toString)
+      assert(stored.exists(_.startsWith("data/versions/")), stored.toString)
+    }
+  }
+

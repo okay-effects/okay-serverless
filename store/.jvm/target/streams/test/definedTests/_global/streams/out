@@ -1,2 +1,2 @@
-[debug] Subclass fingerprints: List((munit.Suite,false,CustomFingerprint{suite='munit.Suite'}), (munit.Suite,true,munit.Framework$$anon$1@11a1b06c))
+[debug] Subclass fingerprints: List((munit.Suite,false,CustomFingerprint{suite='munit.Suite'}), (munit.Suite,true,munit.Framework$$anon$1@b73f741))
 [debug] Annotation fingerprints: List()
