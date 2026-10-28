@@ -77,6 +77,15 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
 /** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
  * is a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests
  * run on DynamoDB Local: `aws/test.sh` */
+/** SEALED ROOMS (specs/relay.md): a host and its guests through an actor that cannot read them — pairing, sealed
+ * frames, the room, signed tokens; the host's client on the JVM, a guest in a browser */
+lazy val relay = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Full).in(file("relay")).dependsOn(core)
+  .settings(name := "okay-serverless-relay", libraryDependencies += munit.value)
+
+/** A TELEGRAM BOT AS AN EFFECT (specs/relay.md): `Telegram.Send` by the Bot API over `Fetch`, or in memory */
+lazy val telegram = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("telegram"))
+  .dependsOn(core, relay).settings(name := "okay-serverless-telegram", libraryDependencies += munit.value)
+
 lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
   .dependsOn(core.js, store.js % "test->test", faces.js % "test->compile")
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
@@ -109,6 +118,6 @@ cloudflareExample := {
 
 lazy val root = (project in file("."))
   .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
-    policy.jvm, policy.js,
+    policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js,
     aws, cloudflare, cloudflareApp)
   .settings(publish / skip := true)
