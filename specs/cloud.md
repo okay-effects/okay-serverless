@@ -1,7 +1,8 @@
 # okay-serverless — a cloud as effects (spec, 2026-10-26)
 
 Status 2026-10-28: RELEASED 0.1.0 (RELEASING.md), republished with mail as people get it (HTML, reply-to, a
-name; `Mails.deliver`) and an object's SQL tested under Node — both from okay-workers, now retired. Built:
+name; `Mails.deliver`), an object's SQL tested under Node — both from okay-workers, now retired — and `Tcp`
+with `Smtp` (a relay's letters from a Worker). Built:
 - the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`), SQL on SQLite on the JVM (`SqliteSql`);
 - Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
 - AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Sql` on Postgres (RDS Proxy); `Env`, `Fetch`, `Log`,
@@ -44,6 +45,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Analytics` | write a data point (indexes, blobs, doubles) |
 | `Mails` | send a mail (text, and HTML beside it; a reply-to; the sender's name); deliver one: sent, or why not |
 | `Objects` | a request to an object by namespace and name |
+| `Tcp` | connect (plain, TLS, or STARTTLS later), write, read, upgrade to TLS, close — each answered `Right` or `Left(why)` |
 | `Sockets` | in an object: accept, send, close, the open ones (by tag) |
 | `Log`, `Clock`, `Async` | okay-scala's own |
 
@@ -65,6 +67,7 @@ Where each is, on each cloud:
 | `Analytics` | Analytics Engine | CloudWatch EMF | BigQuery |
 | `Mails` | Email Routing `send_email` | SES | SMTP |
 | `Objects` | Durable Objects | the same Lambda, its state a DynamoDB space | — |
+| `Tcp` | `connect()` of `cloudflare:sockets` | Node's `net`/`tls` (not yet) | the JDK's sockets (`JdkTcp`) |
 | `Sockets` | DO WebSockets (hibernation) | API Gateway WebSockets | — |
 
 ## The entry points
@@ -111,6 +114,22 @@ MIME message (`Mime.message`: the headers Cloudflare asks — `From`, `To`, `Sub
 destinations, any plan) and Email Service's (any recipient, Workers Paid) take the same message. In memory a letter is
 kept (`MemoryCloud.sent`); `deliver` there always sends.
 
+## Outbound TCP and SMTP (2026-10-28, for szykownia.pl's client letters through Brevo's SMTP relay)
+
+`Tcp` is a connection out, as data: `Connect(host, port, tls)` (`Tls.Off`, `Tls.On`, `Tls.StartTls` — plain now, TLS
+when asked), `Write(conn, text)`, `Read(conn)` (the next text that came; `None` when the other side closed),
+`Upgrade(conn)` (STARTTLS: the same connection, encrypted from here), `Close(conn)`. Every answer is an `Either`: a
+network's refusal is a value the program decides on, never a failure. On Cloudflare `connect()` of
+`cloudflare:sockets` (the entry gives it as `globalThis.OkayConnect`; `secureTransport: "starttls"` and
+`startTls()`); on the JVM `JdkTcp` (a socket, an `SSLSocket` over it to upgrade); in memory a server of the test's
+(`MemoryCloud.listen`). Ports 25 are Cloudflare's to refuse; 587 and 465 go.
+
+`Smtp.deliver(server, mail)` is a program over `Tcp`: the greeting, `EHLO`, `STARTTLS` and `EHLO` again (when the
+server is `Tls.StartTls`), `AUTH LOGIN` with the server's user and password, `MAIL FROM`, `RCPT TO`, `DATA` with the
+letter as `Mime.message` gives it (lines starting with a dot doubled), `QUIT`; `Right(())` when the server took it,
+`Left` with the server's reply (or the network's word) when not. A server that does not offer `STARTTLS` when it
+was asked is refused before any credential is sent.
+
 ## Workflows, without replay
 
 Cloudflare Workflows replay a function, its steps' results kept. Here a workflow is DATA: a list of stages — `step`
@@ -143,6 +162,9 @@ program writes its database's dialect; the effect is the same. A run's last id i
 ## Testing
 
 - memory: every effect, every entry point, the workflow — `sbt coreJVM/test coreJS/test`;
+- SMTP: the whole conversation against a server in memory (both platforms: STARTTLS, AUTH, dot-stuffing, a refused
+  recipient, a server that does not offer STARTTLS), and on the JVM against a real socket of a test's server
+  (`JdkTcp`);
 - Cloudflare, under Node (`sbt cloudflare/test`): `ObjectStorage`'s own SQL — the object's table, its commits in a
   transaction — on SQLite (Node's `node:sqlite`, as the Durable Object's storage is SQLite) behind the object's
   `ctx.storage` shape, through the scenarios every platform passes;

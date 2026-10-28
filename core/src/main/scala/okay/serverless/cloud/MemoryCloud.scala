@@ -263,9 +263,46 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
 
   extension [A](a: A) private def pipe[B](f: A => B): B = f(a)
 
+  // ---- TCP: servers of the test's, by host and port; each connection a session of one
+
+  private val servers = mutable.Map.empty[(String, Int), TcpServer]
+  private val sessions = mutable.Map.empty[String, TcpSession]
+  private var connections = 0
+  /** a server of the test's at `host:port`: each connection to it a new session */
+  def listen(host: String, port: Int)(server: TcpServer): Unit = synchronized(servers((host, port)) = server)
+  val tcp: Port[Tcp] = new Port[Tcp]:
+    def apply[X](op: Tcp[X]): Future[X] = now[X](synchronized[X](op match
+      case Tcp.Connect(host, port, tls) => servers.get((host, port)) match
+        case None => Left(s"connection refused: $host:$port")
+        case Some(server) =>
+          connections += 1
+          val id = s"conn-$connections"
+          sessions(id) = server.open(tls == Tls.On)
+          Right(Conn(id))
+      case Tcp.Write(c, text) => sessions.get(c.id).toRight("closed").map(_.receive(text))
+      case Tcp.Read(c) => sessions.get(c.id).toRight("closed").map(_.answer())
+      case Tcp.Upgrade(c) => sessions.get(c.id).toRight("closed").flatMap(s =>
+        if s.upgrade() then Right(c) else Left("the server would not start TLS"))
+      case Tcp.Close(c) => sessions.remove(c.id).foreach(_.closed()); ()))
+
   val platform: Platform = Platform(kv = kv, blobs = blobsPort, queues = queues, fetch = fetch, cache = cache,
     env = env, services = services, limits = limits, ai = ai, vectors = vectors, analytics = analytics, mails = mails,
-    objects = objects, log = (l, m) => synchronized(logged += l -> m), now = clock)
+    objects = objects, tcp = tcp, log = (l, m) => synchronized(logged += l -> m), now = clock)
 
   /** the platform with SQL by `sql` */
   def withSql(sql: Port[Sql]): Platform = platform.copy(sql = sql)
+
+/** A SERVER OF A TEST'S, in memory (`MemoryCloud.listen`): each connection a session */
+trait TcpServer:
+  /** a session for a connection; `tls` when it was TLS from the start */
+  def open(tls: Boolean): TcpSession
+
+/** one connection to a server in memory: what it is sent, what it answers, its TLS */
+trait TcpSession:
+  /** what was written to it */
+  def receive(text: String): Unit
+  /** what it says now: the next text, `None` when it has closed */
+  def answer(): Option[String]
+  /** STARTTLS asked: whether it agrees */
+  def upgrade(): Boolean = true
+  def closed(): Unit = ()

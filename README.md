@@ -34,8 +34,8 @@ code, not data. The design: [specs/durable.md](specs/durable.md).
 
 Everything a Cloudflare Worker can use is an effect a program names — and each cloud a platform, one port an effect:
 `Kv`, `Blobs`, `Sql`, `Queues`, `Fetch`, `Cache`, `Env`, `Services`, `Limits`, `Ai`, `Vectors`, `Analytics`, `Mails`,
-`Objects` and, in an object, `Sockets`. A Worker is an `App` (`fetch`, `scheduled`, `queue`, `mail`), an object class
-an `Actor` (`fetch`, `alarm`, a socket's messages), its state `Durable`'s. A `Workflow` is a list of stages — steps
+`Objects`, `Tcp` (and `Smtp` over it) and, in an object, `Sockets`. A Worker is an `App` (`fetch`, `scheduled`,
+`queue`, `mail`), an object class an `Actor` (`fetch`, `alarm`, a socket's messages), its state `Durable`'s. A `Workflow` is a list of stages — steps
 retried, sleeps, events — run by an object without replay.
 
 ```scala

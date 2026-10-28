@@ -21,6 +21,15 @@ object Port:
       case Mails.Deliver(_, _) => Future.successful(Left("no mail here"))
       case other => missing[Mails]("mail")(other)
 
+  /** a cloud with no TCP out: each connection refused, said why (`Tcp`'s answers are values) */
+  val noTcp: Port[Tcp] = new Port[Tcp]:
+    def apply[X](op: Tcp[X]): Future[X] = Future.successful[X](op match
+      case Tcp.Close(_) => ()
+      case Tcp.Connect(_, _, _) => Left("no TCP here")
+      case Tcp.Write(_, _) => Left("no TCP here")
+      case Tcp.Read(_) => Left("no TCP here")
+      case Tcp.Upgrade(_) => Left("no TCP here"))
+
   /** `p`'s operations of `E` by `port`, each awaited */
   def handle[E[_], R[_], Rest[_], A](port: Port[E])(p: A ! R)(using Split[E, R, Rest], In[Async, Rest]): A ! Rest =
     okay.scala3.handle(p, Handler.general[E, Rest, A, A](pure)(
@@ -28,7 +37,7 @@ object Port:
 
 /** EVERYTHING A PROGRAM MAY USE IN A CLOUD (specs/cloud.md) */
 type Cloud[X] = (Async + Log + Clock + Kv + Blobs + Sql + Queues + Fetch + Cache + Env + Services + Limits + Ai +
-  Vectors + Analytics + Mails + Objects)[X]
+  Vectors + Analytics + Mails + Objects + Tcp)[X]
 
 /** AN ACTOR'S ROW: the cloud, its own storage (for `Durable`), its sockets */
 type InActor[X] = (Cloud + Storage + Sockets)[X]
@@ -44,13 +53,14 @@ final case class Platform(kv: Port[Kv] = Port.missing("KV"), blobs: Port[Blobs] 
                           vectors: Port[Vectors] = Port.missing("vectors"),
                           analytics: Port[Analytics] = Port.missing("analytics"),
                           mails: Port[Mails] = Port.noMail, objects: Port[Objects] = Port.missing("objects"),
+                          tcp: Port[Tcp] = Port.noTcp,
                           log: (Level, String) => Unit = (l, m) => println(s"[$l] $m"),
                           now: () => Long = () => System.currentTimeMillis()):
   /** a program of the cloud, its effects by this platform's ports: what is left, `Async` */
   def run[A](p: A ! Cloud): A ! Async =
-    Port.handle(objects)(Port.handle(mails)(Port.handle(analytics)(Port.handle(vectors)(Port.handle(ai)(
-      Port.handle(limits)(Port.handle(services)(Port.handle(env)(Port.handle(cache)(Port.handle(fetch)(
-        Port.handle(queues)(Port.handle(sql)(Port.handle(blobs)(Port.handle(kv)(clock(Log.to(log)(p))))))))))))))))
+    Port.handle(tcp)(Port.handle(objects)(Port.handle(mails)(Port.handle(analytics)(Port.handle(vectors)(
+      Port.handle(ai)(Port.handle(limits)(Port.handle(services)(Port.handle(env)(Port.handle(cache)(Port.handle(fetch)(
+        Port.handle(queues)(Port.handle(sql)(Port.handle(blobs)(Port.handle(kv)(clock(Log.to(log)(p)))))))))))))))))
 
   /** the time: `now`'s; a sleep, awaited */
   private def clock[R[_], Rest[_], A](p: A ! R)(using Split[Clock, R, Rest], In[Async, Rest]): A ! Rest =

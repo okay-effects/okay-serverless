@@ -186,9 +186,50 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
           .flatMap(response)
       case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String]))
 
+  /** TCP out by `connect()` of `cloudflare:sockets` (the entry's `globalThis.OkayConnect`): each connection its
+   * socket, its reader and its writer; STARTTLS the socket's `startTls()`, the old one's locks released first */
+  val tcp: Port[Tcp] = new Port[Tcp]:
+    private final case class Open(socket: js.Dynamic, reader: js.Dynamic, writer: js.Dynamic)
+    private val open = scala.collection.mutable.Map.empty[String, Open]
+    private lazy val decoder = js.Dynamic.newInstance(g.TextDecoder)()
+    private lazy val encoder = js.Dynamic.newInstance(g.TextEncoder)()
+    private def kept(socket: js.Dynamic): Conn =
+      val id = g.crypto.randomUUID().asInstanceOf[String]
+      open(id) = Open(socket, socket.readable.getReader(), socket.writable.getWriter())
+      Conn(id)
+    private def attempt[A](f: => Future[A]): Future[Either[String, A]] =
+      guard(f).map(Right(_)).recover { case e => Left(Option(e.getMessage).getOrElse(e.toString)) }
+    def apply[X](op: Tcp[X]): Future[X] = op match
+      case Tcp.Connect(host, port, tls) => attempt {
+          val connect = g.OkayConnect
+          if js.isUndefined(connect) then throw IllegalStateException("no OkayConnect: the entry gives it")
+          val transport = tls match
+            case Tls.Off => "off"
+            case Tls.On => "on"
+            case Tls.StartTls => "starttls"
+          val socket = connect(obj(hostname = host, port = port), obj(secureTransport = transport))
+          await(socket.opened).map(_ => kept(socket))
+        }
+      case Tcp.Write(c, text) => attempt(open.get(c.id) match
+        case None => Future.failed(IllegalStateException("closed"))
+        case Some(o) => await(o.writer.write(encoder.encode(text))).map(_ => ()))
+      case Tcp.Read(c) => attempt(open.get(c.id) match
+        case None => Future.failed(IllegalStateException("closed"))
+        case Some(o) => await(o.reader.read()).map(r =>
+          if r.done.asInstanceOf[Boolean] then None
+          else Some(decoder.decode(r.value, obj(stream = true)).asInstanceOf[String])))
+      case Tcp.Upgrade(c) => attempt(open.remove(c.id) match
+        case None => Future.failed(IllegalStateException("closed"))
+        case Some(o) =>
+          o.reader.releaseLock()
+          o.writer.releaseLock()
+          Future.successful(kept(o.socket.startTls())))
+      case Tcp.Close(c) => Future.successful(open.remove(c.id).foreach(o => scala.util.Try(o.socket.close())))
+
   val platform: Platform = Platform(kv = kv, blobs = blobs, sql = sql, queues = queues, fetch = fetch, cache = cache,
     env = envPort, services = services, limits = limits, ai = aiPort, vectors = vectors, analytics = analytics,
-    mails = mails, objects = objects, log = (l, m) => g.console.log(s"[$l] $m"), now = () => js.Date.now().toLong)
+    mails = mails, objects = objects, tcp = tcp, log = (l, m) => g.console.log(s"[$l] $m"),
+    now = () => js.Date.now().toLong)
 
 /** AN OBJECT'S SOCKETS on Cloudflare: WebSockets by the hibernation API — each tagged by its id, its tags its
  * attachment; event streams by a `TransformStream`, the response its readable side, each send an event */

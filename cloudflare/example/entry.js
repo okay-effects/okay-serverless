@@ -2,10 +2,12 @@
 // say — the entry points and the Durable Object classes, each handing its calls to the Scala worker
 import { DurableObject } from "cloudflare:workers";
 import { EmailMessage } from "cloudflare:email";
+import { connect } from "cloudflare:sockets";
 import pg from "pg";
 import { worker } from "./okay.js";
 
 globalThis.OkayEmailMessage = EmailMessage;
+globalThis.OkayConnect = connect;
 globalThis.OkayPg = pg;
 
 const objectClass = (ns) => class extends DurableObject {

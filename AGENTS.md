@@ -28,6 +28,8 @@ first.
   `aws/test.sh` and `cloudflare/example/e2e.sh` (Hyperdrive's local connection string).
 - `Mails`: a letter with its HTML, reply-to and sender's name, as MIME (`Mime.message`); `Mails.deliver` answers
   sent or why not instead of failing (specs/cloud.md "Mail").
+- `Tcp` (connect, write, read, STARTTLS upgrade, close — answers are `Either`) and `Smtp.deliver` over it: on
+  Cloudflare `connect()` (`globalThis.OkayConnect`), on the JVM `JdkTcp`, in memory `MemoryCloud.listen`.
 - `cloudflare`: `CloudflarePorts(env)` every binding, `Worker(app, actors)` the entry points; the example and its
   e2e use every binding locally but Workers AI and Vectorize (remote only).
 - `cloudflare`: `ObjectStorage(ctx)` — a table `okay_values(key, value, version)` in the object's SQLite storage, a
