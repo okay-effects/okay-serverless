@@ -87,7 +87,8 @@ lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
 /** ON CLOUDFLARE: `Storage` on a Durable Object (its SQLite storage, synchronous, one transaction a commit); an example
  * Worker in `cloudflare/example`, run by `wrangler dev` (`sbt cloudflareExample`, then `cloudflare/example/e2e.sh`) */
 lazy val cloudflare = (project in file("cloudflare")).enablePlugins(ScalaJSPlugin).dependsOn(core.js)
-  .settings(name := "okay-serverless-cloudflare")
+  // its tests under Node: the object's own SQL on Node's SQLite (`node:sqlite`) behind `ctx.storage`'s shape
+  .settings(name := "okay-serverless-cloudflare", libraryDependencies += munit.value)
 
 /** the example Worker (not published): every binding, objects, workflows, okay-store's data, okay-faces' REST and
  * MCP, a token in front */

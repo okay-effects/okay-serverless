@@ -166,11 +166,16 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
 
   val mails: Port[Mails] = new Port[Mails]:
     def apply[X](op: Mails[X]): Future[X] = guard[X](op match
-      case Mails.Send(b, m) =>
-        val raw = s"From: ${m.from}\r\nTo: ${m.to}\r\nSubject: ${m.subject}\r\n" +
-          s"Message-ID: <${g.crypto.randomUUID()}@okay>" +
-          s"\r\nMIME-Version: 1.0\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n${m.text}"
-        await(binding(b).send(js.Dynamic.newInstance(g.OkayEmailMessage)(m.from, m.to, raw))).map(_ => ()))
+      case Mails.Send(b, m) => send(b, m)
+      case Mails.Deliver(b, m) => guard(send(b, m)).map(_ => Right(())).recover { case e =>
+          Left(Option(e.getMessage).getOrElse(e.toString))
+        })
+    /** the letter as MIME (`Mime.message`) in an `EmailMessage` (the entry's `globalThis.OkayEmailMessage`): Email
+     * Routing's binding and Email Service's take the same */
+    private def send(b: String, m: Mail): Future[Unit] =
+      val id = s"${g.crypto.randomUUID()}@${m.from.dropWhile(_ != '@').drop(1)}"
+      val raw = Mime.message(m, id, js.Date.now().toLong)
+      await(binding(b).send(js.Dynamic.newInstance(g.OkayEmailMessage)(m.from, m.to, raw))).map(_ => ())
 
   val objects: Port[Objects] = new Port[Objects]:
     def apply[X](op: Objects[X]): Future[X] = guard[X](op match

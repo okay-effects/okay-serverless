@@ -152,7 +152,8 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   val sent: mutable.ListBuffer[(String, Mail)] = mutable.ListBuffer.empty
   val mails: Port[Mails] = new Port[Mails]:
     def apply[X](op: Mails[X]): Future[X] = now[X](synchronized[X](op match
-      case Mails.Send(binding, mail) => sent += binding -> mail; ()))
+      case Mails.Send(binding, mail) => sent += binding -> mail; ()
+      case Mails.Deliver(binding, mail) => sent += binding -> mail; Right(())))
 
   val logged: mutable.ListBuffer[(Level, String)] = mutable.ListBuffer.empty
 

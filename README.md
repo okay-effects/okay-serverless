@@ -106,6 +106,7 @@ Scala 3.3, sbt, on [okay-scala](https://github.com/okay-effects/okay-scala) 0.1.
 
 ```text
 sbt coreJVM/test coreJS/test                       # the scenarios
+sbt cloudflare/test                                # an object's own SQL, on Node's SQLite
 sbt +simpleJVM/test +simpleJS/test                 # the same on okay-simple, Scala 3 and 2.13
 sbt cloudflareExample && cloudflare/example/e2e.sh  # the example Worker on a local workerd
 aws/test.sh                                         # AWS on DynamoDB Local (Java, Node)

@@ -26,8 +26,11 @@ first.
   `AwsPorts.postgres`), `Lambda` (API Gateway, SQS, EventBridge, `okayAlarm`).
 - Postgres for tests: `node tools/postgres.mjs` (npm's embedded-postgres; prints its URL, stops on SIGTERM) — used by
   `aws/test.sh` and `cloudflare/example/e2e.sh` (Hyperdrive's local connection string).
+- `Mails`: a letter with its HTML, reply-to and sender's name, as MIME (`Mime.message`); `Mails.deliver` answers
+  sent or why not instead of failing (specs/cloud.md "Mail").
 - `cloudflare`: `CloudflarePorts(env)` every binding, `Worker(app, actors)` the entry points; the example and its
   e2e use every binding locally but Workers AI and Vectorize (remote only).
 - `cloudflare`: `ObjectStorage(ctx)` — a table `okay_values(key, value, version)` in the object's SQLite storage, a
-  commit one `transactionSync`, the alarm `setAlarm`. End to end: `sbt cloudflareExample && cloudflare/example/e2e.sh`
+  commit one `transactionSync`, the alarm `setAlarm`; its SQL tested under Node on `node:sqlite` (`sbt
+  cloudflare/test`). End to end: `sbt cloudflareExample && cloudflare/example/e2e.sh`
   (wrangler from the example's own node_modules; `--persist-to` a temp dir, the Worker killed and started again).

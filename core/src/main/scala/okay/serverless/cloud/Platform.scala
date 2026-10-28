@@ -15,6 +15,12 @@ object Port:
   def missing[E[_]](what: String): Port[E] = new Port[E]:
     def apply[X](op: E[X]): Future[X] = Future.failed(UnsupportedOperationException(s"no $what here: $op"))
 
+  /** a cloud with no mail: a send fails, naming it; a delivery is told why not (`Mails.deliver` never fails) */
+  val noMail: Port[Mails] = new Port[Mails]:
+    def apply[X](op: Mails[X]): Future[X] = op match
+      case Mails.Deliver(_, _) => Future.successful(Left("no mail here"))
+      case other => missing[Mails]("mail")(other)
+
   /** `p`'s operations of `E` by `port`, each awaited */
   def handle[E[_], R[_], Rest[_], A](port: Port[E])(p: A ! R)(using Split[E, R, Rest], In[Async, Rest]): A ! Rest =
     okay.scala3.handle(p, Handler.general[E, Rest, A, A](pure)(
@@ -37,7 +43,7 @@ final case class Platform(kv: Port[Kv] = Port.missing("KV"), blobs: Port[Blobs] 
                           limits: Port[Limits] = Port.missing("rate limits"), ai: Port[Ai] = Port.missing("AI"),
                           vectors: Port[Vectors] = Port.missing("vectors"),
                           analytics: Port[Analytics] = Port.missing("analytics"),
-                          mails: Port[Mails] = Port.missing("mail"), objects: Port[Objects] = Port.missing("objects"),
+                          mails: Port[Mails] = Port.noMail, objects: Port[Objects] = Port.missing("objects"),
                           log: (Level, String) => Unit = (l, m) => println(s"[$l] $m"),
                           now: () => Long = () => System.currentTimeMillis()):
   /** a program of the cloud, its effects by this platform's ports: what is left, `Async` */

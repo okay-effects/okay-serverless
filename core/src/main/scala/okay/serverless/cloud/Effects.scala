@@ -213,16 +213,23 @@ object Analytics:
   def write[R[_]](dataset: String, point: DataPoint)(using In[Analytics, R]): Unit ! R =
     perform[Analytics](Write(dataset, point))
 
-final case class Mail(from: String, to: String, subject: String, text: String)
+/** a letter: from an address (and the name shown with it), to one, its subject and text — and its HTML beside the
+ * text, and where a reply goes, when given */
+final case class Mail(from: String, to: String, subject: String, text: String, html: Option[String] = None,
+                      replyTo: Option[String] = None, fromName: Option[String] = None)
 /** a mail received: `App.mail` */
 final case class IncomingMail(from: String, to: String, raw: String)
 
 /** MAIL OUT: Email Routing's `send_email`, SES, SMTP */
 enum Mails[X]:
   case Send(binding: String, mail: Mail) extends Mails[Unit]
+  /** a mail sent — or, never failing, why not: for a program whose work stands without its letters */
+  case Deliver(binding: String, mail: Mail) extends Mails[Either[String, Unit]]
 
 object Mails:
   def send[R[_]](binding: String, mail: Mail)(using In[Mails, R]): Unit ! R = perform[Mails](Send(binding, mail))
+  def deliver[R[_]](binding: String, mail: Mail)(using In[Mails, R]): Either[String, Unit] ! R =
+    perform[Mails](Deliver(binding, mail))
 
 /** A REQUEST TO AN OBJECT — an actor of a namespace, by its name, one in the world: Durable Objects */
 enum Objects[X]:

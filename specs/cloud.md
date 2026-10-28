@@ -1,6 +1,7 @@
 # okay-serverless — a cloud as effects (spec, 2026-10-26)
 
-Status 2026-10-27: RELEASED 0.1.0 (RELEASING.md). Built:
+Status 2026-10-28: RELEASED 0.1.0 (RELEASING.md), republished with mail as people get it (HTML, reply-to, a
+name; `Mails.deliver`) and an object's SQL tested under Node — both from okay-workers, now retired. Built:
 - the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`), SQL on SQLite on the JVM (`SqliteSql`);
 - Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
 - AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Sql` on Postgres (RDS Proxy); `Env`, `Fetch`, `Log`,
@@ -41,7 +42,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Ai` | run a model: JSON in, JSON out |
 | `Vectors` | upsert, query (top k, a filter), delete — cosine |
 | `Analytics` | write a data point (indexes, blobs, doubles) |
-| `Mails` | send a mail |
+| `Mails` | send a mail (text, and HTML beside it; a reply-to; the sender's name); deliver one: sent, or why not |
 | `Objects` | a request to an object by namespace and name |
 | `Sockets` | in an object: accept, send, close, the open ones (by tag) |
 | `Log`, `Clock`, `Async` | okay-scala's own |
@@ -99,6 +100,17 @@ runs: on Cloudflare a `TransformStream` and the runtime's `waitUntil`; in memory
 `Objects.unique(namespace)`: a name never given before, not to be guessed — an object of its own (a session, an
 upload).
 
+## Mail (2026-10-28, for szykownia.pl's sites; what okay-workers had)
+
+A `Mail` is a letter as people get it: `from` (an address, `fromName` shown with it), `to`, `subject`, `text`, and,
+when given, `html` — the two as one multipart/alternative — and `replyTo`. `Mails.send` fails the program when the
+mail does not go (as every effect's failure); `Mails.deliver` answers it instead — `Right(())` sent, `Left(why)` not
+— for a program whose work stands without its letters (an order placed is placed). On Cloudflare a letter is a raw
+MIME message (`Mime.message`: the headers Cloudflare asks — `From`, `To`, `Subject` as RFC 2047 words, `Message-ID`,
+`Date` —, each part UTF-8 in base64) in an `EmailMessage` through a `send_email` binding: Email Routing's (to verified
+destinations, any plan) and Email Service's (any recipient, Workers Paid) take the same message. In memory a letter is
+kept (`MemoryCloud.sent`); `deliver` there always sends.
+
 ## Workflows, without replay
 
 Cloudflare Workflows replay a function, its steps' results kept. Here a workflow is DATA: a list of stages — `step`
@@ -131,6 +143,9 @@ program writes its database's dialect; the effect is the same. A run's last id i
 ## Testing
 
 - memory: every effect, every entry point, the workflow — `sbt coreJVM/test coreJS/test`;
+- Cloudflare, under Node (`sbt cloudflare/test`): `ObjectStorage`'s own SQL — the object's table, its commits in a
+  transaction — on SQLite (Node's `node:sqlite`, as the Durable Object's storage is SQLite) behind the object's
+  `ctx.storage` shape, through the scenarios every platform passes;
 - Cloudflare: the example Worker on `wrangler dev` (`cloudflare/example/e2e.sh`): KV, R2, D1, Hyperdrive (a Postgres
   from `tools/`, npm's embedded-postgres, its URL the binding's local connection string), Queues, the cache,
   rate limits, analytics, a service binding, an object with WebSockets, cron. Workers AI and Vectorize have no local
