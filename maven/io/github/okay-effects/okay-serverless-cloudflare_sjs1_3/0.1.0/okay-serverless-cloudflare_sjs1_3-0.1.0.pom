@@ -57,6 +57,12 @@
             <version>1.22.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.scalameta</groupId>
+            <artifactId>munit_sjs1_3</artifactId>
+            <version>1.2.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <repositories>
         <repository>
