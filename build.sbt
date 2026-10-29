@@ -116,8 +116,12 @@ cloudflareExample := {
   to
 }
 
+/** THE HOST (specs/cloud.md "The host"): a server of one's own on the JVM, the fallback beside Cloudflare */
+lazy val host = (project in file("host")).dependsOn(core.jvm)
+  .settings(name := "okay-serverless-host", libraryDependencies += munit.value)
+
 lazy val root = (project in file("."))
   .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
     policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js,
-    aws, cloudflare, cloudflareApp)
+    aws, cloudflare, cloudflareApp, host)
   .settings(publish / skip := true)
