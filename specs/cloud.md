@@ -151,6 +151,45 @@ pools them). On AWS the same port with a pool a database kept across invocations
 program writes its database's dialect; the effect is the same. A run's last id is SQLite's; Postgres says it by
 `RETURNING`.
 
+## The host: a server of one's own (2026-10-29, the fallback)
+
+The owner's word: every application of his runs on Cloudflare AND can run without it — Cloudflare the main platform,
+a server of his own the fallback, never the reverse. A program is the same; the host is one more set of ports, a
+module of its own (`okay-serverless-host`, the JVM): `Host.start(app, actors, config)` — one process, its state in
+one directory, `java -jar app.jar`. Nothing of Cloudflare's port changes.
+
+| effect | on the host |
+|---|---|
+| `Objects` | an instance a name in the process, its requests one at a time (as `MemoryCloud`'s) |
+| `Storage` (`Durable`) | a table of the host's SQLite file: a value a version, a commit one transaction |
+| alarms | a table; due ones fired by the host's clock, each cleared first (as a cloud does) |
+| `Sockets` | real WebSockets of the host's HTTP server; an event stream its own response, written as sent |
+| `Kv` | a table, with its expiry |
+| `Blobs` | files under `blobs/<bucket>/`, their info beside them |
+| `Sql` | an SQLite file a database (`SqliteSql`) |
+| `Queues` | a table; due messages given to the app's `queue`, retried, given up after 3 into a dead table |
+| `Fetch` | the JDK's HttpClient (`JdkFetch`) |
+| `Cache` | memory |
+| `Env` | the configuration's variables, then the process's environment |
+| `Services` | the host's other apps, by name |
+| `Limits` | memory, a window a name (the configuration's) |
+| `Ai` | any server with OpenAI's API (okay-llm's gateway, Ollama, a remote one): a chat (`messages`) to `/v1/chat/completions` answered `{response}`, a text to `/v1/embeddings` answered `{data}` — Workers AI's shapes, so a program does not tell; a model name mapped by the configuration |
+| `Vectors` | a table, every vector compared (cosine) |
+| `Analytics` | the log |
+| `Mails` | SMTP over `JdkTcp` (`Smtp.deliver`), when a server is configured; else none |
+| `Tcp` | `JdkTcp` |
+| cron | the configuration's triggers (five fields), each minute, to `scheduled` |
+
+The HTTP server is the host's own: HTTP/1.1 over a server socket, a virtual thread a connection, keep-alive;
+WebSockets (RFC 6455, text frames, ping, close) when an object answers an upgrade with its socket (`okay-socket`), as
+Cloudflare's 101 does; a request admitted (`App.admit`), then to its object as it is (`objectFor`) or to `fetch`;
+the configuration's static directory first, as a Worker's assets are.
+
+Tested by: the durable scenarios over the host's storage (a step, a conflict, an alarm, a restart — a new process on
+the same directory); the HTTP server end to end on a port of its own (a request, an object, a WebSocket both ways, a
+static file, a restart keeping state); cron's fields; `Ai` against a stand-in OpenAI server; queues delivered,
+retried, dead.
+
 ## What is the family's, what is here
 
 - JSON is okay-simple's `okay.effects.json` (as okay-guard's and okay-proof's): one JSON for both twins, the stored

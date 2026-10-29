@@ -39,3 +39,6 @@ first.
   commit one `transactionSync`, the alarm `setAlarm`; its SQL tested under Node on `node:sqlite` (`sbt
   cloudflare/test`). End to end: `sbt cloudflareExample && cloudflare/example/e2e.sh`
   (wrangler from the example's own node_modules; `--persist-to` a temp dir, the Worker killed and started again).
+- `host` (specs/cloud.md "The host"): a server of one's own, the FALLBACK — Cloudflare is the main platform.
+  `Host.start(app, actors, config)`: one JVM process, its state in one directory (an SQLite file, blobs as files),
+  its own HTTP and WebSocket server, cron, alarms, queues; `Ai` by any OpenAI-compatible server. `sbt host/test`.
