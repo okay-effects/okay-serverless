@@ -15,7 +15,8 @@ resolvers ++= Seq("okay-serverless" at "https://okay-effects.github.io/okay-serv
 libraryDependencies ++= Seq(
   "io.github.okay-effects" %%% "okay-serverless" % "0.1.0",             // Durable, the cloud's effects, memory
   "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.1.0",  // Scala.js: a Worker, its objects
-  "io.github.okay-effects" %%% "okay-serverless-aws" % "0.1.0"          // Scala.js on Node: a Lambda, DynamoDB
+  "io.github.okay-effects" %%% "okay-serverless-aws" % "0.1.0",         // Scala.js on Node: a Lambda, DynamoDB
+  "io.github.okay-effects" %% "okay-serverless-host" % "0.1.0"           // the JVM: a server of one's own
 )
 ```
 
@@ -30,7 +31,7 @@ and Scala.js 1.22: a Scala.js build needs 1.22 or newer.
 1. On `main`, everything green: the tests, the example Worker end to end, AWS on DynamoDB Local and a Postgres:
 
    ```sh
-   sbt coreJVM/test coreJS/test storeJVM/test storeJS/test facesJVM/test facesJS/test policyJVM/test \
+   sbt coreJVM/test coreJS/test host/test storeJVM/test storeJS/test facesJVM/test facesJS/test policyJVM/test \
      +simpleJVM/test +simpleJS/test
    sbt cloudflareExample && cloudflare/example/e2e.sh
    aws/test.sh
