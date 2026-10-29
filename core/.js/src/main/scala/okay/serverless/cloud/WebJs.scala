@@ -32,9 +32,10 @@ object WebJs:
     if method == "GET" || method == "HEAD" then Future.successful(head)
     else await(r.arrayBuffer()).map(b => head.withContent(bytes(b)))
 
-  /** a request to `base`: the runtime's */
-  def toRequest(base: String, r: Request): js.Dynamic =
+  /** a request to `base`: the runtime's; `follow` false: a redirect answered as it is (`redirect: "manual"`) */
+  def toRequest(base: String, r: Request, follow: Boolean = true): js.Dynamic =
     val init = obj(method = r.method, headers = r.headers.map((k, vs) => k -> vs.mkString(", ")).toJSDictionary)
+    if !follow then init.redirect = "manual"
     if r.bytes.isDefined || r.body.nonEmpty then init.body = uint8(r.content)
     js.Dynamic.newInstance(g.Request)(okay.http.Fetch.target(base, r), init)
 

@@ -181,8 +181,9 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
     def apply[X](op: Objects[X]): Future[X] = guard[X](op match
       case Objects.Call(ns, name, r) =>
         val n = binding(ns)
+        // the object's answer as it is: a redirect is the caller's, never followed on the way (specs/cloud.md)
         await(n.get(n.idFromName(name)).fetch(toRequest(s"https://$ns",
-          r.copy(headers = r.headers + ("okay-object-name" -> List(name))))))
+          r.copy(headers = r.headers + ("okay-object-name" -> List(name))), follow = false)))
           .flatMap(response)
       case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String]))
 

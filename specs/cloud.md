@@ -102,6 +102,9 @@ runs: on Cloudflare a `TransformStream` and the runtime's `waitUntil`; in memory
 (`settled`). On a Lambda, work after an answer is not kept (the runtime freezes): a queue's message is the way.
 `Objects.unique(namespace)`: a name never given before, not to be guessed — an object of its own (a session, an
 upload).
+`Objects.call` answers with the object's response AS IT IS: a redirect is the caller's to give or follow, never
+followed on the way (2026-10-29: on Cloudflare the stub's `fetch` gets `redirect: "manual"` — followed, a language
+redirect turned into the page and a sign-in's `Set-Cookie` was lost). Memory never followed one.
 
 ## Mail (2026-10-28, for szykownia.pl's sites; what okay-workers had)
 
