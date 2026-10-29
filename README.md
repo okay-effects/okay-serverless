@@ -53,8 +53,9 @@ object Shop extends App:
 
 HTTP is [okay-http](https://github.com/okay-effects/okay-http)'s model — a body text, or bytes when it is not
 UTF-8. Every request is admitted first (`App.admit`): `Auth.guarded` puts an app behind bearer tokens. The same
-program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding) and on AWS
-(`Lambda`: what DynamoDB carries so far). The design and the map of each effect to each cloud:
+program runs in memory (`MemoryCloud`, for tests), on Cloudflare (`Worker`: every binding), on AWS
+(`Lambda`: what DynamoDB carries so far) and on a server of one's own (`Host`: the JVM, one process, one directory) —
+an app on Cloudflare that does not depend on it. The design and the map of each effect to each cloud:
 [specs/cloud.md](specs/cloud.md).
 
 ## Data: okay-store
@@ -79,6 +80,11 @@ declare a type, map it, and it has an API and tools for agents, its data in D1, 
 | memory, with faults (crash, conflict, eviction) | `core` | the scenarios; every cloud effect (`MemoryCloud`) |
 | Cloudflare Workers | `cloudflare` | every effect on its binding, Hyperdrive too; objects, sockets, workflows; e2e |
 | AWS Lambda + DynamoDB | `aws` | `Durable`, KV, limits, objects, Postgres; API Gateway, SQS, EventBridge events |
+| a server of one's own (JVM) | `host` | the fallback: SQLite (objects, KV, D1, queues, vectors), files, the JDK's HTTP and WebSockets, cron, a model server of OpenAI's API; okay-chat-edge's e2e |
+
+`Host.start(app, actors, HostConfig(dir = Paths.get("data")))` serves the same `App` and `Actor`s a `Worker` takes:
+objects one instance a name, their state, alarms and sockets in one SQLite file. [specs/cloud.md](specs/cloud.md),
+*The host*.
 
 The twin on [okay-simple](https://github.com/okay-effects/okay-simple), module `simple` (Scala 2.13 and 3, one
 source): the same words, step, machine and `once`, and the same stored format, so state written by one is read by
@@ -97,7 +103,7 @@ libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare"
 ```
 
 Modules: `okay-serverless` (the effect, the cloud's effects, memory; JVM and Scala.js), `-cloudflare` and `-aws`
-(Scala.js), `-store` (okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state),
+(Scala.js), `-host` (the JVM: a server of one's own), `-store` (okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state),
 `-simple` (the twin on okay-simple, Scala 2.13 and 3). Scala 3.3 LTS; Scala.js 1.22 or newer.
 
 ## Build
