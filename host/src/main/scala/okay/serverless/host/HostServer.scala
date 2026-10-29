@@ -52,7 +52,7 @@ final class HostServer(cloud: HostCloud, app: App):
           case None => open = false
           case Some(raw) =>
             val keep = !raw.headers.get("connection").exists(_.exists(_.equalsIgnoreCase("close")))
-            static(raw) match
+            static(raw).orElse(scheduled(raw)) match
               case Some(r) =>
                 write(out, r, raw.method == "HEAD", keep)
                 open = keep
@@ -139,6 +139,17 @@ final class HostServer(cloud: HostCloud, app: App):
     out.write(b.toString.getBytes(UTF_8))
     if !head then out.write(body)
     out.flush()
+
+  /** a cron trigger run by a request (`testScheduled`): wrangler's `/cdn-cgi/handler/scheduled?cron=…` */
+  private def scheduled(raw: Raw): Option[Response] =
+    Option.when(config.testScheduled && raw.target.startsWith("/cdn-cgi/handler/scheduled")) {
+      val cron = Query.parse(raw.target.dropWhile(_ != '?').drop(1)).get("cron").flatMap(_.headOption).getOrElse("")
+      try
+        Await.result(cloud.platform.future(app.scheduled(okay.serverless.cloud.Scheduled(cron, config.clock())))(
+          using scala.concurrent.ExecutionContext.global), 5.minutes)
+        Response.text("ok")
+      catch case e: Exception => Response.text(Option(e.getMessage).getOrElse(e.toString), 500)
+    }
 
   // ---- the static directory: a file under it, `/` its index.html
 

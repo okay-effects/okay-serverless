@@ -16,13 +16,16 @@ import scala.jdk.CollectionConverters.*
 /**
  * WHAT THE HOST IS GIVEN: where its state lives, what it serves, its configuration. `vars` over the process's
  * environment; `crons` the triggers given to `scheduled`; `ai` a server with OpenAI's API; `smtp` a mail binding's
- * server; `limits` a rate limit's `limit` a window of `periodSeconds`; `services` other apps by name.
+ * server; `limits` a rate limit's `limit` a window of `periodSeconds`; `services` other apps by name; `adjust` the
+ * platform as an app wants it (a port wrapped: a model's failure answered as a value); `testScheduled` a cron run by a
+ * request, `/cdn-cgi/handler/scheduled?cron=…` — wrangler's own, so one end-to-end script drives both.
  */
 final case class HostConfig(dir: Path, port: Int = 8787, host: String = "127.0.0.1", static: Option[Path] = None,
                             vars: Map[String, String] = Map.empty, crons: List[String] = Nil,
                             ai: Option[AiServer] = None, smtp: Map[String, SmtpServer] = Map.empty,
                             limits: Map[String, (Int, Long)] = Map.empty, services: Map[String, App] = Map.empty,
                             tickMillis: Long = 1000, maxAttempts: Int = 3,
+                            adjust: Platform => Platform = identity, testScheduled: Boolean = false,
                             log: (Level, String) => Unit = (l, m) => System.err.println(s"[$l] $m"),
                             clock: () => Long = () => System.currentTimeMillis())
 
@@ -285,10 +288,10 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
         case None => platform.future(app.fetch(r))
     }
 
-  lazy val platform: Platform = Platform(kv = kv, blobs = blobs,
+  lazy val platform: Platform = config.adjust(Platform(kv = kv, blobs = blobs,
     sql = SqliteSql(Some(config.dir.resolve("sql").toFile.tap(_.mkdirs()))), queues = queues, fetch = fetch,
     cache = cache, env = env, services = services, limits = limits, ai = ai, vectors = vectors,
-    analytics = analytics, mails = mails, objects = objects, tcp = tcp, log = config.log, now = config.clock)
+    analytics = analytics, mails = mails, objects = objects, tcp = tcp, log = config.log, now = config.clock))
 
   extension [A](a: A) private def tap(f: A => Any): A = { f(a); a }
 
