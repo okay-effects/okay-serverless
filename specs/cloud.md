@@ -47,6 +47,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Objects` | a request to an object by namespace and name |
 | `Tcp` | connect (plain, TLS, or STARTTLS later), write, read, upgrade to TLS, close — each answered `Right` or `Left(why)` |
 | `Sockets` | in an object: accept, send, close, the open ones (by tag) |
+| `Crypto` | random bytes, SHA-256, RSA-OAEP (SHA-256) to a public key, AES-CBC, AES-GCM seal and open — the runtime's, not in the `Cloud` row ("Crypto" below) |
 | `Log`, `Clock`, `Async` | okay-scala's own |
 
 Where each is, on each cloud:
@@ -132,6 +133,28 @@ server is `Tls.StartTls`), `AUTH LOGIN` with the server's user and password, `MA
 letter as `Mime.message` gives it (lines starting with a dot doubled), `QUIT`; `Right(())` when the server took it,
 `Left` with the server's reply (or the network's word) when not. A server that does not offer `STARTTLS` when it
 was asked is refused before any credential is sent.
+
+## Crypto (2026-10-30, for okay-shop's KSeF: another party's encryption, our secrets at rest)
+
+`Crypto` is the runtime's, not a cloud's service: the Web Crypto API in a Worker, Node (20+) or a browser
+(`crypto.subtle`, `crypto.getRandomValues`), the JDK's JCA on the JVM — `Crypto.native`, a `Port` per platform. So it
+is NOT in the `Cloud` row (a new effect there would change every program's row and `Platform`'s shape): a program
+that needs it says `In[Crypto, R]` and is handled in one line, `Crypto.run(p)` (needs `Async`).
+
+| operation | what |
+|---|---|
+| `Random(n)` | `n` secure random bytes |
+| `Sha256(data)` | the digest |
+| `RsaOaep(spki, data)` | RSA-OAEP, SHA-256 for the digest AND MGF1 (the JDK's named padding alone would take MGF1-SHA-1), to a public key given as its SubjectPublicKeyInfo (DER) |
+| `AesCbc(key, iv, data)` | AES-CBC encryption, PKCS#7 padding, a 16-byte IV (another party's format: KSeF's invoices) |
+| `Seal(key, iv, data)` / `Open(key, iv, boxed)` | AES-GCM (a 32-byte key, a 12-byte IV, the 16-byte tag at the end); `Open` answers none for a wrong key or a changed byte |
+
+`Crypto.spki(certificate)` (pure) takes the SubjectPublicKeyInfo out of an X.509 certificate's DER — Web Crypto
+imports `spki`, not certificates. Only encryption is here: nothing needs decrypting another's RSA yet.
+
+Tests (`CryptoSuite`, both platforms; `CryptoJvmSuite`): the KSeF test certificate's key whose SHA-256 is its
+published `publicKeyId`, SHA-256 of "abc", NIST SP 800-38A's AES-256-CBC vector, GCM sealed and opened, a wrong key
+and a changed byte refused, RSA-OAEP decrypted by the private key (JVM).
 
 ## Workflows, without replay
 
