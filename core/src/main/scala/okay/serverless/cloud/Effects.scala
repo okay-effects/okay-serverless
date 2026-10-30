@@ -3,6 +3,8 @@ package okay.serverless.cloud
 import okay.scala3.*
 import okay.effects.json.Json
 
+import scala.concurrent.{ExecutionContext, Future}
+
 /** a value in KV and its metadata (JSON text) */
 final case class KvEntry(value: String, metadata: Option[String] = None)
 /** a page of keys, and where the next starts */
@@ -236,11 +238,25 @@ enum Objects[X]:
   case Call(namespace: String, name: String, request: Request) extends Objects[Response]
   /** a name never given before, not to be guessed: an object of its own — a session, an upload */
   case Unique(namespace: String) extends Objects[String]
+  /** several objects asked at once: the answers in the calls' order, a failed call a 502 (specs/cloud.md) */
+  case CallAll(calls: scala.List[(String, String, Request)]) extends Objects[scala.List[Response]]
 
 object Objects:
   def call[R[_]](namespace: String, name: String, request: Request)(using In[Objects, R]): Response ! R =
     perform[Objects](Call(namespace, name, request))
   def unique[R[_]](namespace: String)(using In[Objects, R]): String ! R = perform[Objects](Unique(namespace))
+  /** each `(namespace, name, request)` sent at once, none waiting for the others: their answers in order */
+  def callAll[R[_]](calls: Seq[(String, String, Request)])(using In[Objects, R]): Vector[Response] ! R =
+    if calls.isEmpty then pure(Vector.empty) else perform[Objects](CallAll(calls.toList)).map(_.toVector)
+
+  /** a port's `CallAll` by its own `call`, started together: a failed one answered 502 with its error */
+  def together(calls: scala.List[(String, String, Request)])(call: (String, String, Request) => Future[Response])(
+    using ExecutionContext): Future[scala.List[Response]] =
+    Future.traverse(calls)((ns, name, r) =>
+      scala.util.Try(call(ns, name, r)).fold(Future.failed, identity).recover { case e =>
+        Response(502, Map("Content-Type" -> "application/json; charset=utf-8"), Json.print(Json.obj("error" ->
+          Json.str(Option(e.getMessage).getOrElse(e.toString)))))
+      })
 
 /** an open connection to an actor: its id and its tags */
 final case class Socket(id: String, tags: List[String])

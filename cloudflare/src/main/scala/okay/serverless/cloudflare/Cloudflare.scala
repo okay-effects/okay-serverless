@@ -185,7 +185,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
         await(n.get(n.idFromName(name)).fetch(toRequest(s"https://$ns",
           r.copy(headers = r.headers + ("okay-object-name" -> List(name))), follow = false)))
           .flatMap(response)
-      case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String]))
+      case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String])
+      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r))))
 
   /** TCP out by `connect()` of `cloudflare:sockets` (the entry's `globalThis.OkayConnect`): each connection its
    * socket, its reader and its writer; STARTTLS the socket's `startTls()`, the old one's locks released first */
@@ -300,7 +301,11 @@ final class Worker(app: App, actors: Map[String, Actor]):
           val n = env.selectDynamic(ns)
           await(n.get(n.idFromName(name)).fetch(js.Dynamic.newInstance(g.Request)(request, obj(headers = h))))
         case None =>
-          WebJs.request(request).flatMap(r => ports(env).platform.future(app.fetch(r.copy(headers = admitted.headers))))
+          WebJs.request(request).flatMap { r =>
+            val in = r.copy(headers = admitted.headers)
+            val p = ports(env).platform
+            p.future(app.fetch(in)).recoverWith { case e => p.future(app.failed(in, e)) }
+          }
             .map(toResponse)
     }.toJSPromise
 

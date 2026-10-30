@@ -107,6 +107,20 @@ upload).
 followed on the way (2026-10-29: on Cloudflare the stub's `fetch` gets `redirect: "manual"` — followed, a language
 redirect turned into the page and a sign-in's `Set-Cookie` was lost). Memory never followed one.
 
+`Objects.callAll(calls)` (2026-10-30, okay-mall's operator dashboard and monitor): several objects asked AT ONCE —
+each `(namespace, name, request)` sent without waiting for the others, the answers in the calls' order; a call that
+fails is answered `502` with its error as text (`{"error": …}`), so one broken object never fails the rest. Each
+platform's port starts them together (Cloudflare: the stubs' `fetch`es, a subrequest each; the host and memory: each
+instance's own queue).
+
+## A failed request (2026-10-30)
+
+`App.failed(request, error)`: a program of `fetch` that FAILED — an exception, an object's call that threw — is given
+to it, the request as admitted, and its answer goes out instead. The default fails again as before (Cloudflare's
+own error page, a failed future elsewhere), so an app that does not override it is unchanged. An app counts, logs and
+answers its own 500 page here. Workers, Lambdas, the host and `MemoryCloud.serve` call it; an object's own failure
+reaches it through the `Objects.call` that failed.
+
 ## Mail (2026-10-28, for szykownia.pl's sites; what okay-workers had)
 
 A `Mail` is a letter as people get it: `from` (an address, `fromName` shown with it), `to`, `subject`, `text`, and,

@@ -195,3 +195,32 @@ class CloudSuite extends munit.FunSuite:
       assertEquals(socket.received.toList, List("tick 1", "tick 2", "tick 3"))
       assert(names._1 != names._2, names.toString)
   }
+
+  test("objects asked at once: the answers in order, a failed one a 502; a failed fetch given to `failed`") {
+    val c = cloud()
+    c.actors("ECHO") = new Actor:
+      def fetch(name: String, r: Request): Response ! InActor =
+        if name == "broken" then defer(throw IllegalStateException("broken object")) else pure(Response.text(name))
+    val app = new App:
+      override def fetch(r: Request): Response ! Cloud =
+        if r.path == "/boom" then Objects.call[Cloud]("ECHO", "broken", Request.get("/")) else pure(Response.text("ok"))
+      override def failed(r: Request, e: Throwable): Response ! Cloud =
+        pure(Response.text(s"failed ${r.path}: ${e.getMessage}", 500))
+    val plain = new App:
+      override def fetch(r: Request): Response ! Cloud = defer(throw IllegalStateException("plain"))
+    for
+      all <- c.platform.future(Objects.callAll[Cloud](Seq(("ECHO", "a", Request.get("/")),
+        ("ECHO", "broken", Request.get("/")), ("ECHO", "b", Request.get("/")))))
+      none <- c.platform.future(Objects.callAll[Cloud](Seq.empty))
+      boom <- c.serve(app)(Request.get("/boom"))
+      fine <- c.serve(app)(Request.get("/"))
+      again <- c.serve(plain)(Request.get("/")).failed
+    yield
+      assertEquals(all.map(_.status), Vector(200, 502, 200))
+      assertEquals(all.map(_.text).filter(!_.contains("error")), Vector("a", "b"))
+      assert(all(1).text.contains("broken object"), all(1).text)
+      assertEquals(none, Vector.empty)
+      assertEquals((boom.status, boom.text), (500, "failed /boom: broken object"))
+      assertEquals(fine.text, "ok")
+      assertEquals(again.getMessage, "plain")
+  }

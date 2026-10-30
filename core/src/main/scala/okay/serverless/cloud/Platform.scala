@@ -82,6 +82,9 @@ trait App:
   /** a request that goes to an object as it is — a WebSocket's, a stream's: its namespace and name */
   def objectFor(request: Request): Option[(String, String)] = None
   def fetch(request: Request): Response ! Cloud = pure(Response.notFound())
+  /** a request whose `fetch` FAILED (an exception, an object that threw): its answer instead (specs/cloud.md "A failed
+   * request"). By default it fails again, as before: the platform's own error */
+  def failed(request: Request, error: Throwable): Response ! Cloud = defer(throw error)
   def scheduled(event: Scheduled): Unit ! Cloud = pure(())
   /** a message of `queue`: acknowledged, or given again later. A failure is a retry */
   def queue(queue: String, message: Message): Settle ! Cloud = pure(Settle.Ack)

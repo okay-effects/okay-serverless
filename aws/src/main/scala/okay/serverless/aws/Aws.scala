@@ -128,6 +128,7 @@ final class AwsPorts(client: js.Dynamic, table: String, limits: Map[String, (Int
     def apply[X](op: Objects[X]): Future[X] = op match
       case Objects.Call(ns, name, r) => Async.toFuture(hosting(ns, name).run(platform)(actor(ns).fetch(name, r)))
       case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String])
+      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
 
   lazy val platform: Platform = Platform(kv = kv, limits = limitsPort, env = env, fetch = WebJs.fetch,
     analytics = analytics, objects = objects, sql = sql, log = (l, m) => log(s"[$l] $m"))
@@ -165,6 +166,7 @@ final class Lambda(app: App, ports: AwsPorts)(using ExecutionContext):
         case Some((ns, name)) => Async.toFuture(ports.hosting(ns, name).run(ports.platform)(ports.actor(ns).fetch(name,
             admitted)))
         case None => ports.platform.future(app.fetch(admitted))
+            .recoverWith { case e => ports.platform.future(app.failed(admitted, e)) }
     }
     answer.map(res => obj(statusCode = res.status, headers = res.headers.toJSDictionary,
       body = g.Buffer.from(WebJs.uint8(res.content)).applyDynamic("toString")("base64"), isBase64Encoded = true))
