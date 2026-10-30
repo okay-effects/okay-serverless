@@ -169,14 +169,14 @@ one directory, `java -jar app.jar`. Nothing of Cloudflare's port changes.
 | `Sql` | an SQLite file a database (`SqliteSql`) |
 | `Queues` | a table; due messages given to the app's `queue`, retried, given up after 3 into a dead table |
 | `Fetch` | the JDK's HttpClient (`JdkFetch`) |
-| `Cache` | memory |
+| `Cache` | memory, bounded: at most 10 000 entries — when full, the expired dropped first, then the soonest to expire (a flood of distinct URLs never grows it without end; a cloud's cache evicts too) |
 | `Env` | the configuration's variables, then the process's environment |
 | `Services` | the host's other apps, by name |
 | `Limits` | memory, a window a name (the configuration's) |
-| `Ai` | any server with OpenAI's API (okay-llm's gateway, Ollama, a remote one): a chat (`messages`) to `/v1/chat/completions` answered `{response}`, a text to `/v1/embeddings` answered `{data}` — Workers AI's shapes, so a program does not tell; a model name mapped by the configuration |
+| `Ai` | any server with OpenAI's API (okay-llm's gateway, Ollama, a remote one): a chat (`messages`) to `/v1/chat/completions` answered `{response}`, a text to `/v1/embeddings` answered `{data}`, a translation (`text` with `target_lang`, `source_lang`: m2m100's) as a chat asking for the translation alone answered `{translated_text}` (a model's `<think>` block dropped) — Workers AI's shapes, so a program does not tell; a model name mapped by the configuration |
 | `Vectors` | a table, every vector compared (cosine) |
 | `Analytics` | the log |
-| `Mails` | SMTP over `JdkTcp` (`Smtp.deliver`), when a server is configured; else none |
+| `Mails` | SMTP over `JdkTcp` (`Smtp.deliver`), when the binding has a server configured; else, with a mail directory (`mailDir`), the letter written there as a MIME file (`Mime.message`, `<time>-<id>.eml`) and logged as `<binding>: Email: <path>` — wrangler's local line, so one end-to-end script reads both; else not sent (why) |
 | `Tcp` | `JdkTcp` |
 | cron | the configuration's triggers (five fields), each minute, to `scheduled` |
 

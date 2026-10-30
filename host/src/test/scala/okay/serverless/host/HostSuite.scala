@@ -168,11 +168,14 @@ class AiSuite extends munit.FunSuite:
       val body = String(ex.getRequestBody.readAllBytes(), "UTF-8")
       asked.put(s"${ex.getRequestURI.getPath} $body")
       val out =
-        if ex.getRequestURI.getPath.endsWith("/chat/completions") then
+        if body.contains("You are a translator") then
+          """{"choices":[{"message":{"role":"assistant","content":"<think>hm</think>\n Dzień dobry"}}]}"""
+        else if ex.getRequestURI.getPath.endsWith("/chat/completions") then
           """{"choices":[{"message":{"role":"assistant","content":"Paris."}}],"usage":{"total_tokens":5}}"""
         else """{"data":[{"embedding":[0.1,0.2]},{"embedding":[0.3,0.4]}]}"""
-      ex.sendResponseHeaders(200, out.length.toLong)
-      ex.getResponseBody.write(out.getBytes("UTF-8"))
+      val bytes = out.getBytes("UTF-8")
+      ex.sendResponseHeaders(200, bytes.length.toLong)
+      ex.getResponseBody.write(bytes)
       ex.close())
     server.start()
     try
@@ -191,6 +194,11 @@ class AiSuite extends munit.FunSuite:
       val emb = await(ai(Ai.Run("@cf/baai/bge-m3", Json.obj("text" -> Json.arr(Json.Str("a"), Json.Str("b"))))))
       assertEquals(emb.field("data").collect { case Json.Arr(rows) => rows.size }, Some(2))
       assert(asked.poll().startsWith("/v1/embeddings "))
+      val tr = await(ai(Ai.Run("@cf/meta/m2m100-1.2b", Json.obj("text" -> Json.Str("Good morning"),
+        "source_lang" -> Json.Str("en"), "target_lang" -> Json.Str("pl")))))
+      assertEquals(tr.field("translated_text"), Some(Json.Str("Dzień dobry")))
+      val t = asked.poll()
+      assert(t.startsWith("/v1/chat/completions ") && t.contains("from English to Polish"), t)
     finally server.stop(0)
 
 class HostStoreSuite extends munit.FunSuite:
@@ -208,3 +216,36 @@ class HostStoreSuite extends munit.FunSuite:
       assert(store.commit("N", "a", Map.empty, Map.empty, Some(80L)))
       assertEquals(store.alarm("N", "a"), Some(50L))
     finally store.close()
+
+class HostPortsSuite extends munit.FunSuite:
+  given scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
+  private def await[A](f: scala.concurrent.Future[A]): A =
+    scala.concurrent.Await.result(f, scala.concurrent.duration.Duration(10, "s"))
+
+  test("the cache is bounded: a flood of distinct URLs never holds more than its most"):
+    val cloud = HostCloud(HostConfig(Files.createTempDirectory("okay-cache"), log = (_, _) => ()), Map.empty)
+    try
+      (0 to HostCloud.cacheEntries + 500).foreach(i =>
+        await(cloud.cache(Cache.Put(s"https://x/$i", Response.text("p"), 300))))
+      assert(cloud.cacheSize <= HostCloud.cacheEntries, cloud.cacheSize)
+      assertEquals(await(cloud.cache(Cache.Match(s"https://x/${HostCloud.cacheEntries + 500}"))).map(_.body),
+        Some("p"))
+    finally cloud.close()
+
+  test("a letter of a binding without a server: written into the mail directory, its path logged"):
+    val dir = Files.createTempDirectory("okay-mail")
+    val logged = LinkedBlockingQueue[String]()
+    val cloud = HostCloud(HostConfig(dir, mailDir = Some(dir.resolve("mail")), log = (_, m) => logged.put(m)),
+      Map.empty)
+    try
+      val sent = await(cloud.mails(Mails.Deliver("MAIL", Mail("shop@example.com", "owner@example.com", "Zamówienie",
+        "Nowe zamówienie", Some("<p>Nowe</p>")))))
+      assertEquals(sent, Right(()))
+      val line = logged.poll()
+      assert(line.startsWith("MAIL: Email: ") && line.endsWith(".eml"), line)
+      val text = Files.readString(Path.of(line.stripPrefix("MAIL: Email: ")))
+      assert(text.contains("To: owner@example.com") && text.contains("multipart/alternative"), text)
+      val none = HostCloud(HostConfig(Files.createTempDirectory("okay-mail")), Map.empty)
+      try assert(await(none.mails(Mails.Deliver("MAIL", Mail("a@b.c", "d@e.f", "s", "t")))).isLeft)
+      finally none.close()
+    finally cloud.close()

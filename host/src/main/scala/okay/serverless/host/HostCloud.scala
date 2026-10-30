@@ -16,13 +16,14 @@ import scala.jdk.CollectionConverters.*
 /**
  * WHAT THE HOST IS GIVEN: where its state lives, what it serves, its configuration. `vars` over the process's
  * environment; `crons` the triggers given to `scheduled`; `ai` a server with OpenAI's API; `smtp` a mail binding's
- * server; `limits` a rate limit's `limit` a window of `periodSeconds`; `services` other apps by name; `adjust` the
+ * server, `mailDir` where a letter of a binding without one is written (a MIME file, logged); `limits` a rate limit's `limit` a window of `periodSeconds`; `services` other apps by name; `adjust` the
  * platform as an app wants it (a port wrapped: a model's failure answered as a value); `testScheduled` a cron run by a
  * request, `/cdn-cgi/handler/scheduled?cron=…` — wrangler's own, so one end-to-end script drives both.
  */
 final case class HostConfig(dir: Path, port: Int = 8787, host: String = "127.0.0.1", static: Option[Path] = None,
                             vars: Map[String, String] = Map.empty, crons: List[String] = Nil,
                             ai: Option[AiServer] = None, smtp: Map[String, SmtpServer] = Map.empty,
+                            mailDir: Option[Path] = None,
                             limits: Map[String, (Int, Long)] = Map.empty, services: Map[String, App] = Map.empty,
                             tickMillis: Long = 1000, maxAttempts: Int = 3,
                             adjust: Platform => Platform = identity, testScheduled: Boolean = false,
@@ -121,13 +122,24 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
 
   val fetch: JdkFetch = JdkFetch()
 
-  // ---- cache, in memory
+  // ---- cache, in memory, bounded: when full, the expired dropped, then the soonest to expire
   private val cached = mutable.Map.empty[String, (Response, Long)]
+  private def room(): Unit =
+    if cached.size >= HostCloud.cacheEntries then
+      val t = clock()
+      cached.filterInPlace((_, e) => e._2 > t)
+      if cached.size >= HostCloud.cacheEntries then
+        cached.toVector.sortBy(_._2._2).take(cached.size - HostCloud.cacheEntries * 9 / 10)
+          .foreach((k, _) => cached.remove(k))
   val cache: Port[Cache] = new Port[Cache]:
     def apply[X](op: Cache[X]): Future[X] = now[X](synchronized[X](op match
       case Cache.Match(url) => cached.get(url).collect { case (r, exp) if exp > clock() => r }
-      case Cache.Put(url, r, ttl) => cached(url) = (r, clock() + ttl * 1000)
+      case Cache.Put(url, r, ttl) =>
+        if !cached.contains(url) then room()
+        cached(url) = (r, clock() + ttl * 1000)
       case Cache.Delete(url) => cached.remove(url).isDefined))
+  /** how many entries the cache holds now */
+  def cacheSize: Int = synchronized(cached.size)
 
   // ---- configuration: the host's variables, then the process's environment
   val env: Port[Env] = new Port[Env]:
@@ -178,14 +190,22 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
 
   val tcp: Port[Tcp] = JdkTcp().port
 
-  // ---- mail: by SMTP over the JDK's sockets, a binding's server the configuration's
+  // ---- mail: by SMTP over the JDK's sockets, a binding's server the configuration's; else into the mail directory
   val mails: Port[Mails] = new Port[Mails]:
     private def deliver(binding: String, mail: Mail): Future[Either[String, Unit]] =
-      config.smtp.get(binding) match
-        case None => Future.successful(Left(s"no SMTP server for $binding"))
-        case Some(server) =>
+      (config.smtp.get(binding), config.mailDir) match
+        case (Some(server), _) =>
           val id = s"<${java.util.UUID.randomUUID()}@${server.helo}>"
           Async.toFuture(Port.handle(tcp)(Smtp.deliver[Async + Tcp](server, mail, id, clock())))
+        case (None, Some(dir)) => now {
+            val id = java.util.UUID.randomUUID().toString
+            Files.createDirectories(dir)
+            val file = dir.resolve(s"${clock()}-$id.eml").toAbsolutePath
+            Files.writeString(file, Mime.message(mail, s"$id@${mail.from.dropWhile(_ != '@').drop(1)}", clock()))
+            config.log(Level.Info, s"$binding: Email: $file")
+            Right(())
+          }
+        case (None, None) => Future.successful(Left(s"no SMTP server for $binding"))
     def apply[X](op: Mails[X]): Future[X] = op match
       case Mails.Deliver(binding, mail) => deliver(binding, mail)
       case Mails.Send(binding, mail) => deliver(binding, mail).flatMap {
@@ -296,3 +316,7 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
   extension [A](a: A) private def tap(f: A => Any): A = { f(a); a }
 
   def close(): Unit = store.close()
+
+object HostCloud:
+  /** the most entries the cache holds */
+  val cacheEntries = 10000

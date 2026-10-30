@@ -13,8 +13,9 @@ final case class AiServer(url: String, key: Option[String] = None, models: Map[S
  * `Ai` BY ANY SERVER WITH OPENAI'S API (specs/cloud.md "The host"): okay-llm's gateway, Ollama, vLLM, a remote one.
  * Workers AI's shapes in and out, so a program does not tell: a chat (`messages`, or a `prompt`) goes to
  * `/v1/chat/completions` and is answered `{"response": text}`; a text (`text`, one or several) goes to
- * `/v1/embeddings` and is answered `{"data": [[...], ...]}`. A model's name is the configuration's mapping of it, or
- * itself.
+ * `/v1/embeddings` and is answered `{"data": [[...], ...]}`; a translation (`text` with `target_lang` and
+ * `source_lang`, m2m100's) is a chat asking for the translation alone, answered `{"translated_text": text}`. A model's
+ * name is the configuration's mapping of it, or itself.
  */
 final class OpenAiAi(server: AiServer, fetch: JdkFetch)(using ec: ExecutionContext) extends Port[Ai]:
   private val base = server.url.stripSuffix("/")
@@ -36,6 +37,7 @@ final class OpenAiAi(server: AiServer, fetch: JdkFetch)(using ec: ExecutionConte
         case (Some(messages), _, _) => chat(name, messages, input)
         case (None, Some(prompt), _) =>
           chat(name, Json.arr(Json.obj("role" -> Json.Str("user"), "content" -> prompt)), input)
+        case (None, None, Some(text)) if field(input, "target_lang").isDefined => translation(name, text, input)
         case (None, None, Some(text)) =>
           val texts = text match
             case a: Json.Arr => a
@@ -47,6 +49,27 @@ final class OpenAiAi(server: AiServer, fetch: JdkFetch)(using ec: ExecutionConte
               case Json.Arr(v) => v.size }.getOrElse(0))), "data" -> Json.Arr(rows))
           }
         case _ => Future.failed(IllegalArgumentException(s"AI: no messages, prompt or text in $input"))
+
+  /** a translation as a chat: the languages by their English names, the answer the translation alone (a model's
+   * `<think>` block dropped) */
+  private def translation(model: Json, text: Json, input: Json): Future[Json] =
+    def lang(k: String): String = field(input, k).collect { case Json.Str(c) => c }.map(c =>
+      Option(java.util.Locale.forLanguageTag(c).getDisplayLanguage(java.util.Locale.ENGLISH)).filter(_.nonEmpty)
+        .getOrElse(c)).getOrElse("the source language")
+    val source = text match
+      case Json.Str(t) => t
+      case other => Json.print(other)
+    val messages = Json.arr(
+      Json.obj("role" -> Json.Str("system"), "content" -> Json.Str(
+        "You are a translator. Answer with the translation of the user's text alone: no quotes, no notes.")),
+      Json.obj("role" -> Json.Str("user"), "content" -> Json.Str(
+        s"Translate from ${lang("source_lang")} to ${lang("target_lang")}:\n\n$source")))
+    post("/v1/chat/completions", Json.obj("model" -> model, "messages" -> messages)).map { j =>
+      val content = field(j, "choices").collect { case Json.Arr(cs) => cs }.flatMap(_.headOption)
+        .flatMap(c => field(c, "message")).flatMap(m => field(m, "content")).collect { case Json.Str(s) => s }
+        .getOrElse("")
+      Json.obj("translated_text" -> Json.Str(content.replaceAll("(?s)<think>.*?</think>", "").trim))
+    }
 
   /** a chat: the rest of the input passed as it is (max_tokens, temperature, chat_template_kwargs, tools…) */
   private def chat(model: Json, messages: Json, input: Json): Future[Json] =
