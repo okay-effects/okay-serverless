@@ -8,8 +8,8 @@ import okay.scala3.std.Async
  * AES-256-CBC encryption (another party's format), AES-256-GCM sealing and opening (our own secrets at rest). Not a
  * cloud's service but the runtime's: the Web Crypto API in a Worker, Node or a browser, the JDK's JCA on the JVM —
  * `Crypto.run` handles it by the runtime's own (`Crypto.native`), so it is not in the `Cloud` row: a program that needs
- * it says so (`In[Crypto, R]`) and one line handles it. Keys and data are bytes; a public key is its SubjectPublicKeyInfo
- * (DER) — `Crypto.spki` takes it out of an X.509 certificate
+ * it says so (`In[Crypto, R]`) and one line handles it. Keys and data are bytes; a public key is its
+ * SubjectPublicKeyInfo (DER) — `Crypto.spki` takes it out of an X.509 certificate
  */
 enum Crypto[X]:
   /** `n` bytes from the runtime's secure generator */
