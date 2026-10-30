@@ -183,9 +183,19 @@ object Limits:
 /** A MODEL: JSON in, JSON out — Workers AI, Bedrock, Vertex AI */
 enum Ai[X]:
   case Run(model: String, input: Json) extends Ai[Json]
+  /** the same, its failure an answer (`Left` and why) instead of the program's: a model busy, gone or refusing */
+  case Attempt(model: String, input: Json) extends Ai[Either[String, Json]]
 
 object Ai:
   def run[R[_]](model: String, input: Json)(using In[Ai, R]): Json ! R = perform[Ai](Run(model, input))
+  /** a model run, its failure a `Left`: the program goes on (a fallback, a copy) */
+  def attempt[R[_]](model: String, input: Json)(using In[Ai, R]): Either[String, Json] ! R =
+    perform[Ai](Attempt(model, input))
+
+  /** a port's `Attempt` by its own `Run`: a failure answered as its message */
+  def attempted(run: => Future[Json])(using ExecutionContext): Future[Either[String, Json]] =
+    scala.util.Try(run).fold(Future.failed, identity).map(Right(_)).recover { case e =>
+      Left(Option(e.getMessage).getOrElse(e.toString)) }
 
 final case class Embedding(id: String, values: List[Double], metadata: Map[String, String] = Map.empty)
 final case class Nearest(id: String, score: Double, metadata: Map[String, String])

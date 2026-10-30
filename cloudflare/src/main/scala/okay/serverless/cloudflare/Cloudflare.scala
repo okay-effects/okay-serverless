@@ -144,7 +144,8 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
 
   val aiPort: Port[Ai] = new Port[Ai]:
     def apply[X](op: Ai[X]): Future[X] = guard[X](op match
-      case Ai.Run(model, input) => await(binding(ai).run(model, fromJson(input))).map(r => toJson(r)))
+      case Ai.Run(model, input) => await(binding(ai).run(model, fromJson(input))).map(r => toJson(r))
+      case Ai.Attempt(model, input) => Ai.attempted(apply(Ai.Run(model, input))))
 
   val vectors: Port[Vectors] = new Port[Vectors]:
     def apply[X](op: Vectors[X]): Future[X] = guard[X](op match

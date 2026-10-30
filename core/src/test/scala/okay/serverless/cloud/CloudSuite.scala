@@ -224,3 +224,15 @@ class CloudSuite extends munit.FunSuite:
       assertEquals(fine.text, "ok")
       assertEquals(again.getMessage, "plain")
   }
+
+  test("a model attempted: its answer, or its failure as a Left — the program goes on") {
+    val c = cloud()
+    c.model = (m, input) => if m == "busy" then throw IllegalStateException("capacity") else Json.obj("echo" -> input)
+    c.platform.future(for
+      ok <- Ai.attempt[Cloud]("m", Json.Str("hi"))
+      busy <- Ai.attempt[Cloud]("busy", Json.Str("hi"))
+    yield (ok, busy)).map { (ok, busy) =>
+      assertEquals(ok, Right(Json.obj("echo" -> Json.Str("hi"))))
+      assertEquals(busy, Left("capacity"))
+    }
+  }

@@ -31,6 +31,7 @@ final class OpenAiAi(server: AiServer, fetch: JdkFetch)(using ec: ExecutionConte
   private def field(j: Json, k: String): Option[Json] = j.field(k)
 
   def apply[X](op: Ai[X]): Future[X] = op match
+    case Ai.Attempt(model, input) => Ai.attempted(apply(Ai.Run(model, input)))
     case Ai.Run(model, input) =>
       val name = Json.Str(server.models.getOrElse(model, model))
       (field(input, "messages"), field(input, "prompt"), field(input, "text")) match

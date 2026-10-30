@@ -131,6 +131,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   val ai: Port[Ai] = new Port[Ai]:
     def apply[X](op: Ai[X]): Future[X] = op match
       case Ai.Run(m, input) => now(model(m, input))
+      case Ai.Attempt(m, input) => Ai.attempted(now(model(m, input)))
 
   // ---- vectors: cosine, every one compared
   private val vectorsStored = mutable.Map.empty[(String, String), Embedding]

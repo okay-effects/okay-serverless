@@ -40,7 +40,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Env` | a variable, a secret — okay-scala's `std.Env` |
 | `Services` | a request to another service by name |
 | `Limits` | may this key go now (a limit per period, configured per name) |
-| `Ai` | run a model: JSON in, JSON out |
+| `Ai` | run a model: JSON in, JSON out; `Ai.attempt` the same, its failure a `Left` (a model busy or gone: the program goes on to its fallback) |
 | `Vectors` | upsert, query (top k, a filter), delete — cosine |
 | `Analytics` | write a data point (indexes, blobs, doubles) |
 | `Mails` | send a mail (text, and HTML beside it; a reply-to; the sender's name); deliver one: sent, or why not |
