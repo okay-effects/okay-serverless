@@ -73,6 +73,13 @@ it answers a Worker's or a Lambda's requests (`Faces.rest`, `Faces.mcp`), the ty
 declare a type, map it, and it has an API and tools for agents, its data in D1, Postgres, KV or an object.
 [specs/faces.md](specs/faces.md).
 
+## Accounts for phone apps
+
+`accounts` (specs/accounts.md) is a backend any okay-faces phone app can use: sign-in by a code by mail, Sign in with
+Apple or Google (their identity tokens checked RS256 in plain Scala), sessions, and what the person's program marks
+as shared, kept in their own object. `cloudflare/accounts` deploys it as a Worker; okay-faces' `Accounts` is the
+phone's side.
+
 ## Platforms
 
 | | module | status |
