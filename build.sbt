@@ -86,6 +86,11 @@ lazy val relay = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Full)
 lazy val telegram = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("telegram"))
   .dependsOn(core, relay).settings(name := "okay-serverless-telegram", libraryDependencies += munit.value)
 
+/** A PHONE APP'S BACKEND (specs/accounts.md): signing in — a code by mail, Apple's or Google's identity token — and
+ * what the person's program marks as shared, in their own object */
+lazy val accounts = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("accounts"))
+  .dependsOn(core, relay).settings(name := "okay-serverless-accounts", libraryDependencies += munit.value)
+
 lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
   .dependsOn(core.js, store.js % "test->test", faces.js % "test->compile")
   .settings(name := "okay-serverless-aws", libraryDependencies += munit.value,
@@ -122,6 +127,6 @@ lazy val host = (project in file("host")).dependsOn(core.jvm)
 
 lazy val root = (project in file("."))
   .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
-    policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js,
+    policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js, accounts.jvm, accounts.js,
     aws, cloudflare, cloudflareApp, host)
   .settings(publish / skip := true)

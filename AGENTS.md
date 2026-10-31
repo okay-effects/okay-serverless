@@ -33,6 +33,8 @@ first.
 - `relay` (specs/relay.md): sealed rooms — `Pairing`, `Envelope`, `Tokens`, `Hashes` (plain Scala), the `Rooms`
   actor and its `Steward`; `Sealer` and the host's `RelayClient` on the JVM, `Sealer` and `Guest` in a browser.
   `telegram`: the `Telegram` effect, by the Bot API over `Fetch` or in memory. okay-remote is their first user.
+- `accounts` (specs/accounts.md): a phone app's backend — sign-in by a code by mail, Apple's or Google's identity
+  token (RS256 checked in plain Scala, `Jwt`), sessions in KV, the person's shared values in their own object.
 - `cloudflare`: `CloudflarePorts(env)` every binding, `Worker(app, actors)` the entry points; the example and its
   e2e use every binding locally but Workers AI and Vectorize (remote only).
 - `cloudflare`: `ObjectStorage(ctx)` — a table `okay_values(key, value, version)` in the object's SQLite storage, a
