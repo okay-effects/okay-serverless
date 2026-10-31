@@ -33,6 +33,14 @@ object CryptoNative:
     case Crypto.Open(key, iv, boxed) => raw(key, "AES-GCM", "decrypt").flatMap(k =>
         WebJs.await(subtle.decrypt(obj(name = "AES-GCM", iv = WebJs.uint8(iv)), k, WebJs.uint8(boxed))))
         .map(b => Option(WebJs.bytes(b))).recover { case _ => None }
+    case Crypto.SignEs256(pkcs8, data) =>
+      WebJs.await(subtle.importKey("pkcs8", WebJs.uint8(pkcs8), obj(name = "ECDSA", namedCurve = "P-256"), false,
+        js.Array("sign"))).flatMap(k => WebJs.await(subtle.sign(obj(name = "ECDSA", hash = "SHA-256"), k,
+        WebJs.uint8(data)))).map(WebJs.bytes)
+    case Crypto.SignRs256(pkcs8, data) =>
+      WebJs.await(subtle.importKey("pkcs8", WebJs.uint8(pkcs8), obj(name = "RSASSA-PKCS1-v1_5", hash = "SHA-256"),
+        false, js.Array("sign"))).flatMap(k => WebJs.await(subtle.sign(obj(name = "RSASSA-PKCS1-v1_5"), k,
+        WebJs.uint8(data)))).map(WebJs.bytes)
 
   val port: Port[Crypto] = new Port[Crypto]:
     def apply[X](op: Crypto[X]): Future[X] = answer(op)

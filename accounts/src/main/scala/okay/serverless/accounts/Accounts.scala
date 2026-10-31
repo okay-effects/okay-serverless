@@ -24,11 +24,50 @@ final class Accounts extends App:
       case ("POST", List("auth", "google")) => identity(r, google)
       case ("POST", List("auth", "out")) => Auth.token(r).fold(pure(Response.json(Json.Obj.empty)))(t =>
           Kv.delete[Cloud](ns, s"session/$t").as(Response.json(Json.Obj.empty)))
+      case ("POST", List("push", "device")) => person(r).flatMap {
+          case None => pure(Response.json(Json.obj("error" -> Json.Str("not signed in")), 401))
+          case Some(who) => body(r).flatMap(b => text(b, "platform").zip(text(b, "token"))) match
+            case Some((p, t)) if (p == "apns" || p == "fcm") && t.nonEmpty =>
+              Objects.call[Cloud]("SHARED", who, Request("PUT", s"/devices/${p}:${t}"))
+            case _ => pure(bad("a platform (apns or fcm) and a token"))
+        }
+      case ("POST", List("push")) => push(r)
       case (_, "shared" :: rest) if rest.length <= 1 => person(r).flatMap {
           case None => pure(Response.json(Json.obj("error" -> Json.Str("not signed in")), 401))
           case Some(who) => Objects.call[Cloud]("SHARED", who, r)
         }
       case _ => pure(Response.json(Json.obj("error" -> Json.Str("no such path")), 404))
+
+  /**
+   * A NOTIFICATION to a person's devices: one's own (a session), or anyone's by the app's server (`PUSH_SECRET`, the
+   * person `to`); each device by its service, the gone ones forgotten
+   */
+  private def push(r: Request): Response ! Cloud =
+    val b = body(r)
+    for
+      self <- person(r)
+      secret <- Env.secret[Cloud]("PUSH_SECRET")
+      server = secret.exists(s => s.nonEmpty && Auth.token(r).exists(Auth.same(s, _)))
+      who = if server then b.flatMap(text(_, "to")) else self
+      answer <- who match
+        case None => pure[Response, Cloud](Response.json(Json.obj("error" -> Json.Str("not signed in")), 401))
+        case Some(w) => Objects.call[Cloud]("SHARED", w, Request.get("/devices")).flatMap { res =>
+            val devices = Descent.parse(res.text).toOption.collect { case o: Json.Obj => o.get("devices") }.flatten
+              .collect { case Json.Arr(ds) => ds.collect { case Json.Str(d) => d } }.getOrElse(Vector.empty)
+              .flatMap(d => d.split(":", 2) match { case Array(p, t) => Some(Push.Device(p, t)); case _ => None })
+            val title = b.flatMap(text(_, "title")).getOrElse("")
+            val text0 = b.flatMap(text(_, "body")).getOrElse("")
+            val all = devices.foldLeft(pure[Vector[Push.Sent], Push.C](Vector.empty))(
+              (acc, d) => acc.flatMap(l => Push.send(d, title, text0).map(l :+ _)))
+            Crypto.run[Push.C, Cloud, Vector[Push.Sent]](all).flatMap { sent =>
+              sent.filter(_.gone).foldLeft(pure[Unit, Cloud](()))((p, s) => p.andThen(Objects.call[Cloud]("SHARED", w,
+                Request("DELETE", s"/devices/${s.device.platform}:${s.device.token}")).as(()))).as(
+                Response.json(Json.obj("sent" -> Json.num(sent.count(s => s.status >= 200 && s.status < 300)),
+                  "results" -> Json.Arr(sent.map(s => Json.obj("platform" -> Json.Str(s.device.platform),
+                    "status" -> Json.num(s.status), "gone" -> Json.Bool(s.gone)))))))
+            }
+          }
+    yield answer
 
   /** the person a request's session names */
   private def person(r: Request): Option[String] ! Cloud =
@@ -167,6 +206,22 @@ object Accounts:
   /** A PERSON'S SHARED VALUES: each with its version; the last write wins */
   object Shared extends Actor:
     def fetch(who: String, r: Request): Response ! InActor =
+      val parts = r.path.takeWhile(_ != '?').split('/').toList.drop(1)
+      if parts.headOption.contains("devices") then devices(who, r.method, parts.drop(1).headOption)
+      else shared(who, r)
+
+    /** the person's devices for notifications: `platform:token`, each a key `d/…` */
+    private def devices(who: String, method: String, id: Option[String]): Response ! InActor = (method, id) match
+      case ("GET", None) => Durable.step[ActorStep, InActor, List[String]](who)(Durable.keys[ActorStep]("d/"))
+          .map(ks => Response.json(Json.obj("devices" -> Json.Arr(ks.toVector.map(k => Json.Str(k.drop(2)))))))
+      case ("PUT", Some(d)) =>
+        Durable.step[ActorStep, InActor, Unit](who)(Durable.put[Boolean, ActorStep](s"d/$d", true))
+          .as(Response.json(Json.obj("ok" -> Json.Bool(true))))
+      case ("DELETE", Some(d)) => Durable.step[ActorStep, InActor, Unit](who)(Durable.delete[ActorStep](s"d/$d"))
+          .as(Response.json(Json.Obj.empty))
+      case _ => pure(Response.json(Json.obj("error" -> Json.Str("no such path")), 404))
+
+    private def shared(who: String, r: Request): Response ! InActor =
       val key = r.path.takeWhile(_ != '?').split('/').toList.drop(2).headOption.map(java.net.URLDecoder.decode(_,
         "UTF-8"))
       (r.method, key) match

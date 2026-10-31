@@ -23,6 +23,14 @@ A backend any okay-faces phone app can use as it is:
   (`SHARED`), its values with versions: `GET /shared` (every key, its version), `GET /shared/<key>` (`{value,
   version}`, or 404), `PUT /shared/<key> {value}` (`{version}`; the last write wins), `DELETE /shared/<key>`.
 
+- PUSH (asked 2026-10-31: «Push-уведомления нужны»): `POST /push/device {platform: apns|fcm, token}` (a session) keeps
+  a phone's token in the person's object; `POST /push {title, body}` notifies the person's own phones (a session — the
+  others of theirs), or anyone's (`{to}`, by the app's server: `Authorization: Bearer <PUSH_SECRET>`). APNs: a
+  provider token, JWT ES256 by the team's key (`APNS_KEY` the `.p8`, `APNS_KEY_ID`, `APNS_TEAM_ID`, `APNS_TOPIC` the
+  bundle id, `APNS_SANDBOX=yes` for development builds), kept 50 minutes. FCM: HTTP v1, an OAuth token for a service
+  account's assertion (`FCM_SERVICE_ACCOUNT`, its JSON), kept 55 minutes. A device its service no longer knows (APNs
+  410, FCM `UNREGISTERED`) is forgotten. The signatures are the runtime's (`Crypto.SignEs256`, `SignRs256`).
+
 ## Decided
 
 - Keys are checked in PLAIN SCALA, the same on every platform: a JWK's modulus and exponent, `s^e mod n` by `BigInt`,
@@ -38,6 +46,6 @@ A backend any okay-faces phone app can use as it is:
 
 ## Open
 
-- Push notifications (APNs, FCM): a session's devices and a `Notify` to a person — when the operator wants them.
+- APNs from a Worker: APNs speaks HTTP/2 alone; whether Cloudflare's `fetch` reaches it so is to be seen with a real
+  key — the host (the JVM's HttpClient, HTTP/2) does.
 - One person by several ways (link an Apple account to an email).
-- Conflicts beyond the last write.

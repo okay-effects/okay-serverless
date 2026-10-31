@@ -47,7 +47,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Objects` | a request to an object by namespace and name |
 | `Tcp` | connect (plain, TLS, or STARTTLS later), write, read, upgrade to TLS, close — each answered `Right` or `Left(why)` |
 | `Sockets` | in an object: accept, send, close, the open ones (by tag) |
-| `Crypto` | random bytes, SHA-256, RSA-OAEP (SHA-256) to a public key, AES-CBC, AES-GCM seal and open — the runtime's, not in the `Cloud` row ("Crypto" below) |
+| `Crypto` | random bytes, SHA-256, RSA-OAEP (SHA-256) to a public key, AES-CBC, AES-GCM seal and open, ES256 and RS256 signatures by a private key — the runtime's, not in the `Cloud` row ("Crypto" below) |
 | `Log`, `Clock`, `Async` | okay-scala's own |
 
 Where each is, on each cloud:
@@ -170,6 +170,12 @@ Tests (`CryptoSuite`, both platforms; `CryptoJvmSuite`): the KSeF test certifica
 published `publicKeyId`, SHA-256 of "abc", NIST SP 800-38A's AES-256-CBC vector, GCM sealed and opened, a wrong key
 and a changed byte refused, RSA-OAEP decrypted by the private key (JVM).
 
+
+2026-10-31 (push for okay-faces' phones, specs/accounts.md): `SignEs256(pkcs8, data)` — ECDSA P-256 with SHA-256,
+the signature r and s, 64 bytes, as JWS writes it (APNs' provider tokens); `SignRs256(pkcs8, data)` — RSASSA-PKCS1-v1_5
+with SHA-256 (a Google service account's assertions). A private key is PKCS#8 DER; `Crypto.pem` takes it out of a
+PEM. On the JVM the JDK's `SHA256withECDSAinP1363Format` and `SHA256withRSA`, in JavaScript Web Crypto's `sign`;
+`SignSuite` checks both against the runtime's own verification.
 ## Workflows, without replay
 
 Cloudflare Workflows replay a function, its steps' results kept. Here a workflow is DATA: a list of stages — `step`

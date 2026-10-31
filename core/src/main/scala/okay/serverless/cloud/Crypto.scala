@@ -24,6 +24,11 @@ enum Crypto[X]:
   case Seal(key: Bytes, iv: Bytes, data: Bytes) extends Crypto[Bytes]
   /** AES-GCM opened: the data, or none when the key is not the one or anything was changed */
   case Open(key: Bytes, iv: Bytes, boxed: Bytes) extends Crypto[Option[Bytes]]
+  /** ECDSA on P-256 with SHA-256 by the private key `pkcs8` (DER): the signature as JWS writes it, r and s, 64 bytes
+   * (APNs' tokens) */
+  case SignEs256(pkcs8: Bytes, data: Bytes) extends Crypto[Bytes]
+  /** RSASSA-PKCS1-v1_5 with SHA-256 by the private key `pkcs8` (DER) (a Google service account's tokens) */
+  case SignRs256(pkcs8: Bytes, data: Bytes) extends Crypto[Bytes]
 
 object Crypto:
   def random[R[_]](n: Int)(using In[Crypto, R]): Bytes ! R = perform[Crypto](Random(n))
@@ -35,6 +40,14 @@ object Crypto:
     perform[Crypto](Seal(key, iv, data))
   def open[R[_]](key: Bytes, iv: Bytes, boxed: Bytes)(using In[Crypto, R]): Option[Bytes] ! R =
     perform[Crypto](Open(key, iv, boxed))
+  def signEs256[R[_]](pkcs8: Bytes, data: Bytes)(using In[Crypto, R]): Bytes ! R =
+    perform[Crypto](SignEs256(pkcs8, data))
+  def signRs256[R[_]](pkcs8: Bytes, data: Bytes)(using In[Crypto, R]): Bytes ! R =
+    perform[Crypto](SignRs256(pkcs8, data))
+
+  /** a PEM's DER: the base64 between its BEGIN and END lines (an APNs `.p8`, a service account's `private_key`) */
+  def pem(text: String): Bytes =
+    Bytes(java.util.Base64.getMimeDecoder.decode(text.linesIterator.filterNot(_.startsWith("-----")).mkString))
 
   /** the runtime's own: the JDK's JCA on the JVM, the Web Crypto API in JavaScript */
   def native: Port[Crypto] = CryptoNative.port

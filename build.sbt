@@ -89,7 +89,8 @@ lazy val telegram = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pu
 /** A PHONE APP'S BACKEND (specs/accounts.md): signing in — a code by mail, Apple's or Google's identity token — and
  * what the person's program marks as shared, in their own object */
 lazy val accounts = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("accounts"))
-  .dependsOn(core, relay).settings(name := "okay-serverless-accounts", libraryDependencies += munit.value)
+  .dependsOn(core % "compile->compile;test->test", relay).settings(name := "okay-serverless-accounts",
+    libraryDependencies += munit.value)
 
 lazy val aws = (project in file("aws")).enablePlugins(ScalaJSPlugin)
   .dependsOn(core.js, store.js % "test->test", faces.js % "test->compile")

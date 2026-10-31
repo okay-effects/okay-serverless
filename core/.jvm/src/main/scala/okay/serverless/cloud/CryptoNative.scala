@@ -1,7 +1,7 @@
 package okay.serverless.cloud
 
-import java.security.spec.{MGF1ParameterSpec, X509EncodedKeySpec}
-import java.security.{KeyFactory, MessageDigest, SecureRandom}
+import java.security.spec.{MGF1ParameterSpec, PKCS8EncodedKeySpec, X509EncodedKeySpec}
+import java.security.{KeyFactory, MessageDigest, SecureRandom, Signature}
 import javax.crypto.Cipher
 import javax.crypto.spec.{GCMParameterSpec, IvParameterSpec, OAEPParameterSpec, PSource, SecretKeySpec}
 import scala.concurrent.Future
@@ -37,6 +37,16 @@ object CryptoNative:
         c.init(Cipher.DECRYPT_MODE, SecretKeySpec(key.toArray, "AES"), GCMParameterSpec(128, iv.toArray))
         Bytes(c.doFinal(boxed.toArray))
       }.toOption
+    case Crypto.SignEs256(pkcs8, data) =>
+      val s = Signature.getInstance("SHA256withECDSAinP1363Format")
+      s.initSign(KeyFactory.getInstance("EC").generatePrivate(PKCS8EncodedKeySpec(pkcs8.toArray)))
+      s.update(data.toArray)
+      Bytes(s.sign())
+    case Crypto.SignRs256(pkcs8, data) =>
+      val s = Signature.getInstance("SHA256withRSA")
+      s.initSign(KeyFactory.getInstance("RSA").generatePrivate(PKCS8EncodedKeySpec(pkcs8.toArray)))
+      s.update(data.toArray)
+      Bytes(s.sign())
 
   val port: Port[Crypto] = new Port[Crypto]:
     def apply[X](op: Crypto[X]): Future[X] = Future.fromTry(Try(answer(op)))
