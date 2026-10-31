@@ -111,6 +111,20 @@ lazy val cloudflareApp = (project in file("cloudflare/app")).enablePlugins(Scala
   .settings(name := "okay-serverless-cloudflare-example", publish / skip := true,
     scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
 
+/** THE ACCOUNTS' WORKER (specs/accounts.md): `accounts` on Cloudflare, linked into cloudflare/accounts/okay.js */
+lazy val accountsWorker = (project in file("cloudflare/accounts/app")).enablePlugins(ScalaJSPlugin)
+  .dependsOn(cloudflare, accounts.js)
+  .settings(name := "okay-serverless-accounts-worker", publish / skip := true,
+    scalaJSLinkerConfig ~= (_.withModuleKind(org.scalajs.linker.interface.ModuleKind.ESModule)))
+val accountsWorkerJs = taskKey[File]("the accounts' Worker, linked")
+accountsWorkerJs := {
+  val out = (accountsWorker / Compile / fullLinkJS / scalaJSLinkerOutputDirectory).value
+  val _ = (accountsWorker / Compile / fullLinkJS).value
+  val to = baseDirectory.value / "cloudflare" / "accounts" / "okay.js"
+  IO.copyFile(out / "main.js", to)
+  to
+}
+
 /** the example Worker's Scala, linked into cloudflare/example/okay.js */
 val cloudflareExample = taskKey[File]("the example Worker's code, linked")
 cloudflareExample := {

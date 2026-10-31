@@ -122,9 +122,9 @@ object Accounts:
                 .andThen(Durable.put[Int, ActorStep]("tries", 0)))
             test <- Env.variable[InActor]("ACCOUNTS_TEST").map(_.contains("yes"))
             from <- Env.variable[InActor]("MAIL_FROM").map(_.getOrElse("no-reply@okay-effects.github.io"))
-            sent <- if test then pure[Either[String, Unit], InActor](Right(()))
-              else Mails.deliver[InActor]("MAIL", Mail(from, email, s"Your code: $code",
-                s"$code\n\nThe code to sign in, for $minutes minutes. If you did not ask for it, do nothing."))
+            letter = Mail(from, email, s"Your code: $code",
+              s"$code\n\nThe code to sign in, for $minutes minutes. If you did not ask for it, do nothing.")
+            sent <- if test then pure[Either[String, Unit], InActor](Right(())) else mail(letter, now)
           yield sent match
             case Left(why) => Response.json(Json.obj("error" -> Json.Str(s"not sent: $why")), 502)
             case Right(_) => Response.json(Json.Obj(Vector("sent" -> Json.Bool(true)) ++
@@ -147,6 +147,22 @@ object Accounts:
             case Left(why) => Response.json(Json.obj("error" -> Json.Str(why)), 401)
           }
         case _ => pure(Response.json(Json.obj("error" -> Json.Str("no such path")), 404))
+
+    /** a letter by an SMTP server when one is set (`SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASSWORD`; to anyone),
+     * else by the platform's binding `MAIL` (on Cloudflare: only to the account's verified addresses) */
+    private def mail(letter: Mail, now: Long): Either[String, Unit] ! InActor =
+      for
+        host <- Env.variable[InActor]("SMTP_HOST")
+        port <- Env.variable[InActor]("SMTP_PORT")
+        user <- Env.secret[InActor]("SMTP_USER")
+        password <- Env.secret[InActor]("SMTP_PASSWORD")
+        sent <- host.filter(_.nonEmpty) match
+          case Some(h) =>
+            val p = port.flatMap(_.toIntOption).getOrElse(587)
+            Smtp.deliver[InActor](SmtpServer(h, p, if p == 465 then Tls.On else Tls.StartTls, user.getOrElse(""),
+              password.getOrElse("")), letter, s"${now}.${letter.to.hashCode.abs}@okay", now)
+          case None => Mails.deliver[InActor]("MAIL", letter)
+      yield sent
 
   /** A PERSON'S SHARED VALUES: each with its version; the last write wins */
   object Shared extends Actor:

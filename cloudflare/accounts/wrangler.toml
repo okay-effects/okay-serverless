@@ -1,0 +1,27 @@
+# the accounts' Worker: `npx wrangler dev` here after `sbt accountsWorkerJs` (ACCOUNTS_TEST answers codes, no mail);
+# deployed with the audiences and the mail set — APPLE_CLIENT_IDS, GOOGLE_CLIENT_IDS, MAIL_FROM, SMTP_* (secrets)
+name = "okay-accounts"
+main = "entry.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+APPLE_CLIENT_IDS = "io.github.okay-effects.faces.shell"
+GOOGLE_CLIENT_IDS = ""
+MAIL_FROM = "no-reply@okay-effects.github.io"
+
+[[kv_namespaces]]
+binding = "ACCOUNTS"
+id = "okay-accounts-kv"
+
+[[durable_objects.bindings]]
+name = "SIGNIN"
+class_name = "SignIn"
+
+[[durable_objects.bindings]]
+name = "SHARED"
+class_name = "Shared"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["SignIn", "Shared"]
