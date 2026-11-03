@@ -25,6 +25,9 @@ guest (a browser) ──wss──▶ Rooms (an actor a room: the sockets' tags o
 - **Tokens**: a short signed token (HMAC-SHA-256, a deadline) naming a room — a link that binds something to the room
   later (a chat), with no state kept.
 - `Hashes`: SHA-256, HMAC-SHA-256, hex, base64url, in plain Scala (the same on every platform).
+- The module `pairing` (2026-11-03): `Pairing`, `Envelope`, `Tokens`, `Hashes` — no cloud, on the JVM, Scala.js and
+  Scala Native (a phone's guest: okay-remote's iPhone app seals with the phone's own AES-GCM); `relay` depends on it,
+  the package the same.
 
 ## `telegram`: a bot as an effect
 

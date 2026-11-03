@@ -77,9 +77,16 @@ lazy val policy = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
 /** ON AWS: `Storage` on DynamoDB (Scala.js on Node — a Lambda's runtime has its SDK): no single writer, so a commit
  * is a `TransactWriteItems` conditioned on the versions read, `false` on a conflict and the step run again. Its tests
  * run on DynamoDB Local: `aws/test.sh` */
+/** THE PAIRING AND ITS FRAMES (specs/relay.md): the secret's keys, the room's name, a frame's envelope, signed tokens,
+ * the hashes — no cloud, so a phone has them too (Scala Native: okay-remote's iPhone app) */
+lazy val pairing = crossProject(JVMPlatform, JSPlatform, NativePlatform).crossType(CrossType.Pure).in(file("pairing"))
+  .settings(name := "okay-serverless-pairing",
+    libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-effects-json" % "0.1.1", munit.value))
+
 /** SEALED ROOMS (specs/relay.md): a host and its guests through an actor that cannot read them — pairing, sealed
  * frames, the room, signed tokens; the host's client on the JVM, a guest in a browser */
-lazy val relay = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Full).in(file("relay")).dependsOn(core)
+lazy val relay = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Full).in(file("relay")).dependsOn(core,
+  pairing)
   .settings(name := "okay-serverless-relay", libraryDependencies += munit.value)
 
 /** A TELEGRAM BOT AS AN EFFECT (specs/relay.md): `Telegram.Send` by the Bot API over `Fetch`, or in memory */
@@ -141,7 +148,7 @@ lazy val host = (project in file("host")).dependsOn(core.jvm)
   .settings(name := "okay-serverless-host", libraryDependencies += munit.value)
 
 lazy val root = (project in file("."))
-  .aggregate(core.jvm, core.js, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
+  .aggregate(core.jvm, core.js, pairing.jvm, pairing.js, pairing.native, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
     policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js, accounts.jvm, accounts.js,
     aws, cloudflare, cloudflareApp, host)
   .settings(publish / skip := true)
