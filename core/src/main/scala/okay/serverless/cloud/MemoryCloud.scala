@@ -39,6 +39,8 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
         info
       case Blobs.Get(bucket, key, range) => blobs.get((bucket, key)).map((info, b) =>
         (info, range.fold(b)((from, until) => b.slice(from.toInt, math.min(until, b.size.toLong).toInt))))
+      case Blobs.View(bucket, key) => blobs.get((bucket, key)).map((info, b) =>
+        (info, java.nio.ByteBuffer.wrap(b.toArray).asReadOnlyBuffer))
       case Blobs.Head(bucket, key) => blobs.get((bucket, key)).map(_._1)
       case Blobs.Delete(bucket, keys) => keys.foreach(k => blobs.remove((bucket, k)))
       case Blobs.List(bucket, prefix, cursor, limit) =>

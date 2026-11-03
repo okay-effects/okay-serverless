@@ -81,6 +81,8 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
           val all = Files.readAllBytes(blobFile(bucket, key))
           (i, Bytes(range.fold(all)((from, until) => all.slice(from.toInt, math.min(until, all.length.toLong).toInt))))
         }
+      case Blobs.View(bucket, key) => info(bucket, key).map(i =>
+          (i, java.nio.ByteBuffer.wrap(Files.readAllBytes(blobFile(bucket, key))).asReadOnlyBuffer))
       case Blobs.Head(bucket, key) => info(bucket, key)
       case Blobs.Delete(bucket, keys) => keys.foreach { k =>
           val f = blobFile(bucket, k)

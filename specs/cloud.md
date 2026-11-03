@@ -32,7 +32,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | effect | operations |
 |---|---|
 | `Kv` | get (with metadata), put (ttl, metadata), delete, list (prefix, cursor) |
-| `Blobs` | put (content type, metadata), get (a range), head, delete, list |
+| `Blobs` | put (content type, metadata), get (a range), view (the bytes read in place: a read-only buffer over the platform's own memory, no copy where it allows — a Worker's `ArrayBuffer`), head, delete, list |
 | `Sql` | query, run (changes, last id), batch (atomic) — the database's dialect; `?` parameters, a union type |
 | `Queues` | send (a delay), send a batch; a consumer settles each message (ack, retry with a delay) |
 | `Fetch` | an HTTP request out — okay-http's own effect |

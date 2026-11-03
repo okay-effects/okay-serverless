@@ -39,6 +39,9 @@ enum Blobs[X]:
     extends Blobs[BlobInfo]
   /** the object, or its bytes `from` (inclusive) `until` (exclusive) */
   case Get(bucket: String, key: String, range: Option[(Long, Long)]) extends Blobs[Option[(BlobInfo, Bytes)]]
+  /** the object's bytes read in place: a buffer over the platform's own memory, never copied where the platform allows
+   * (a Worker: a view of R2's `ArrayBuffer`) — for a large object read by position (a table, an index); not written */
+  case View(bucket: String, key: String) extends Blobs[Option[(BlobInfo, java.nio.ByteBuffer)]]
   case Head(bucket: String, key: String) extends Blobs[Option[BlobInfo]]
   case Delete(bucket: String, keys: scala.List[String]) extends Blobs[Unit]
   case List(bucket: String, prefix: String, cursor: Option[String], limit: Int) extends Blobs[Page[BlobInfo]]
@@ -49,6 +52,8 @@ object Blobs:
     perform[Blobs](Put(bucket, key, body, contentType, metadata))
   def get[R[_]](bucket: String, key: String, range: Option[(Long, Long)] = None)(
     using In[Blobs, R]): Option[(BlobInfo, Bytes)] ! R = perform[Blobs](Get(bucket, key, range))
+  def view[R[_]](bucket: String, key: String)(using In[Blobs, R]): Option[(BlobInfo, java.nio.ByteBuffer)] ! R =
+    perform[Blobs](View(bucket, key))
   def head[R[_]](bucket: String, key: String)(using In[Blobs, R]): Option[BlobInfo] ! R =
     perform[Blobs](Head(bucket, key))
   def delete[R[_]](bucket: String, keys: String*)(using In[Blobs, R]): Unit ! R =

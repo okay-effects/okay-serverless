@@ -179,6 +179,14 @@ object Example:
             case Some((info, b)) => Response.binary(b, info.contentType.getOrElse("application/octet-stream"))
             case None => Response.notFound()
           }
+      // the object read in place (`Blobs.view`): its bytes' count and the text of its first ones
+      case "/blob/view" => Blobs.view[Cloud]("BUCKET", q(r, "key")).map {
+          case Some((_, b)) =>
+            val head = new Array[Byte](math.min(5, b.remaining))
+            b.duplicate.get(head)
+            Response.text(s"${b.remaining} ${new String(head, "UTF-8")}")
+          case None => Response.notFound()
+        }
       case "/sql" =>
         def text(v: SqlValue) = v match
           case SqlValue.Text(t) => t

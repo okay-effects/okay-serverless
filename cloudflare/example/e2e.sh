@@ -35,6 +35,7 @@ expect "$(curl -s -XPOST "$P/kv?key=a" -d one; curl -s "$P/kv?key=a")" "okone" "
 expect "$(curl -s -XPUT "$P/blob?key=f.txt" -H 'content-type: text/plain' --data-binary 'hello, world')" "12" \
   "R2: put"
 expect "$(curl -s "$P/blob?key=f.txt&range=7-12")" "world" "R2: a range"
+expect "$(curl -s "$P/blob/view?key=f.txt")" "12 hello" "R2: the object viewed in place"
 head -c 4096 /dev/urandom > "$state/in.bin"
 curl -s -XPUT "$P/blob?key=r.bin" -H 'content-type: application/octet-stream' --data-binary @"$state/in.bin" \
   >/dev/null

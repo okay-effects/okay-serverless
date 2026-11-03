@@ -57,6 +57,12 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
         range.foreach((from, until) => o.range = obj(offset = from.toDouble, length = (until - from).toDouble))
         await(binding(bucket).get(key, o)).flatMap(r =>
           if r == null then Future.successful(None) else await(r.arrayBuffer()).map(b => Some((info(r), bytes(b)))))
+      // the object's ArrayBuffer as it came, viewed: no copy into a Scala array
+      case Blobs.View(bucket, key) =>
+        await(binding(bucket).get(key)).flatMap(r =>
+          if r == null then Future.successful(None)
+          else await(r.arrayBuffer()).map(b => Some((info(r), scala.scalajs.js.typedarray.TypedArrayBuffer.wrap(
+            b.asInstanceOf[scala.scalajs.js.typedarray.ArrayBuffer])))))
       case Blobs.Head(bucket, key) =>
         await(binding(bucket).head(key)).map(r => if r == null then None else Some(info(r)))
       case Blobs.Delete(bucket, keys) => await(binding(bucket).delete(keys.toJSArray)).map(_ => ())

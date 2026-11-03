@@ -34,11 +34,13 @@ class CloudSuite extends munit.FunSuite:
       assertEquals(after, None)
   }
 
-  test("blobs: put, a range, head, list, delete") {
+  test("blobs: put, a range, a view in place, head, list, delete") {
     val c = cloud()
     c.platform.future(for
       info <- Blobs.put[Cloud]("uploads", "a/one.txt", Bytes.of("hello, world"), Some("text/plain"))
       part <- Blobs.get[Cloud]("uploads", "a/one.txt", Some((7L, 12L)))
+      view <- Blobs.view[Cloud]("uploads", "a/one.txt")
+      none <- Blobs.view[Cloud]("uploads", "a/two.txt")
       head <- Blobs.head[Cloud]("uploads", "a/one.txt")
       listed <- Blobs.list[Cloud]("uploads", "a/")
       _ <- Blobs.delete[Cloud]("uploads", "a/one.txt")
@@ -46,6 +48,8 @@ class CloudSuite extends munit.FunSuite:
     yield
       assertEquals(info.size, 12L)
       assertEquals(part.map(_._2.text), Some("world"))
+      assertEquals(view.map((i, b) => (i.size, b.remaining, b.get(7).toChar, b.isReadOnly)), Some((12L, 12, 'w', true)))
+      assertEquals(none, None)
       assertEquals(head.flatMap(_.contentType), Some("text/plain"))
       assertEquals(listed.items.map(_.key), List("a/one.txt"))
       assertEquals(gone, None))
