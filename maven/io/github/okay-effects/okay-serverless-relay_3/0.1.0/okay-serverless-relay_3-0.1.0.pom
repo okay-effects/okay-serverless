@@ -42,6 +42,11 @@
             <version>0.1.0</version>
         </dependency>
         <dependency>
+            <groupId>io.github.okay-effects</groupId>
+            <artifactId>okay-serverless-pairing_3</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.scala-lang</groupId>
             <artifactId>scala3-library_3</artifactId>
             <version>3.3.8</version>
