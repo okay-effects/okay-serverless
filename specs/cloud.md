@@ -113,6 +113,18 @@ fails is answered `502` with its error as text (`{"error": …}`), so one broken
 platform's port starts them together (Cloudflare: the stubs' `fetch`es, a subrequest each; the host and memory: each
 instance's own queue).
 
+## Where objects live (2026-11-05, okay-mall's data in the EU)
+
+On Cloudflare an object is placed near its first request unless its id is made in a JURISDICTION (Durable Objects
+"Data location": `namespace.jurisdiction("eu").idFromName(name)`, the recommended way; an object never moves after it
+is made). The Worker's var `OBJECTS_JURISDICTION` (`"eu"`, `"fedramp"`) says it for every namespace of the Worker
+(`Jurisdiction`): every `Objects.call` and the entry's `objectFor` take the id from the subnamespace, in the Worker and
+in its objects alike (the same env). Unset or empty: the namespace's own ids, as before. The same name in a
+jurisdiction is ANOTHER object: setting the var on a Worker with data is a move — copy the data into the new objects
+(the old ones stay as they were, unreached until the var is unset). The host and memory have no jurisdictions (the
+host's data is where its directory is). Tests: `JurisdictionSuite` (a fake namespace: the id from `jurisdiction("eu")`
+with the var, the namespace's own without it or when empty).
+
 ## The visitor's approximate place (2026-11-04, okay-mall's "Szukasz w: Warszawa?")
 
 A request from the internet says roughly where it comes from as the platform knows it from the IP: on Cloudflare the
