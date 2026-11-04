@@ -113,6 +113,17 @@ fails is answered `502` with its error as text (`{"error": …}`), so one broken
 platform's port starts them together (Cloudflare: the stubs' `fetch`es, a subrequest each; the host and memory: each
 instance's own queue).
 
+## The visitor's approximate place (2026-11-04, okay-mall's "Szukasz w: Warszawa?")
+
+A request from the internet says roughly where it comes from as the platform knows it from the IP: on Cloudflare the
+request's `cf` object (`city`, `region`, `country`, `postalCode`, `latitude`, `longitude`, `timezone`). The Worker's
+entry turns it into the headers Cloudflare's own "visitor location" transform names — `cf-ipcity`, `cf-region`,
+`cf-ipcountry`, `cf-postal-code`, `cf-iplatitude`, `cf-iplongitude`, `cf-timezone` — after removing any a client sent
+of those names, so a program reads it the same on every platform and an object called with the request gets it too.
+`r.visitor` (`Visitor(city, region, country, postcode, lat, lon)`, each optional) reads them. Approximate (a city's,
+an ISP's), for a suggestion only — never a fact about the person, never stored by the library. The host and memory
+have none unless a proxy in front sets them (then they are that proxy's word, still only a suggestion).
+
 ## A failed request (2026-10-30)
 
 `App.failed(request, error)`: a program of `fetch` that FAILED — an exception, an object's call that threw — is given

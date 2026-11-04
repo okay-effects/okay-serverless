@@ -23,12 +23,24 @@ object WebJs:
     h.forEach(((v: String, k: String) => out(k) = v): js.Function2[String, String, Unit])
     out.toMap
 
+  /** the platform's word on where a request comes from (Cloudflare's `request.cf`) as the visitor location headers,
+   * percent-encoded (a header is Latin-1 only: "Łódź"); a client's own of those names removed (specs/cloud.md) */
+  private def visitor(r: js.Dynamic, hs: Map[String, List[String]]): Map[String, List[String]] =
+    val cf = r.selectDynamic("cf")
+    if js.isUndefined(cf) || cf == null then hs
+    else
+      def f(k: String): Option[String] = str(cf.selectDynamic(k)).filter(_.nonEmpty)
+      val got = Vector("cf-ipcity" -> f("city"), "cf-region" -> f("region"), "cf-ipcountry" -> f("country"),
+        "cf-postal-code" -> f("postalCode"), "cf-iplatitude" -> f("latitude"), "cf-iplongitude" -> f("longitude"),
+        "cf-timezone" -> f("timezone")).collect { case (k, Some(v)) => k -> List(js.URIUtils.encodeURIComponent(v)) }
+      hs.filterNot((k, _) => Visitor.headers.contains(k)) ++ got
+
   /** a request of the runtime's: its path and query, its headers (names lowercased), its body as it came */
   def request(r: js.Dynamic): Future[Request] =
     val method = r.method.asInstanceOf[String]
     val url = js.Dynamic.newInstance(g.URL)(r.url)
     val head = Request(method, url.pathname.toString + url.search.toString)
-      .copy(headers = headers(r.headers).map((k, v) => k.toLowerCase -> List(v)))
+      .copy(headers = visitor(r, headers(r.headers).map((k, v) => k.toLowerCase -> List(v))))
     if method == "GET" || method == "HEAD" then Future.successful(head)
     else await(r.arrayBuffer()).map(b => head.withContent(bytes(b)))
 

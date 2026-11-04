@@ -240,3 +240,11 @@ class CloudSuite extends munit.FunSuite:
       assertEquals(busy, Left("capacity"))
     }
   }
+
+class VisitorSuite extends munit.FunSuite:
+  test("the visitor's approximate place from the platform's headers, percent-encoded; none without them"):
+    val r = Request.get("/").copy(headers = Map("cf-ipcity" -> List("%C5%81%C3%B3d%C5%BA"), "cf-ipcountry" -> List("PL"),
+      "cf-iplatitude" -> List("51.77"), "cf-iplongitude" -> List("19.46")))
+    assertEquals(r.visitor, Some(Visitor(Some("Łódź"), None, Some("PL"), None, Some(51.77), Some(19.46))))
+    assertEquals(Request.get("/").visitor, None)
+    assertEquals(Visitor.decoded("100%"), "100%")
