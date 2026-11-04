@@ -25,7 +25,7 @@ object WebJs:
 
   /** the platform's word on where a request comes from (Cloudflare's `request.cf`) as the visitor location headers,
    * percent-encoded (a header is Latin-1 only: "Łódź"); a client's own of those names removed (specs/cloud.md) */
-  private def visitor(r: js.Dynamic, hs: Map[String, List[String]]): Map[String, List[String]] =
+  def visitor(r: js.Dynamic, hs: Map[String, List[String]]): Map[String, List[String]] =
     val cf = r.selectDynamic("cf")
     if js.isUndefined(cf) || cf == null then hs
     else

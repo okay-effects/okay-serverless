@@ -296,7 +296,8 @@ final class Worker(app: App, actors: Map[String, Actor]):
   def fetch(request: js.Dynamic, env: js.Dynamic, ctx: js.Dynamic): js.Promise[js.Dynamic] =
     val url = js.Dynamic.newInstance(g.URL)(request.url)
     val head = Request(request.method.asInstanceOf[String], url.pathname.toString + url.search.toString)
-      .copy(headers = headers(request.headers).map((k, v) => k.toLowerCase -> List(v)))
+      // the platform's word on where it comes from as headers (specs/cloud.md "The visitor's approximate place")
+      .copy(headers = WebJs.visitor(request, headers(request.headers).map((k, v) => k.toLowerCase -> List(v))))
     // admitted first (`App.admit`): the admitted request's headers are the request's from then on
     ports(env).platform.future(app.admit(head)).flatMap {
       case Left(refused) => Future.successful(toResponse(refused))
