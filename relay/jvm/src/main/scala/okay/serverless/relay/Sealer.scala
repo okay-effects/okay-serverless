@@ -1,10 +1,13 @@
 package okay.serverless.relay
 
 import java.security.SecureRandom
+import java.util.{Base64, HexFormat}
 import javax.crypto.Cipher
 import javax.crypto.spec.{GCMParameterSpec, SecretKeySpec}
 
-/** A FRAME SEALED AND OPENED on the JVM (the JCA): AES-256-GCM by the pairing's key, its label the associated data */
+/** A FRAME SEALED AND OPENED on the JVM (the JCA): AES-256-GCM by the pairing's key, its label the associated data.
+ * The bytes it makes (an IV, a sealed box, a nonce, a secret) stay here: the business code gets them as text —
+ * base64url and hex written by the JDK, the same as `Hashes`' — never as an array of the handler's */
 final class Sealer(pairing: Pairing):
   private val random = new SecureRandom
   private val key = new SecretKeySpec(pairing.enc, "AES")
@@ -14,7 +17,7 @@ final class Sealer(pairing: Pairing):
     val c = Cipher.getInstance("AES/GCM/NoPadding")
     c.init(Cipher.ENCRYPT_MODE, key, new GCMParameterSpec(128, iv))
     c.updateAAD(aad)
-    Hashes.base64url(iv ++ c.doFinal(Hashes.utf8(plain)))
+    Sealer.base64url(iv ++ c.doFinal(Hashes.utf8(plain)))
   def open(frame: String): Option[String] = Hashes.unbase64url(frame).filter(_.length > 28).flatMap { b =>
     scala.util.Try {
       val c = Cipher.getInstance("AES/GCM/NoPadding")
@@ -23,8 +26,12 @@ final class Sealer(pairing: Pairing):
       new String(c.doFinal(b.drop(12)), java.nio.charset.StandardCharsets.UTF_8)
     }.toOption
   }
-  def nonce: String = { val b = new Array[Byte](12); random.nextBytes(b); Hashes.hex(b) }
+  def nonce: String = { val b = new Array[Byte](12); random.nextBytes(b); HexFormat.of().formatHex(b) }
 
 object Sealer:
+  /** a new pairing: 32 random bytes, given to `Pairing` as the text a pairing link carries */
   def fresh(label: String): Pairing =
-    val b = new Array[Byte](32); new SecureRandom().nextBytes(b); Pairing(b, label)
+    val b = new Array[Byte](32); new SecureRandom().nextBytes(b)
+    Pairing.of(base64url(b), label).getOrElse(throw IllegalStateException("32 bytes are a pairing's secret"))
+  /** base64url without padding, as `Hashes.base64url` writes it */
+  private def base64url(b: Array[Byte]): String = Base64.getUrlEncoder.withoutPadding.encodeToString(b)
