@@ -100,14 +100,14 @@ the other.
 
 ## Release
 
-0.1.0, a Maven repository on GitHub Pages ([RELEASING.md](RELEASING.md)):
+0.2.0, a Maven repository on GitHub Pages ([RELEASING.md](RELEASING.md)):
 
 ```scala-sbt
 resolvers ++= Seq("okay-serverless" at "https://okay-effects.github.io/okay-serverless/maven",
   "okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
   "okay-simple" at "https://okay-effects.github.io/okay-simple/maven",
   "okay-http" at "https://okay-effects.github.io/okay-http/maven")
-libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.1.0"   // or -aws, or the core
+libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.2.0"   // or -aws, or the core
 ```
 
 Modules: `okay-serverless` (the effect, the cloud's effects, memory; JVM and Scala.js), `-cloudflare` and `-aws`
@@ -117,12 +117,12 @@ okay-simple, Scala 2.13 and 3). Scala 3.3 LTS; Scala.js 1.22 or newer.
 
 ### From 0.1.0
 
-The JVM's handlers left the core (0.1.1, not released yet): `JdkFetch`, `JdkTcp` and `SqliteSql` are in
+The JVM's handlers left the core (0.2.0): `JdkFetch`, `JdkTcp` and `SqliteSql` are in
 `okay-serverless-jvm`, package `okay.serverless.jvm` — so a business module on the core has no socket, JDBC or
 sqlite-jdbc on its classpath. A build that uses them adds the module (`-host` brings it):
 
 ```scala-sbt
-libraryDependencies += "io.github.okay-effects" %% "okay-serverless-jvm" % "0.1.1"   // or % Test, for SqliteSql
+libraryDependencies += "io.github.okay-effects" %% "okay-serverless-jvm" % "0.2.0"   // or % Test, for SqliteSql
 ```
 
 and imports them by name, `import okay.serverless.jvm.{JdkFetch, SqliteSql}` — by name: beside

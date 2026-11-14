@@ -4,7 +4,7 @@ Status 2026-10-28: RELEASED 0.1.0 (RELEASING.md), republished with mail as peopl
 name; `Mails.deliver`), an object's SQL tested under Node — both from okay-workers, now retired — and `Tcp`
 with `Smtp` (a relay's letters from a Worker). Built:
 - the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`); on the JVM (module `jvm`, since
-  0.1.1 — "Layers" below) SQL on SQLite (`SqliteSql`), HTTP out (`JdkFetch`), TCP (`JdkTcp`);
+  0.2.0 — "Layers" below) SQL on SQLite (`SqliteSql`), HTTP out (`JdkFetch`), TCP (`JdkTcp`);
 - Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
 - AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Sql` on Postgres (RDS Proxy); `Env`, `Fetch`, `Log`,
   `Analytics` (EMF); the Lambda's events

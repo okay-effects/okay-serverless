@@ -13,11 +13,11 @@ resolvers ++= Seq("okay-serverless" at "https://okay-effects.github.io/okay-serv
   "okay-http" at "https://okay-effects.github.io/okay-http/maven")
 
 libraryDependencies ++= Seq(
-  "io.github.okay-effects" %%% "okay-serverless" % "0.1.0",             // Durable, the cloud's effects, memory
-  "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.1.0",  // Scala.js: a Worker, its objects
-  "io.github.okay-effects" %%% "okay-serverless-aws" % "0.1.0",         // Scala.js on Node: a Lambda, DynamoDB
-  "io.github.okay-effects" %% "okay-serverless-host" % "0.1.0"           // the JVM: a server of one's own
-  // okay-serverless-jvm: the JVM's handlers (JdkFetch, JdkTcp, SqliteSql) — from 0.1.1; -host brings it
+  "io.github.okay-effects" %%% "okay-serverless" % "0.2.0",             // Durable, the cloud's effects, memory
+  "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.2.0",  // Scala.js: a Worker, its objects
+  "io.github.okay-effects" %%% "okay-serverless-aws" % "0.2.0",         // Scala.js on Node: a Lambda, DynamoDB
+  "io.github.okay-effects" %% "okay-serverless-host" % "0.2.0",          // the JVM: a server of one's own (brings -jvm)
+  "io.github.okay-effects" %% "okay-serverless-jvm" % "0.2.0"            // the JVM's handlers: JdkFetch, JdkTcp, SQLite
 )
 ```
 

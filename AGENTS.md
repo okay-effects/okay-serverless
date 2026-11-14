@@ -11,7 +11,7 @@ resolvers ++= Seq("okay-serverless" at "https://okay-effects.github.io/okay-serv
   "okay-scala" at "https://okay-effects.github.io/okay-scala/maven",
   "okay-simple" at "https://okay-effects.github.io/okay-simple/maven",
   "okay-http" at "https://okay-effects.github.io/okay-http/maven")
-libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.1.0"   // or -aws, or the core
+libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare" % "0.2.0"   // or -aws, or the core
 ```
 
 Modules: `okay-serverless` (core: the effects, memory; JVM + Scala.js), `-cloudflare` / `-aws` (Scala.js), `-host`

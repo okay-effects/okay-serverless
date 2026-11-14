@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.1.1 (not released)
+## 0.2.0 (2026-11-14)
+
+0.2.0, not 0.1.1: classes moved between modules, a binary-incompatible change, so the minor number under 0.x
+(`versionScheme` early-semver). 0.1.0 stays published as it was.
 
 ### The JVM's handlers left the core
 
@@ -8,7 +11,7 @@ okay-audit (okay-effects/okay's boundary checks) found real I/O in the core's bu
 `HttpClient`, raw sockets, `java.sql` and sqlite-jdbc on the classpath of every business module built on
 `okay-serverless`. They are a module of their own now (specs/cloud.md, "Layers"):
 
-| 0.1.0 | 0.1.1 |
+| 0.1.0 | 0.2.0 |
 |---|---|
 | `okay.serverless.cloud.JdkFetch` (`okay-serverless`) | `okay.serverless.jvm.JdkFetch` (`okay-serverless-jvm`) |
 | `okay.serverless.cloud.JdkTcp` (`okay-serverless`) | `okay.serverless.jvm.JdkTcp` (`okay-serverless-jvm`) |
@@ -21,7 +24,7 @@ Migrating:
 
 - `-host` depends on `-jvm`: a build on the host needs nothing.
 - A build on the core that names `JdkFetch`, `JdkTcp` or `SqliteSql` adds
-  `"io.github.okay-effects" %% "okay-serverless-jvm" % "0.1.1"` (`% Test` when only its tests do — `SqliteSql` under
+  `"io.github.okay-effects" %% "okay-serverless-jvm" % "0.2.0"` (`% Test` when only its tests do — `SqliteSql` under
   `MemoryCloud`), and imports them by name: `import okay.serverless.jvm.SqliteSql`. A wildcard
   `import okay.serverless.jvm.*` beside `import okay.serverless.cloud.*` makes the deprecated old names ambiguous.
 - Until then the old names compile: `okay.serverless.cloud.JdkFetch` / `JdkTcp` / `SqliteSql` (a type and its
