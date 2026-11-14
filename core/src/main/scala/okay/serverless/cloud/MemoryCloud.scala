@@ -251,7 +251,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
       case Left(refused) => Future.successful(refused)
       case Right(r) => app.objectFor(r) match
         case Some((ns, name)) => objects(Objects.Call(ns, name, r))
-        case None => platform.future(app.fetch(r)).recoverWith { case e => platform.future(app.failed(r, e)) }
+        case None => platform.future(app.fetch(r)).recoverWith { case e => Port.failed(platform, app, r)(e) }
     }
 
   /** an object's storage, as committed */

@@ -45,6 +45,15 @@ object Port:
           Json.str(Option(e.getMessage).getOrElse(e.toString)))))
       })
 
+  /** a request whose `fetch` failed with `error`: told to `App.failure` as data (`Failed`); when that fails again
+   * with the very failure (the default), `error` as it was thrown — the platform's own error, as before */
+  def failed(platform: Platform, app: App, request: Request)(error: Throwable)(using ExecutionContext)
+    : Future[Response] =
+    val f = Failed(error.getClass.getName, Option(error.getMessage), error.getStackTrace.toList.map(_.toString))
+    platform.future(app.failure(request, f)).recoverWith {
+      case a: Failed.Again if a.failed eq f => Future.failed(error)
+    }
+
   /** `p`'s operations of `E` by `port`, each awaited */
   def handle[E[_], R[_], Rest[_], A](port: Port[E])(p: A ! R)(using Split[E, R, Rest], In[Async, Rest]): A ! Rest =
     okay.scala3.handle(p, Handler.general[E, Rest, A, A](pure)(
@@ -86,6 +95,18 @@ final case class Platform(kv: Port[Kv] = Port.missing("KV"), blobs: Port[Blobs] 
   /** the same, to a future */
   def future[A](p: A ! Cloud)(using ExecutionContext): Future[A] = Async.toFuture(run(p))
 
+/** WHAT FAILED, as data: the exception's class, its message (none when it had none), its stack's frames as text —
+ * what the platform tells `App.failure`, never the exception itself */
+final case class Failed(kind: String, message: Option[String], trace: List[String] = Nil):
+  /** as the exception would print itself: its class, then its message */
+  def text: String = message.fold(kind)(m => s"$kind: $m")
+
+object Failed:
+  /** the failure as an exception again — what `App.failed` (deprecated) is given: its message and its text the
+   * original's */
+  final class Again(val failed: Failed) extends RuntimeException(failed.message.orNull, null, false, false):
+    override def toString: String = failed.text
+
 /** a cron trigger's firing */
 final case class Scheduled(cron: String, time: Long)
 
@@ -97,8 +118,13 @@ trait App:
   /** a request that goes to an object as it is — a WebSocket's, a stream's: its namespace and name */
   def objectFor(request: Request): Option[(String, String)] = None
   def fetch(request: Request): Response ! Cloud = pure(Response.notFound())
-  /** a request whose `fetch` FAILED (an exception, an object that threw): its answer instead (specs/cloud.md "A failed
-   * request"). By default it fails again, as before: the platform's own error */
+  /** a request whose `fetch` FAILED (an exception, an object that threw), the failure told as data: its answer
+   * instead (specs/cloud.md "A failed request"). By default `failed`'s — which fails again, as before: the
+   * platform's own error, the exception as it was thrown */
+  @annotation.nowarn("cat=deprecation")
+  def failure(request: Request, error: Failed): Response ! Cloud = failed(request, Failed.Again(error))
+  /** the same, given an exception: what `failure` gives it by default is `error` as an exception (`Failed.Again`) */
+  @deprecated("App.failure: the failure as data (Failed), not an exception", "0.3.0")
   def failed(request: Request, error: Throwable): Response ! Cloud = defer(throw error)
   def scheduled(event: Scheduled): Unit ! Cloud = pure(())
   /** a message of `queue`: acknowledged, or given again later. A failure is a retry */

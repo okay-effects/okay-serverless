@@ -309,7 +309,7 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
       case Left(refused) => Future.successful(refused)
       case Right(r) => app.objectFor(r) match
         case Some((ns, name)) => objects(Objects.Call(ns, name, r))
-        case None => platform.future(app.fetch(r)).recoverWith { case e => platform.future(app.failed(r, e)) }
+        case None => platform.future(app.fetch(r)).recoverWith { case e => Port.failed(platform, app, r)(e) }
     }
 
   lazy val platform: Platform = config.adjust(Platform(kv = kv, blobs = blobs,

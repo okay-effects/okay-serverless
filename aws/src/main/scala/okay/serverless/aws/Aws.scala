@@ -166,7 +166,7 @@ final class Lambda(app: App, ports: AwsPorts)(using ExecutionContext):
         case Some((ns, name)) => Async.toFuture(ports.hosting(ns, name).run(ports.platform)(ports.actor(ns).fetch(name,
             admitted)))
         case None => ports.platform.future(app.fetch(admitted))
-            .recoverWith { case e => ports.platform.future(app.failed(admitted, e)) }
+            .recoverWith { case e => Port.failed(ports.platform, app, admitted)(e) }
     }
     answer.map(res => obj(statusCode = res.status, headers = res.headers.toJSDictionary,
       body = g.Buffer.from(WebJs.uint8(res.content)).applyDynamic("toString")("base64"), isBase64Encoded = true))

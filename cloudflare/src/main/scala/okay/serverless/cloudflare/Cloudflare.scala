@@ -312,7 +312,7 @@ final class Worker(app: App, actors: Map[String, Actor]):
           WebJs.request(request).flatMap { r =>
             val in = r.copy(headers = admitted.headers)
             val p = ports(env).platform
-            p.future(app.fetch(in)).recoverWith { case e => p.future(app.failed(in, e)) }
+            p.future(app.fetch(in)).recoverWith { case e => Port.failed(p, app, in)(e) }
           }
             .map(toResponse)
     }.toJSPromise

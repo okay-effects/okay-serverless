@@ -145,6 +145,15 @@ own error page, a failed future elsewhere), so an app that does not override it 
 answers its own 500 page here. Workers, Lambdas, the host and `MemoryCloud.serve` call it; an object's own failure
 reaches it through the `Objects.call` that failed.
 
+2026-11-14 (okay-audit: a handler gives business code data, never a live exception): the platform tells
+`App.failure(request, failed)` what failed as data — `Failed(kind, message, trace)`, the exception's class name, its
+message (none when it had none), its stack's frames as text — never the `Throwable` (`Port.failed` builds it, on the
+platform's side). By default `failure` calls `failed(request, Failed.Again(failed))` (deprecated: an exception made
+of the data, its message and text the original's), whose default fails again with it; the platform, seeing its own
+failure come back, fails with the original exception as before. So an app that overrides neither is unchanged, and
+one that overrides the old `failed` keeps working (deprecated) — what it can no longer do is match on the
+exception's class: it reads `failed.kind`.
+
 ## Mail (2026-10-28, for szykownia.pl's sites; what okay-workers had)
 
 A `Mail` is a letter as people get it: `from` (an address, `fromName` shown with it), `to`, `subject`, `text`, and,

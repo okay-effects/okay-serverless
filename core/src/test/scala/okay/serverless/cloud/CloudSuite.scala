@@ -200,7 +200,7 @@ class CloudSuite extends munit.FunSuite:
       assert(names._1 != names._2, names.toString)
   }
 
-  test("objects asked at once: the answers in order, a failed one a 502; a failed fetch given to `failed`") {
+  test("objects asked at once: the answers in order, a failed one a 502; a failed fetch given to `failure`") {
     val c = cloud()
     c.actors("ECHO") = new Actor:
       def fetch(name: String, r: Request): Response ! InActor =
@@ -208,8 +208,14 @@ class CloudSuite extends munit.FunSuite:
     val app = new App:
       override def fetch(r: Request): Response ! Cloud =
         if r.path == "/boom" then Objects.call[Cloud]("ECHO", "broken", Request.get("/")) else pure(Response.text("ok"))
+      override def failure(r: Request, f: Failed): Response ! Cloud =
+        pure(Response.text(s"failed ${r.path}: ${f.message.getOrElse(f.kind)}", 500))
+    // an app of before 0.3.0, given an exception: its message and text the failure's
+    val older = new App:
+      override def fetch(r: Request): Response ! Cloud = defer(throw IllegalStateException("older"))
+      @scala.annotation.nowarn("cat=deprecation")
       override def failed(r: Request, e: Throwable): Response ! Cloud =
-        pure(Response.text(s"failed ${r.path}: ${e.getMessage}", 500))
+        pure(Response.text(s"${e.getMessage} | $e", 500))
     val plain = new App:
       override def fetch(r: Request): Response ! Cloud = defer(throw IllegalStateException("plain"))
     for
@@ -219,6 +225,7 @@ class CloudSuite extends munit.FunSuite:
       boom <- c.serve(app)(Request.get("/boom"))
       fine <- c.serve(app)(Request.get("/"))
       again <- c.serve(plain)(Request.get("/")).failed
+      old <- c.serve(older)(Request.get("/"))
     yield
       assertEquals(all.map(_.status), Vector(200, 502, 200))
       assertEquals(all.map(_.text).filter(!_.contains("error")), Vector("a", "b"))
@@ -227,6 +234,8 @@ class CloudSuite extends munit.FunSuite:
       assertEquals((boom.status, boom.text), (500, "failed /boom: broken object"))
       assertEquals(fine.text, "ok")
       assertEquals(again.getMessage, "plain")
+      assert(again.isInstanceOf[IllegalStateException], again.toString)
+      assertEquals(old.text, "older | java.lang.IllegalStateException: older")
   }
 
   test("a model attempted: its answer, or its failure as a Left — the program goes on") {
