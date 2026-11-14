@@ -88,6 +88,7 @@ phone's side.
 | Cloudflare Workers | `cloudflare` | every effect on its binding, Hyperdrive too; objects, sockets, workflows; e2e |
 | AWS Lambda + DynamoDB | `aws` | `Durable`, KV, limits, objects, Postgres; API Gateway, SQS, EventBridge events |
 | a server of one's own (JVM) | `host` | the fallback: SQLite (objects, KV, D1, queues, vectors), files, the JDK's HTTP and WebSockets, cron, a model server of OpenAI's API; okay-chat-edge's e2e |
+| the JVM's own handlers | `jvm` | `JdkFetch` (the JDK's HttpClient), `JdkTcp` (its sockets), `SqliteSql` (SQLite files): the host's, and a JVM test's — not in the core (*Layers*, specs/cloud.md) |
 
 `Host.start(app, actors, HostConfig(dir = Paths.get("data")))` serves the same `App` and `Actor`s a `Worker` takes:
 objects one instance a name, their state, alarms and sockets in one SQLite file. [specs/cloud.md](specs/cloud.md),
@@ -110,8 +111,23 @@ libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare"
 ```
 
 Modules: `okay-serverless` (the effect, the cloud's effects, memory; JVM and Scala.js), `-cloudflare` and `-aws`
-(Scala.js), `-host` (the JVM: a server of one's own), `-store` (okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state),
-`-simple` (the twin on okay-simple, Scala 2.13 and 3). Scala 3.3 LTS; Scala.js 1.22 or newer.
+(Scala.js), `-host` (the JVM: a server of one's own), `-jvm` (the JVM's handlers: HTTP out, TCP, SQLite), `-store`
+(okay-store's data), `-faces` (okay-faces' REST and MCP), `-policy` (okay-policy's state), `-simple` (the twin on
+okay-simple, Scala 2.13 and 3). Scala 3.3 LTS; Scala.js 1.22 or newer.
+
+### From 0.1.0
+
+The JVM's handlers left the core (0.1.1, not released yet): `JdkFetch`, `JdkTcp` and `SqliteSql` are in
+`okay-serverless-jvm`, package `okay.serverless.jvm` — so a business module on the core has no socket, JDBC or
+sqlite-jdbc on its classpath. A build that uses them adds the module (`-host` brings it):
+
+```scala-sbt
+libraryDependencies += "io.github.okay-effects" %% "okay-serverless-jvm" % "0.1.1"   // or % Test, for SqliteSql
+```
+
+and imports them by name, `import okay.serverless.jvm.{JdkFetch, SqliteSql}` — by name: beside
+`okay.serverless.cloud.*` a second wildcard would make the old names ambiguous. The old names in
+`okay.serverless.cloud` still compile, deprecated. [CHANGELOG.md](CHANGELOG.md).
 
 ## Build
 
@@ -120,6 +136,7 @@ Scala 3.3, sbt, on [okay-scala](https://github.com/okay-effects/okay-scala) 0.1.
 ```text
 sbt coreJVM/test coreJS/test                       # the scenarios
 sbt cloudflare/test                                # an object's own SQL, on Node's SQLite
+sbt jvm/test host/test                            # the JVM's handlers; the host
 sbt +simpleJVM/test +simpleJS/test                 # the same on okay-simple, Scala 3 and 2.13
 sbt cloudflareExample && cloudflare/example/e2e.sh  # the example Worker on a local workerd
 aws/test.sh                                         # AWS on DynamoDB Local (Java, Node)

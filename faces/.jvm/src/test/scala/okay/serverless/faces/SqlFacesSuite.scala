@@ -4,6 +4,7 @@ import okay.effects.json.{Descent, Json}
 import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
+import okay.serverless.jvm.SqliteSql
 import okay.serverless.field
 import okay.serverless.store.StoreOn
 import okay.store.Dialect

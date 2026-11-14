@@ -1,4 +1,6 @@
-package okay.serverless.cloud
+package okay.serverless.jvm
+
+import okay.serverless.cloud.{Bytes, Changes, Port, Row, Sql, SqlValue, Statement}
 
 import java.sql.{Connection, PreparedStatement, ResultSet, Types}
 import scala.collection.mutable

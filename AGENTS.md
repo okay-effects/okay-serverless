@@ -15,8 +15,9 @@ libraryDependencies += "io.github.okay-effects" %%% "okay-serverless-cloudflare"
 ```
 
 Modules: `okay-serverless` (core: the effects, memory; JVM + Scala.js), `-cloudflare` / `-aws` (Scala.js), `-host`
-(JVM), `-store` (okay-store data), `-faces` (okay-faces REST/MCP), `-policy`, `-simple` (the twin on okay-simple,
-Scala 2.13 and 3, same stored format). Scala 3.3 LTS on okay-scala (`import okay.scala3.*`); Scala.js 1.22+.
+(JVM), `-jvm` (the JVM's handlers: `JdkFetch`, `JdkTcp`, `SqliteSql`), `-store` (okay-store data), `-faces`
+(okay-faces REST/MCP), `-policy`, `-simple` (the twin on okay-simple, Scala 2.13 and 3, same stored format). Scala
+3.3 LTS on okay-scala (`import okay.scala3.*`); Scala.js 1.22+.
 
 ### The model: effects, a program, handlers, one run
 
@@ -78,8 +79,9 @@ A described type as an API: `Faces.rest`, `Faces.mcp`.
 - Gate and audit: every request passes `App.admit` first (`Auth.guarded(app, who)` for bearer tokens); okay-scala's
   `observe` / `around` / `intercept` over an effect (e.g. `Sql`, `Mails`, `Fetch`) to audit or refuse sensitive ops.
 - Tests swap handlers: `Memory()` (with faults: `crashBeforeCommit`, `crashAfterCommit`, `beforeCommit` for a
-  conflict), `MemoryCloud(clock)` (`serve`, `deliver` queues, `fireAlarms`), `SqliteSql` for SQL on the JVM. The same
-  program then runs on Cloudflare / AWS / host unchanged. No mocks of clients.
+  conflict), `MemoryCloud(clock)` (`serve`, `deliver` queues, `fireAlarms`), `SqliteSql` for SQL on the JVM (module
+  `-jvm`, `import okay.serverless.jvm.SqliteSql`). The same program then runs on Cloudflare / AWS / host
+  unchanged. No mocks of clients.
 - No ambient effects (`System.currentTimeMillis`, random, threads, `java.net`, files): use `Clock`, `Fetch`, `Blobs`,
   … — and inside a step, external calls only via `Durable.once`.
 - Continuations: okay-scala's `k` is data and multi-shot within a run, but durability never keeps a continuation
@@ -94,8 +96,8 @@ A described type as an API: `Faces.rest`, `Faces.mcp`.
 - New code goes on from OLD state: keep state codecs (`Codec[A]`) backward-compatible; the stored format
   (`<name>/state`, `<scope>/#steps`, JSON text) is shared with the `simple` twin.
 - Type parameters are explicit: `Kv.put[Cloud](...)`, `Fail.raise[String, S](...)`, `Durable.machine[S, E, R, Rest]`.
-- `MemoryCloud` has no SQL (use `SqliteSql` on the JVM, the cloud's own elsewhere); Workers AI and Vectorize work
-  only remotely, not under local `wrangler dev`.
+- `MemoryCloud` has no SQL (use `SqliteSql` on the JVM, from `-jvm`, the cloud's own elsewhere); Workers AI and
+  Vectorize work only remotely, not under local `wrangler dev`.
 - `-cloudflare` / `-aws` are Scala.js; `-host` is JVM. Put `@JSExportTopLevel` only in your app module, never in a
   library (it lands in every user's linked code).
 - Cloudflare is the main platform, the JVM host the fallback: keep app code free of either (same `App`, same
@@ -148,7 +150,8 @@ first.
 - `Mails`: a letter with its HTML, reply-to and sender's name, as MIME (`Mime.message`); `Mails.deliver` answers
   sent or why not instead of failing (specs/cloud.md "Mail").
 - `Tcp` (connect, write, read, STARTTLS upgrade, close — answers are `Either`) and `Smtp.deliver` over it: on
-  Cloudflare `connect()` (`globalThis.OkayConnect`), on the JVM `JdkTcp`, in memory `MemoryCloud.listen`.
+  Cloudflare `connect()` (`globalThis.OkayConnect`), on the JVM `JdkTcp` (module `jvm`), in memory
+  `MemoryCloud.listen`.
 - `relay` (specs/relay.md): sealed rooms — `Pairing`, `Envelope`, `Tokens`, `Hashes` (plain Scala), the `Rooms`
   actor and its `Steward`; `Sealer` and the host's `RelayClient` on the JVM, `Sealer` and `Guest` in a browser.
   `telegram`: the `Telegram` effect, by the Bot API over `Fetch` or in memory. okay-remote is their first user.
@@ -160,6 +163,12 @@ first.
   commit one `transactionSync`, the alarm `setAlarm`; its SQL tested under Node on `node:sqlite` (`sbt
   cloudflare/test`). End to end: `sbt cloudflareExample && cloudflare/example/e2e.sh`
   (wrangler from the example's own node_modules; `--persist-to` a temp dir, the Worker killed and started again).
+- LAYERS (specs/cloud.md "Layers"): business modules reach nothing; what does real I/O on the JVM is the module
+  `jvm` (`okay.serverless.jvm`: `JdkFetch`, `JdkTcp`, `SqliteSql`, sqlite-jdbc), never the core. The core keeps the
+  platform's contract and the memory platform (`Port`, `Platform`, `Hosting`, `MemoryCloud`, `Memory`,
+  `CryptoNative`): handlers, declared so class by class in an okay-audit manifest. Old names in
+  `okay.serverless.cloud` forward, deprecated (CHANGELOG.md).
 - `host` (specs/cloud.md "The host"): a server of one's own, the FALLBACK — Cloudflare is the main platform.
-  `Host.start(app, actors, config)`: one JVM process, its state in one directory (an SQLite file, blobs as files),
-  its own HTTP and WebSocket server, cron, alarms, queues; `Ai` by any OpenAI-compatible server. `sbt host/test`.
+  `Host.start(app, actors, config)` (on `jvm`'s handlers): one JVM process, its state in one directory (an SQLite
+  file, blobs as files), its own HTTP and WebSocket server, cron, alarms, queues; `Ai` by any OpenAI-compatible
+  server. `sbt host/test`.

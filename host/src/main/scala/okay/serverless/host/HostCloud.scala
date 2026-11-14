@@ -6,6 +6,7 @@ import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.Storage
 import okay.serverless.cloud.*
+import okay.serverless.jvm.{JdkFetch, JdkTcp, SqliteSql}
 
 import java.nio.file.{Files, Path}
 import java.util.concurrent.ConcurrentHashMap
@@ -293,7 +294,7 @@ final class HostCloud(val config: HostConfig, actors: Map[String, Actor])(using 
         val i = instance(ns, name)
         i.one(i.actor.fetch(name, r))
       case Objects.Unique(ns) => now(s"${ns.toLowerCase}-${java.util.UUID.randomUUID()}")
-      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
+      case Objects.CallAll(calls) => Port.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
 
   /** each object whose alarm is due, its `alarm` run (cleared first, as a cloud does) */
   def fireAlarms(): Future[Int] =

@@ -1,4 +1,6 @@
-package okay.serverless.cloud
+package okay.serverless.jvm
+
+import okay.serverless.cloud.{Conn, Port, Tcp, Tls}
 
 import java.io.{InputStream, OutputStream}
 import java.net.{InetSocketAddress, Socket}

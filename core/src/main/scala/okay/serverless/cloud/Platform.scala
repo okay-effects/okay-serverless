@@ -2,6 +2,7 @@ package okay.serverless.cloud
 
 import okay.scala3.*
 import okay.scala3.std.*
+import okay.effects.json.Json
 import okay.serverless.{Durable, Storage}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -29,6 +30,20 @@ object Port:
       case Tcp.Write(_, _) => Left("no TCP here")
       case Tcp.Read(_) => Left("no TCP here")
       case Tcp.Upgrade(_) => Left("no TCP here"))
+
+  /** a port's `Ai.Attempt` by its own `Run`: a failure answered as its message */
+  def attempted(run: => Future[Json])(using ExecutionContext): Future[Either[String, Json]] =
+    scala.util.Try(run).fold(Future.failed, identity).map(Right(_)).recover { case e =>
+      Left(Option(e.getMessage).getOrElse(e.toString)) }
+
+  /** a port's `Objects.CallAll` by its own `call`, started together: a failed one answered 502 with its error */
+  def together(calls: List[(String, String, Request)])(call: (String, String, Request) => Future[Response])(
+    using ExecutionContext): Future[List[Response]] =
+    Future.traverse(calls)((ns, name, r) =>
+      scala.util.Try(call(ns, name, r)).fold(Future.failed, identity).recover { case e =>
+        Response(502, Map("Content-Type" -> "application/json; charset=utf-8"), Json.print(Json.obj("error" ->
+          Json.str(Option(e.getMessage).getOrElse(e.toString)))))
+      })
 
   /** `p`'s operations of `E` by `port`, each awaited */
   def handle[E[_], R[_], Rest[_], A](port: Port[E])(p: A ! R)(using Split[E, R, Rest], In[Async, Rest]): A ! Rest =

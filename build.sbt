@@ -42,7 +42,6 @@ lazy val core = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).
     libraryDependencies ++= Seq("io.github.okay-effects" %%% "okay-scala" % "0.1.1",
       "io.github.okay-effects" %%% "okay-effects-json" % "0.1.1", "io.github.okay-effects" %%% "okay-http" % "0.1.1",
       munit.value))
-  .jvmSettings(libraryDependencies += "org.xerial" % "sqlite-jdbc" % "3.53.1.0")
 
 /** THE TWIN ON okay-simple, Scala 2.13 and 3: the same words, step, machine, `once`, the same stored format; the same
  * scenarios on the machine and on `Free` (`sbt +simpleJVM/test`) */
@@ -57,6 +56,7 @@ lazy val simple = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure
 /** OKAY-STORE IN THE CLOUD: its `Data` and a type's repository (`Mapped`) on the cloud's SQL (D1, Postgres), KV and an
  * object's `Durable` state (specs/store.md) */
 lazy val store = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("store")).dependsOn(core)
+  .jvmConfigure(_.dependsOn(jvm % Test))
   .settings(name := "okay-serverless-store", libraryDependencies ++= Seq(
     "io.github.okay-effects" %%% "okay-store" % "0.1.0", "io.github.okay-effects" %%% "okay-effects-cek" % "0.1.1",
     munit.value))
@@ -64,6 +64,7 @@ lazy val store = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure)
 /** A DESCRIBED EFFECT SERVED FROM THE CLOUD: okay-faces' REST resources and MCP tools of it, put into a cloud program
  * by okay-simple's bridge; a mapped type's operations then on the cloud's store (specs/faces.md) */
 lazy val faces = crossProject(JVMPlatform, JSPlatform).crossType(CrossType.Pure).in(file("faces")).dependsOn(store)
+  .jvmConfigure(_.dependsOn(jvm % Test))
   .settings(name := "okay-serverless-faces", libraryDependencies ++= Seq(
     "io.github.okay-effects" %%% "okay-faces-rest" % "0.1.0", "io.github.okay-effects" %%% "okay-faces-mcp" % "0.1.0",
     munit.value))
@@ -143,12 +144,19 @@ cloudflareExample := {
   to
 }
 
+/** THE JVM'S HANDLERS (specs/cloud.md "Layers"): `Fetch` by the JDK's HttpClient (`JdkFetch`), `Tcp` by its
+ * sockets (`JdkTcp`), `Sql` on SQLite files (`SqliteSql`, sqlite-jdbc) — real I/O, so not in the core: business code
+ * depends on the core's effects; the host, and a JVM test, on these */
+lazy val jvm = (project in file("jvm")).dependsOn(core.jvm % "compile->compile;test->test")
+  .settings(name := "okay-serverless-jvm",
+    libraryDependencies ++= Seq("org.xerial" % "sqlite-jdbc" % "3.53.1.0", munit.value))
+
 /** THE HOST (specs/cloud.md "The host"): a server of one's own on the JVM, the fallback beside Cloudflare */
-lazy val host = (project in file("host")).dependsOn(core.jvm)
+lazy val host = (project in file("host")).dependsOn(core.jvm, jvm)
   .settings(name := "okay-serverless-host", libraryDependencies += munit.value)
 
 lazy val root = (project in file("."))
   .aggregate(core.jvm, core.js, pairing.jvm, pairing.js, pairing.native, simple.jvm, simple.js, store.jvm, store.js, faces.jvm, faces.js,
     policy.jvm, policy.js, relay.jvm, relay.js, telegram.jvm, telegram.js, accounts.jvm, accounts.js,
-    aws, cloudflare, cloudflareApp, host)
+    aws, cloudflare, cloudflareApp, jvm, host)
   .settings(publish / skip := true)

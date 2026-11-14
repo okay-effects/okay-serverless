@@ -133,7 +133,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
   val ai: Port[Ai] = new Port[Ai]:
     def apply[X](op: Ai[X]): Future[X] = op match
       case Ai.Run(m, input) => now(model(m, input))
-      case Ai.Attempt(m, input) => Ai.attempted(now(model(m, input)))
+      case Ai.Attempt(m, input) => Port.attempted(now(model(m, input)))
 
   // ---- vectors: cosine, every one compared
   private val vectorsStored = mutable.Map.empty[(String, String), Embedding]
@@ -230,7 +230,7 @@ final class MemoryCloud(val clock: () => Long = () => System.currentTimeMillis()
     def apply[X](op: Objects[X]): Future[X] = op match
       case Objects.Call(ns, name, r) => instance(ns, name).pipe(i => i.one(i.actor.fetch(name, r)))
       case Objects.Unique(ns) => now(synchronized { ids += 1; s"${ns.toLowerCase}-$ids-${clock()}" })
-      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
+      case Objects.CallAll(calls) => Port.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
 
   /** a socket opened to an object: its request answered by the actor's `Sockets.accept` */
   def connect(ns: String, name: String, request: Request): Future[MemorySocket] =

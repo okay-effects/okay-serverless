@@ -3,6 +3,7 @@ package okay.serverless.store
 import okay.scala3.*
 import okay.scala3.std.*
 import okay.serverless.cloud.*
+import okay.serverless.jvm.SqliteSql
 import okay.store.{Data, Dialect}
 
 import scala.concurrent.ExecutionContext

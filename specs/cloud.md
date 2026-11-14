@@ -3,7 +3,8 @@
 Status 2026-10-28: RELEASED 0.1.0 (RELEASING.md), republished with mail as people get it (HTML, reply-to, a
 name; `Mails.deliver`), an object's SQL tested under Node — both from okay-workers, now retired — and `Tcp`
 with `Smtp` (a relay's letters from a Worker). Built:
-- the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`), SQL on SQLite on the JVM (`SqliteSql`);
+- the effects, `App`/`Actor`, `Workflow`, the memory platform (`MemoryCloud`); on the JVM (module `jvm`, since
+  0.1.1 — "Layers" below) SQL on SQLite (`SqliteSql`), HTTP out (`JdkFetch`), TCP (`JdkTcp`);
 - Cloudflare: every effect on its binding, the Worker's entry points and objects (`Worker`, `entry.js`);
 - AWS: `Kv`, `Limits`, objects' state on DynamoDB; `Sql` on Postgres (RDS Proxy); `Env`, `Fetch`, `Log`,
   `Analytics` (EMF); the Lambda's events
@@ -232,9 +233,9 @@ one directory, `java -jar app.jar`. Nothing of Cloudflare's port changes.
 | `Sockets` | real WebSockets of the host's HTTP server; an event stream its own response, written as sent |
 | `Kv` | a table, with its expiry |
 | `Blobs` | files under `blobs/<bucket>/`, their info beside them |
-| `Sql` | an SQLite file a database (`SqliteSql`) |
+| `Sql` | an SQLite file a database (`SqliteSql`, module `jvm`) |
 | `Queues` | a table; due messages given to the app's `queue`, retried, given up after 3 into a dead table |
-| `Fetch` | the JDK's HttpClient (`JdkFetch`) |
+| `Fetch` | the JDK's HttpClient (`JdkFetch`, module `jvm`) |
 | `Cache` | memory, bounded: at most 10 000 entries — when full, the expired dropped first, then the soonest to expire (a flood of distinct URLs never grows it without end; a cloud's cache evicts too) |
 | `Env` | the configuration's variables, then the process's environment |
 | `Services` | the host's other apps, by name |
@@ -243,7 +244,7 @@ one directory, `java -jar app.jar`. Nothing of Cloudflare's port changes.
 | `Vectors` | a table, every vector compared (cosine) |
 | `Analytics` | the log |
 | `Mails` | SMTP over `JdkTcp` (`Smtp.deliver`), when the binding has a server configured; else, with a mail directory (`mailDir`), the letter written there as a MIME file (`Mime.message`, `<time>-<id>.eml`) and logged as `<binding>: Email: <path>` — wrangler's local line, so one end-to-end script reads both; else not sent (why) |
-| `Tcp` | `JdkTcp` |
+| `Tcp` | `JdkTcp` (module `jvm`) |
 | cron | the configuration's triggers (five fields), each minute, to `scheduled` |
 
 The HTTP server is the host's own: HTTP/1.1 over a server socket, a virtual thread a connection, keep-alive;
@@ -255,6 +256,31 @@ Tested by: the durable scenarios over the host's storage (a step, a conflict, an
 the same directory); the HTTP server end to end on a port of its own (a request, an object, a WebSocket both ways, a
 static file, a restart keeping state); cron's fields; `Ai` against a stand-in OpenAI server; queues delivered,
 retried, dead.
+
+## Layers: what is business, what is a handler (2026-11-14, okay-audit's findings)
+
+A business module holds programs and the words they use — the effects, `App` / `Actor`, `Durable`, `Workflow`,
+`Auth`, `Mime`, `Smtp` (a program over `Tcp`), `Codec` — and reaches nothing: no socket, no JDBC, no HTTP client, no
+clock, no console. The core (`okay-serverless`) is that, PLUS the platform's contract and the memory platform, kept
+in it so a test needs one dependency and every platform module builds on them; they are handlers by what they do, and
+an audit's manifest says so class by class (`packages`):
+
+| in the core, a handler | why it is here |
+|---|---|
+| `Port`, `Platform`, `Hosting` | the contract every platform fills: a port's `Future` is the platform's async (a Worker's promises, the JDK's), `Platform.run` the handler of the whole `Cloud` row — its `now` and `log` the platform's (a real clock and the console when not given) |
+| `MemoryCloud`, `Memory`, `TcpServer` / `TcpSession` | the platform in memory, for tests and local runs: its state mutable, its clock a function given (real time when not given) |
+| `CryptoNative` (JVM: the JDK's JCA, `SecureRandom`; JS: Web Crypto) | the runtime's own, no jar of anyone's; `Crypto.run` handles `Crypto` by it in one line (okay-mall's invoicing does, in shared code) |
+| `WebJs`, `PostgresSql` (Scala.js only) | the JS interop Cloudflare and AWS share (`fetch`, `pg`); a page uses `WebJs.fetch` too |
+
+What reaches the world on the JVM is not in the core: the module `jvm` (`okay-serverless-jvm`, package
+`okay.serverless.jvm`) has `JdkFetch` (the JDK's `HttpClient`), `JdkTcp` (its sockets, `SSLSocket`), `SqliteSql`
+(sqlite-jdbc, the only third-party jar) — the host's, and a JVM test's. Until 0.1.0 they were in the core's
+`okay.serverless.cloud`; the old names are deprecated forwarders in the `jvm` module (CHANGELOG.md). A port's helpers
+are `Port.attempted` (an `Ai.Attempt` by the port's `Run`) and `Port.together` (an `Objects.CallAll`); `Ai.attempted`
+and `Objects.together`, where they were, forward to them, deprecated.
+
+The relay's ends keep the nonces they have seen as a value (`Envelope.Nonces`, `Envelope.check`): the business code
+gets and gives values; `Envelope.Seen` (a mutable cell over it) stays for an end that wants one.
 
 ## What is the family's, what is here
 

@@ -2,7 +2,8 @@ package okay.serverless.host
 
 import okay.effects.json.{Descent, Json}
 import okay.http.{Request, Response}
-import okay.serverless.cloud.{Ai, JdkFetch, Port}
+import okay.serverless.cloud.{Ai, Port}
+import okay.serverless.jvm.JdkFetch
 
 import scala.concurrent.{ExecutionContext, Future}
 
@@ -31,7 +32,7 @@ final class OpenAiAi(server: AiServer, fetch: JdkFetch)(using ec: ExecutionConte
   private def field(j: Json, k: String): Option[Json] = j.field(k)
 
   def apply[X](op: Ai[X]): Future[X] = op match
-    case Ai.Attempt(model, input) => Ai.attempted(apply(Ai.Run(model, input)))
+    case Ai.Attempt(model, input) => Port.attempted(apply(Ai.Run(model, input)))
     case Ai.Run(model, input) =>
       val name = Json.Str(server.models.getOrElse(model, model))
       (field(input, "messages"), field(input, "prompt"), field(input, "text")) match

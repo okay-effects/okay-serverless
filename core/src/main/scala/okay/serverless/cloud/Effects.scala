@@ -197,10 +197,9 @@ object Ai:
   def attempt[R[_]](model: String, input: Json)(using In[Ai, R]): Either[String, Json] ! R =
     perform[Ai](Attempt(model, input))
 
-  /** a port's `Attempt` by its own `Run`: a failure answered as its message */
-  def attempted(run: => Future[Json])(using ExecutionContext): Future[Either[String, Json]] =
-    scala.util.Try(run).fold(Future.failed, identity).map(Right(_)).recover { case e =>
-      Left(Option(e.getMessage).getOrElse(e.toString)) }
+  /** a port's `Attempt` by its own `Run`: a port's helper, the platform's side */
+  @deprecated("Port.attempted: a port's helper, not the effect's", "0.1.1")
+  def attempted(run: => Future[Json])(using ExecutionContext): Future[Either[String, Json]] = Port.attempted(run)
 
 final case class Embedding(id: String, values: List[Double], metadata: Map[String, String] = Map.empty)
 final case class Nearest(id: String, score: Double, metadata: Map[String, String])
@@ -264,14 +263,10 @@ object Objects:
   def callAll[R[_]](calls: Seq[(String, String, Request)])(using In[Objects, R]): Vector[Response] ! R =
     if calls.isEmpty then pure(Vector.empty) else perform[Objects](CallAll(calls.toList)).map(_.toVector)
 
-  /** a port's `CallAll` by its own `call`, started together: a failed one answered 502 with its error */
+  /** a port's `CallAll` by its own `call`: a port's helper, the platform's side */
+  @deprecated("Port.together: a port's helper, not the effect's", "0.1.1")
   def together(calls: scala.List[(String, String, Request)])(call: (String, String, Request) => Future[Response])(
-    using ExecutionContext): Future[scala.List[Response]] =
-    Future.traverse(calls)((ns, name, r) =>
-      scala.util.Try(call(ns, name, r)).fold(Future.failed, identity).recover { case e =>
-        Response(502, Map("Content-Type" -> "application/json; charset=utf-8"), Json.print(Json.obj("error" ->
-          Json.str(Option(e.getMessage).getOrElse(e.toString)))))
-      })
+    using ExecutionContext): Future[scala.List[Response]] = Port.together(calls)(call)
 
 /** an open connection to an actor: its id and its tags */
 final case class Socket(id: String, tags: List[String])

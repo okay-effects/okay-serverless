@@ -151,7 +151,7 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
   val aiPort: Port[Ai] = new Port[Ai]:
     def apply[X](op: Ai[X]): Future[X] = guard[X](op match
       case Ai.Run(model, input) => await(binding(ai).run(model, fromJson(input))).map(r => toJson(r))
-      case Ai.Attempt(model, input) => Ai.attempted(apply(Ai.Run(model, input))))
+      case Ai.Attempt(model, input) => Port.attempted(apply(Ai.Run(model, input))))
 
   val vectors: Port[Vectors] = new Port[Vectors]:
     def apply[X](op: Vectors[X]): Future[X] = guard[X](op match
@@ -193,7 +193,7 @@ final class CloudflarePorts(env: js.Dynamic, ai: String = "AI"):
           r.copy(headers = r.headers + ("okay-object-name" -> List(name))), follow = false)))
           .flatMap(response)
       case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String])
-      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r))))
+      case Objects.CallAll(calls) => Port.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r))))
 
   /** TCP out by `connect()` of `cloudflare:sockets` (the entry's `globalThis.OkayConnect`): each connection its
    * socket, its reader and its writer; STARTTLS the socket's `startTls()`, the old one's locks released first */

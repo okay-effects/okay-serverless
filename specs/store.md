@@ -40,7 +40,7 @@ Worker or a Lambda run the same statements; its tests compare them with the refe
 ## Checked
 
 - memory cloud: KV, an object (the documents in its storage, the keys, a removal);
-- SQLite (`SqliteSql`, the JVM): the program's answers, the table, the keys;
+- SQLite (`SqliteSql`, the JVM, module `jvm`): the program's answers, the table, the keys;
 - Postgres (`aws/test.sh`, a Postgres from `tools/`): the same answers, through `AwsPorts.postgres`;
 - `wrangler dev` (`cloudflare/example/e2e.sh`): one program on D1, on Postgres through Hyperdrive, in an object.
 

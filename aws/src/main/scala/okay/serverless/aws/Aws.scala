@@ -128,7 +128,7 @@ final class AwsPorts(client: js.Dynamic, table: String, limits: Map[String, (Int
     def apply[X](op: Objects[X]): Future[X] = op match
       case Objects.Call(ns, name, r) => Async.toFuture(hosting(ns, name).run(platform)(actor(ns).fetch(name, r)))
       case Objects.Unique(_) => Future.successful(g.crypto.randomUUID().asInstanceOf[String])
-      case Objects.CallAll(calls) => Objects.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
+      case Objects.CallAll(calls) => Port.together(calls)((ns, name, r) => apply(Objects.Call(ns, name, r)))
 
   lazy val platform: Platform = Platform(kv = kv, limits = limitsPort, env = env, fetch = WebJs.fetch,
     analytics = analytics, objects = objects, sql = sql, log = (l, m) => log(s"[$l] $m"))

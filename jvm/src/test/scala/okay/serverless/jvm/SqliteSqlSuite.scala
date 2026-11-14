@@ -1,5 +1,7 @@
-package okay.serverless.cloud
+package okay.serverless.jvm
 
+import okay.serverless.cloud.*
+import okay.serverless.jvm.SqliteSql
 import okay.scala3.*
 import okay.scala3.std.*
 

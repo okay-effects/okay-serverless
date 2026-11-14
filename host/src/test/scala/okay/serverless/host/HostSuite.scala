@@ -5,6 +5,7 @@ import okay.http.{Request, Response}
 import okay.scala3.*
 import okay.serverless.Durable
 import okay.serverless.cloud.*
+import okay.serverless.jvm.JdkFetch
 
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse, WebSocket}

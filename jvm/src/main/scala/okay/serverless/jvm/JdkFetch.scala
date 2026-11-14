@@ -1,6 +1,7 @@
-package okay.serverless.cloud
+package okay.serverless.jvm
 
 import okay.http.{Bytes, Request, Response}
+import okay.serverless.cloud.{Fetch, Port}
 
 import java.net.URI
 import java.net.http.{HttpClient, HttpRequest, HttpResponse}
