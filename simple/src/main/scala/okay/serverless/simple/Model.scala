@@ -33,3 +33,14 @@ object Durable {
 
 /** an instance gone mid-step: what the platform would see as the process dying */
 final class Crash(where: String) extends RuntimeException(s"crashed $where", null, false, false)
+
+/**
+ * WHERE A HANDLER OF `Storage` KEEPS THE VALUES: the platform's side, behind this interface (`Memory` is one) — so the
+ * handler, `Serverless.memory`, names no platform's class. Values by key with their versions, keys by prefix, a commit
+ * if what was read is as it was
+ */
+trait Backend {
+  def read(keys: List[String]): Map[String, Versioned]
+  def keys(prefix: String): List[String]
+  def commit(read: Map[String, Long], writes: Map[String, Option[String]], at: Option[Long]): Boolean
+}

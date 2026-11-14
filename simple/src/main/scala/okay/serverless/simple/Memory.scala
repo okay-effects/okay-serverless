@@ -5,7 +5,7 @@ package okay.serverless.simple
  * another writer between a step's reads and its commit, an eviction (a new instance on the same storage). Its handler:
  * `Serverless.memory(m)`.
  */
-final class Memory {
+final class Memory extends Backend {
   private val values = scala.collection.mutable.Map.empty[String, Versioned]
   @volatile var alarm: Option[Long] = None
   /** run before a commit is checked: another writer's moment */

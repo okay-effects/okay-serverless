@@ -126,8 +126,8 @@ class Serverless[F <: Effects with Singleton](implicit implementation: F) {
       get[S, R](s"$name/state").flatMap(s => step(s.getOrElse(init), event))
         .flatMap(next => put[S, R](s"$name/state", next).as(next)))
 
-  /** the handler of `Storage` on a memory: one instance of the program */
-  def memory[R[_], Rest[_], A](m: Memory)(p: A ! R)(implicit sp: Split[Storage, R, Rest]): A ! Rest =
+  /** the handler of `Storage` on a backend (a `Memory`, for tests): one instance of the program */
+  def memory[R[_], Rest[_], A](m: Backend)(p: A ! R)(implicit sp: Split[Storage, R, Rest]): A ! Rest =
     handle[Storage, R, Rest, A, A](p, new TailHandler[Storage, Rest, A, A] {
       def ret(a: A): A ! Rest = pure[A, Rest](a)
       def answer[X](op: Storage[X]): X = op match {
