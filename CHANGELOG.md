@@ -28,6 +28,9 @@ Migrating:
   `apply`, the same arguments) forward to the new ones, deprecated — they are in `okay-serverless-jvm` too, so the
   dependency is needed either way.
 - `Ai.attempted` and `Objects.together` forward to `Port`'s, deprecated.
+- The forwarders keep SOURCES compiling, not old binaries: a jar compiled against 0.1.0 that names
+  `okay.serverless.cloud.JdkFetch` / `JdkTcp` / `SqliteSql` is to be compiled again (the classes are
+  `okay.serverless.jvm`'s now). None of the family's published jars does (checked 2026-11-14).
 
 Nothing else moved: the effects, `App`, `Actor`, `Platform`, `Port`, `MemoryCloud`, `Crypto` (and `Crypto.run` on the
 runtime's own) stay in the core, in `okay.serverless.cloud`. The stored format, the Cloudflare and AWS modules and the
