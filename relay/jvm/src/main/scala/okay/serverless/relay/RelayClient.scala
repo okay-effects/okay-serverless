@@ -17,7 +17,7 @@ final class RelayClient(base: String, pairing: Pairing, deliver: Runnable => Uni
                         query: () => String = () => ""):
   private val client = HttpClient.newHttpClient()
   private val sealer = Sealer(pairing)
-  private val seen = Envelope.Seen()
+  @volatile private var nonces = Envelope.Nonces()
   private val timer = Executors.newSingleThreadScheduledExecutor { r =>
     val t = new Thread(r, "okay-relay-timer"); t.setDaemon(true); t
   }
@@ -84,7 +84,10 @@ final class RelayClient(base: String, pairing: Pairing, deliver: Runnable => Uni
         if frame.startsWith("ctl:") then deliver(() => control(frame.drop(4)))
         else if frame != "pong" && frame.length < 3000000 then
           sealer.open(frame).foreach(text => deliver(() =>
-            Envelope.open(text, "guest", System.currentTimeMillis(), seen).foreach((kind, j) => got(kind, j))))
+            Envelope.check(text, "guest", System.currentTimeMillis(), nonces).foreach { case ((kind, j), next) =>
+              nonces = next
+              got(kind, j)
+            }))
       ws.request(1)
       null
     override def onClose(ws: WebSocket, code: Int, reason: String): CompletionStage[?] =

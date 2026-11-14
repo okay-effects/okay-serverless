@@ -18,3 +18,10 @@ class PairingSuite extends munit.FunSuite:
     assert(Envelope.open(text, "host", 1000L, seen).isRight)
     assert(Envelope.open(text, "host", 1000L, seen).isLeft)           // seen before
     assert(Envelope.open(text, "guest", 1000L, Envelope.Seen()).isLeft)   // the wrong side
+
+  test("the nonces as a value: a frame taken once, its nonce kept by the end that took it, dropped out of the window"):
+    val text = Envelope.wrap("host", 1000L, "nonce-0002", "event")
+    val Right(((kind, _), after)) = Envelope.check(text, "host", 1000L, Envelope.Nonces()): @unchecked
+    assertEquals(kind, "event")
+    assertEquals(Envelope.check(text, "host", 1000L, after).left.toOption, Some("seen before"))
+    assertEquals(after.fresh("nonce-0003", 1000L + 3 * Envelope.windowMs).map(_.at.keySet), Some(Set("nonce-0003")))
