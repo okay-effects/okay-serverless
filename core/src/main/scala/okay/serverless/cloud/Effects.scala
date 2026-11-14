@@ -3,8 +3,6 @@ package okay.serverless.cloud
 import okay.scala3.*
 import okay.effects.json.Json
 
-import scala.concurrent.{ExecutionContext, Future}
-
 /** a value in KV and its metadata (JSON text) */
 final case class KvEntry(value: String, metadata: Option[String] = None)
 /** a page of keys, and where the next starts */
@@ -197,10 +195,6 @@ object Ai:
   def attempt[R[_]](model: String, input: Json)(using In[Ai, R]): Either[String, Json] ! R =
     perform[Ai](Attempt(model, input))
 
-  /** a port's `Attempt` by its own `Run`: a port's helper, the platform's side */
-  @deprecated("Port.attempted: a port's helper, not the effect's", "0.1.1")
-  def attempted(run: => Future[Json])(using ExecutionContext): Future[Either[String, Json]] = Port.attempted(run)
-
 final case class Embedding(id: String, values: List[Double], metadata: Map[String, String] = Map.empty)
 final case class Nearest(id: String, score: Double, metadata: Map[String, String])
 
@@ -262,11 +256,6 @@ object Objects:
   /** each `(namespace, name, request)` sent at once, none waiting for the others: their answers in order */
   def callAll[R[_]](calls: Seq[(String, String, Request)])(using In[Objects, R]): Vector[Response] ! R =
     if calls.isEmpty then pure(Vector.empty) else perform[Objects](CallAll(calls.toList)).map(_.toVector)
-
-  /** a port's `CallAll` by its own `call`: a port's helper, the platform's side */
-  @deprecated("Port.together: a port's helper, not the effect's", "0.1.1")
-  def together(calls: scala.List[(String, String, Request)])(call: (String, String, Request) => Future[Response])(
-    using ExecutionContext): Future[scala.List[Response]] = Port.together(calls)(call)
 
 /** an open connection to an actor: its id and its tags */
 final case class Socket(id: String, tags: List[String])

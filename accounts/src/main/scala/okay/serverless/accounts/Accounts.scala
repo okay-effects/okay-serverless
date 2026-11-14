@@ -59,7 +59,7 @@ final class Accounts extends App:
             val text0 = b.flatMap(text(_, "body")).getOrElse("")
             val all = devices.foldLeft(pure[Vector[Push.Sent], Push.C](Vector.empty))(
               (acc, d) => acc.flatMap(l => Push.send(d, title, text0).map(l :+ _)))
-            Crypto.run[Push.C, Cloud, Vector[Push.Sent]](all).flatMap { sent =>
+            all.flatMap { sent =>
               sent.filter(_.gone).foldLeft(pure[Unit, Cloud](()))((p, s) => p.andThen(Objects.call[Cloud]("SHARED", w,
                 Request("DELETE", s"/devices/${s.device.platform}:${s.device.token}")).as(()))).as(
                 Response.json(Json.obj("sent" -> Json.num(sent.count(s => s.status >= 200 && s.status < 300)),
@@ -117,7 +117,7 @@ final class Accounts extends App:
 
   /** a session for a person: 32 random bytes, kept 90 days */
   private def session(who: String): Response ! Cloud =
-    Crypto.run[Cloud + Crypto, Cloud, Bytes](Crypto.random[Cloud + Crypto](32)).flatMap { b =>
+    Crypto.random[Cloud](32).flatMap { b =>
       val token = Hashes.hex(b.toArray)
       Kv.put[Cloud](ns, s"session/$token", who, Some(90L * 24 * 3600))
         .as(Response.json(Json.obj("session" -> Json.Str(token), "who" -> Json.Str(who))))
@@ -152,7 +152,7 @@ object Accounts:
       r.path.takeWhile(_ != '?') match
         case "/send" =>
           for
-            b <- Crypto.run[InActor + Crypto, InActor, Bytes](Crypto.random[InActor + Crypto](4))
+            b <- Crypto.random[InActor](4)
             code = f"${(BigInt(1, b.toArray) % 1000000).toInt}%06d"
             now <- Clock.now[InActor]
             _ <- Durable.step[ActorStep, InActor, Unit](email)(

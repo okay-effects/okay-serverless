@@ -13,7 +13,8 @@ import okay.serverless.relay.Hashes
  * (APNs 410, FCM `UNREGISTERED`) forgotten.
  */
 object Push:
-  type C[X] = (Cloud + Crypto)[X]
+  /** the row of a send: the cloud's, `Crypto` in it (since 0.2.0 as republished; before, `Cloud + Crypto`) */
+  type C[X] = Cloud[X]
   final case class Device(platform: String, token: String)
   /** what a send did: each device, and its service's word */
   final case class Sent(device: Device, status: Int, gone: Boolean)

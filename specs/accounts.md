@@ -36,9 +36,9 @@ A backend any okay-faces phone app can use as it is:
 - Keys are checked in PLAIN SCALA, the same on every platform: a JWK's modulus and exponent, `s^e mod n` by `BigInt`,
   the PKCS#1 v1.5 block with SHA-256's DigestInfo compared (`Jwt`). Apple's and Google's keys are fetched and kept an
   hour (KV `ACCOUNTS`, `keys/<issuer>`); an unknown `kid` fetches them again once.
-- Codes and sessions are random by the runtime's own (`Crypto.random`, handled inside the request). A code is kept
-  as its SHA-256, in the email's own object (`SIGNIN`), so two requests for one address are one at a time. A session
-  is KV `ACCOUNTS` `session/<token>` → the person, 90 days.
+- Codes and sessions are random by the runtime's own (`Crypto.random`, in the `Cloud` row: the platform handles it).
+  A code is kept as its SHA-256, in the email's own object (`SIGNIN`), so two requests for one address are one at a
+  time. A session is KV `ACCOUNTS` `session/<token>` → the person, 90 days.
 - Mail: `MAIL` the binding, `MAIL_FROM` the sender. `ACCOUNTS_TEST=yes` (tests and a local host only) answers the code
   in the response instead of mailing it.
 - The phone side is okay-faces' (`okay.faces.mobile.Accounts`): the session in the keychain, the shared values cached

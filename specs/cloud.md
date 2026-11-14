@@ -48,7 +48,7 @@ its binding (Cloudflare: the binding of that name; AWS: a table, a bucket, a que
 | `Objects` | a request to an object by namespace and name |
 | `Tcp` | connect (plain, TLS, or STARTTLS later), write, read, upgrade to TLS, close — each answered `Right` or `Left(why)` |
 | `Sockets` | in an object: accept, send, close, the open ones (by tag) |
-| `Crypto` | random bytes, SHA-256, RSA-OAEP (SHA-256) to a public key, AES-CBC, AES-GCM seal and open, ES256 and RS256 signatures by a private key — the runtime's, not in the `Cloud` row ("Crypto" below) |
+| `Crypto` | random bytes, SHA-256, RSA-OAEP (SHA-256) to a public key, AES-CBC, AES-GCM seal and open, ES256 and RS256 signatures by a private key — the runtime's, in the `Cloud` row since 0.2.0 as republished ("Crypto" below) |
 | `Log`, `Clock`, `Async` | okay-scala's own |
 
 Where each is, on each cloud:
@@ -188,6 +188,17 @@ was asked is refused before any credential is sent.
 is NOT in the `Cloud` row (a new effect there would change every program's row and `Platform`'s shape): a program
 that needs it says `In[Crypto, R]` and is handled in one line, `Crypto.run(p)` (needs `Async`).
 
+2026-11-14 (0.2.0 republished, okay-audit: business code named the runtime's handler): `Crypto` IS in the `Cloud`
+row now, last (`… + Tcp + Crypto`), and `Platform.run` handles it by `CryptoNative` — the host wires it, as every
+other effect. A program calls `Crypto.random[Cloud](n)` (an actor's, `[InActor]`) and nothing handles it in business
+code: `Crypto.run` installed the runtime's handler INSIDE a program (in okay-mall's invoicing, in `accounts`), a
+business class naming a handler's. `Crypto.run` stays, deprecated, as what it now is — the program's `Crypto` given
+to the row's (`Rest` must have `Crypto`: `Cloud`, `InActor` do), so `Crypto.run[InActor + Crypto, InActor, A](p)`
+compiles and runs as before; `Crypto.native` is gone (`CryptoNative.port`, a handler's, for a test outside a cloud).
+The cost the old decision named is paid once: a program's row is the same text, but its places in it are not — an
+effect's place in `Cloud` is found at compile time, so code compiled against the first 0.2.0 is compiled again
+(0.2.0 was republished in place, the family's one version while unused).
+
 | operation | what |
 |---|---|
 | `Random(n)` | `n` secure random bytes |
@@ -278,7 +289,7 @@ an audit's manifest says so class by class (`packages`):
 |---|---|
 | `Port`, `Platform`, `Hosting` | the contract every platform fills: a port's `Future` is the platform's async (a Worker's promises, the JDK's), `Platform.run` the handler of the whole `Cloud` row — its `now` and `log` the platform's (a real clock and the console when not given) |
 | `MemoryCloud`, `Memory`, `TcpServer` / `TcpSession` | the platform in memory, for tests and local runs: its state mutable, its clock a function given (real time when not given) |
-| `CryptoNative` (JVM: the JDK's JCA, `SecureRandom`; JS: Web Crypto) | the runtime's own, no jar of anyone's; `Crypto.run` handles `Crypto` by it in one line (okay-mall's invoicing does, in shared code) |
+| `CryptoNative` (JVM: the JDK's JCA, `SecureRandom`; JS: Web Crypto) | the runtime's own, no jar of anyone's; `Platform.run` handles the row's `Crypto` by it (since 0.2.0 as republished: before, business code did, by `Crypto.run`) |
 | `WebJs`, `PostgresSql` (Scala.js only) | the JS interop Cloudflare and AWS share (`fetch`, `pg`); a page uses `WebJs.fetch` too |
 
 What reaches the world on the JVM is not in the core: the module `jvm` (`okay-serverless-jvm`, package
@@ -286,7 +297,8 @@ What reaches the world on the JVM is not in the core: the module `jvm` (`okay-se
 (sqlite-jdbc, the only third-party jar) — the host's, and a JVM test's. Until 0.1.0 they were in the core's
 `okay.serverless.cloud`; the old names are deprecated forwarders in the `jvm` module (CHANGELOG.md). A port's helpers
 are `Port.attempted` (an `Ai.Attempt` by the port's `Run`) and `Port.together` (an `Objects.CallAll`); `Ai.attempted`
-and `Objects.together`, where they were, forward to them, deprecated.
+and `Objects.together`, where they were, forwarded to them, deprecated, until the republished 0.2.0 removed them (a
+forwarder in an effect's companion names the handler's class).
 
 The relay's ends keep the nonces they have seen as a value (`Envelope.Nonces`, `Envelope.check`): the business code
 gets and gives values; `Envelope.Seen` (a mutable cell over it) stays for an end that wants one.

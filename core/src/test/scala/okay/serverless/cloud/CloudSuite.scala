@@ -210,7 +210,7 @@ class CloudSuite extends munit.FunSuite:
         if r.path == "/boom" then Objects.call[Cloud]("ECHO", "broken", Request.get("/")) else pure(Response.text("ok"))
       override def failure(r: Request, f: Failed): Response ! Cloud =
         pure(Response.text(s"failed ${r.path}: ${f.message.getOrElse(f.kind)}", 500))
-    // an app of before 0.3.0, given an exception: its message and text the failure's
+    // an app of the first 0.2.0, given an exception: its message and text the failure's
     val older = new App:
       override def fetch(r: Request): Response ! Cloud = defer(throw IllegalStateException("older"))
       @scala.annotation.nowarn("cat=deprecation")

@@ -103,6 +103,8 @@ A described type as an API: `Faces.rest`, `Faces.mcp`.
 - Cloudflare is the main platform, the JVM host the fallback: keep app code free of either (same `App`, same
   `Actor`s).
 - `Mails.deliver` answers sent-or-why instead of failing; `Tcp` answers are `Either`.
+- `Crypto` is in `Cloud` (since 0.2.0 as republished): `Crypto.random[Cloud](32)`, no handler in the program. A
+  failed request reaches `App.failure(request, failed: Failed)` as data (class name, message, frames).
 
 ### Pointers
 
@@ -167,7 +169,9 @@ first.
   `jvm` (`okay.serverless.jvm`: `JdkFetch`, `JdkTcp`, `SqliteSql`, sqlite-jdbc), never the core. The core keeps the
   platform's contract and the memory platform (`Port`, `Platform`, `Hosting`, `MemoryCloud`, `Memory`,
   `CryptoNative`): handlers, declared so class by class in an okay-audit manifest. Old names in
-  `okay.serverless.cloud` forward, deprecated (CHANGELOG.md).
+  `okay.serverless.cloud` forward, deprecated (CHANGELOG.md). Business code names no handler's class: `Crypto` is in
+  the `Cloud` row, handled by `Platform.run` (never `Crypto.run` in a program); a handler gives business code data —
+  `App.failure(request, Failed)`, not a `Throwable`; text, not its arrays (the relay's `Sealer`).
 - `host` (specs/cloud.md "The host"): a server of one's own, the FALLBACK — Cloudflare is the main platform.
   `Host.start(app, actors, config)` (on `jvm`'s handlers): one JVM process, its state in one directory (an SQLite
   file, blobs as files), its own HTTP and WebSocket server, cron, alarms, queues; `Ai` by any OpenAI-compatible

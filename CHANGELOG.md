@@ -5,6 +5,39 @@
 0.2.0, not 0.1.1: classes moved between modules, a binary-incompatible change, so the minor number under 0.x
 (`versionScheme` early-semver). 0.1.0 stays published as it was.
 
+### Republished in place (2026-11-14): okay-audit's last 14 findings
+
+okay-audit 0.1.4's last 14 findings on okay-serverless, acted on: a handler gives business code data, and business
+code names no handler's class. 0.2.0 was published again with them (no new version while the family is its only
+user); the `Cloud` row gained `Crypto`, so an effect's place in it (found at compile time) moved: code compiled
+against the first 0.2.0 is to be compiled again.
+
+| the first 0.2.0 | 0.2.0 as republished |
+|---|---|
+| `Crypto` outside `Cloud`; `Crypto.run(p)` installed the runtime's handler inside a program | `Crypto` last in `Cloud` (`… + Tcp + Crypto`), handled by `Platform.run` (`CryptoNative`); `Crypto.run` deprecated, only gives a program's `Crypto` to the row's |
+| `Crypto.native` | removed: `CryptoNative.port` (a handler's) |
+| `Ai.attempted`, `Objects.together` (deprecated forwarders) | removed: `Port.attempted`, `Port.together` |
+| `App.failed(request, error: Throwable)` | `App.failure(request, error: Failed)` — `Failed(kind, message, trace)`, data; `failed` deprecated, still called by `failure`'s default |
+| `accounts`' `Push.C` = `Cloud + Crypto` | `Push.C` = `Cloud` |
+| `simple`'s `Serverless.memory(m: Memory)` | `Serverless.memory(m: Backend)` — `Backend` an interface `Memory` implements |
+| the relay's JVM `Sealer` gave `Hashes` / `Pairing` its arrays | it writes its bytes as text itself (the JDK's base64url / hex, the same text); `Pairing.of(text)` |
+
+Migrating:
+
+- Recompile against 0.2.0 as republished (all of it: the row's places changed); clear the old 0.2.0 from the
+  Coursier cache.
+- `Crypto.run[InActor + Crypto, InActor, A](p)` still compiles (deprecated) and runs as before; to drop it, perform
+  `Crypto` in the row itself — `Crypto.random[InActor](n)`, `Crypto.seal[Cloud](…)` — and remove the `+ Crypto`.
+  `Crypto.run[Async + Crypto, Async, A]` (no `Crypto` in the rest) no longer compiles: outside a cloud,
+  `Port.handle(CryptoNative.port)(p)`.
+- `Crypto.native(op)` → `CryptoNative.port(op)`; `Ai.attempted` / `Objects.together` → `Port.attempted` /
+  `Port.together`.
+- An app overriding `failed(r, e: Throwable)` keeps working (deprecated): it is given `Failed.Again`, an exception
+  whose message and `toString` are the original's — not its class. Move to
+  `override def failure(r: Request, f: Failed)`: `f.message`, `f.kind` (the class name), `f.text`, `f.trace`.
+- A handler of `Cloud` of one's own (not through `Platform.run`) handles `Crypto` too.
+- `Serverless.memory` (simple) takes any `Backend`; a `Memory` is one: sources unchanged.
+
 ### The JVM's handlers left the core
 
 okay-audit (okay-effects/okay's boundary checks) found real I/O in the core's business package: the JDK's

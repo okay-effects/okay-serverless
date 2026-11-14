@@ -9,7 +9,7 @@ import scala.concurrent.Future
 /** `Crypto` by the runtime's own (the JDK's on the JVM, the Web Crypto API under Node): known answers */
 class CryptoSuite extends munit.FunSuite:
   given scala.concurrent.ExecutionContext = Async.defaultContext
-  private def run[A](p: A ! (Async + Crypto)): Future[A] = Async.toFuture(Crypto.run[Async + Crypto, Async, A](p))
+  private def run[A](p: A ! (Async + Crypto)): Future[A] = Async.toFuture(Port.handle(CryptoNative.port)(p))
   private def hex(b: Bytes) = b.toArray.map(x => f"${x & 0xff}%02x").mkString
   private def unhex(s: String) = Bytes(s.grouped(2).map(Integer.parseInt(_, 16).toByte).toArray)
   private def b64(b: Bytes) = Base64.getEncoder.encodeToString(b.toArray)
@@ -83,4 +83,18 @@ class CryptoSuite extends munit.FunSuite:
     run(Crypto.rsaOaep[Async + Crypto](spki, Bytes.of("token|1")).flatMap(a =>
       Crypto.rsaOaep[Async + Crypto](spki, Bytes.of("token|1")).map(b => (a, b)))).map((a, b) =>
       assertEquals((a.size, b.size, a == b), (256, 256, false)))
+  }
+
+  test("in the cloud's row: the platform handles it; Crypto.run (deprecated) gives a program's to the row's") {
+    val platform = MemoryCloud(() => 0L).platform
+    @annotation.nowarn("cat=deprecation")
+    def older: Bytes ! Cloud = Crypto.run[Cloud + Crypto, Cloud, Bytes](Crypto.sha256[Cloud + Crypto](Bytes.of("abc")))
+    platform.future(for
+      r <- Crypto.random[Cloud](16)
+      d <- Crypto.sha256[Cloud](Bytes.of("abc"))
+      o <- older
+    yield (r.size, hex(d), hex(o))).map((n, d, o) =>
+      assertEquals(n, 16)
+      assertEquals(d, "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad")
+      assertEquals(o, d))
   }

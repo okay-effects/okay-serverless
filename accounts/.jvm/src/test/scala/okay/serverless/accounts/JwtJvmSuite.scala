@@ -32,7 +32,7 @@ class ApnsTokenJvmSuite extends munit.FunSuite:
     c.internet = (url, r) => { if url.contains("push.apple.com") then jwt = r.header("authorization").get.drop(7)
       Response.json(Json.Obj.empty) }
     val p = Push.send(Push.Device("apns", "x"), "t", "b")
-    c.platform.future(Crypto.run[Push.C, Cloud, Push.Sent](p)).flatMap { _ =>
+    c.platform.future(p).flatMap { _ =>
       val Array(h, cl, sig) = jwt.split('.')
       SignCheck.es256(Crypto.pem(TestKeys.ecPublic), Bytes(okay.serverless.relay.Hashes.utf8(s"$h.$cl")),
         Bytes(okay.serverless.relay.Hashes.unbase64url(sig).get))

@@ -1,15 +1,14 @@
 package okay.serverless.cloud
 
 import okay.scala3.*
-import okay.scala3.std.Async
 
 /**
  * CRYPTOGRAPHY AS AN EFFECT (specs/cloud.md "Crypto"): random bytes, a digest, RSA-OAEP encryption to a public key,
  * AES-256-CBC encryption (another party's format), AES-256-GCM sealing and opening (our own secrets at rest). Not a
  * cloud's service but the runtime's: the Web Crypto API in a Worker, Node or a browser, the JDK's JCA on the JVM —
- * `Crypto.run` handles it by the runtime's own (`Crypto.native`), so it is not in the `Cloud` row: a program that needs
- * it says so (`In[Crypto, R]`) and one line handles it. Keys and data are bytes; a public key is its
- * SubjectPublicKeyInfo (DER) — `Crypto.spki` takes it out of an X.509 certificate
+ * `Platform.run` handles it by the runtime's own (`CryptoNative`, a handler's): it is in the `Cloud` row, last (in
+ * 0.2.0 as republished), so a program performs it and nothing in the program handles it. Keys and data are bytes;
+ * a public key is its SubjectPublicKeyInfo (DER) — `Crypto.spki` takes it out of an X.509 certificate
  */
 enum Crypto[X]:
   /** `n` bytes from the runtime's secure generator */
@@ -49,12 +48,14 @@ object Crypto:
   def pem(text: String): Bytes =
     Bytes(java.util.Base64.getMimeDecoder.decode(text.linesIterator.filterNot(_.startsWith("-----")).mkString))
 
-  /** the runtime's own: the JDK's JCA on the JVM, the Web Crypto API in JavaScript */
-  def native: Port[Crypto] = CryptoNative.port
-
-  /** `p`'s cryptography by the runtime's own, in one line */
-  def run[R[_], Rest[_], A](p: A ! R)(using Split[Crypto, R, Rest], In[Async, Rest]): A ! Rest =
-    Port.handle(native)(p)
+  /** `p`'s cryptography given to the row's: before, the runtime's handler, installed here — now the platform's
+   * (`Crypto` is in `Cloud`), so this only gives `p`'s operations to `Rest`'s `Crypto` */
+  @deprecated("Crypto is in the Cloud row: perform it there (Crypto.random[Cloud](n)); the platform handles it",
+    "0.2.0")
+  def run[R[_], Rest[_], A](p: A ! R)(using Split[Crypto, R, Rest], In[Crypto, Rest]): A ! Rest =
+    val to = summon[In[Crypto, Rest]]
+    handle(p, Handler.general[Crypto, Rest, A, A](pure)(
+      [X] => (op: Crypto[X], k: X => A ! Rest) => perform[Crypto](op)(using to).flatMap(k)))
 
   /** the SubjectPublicKeyInfo (DER) of an X.509 certificate (DER): the seventh element of its TBSCertificate when it
    * has the explicit version, else the sixth; none when it is not a certificate */

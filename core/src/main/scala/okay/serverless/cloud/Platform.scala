@@ -59,9 +59,9 @@ object Port:
     okay.scala3.handle(p, Handler.general[E, Rest, A, A](pure)(
       [X] => (op: E[X], k: X => A ! Rest) => Async.fromFuture[X, Rest](port(op)).flatMap(k)))
 
-/** EVERYTHING A PROGRAM MAY USE IN A CLOUD (specs/cloud.md) */
+/** EVERYTHING A PROGRAM MAY USE IN A CLOUD (specs/cloud.md); `Crypto`, the runtime's, last (0.2.0 as republished) */
 type Cloud[X] = (Async + Log + Clock + Kv + Blobs + Sql + Queues + Fetch + Cache + Env + Services + Limits + Ai +
-  Vectors + Analytics + Mails + Objects + Tcp)[X]
+  Vectors + Analytics + Mails + Objects + Tcp + Crypto)[X]
 
 /** AN ACTOR'S ROW: the cloud, its own storage (for `Durable`), its sockets */
 type InActor[X] = (Cloud + Storage + Sockets)[X]
@@ -80,11 +80,13 @@ final case class Platform(kv: Port[Kv] = Port.missing("KV"), blobs: Port[Blobs] 
                           tcp: Port[Tcp] = Port.noTcp,
                           log: (Level, String) => Unit = (l, m) => println(s"[$l] $m"),
                           now: () => Long = () => System.currentTimeMillis()):
-  /** a program of the cloud, its effects by this platform's ports: what is left, `Async` */
+  /** a program of the cloud, its effects by this platform's ports — `Crypto` by the runtime's own (`CryptoNative`):
+   * what is left, `Async` */
   def run[A](p: A ! Cloud): A ! Async =
-    Port.handle(tcp)(Port.handle(objects)(Port.handle(mails)(Port.handle(analytics)(Port.handle(vectors)(
-      Port.handle(ai)(Port.handle(limits)(Port.handle(services)(Port.handle(env)(Port.handle(cache)(Port.handle(fetch)(
-        Port.handle(queues)(Port.handle(sql)(Port.handle(blobs)(Port.handle(kv)(clock(Log.to(log)(p)))))))))))))))))
+    Port.handle(CryptoNative.port)(Port.handle(tcp)(Port.handle(objects)(Port.handle(mails)(Port.handle(analytics)(
+      Port.handle(vectors)(Port.handle(ai)(Port.handle(limits)(Port.handle(services)(Port.handle(env)(
+        Port.handle(cache)(Port.handle(fetch)(Port.handle(queues)(Port.handle(sql)(Port.handle(blobs)(
+          Port.handle(kv)(clock(Log.to(log)(p))))))))))))))))))
 
   /** the time: `now`'s; a sleep, awaited */
   private def clock[R[_], Rest[_], A](p: A ! R)(using Split[Clock, R, Rest], In[Async, Rest]): A ! Rest =
@@ -124,7 +126,7 @@ trait App:
   @annotation.nowarn("cat=deprecation")
   def failure(request: Request, error: Failed): Response ! Cloud = failed(request, Failed.Again(error))
   /** the same, given an exception: what `failure` gives it by default is `error` as an exception (`Failed.Again`) */
-  @deprecated("App.failure: the failure as data (Failed), not an exception", "0.3.0")
+  @deprecated("App.failure: the failure as data (Failed), not an exception", "0.2.0")
   def failed(request: Request, error: Throwable): Response ! Cloud = defer(throw error)
   def scheduled(event: Scheduled): Unit ! Cloud = pure(())
   /** a message of `queue`: acknowledged, or given again later. A failure is a retry */
